@@ -1,0 +1,58 @@
+Brocade Virtual Traffic Manager Plugin for Eclipse
+=================================================
+
+Release 20151116.1.91597
+========================
+
+ * Brocade Virtual Traffic Manager Plugin for Eclipse now transferred to
+   github.com/brocade
+
+Release 20140402.1.91597
+========================
+
+ * Stingray Plugin for Eclipse now contains help data for TrafficScript 
+   functions for all versions of Stingray Traffic Manager up to and including
+   release 9.6.
+
+ * Stingray Plugin for Eclipse is now capable of connecting to the Developer
+   edition of Stingray Traffic Manager.
+   SR22090
+
+ * The validation rules in the eclipse plugin have been widened to allow 
+   periods, '@' and '\' characters in the username. 
+   SR24347
+ 
+ * Some TrafficScript functions which were missing from the Eclipse plugin
+   help data for Traffic Manager version 9.5 have been added.
+   SR27661
+
+Release 20140207.1.87712
+========================
+
+ * Stingray Plugin for Eclipse now contains help data for TrafficScript 
+   functions for all versions of Stingray Traffic Manager up to and including
+   release 9.5.
+
+ * The old Zeus Eclipse plugin was republished on github as the "Stingray
+   Plugin for Eclipse".
+   SR26115
+
+
+License
+=======
+
+Copyright (c) 2015 Brocade Communications Systems, Inc.
+
+Brocade Virtual Traffic Manager Plugin for Eclipse is licensed
+under the terms and conditions of the Eclipse Public License v1.0 set
+forth at:
+
+   https://github.com/brocade/vTM-eclipse/LICENSE
+
+("License"). Brocade Virtual Traffic Manager Plugin for Eclipse is
+distributed "AS IS" as set forth in the License.  Brocade Virtual Traffic
+Manager Plugin for Eclipse also includes certain third party code.
+All such third party code is also distributed "AS IS" and is licensed
+by the respective copyright holders under the applicable terms and conditions
+(including, without limitation, warranty and liability disclaimers) identified
+at https://github.com/brocade/vTM-eclipse/LICENSE.

@@ -1,0 +1,146 @@
+<html>
+   <header>
+      <title>geo</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>geo</h2>
+
+      <div class="groupDescription">Functions for working out geographic location based on IP address.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#geo.getCity">geo.getCity</a>
+         </li>
+         <li>
+            <a href="#geo.getCountry">geo.getCountry</a>
+         </li>
+         <li>
+            <a href="#geo.getCountryCode">geo.getCountryCode</a>
+         </li>
+         <li>
+            <a href="#geo.getDistanceKM">geo.getDistanceKM</a>
+         </li>
+         <li>
+            <a href="#geo.getDistanceMiles">geo.getDistanceMiles</a>
+         </li>
+         <li>
+            <a href="#geo.getIPDistanceKM">geo.getIPDistanceKM</a>
+         </li>
+         <li>
+            <a href="#geo.getIPDistanceMiles">geo.getIPDistanceMiles</a>
+         </li>
+         <li>
+            <a href="#geo.getLatitude">geo.getLatitude</a>
+         </li>
+         <li>
+            <a href="#geo.getLocation">geo.getLocation</a>
+         </li>
+         <li>
+            <a href="#geo.getLocationLonLat">geo.getLocationLonLat</a>
+         </li>
+         <li>
+            <a href="#geo.getLongitude">geo.getLongitude</a>
+         </li>
+         <li>
+            <a href="#geo.getRegion">geo.getRegion</a>
+         </li>
+         <li>
+            <a href="#geo.getRegionCode">geo.getRegionCode</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="geo.getCity">
+         <h4>geo.getCity( ip )</h4>
+         <div class="functionDescription"><p>
+Returns the city of the supplied IPv4 address, or the empty string.
+</p><pre># Get this IP's city, such as Santa Clara<br>$city = geo.getCity( "216.250.81.96" );</pre></div>
+      </div>
+
+      <div class="functionDoc" id="geo.getCountry">
+         <h4>geo.getCountry( ip )</h4>
+         <div class="functionDescription"><p>
+Returns the country name of the supplied IPv4 address, or the empty string.
+</p><pre># Get this IP's country, such as United States<br>$country = geo.getCountry( "216.250.81.96" );</pre></div>
+      </div>
+
+      <div class="functionDoc" id="geo.getCountryCode">
+         <h4>geo.getCountryCode( ip )</h4>
+         <div class="functionDescription"><p>
+Returns the two-character country code of the supplied IPv4 address, or the empty string.
+</p><pre># Get this IP's country code, such as US<br>$countryCode = geo.getCountryCode( "216.250.81.96" );</pre></div>
+      </div>
+
+      <div class="functionDoc" id="geo.getDistanceKM">
+         <h4>geo.getDistanceKM( lat1, lon1, lat2, lon2 )</h4>
+         <div class="functionDescription"><p>
+Returns the distance in kilometres between two points on the earth's surface (identified by latitude and longitude), or -1 on error.
+</p><pre># Get the distance between two lat-long points in km<br>$d = geo.getDistanceKM( "52.2338", "0.1529",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"37.4062", "-121.9765" );</pre></div>
+      </div>
+
+      <div class="functionDoc" id="geo.getDistanceMiles">
+         <h4>geo.getDistanceMiles( lat1, lon1, lat2, lon2 )</h4>
+         <div class="functionDescription"><p>
+Returns the distance in miles between two points on the earth's surface (identified by latitude and longitude), or -1 on error.
+</p><pre># Get the miles between two lat-long points<br>$d = geo.getDistanceMiles( "52.2338", "0.1529",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"37.4062", "-121.9765" );</pre></div>
+      </div>
+
+      <div class="functionDoc" id="geo.getIPDistanceKM">
+         <h4>geo.getIPDistanceKM( ip1, ip2 )</h4>
+         <div class="functionDescription"><p>
+Returns the distance in kilometres between the locations of two IPv4 addresses. It will return -1 unless both locations can be found.
+</p><pre># Get the distance between two IPs in kilometres<br>$d = geo.getIPDistanceKM( "11.12.13.14",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"25.26.27.28" );</pre></div>
+      </div>
+
+      <div class="functionDoc" id="geo.getIPDistanceMiles">
+         <h4>geo.getIPDistanceMiles( ip1, ip2 )</h4>
+         <div class="functionDescription"><p>
+Returns the distance in miles between the locations of two IPv4 addresses. It will return -1 unless both locations can be found.
+</p><pre># Get the distance between two IPs in miles<br>$d = geo.getIPDistanceMiles( "1.2.3.4", "5.6.7.8" );</pre></div>
+      </div>
+
+      <div class="functionDoc" id="geo.getLatitude">
+         <h4>geo.getLatitude( ip )</h4>
+         <div class="functionDescription"><p>
+Returns the decimal latitude of the supplied IPv4 address, or the empty string if the location is unknown. This may be accurate to city, region or only country level: to find out, check whether geo.getCity() and geo.getRegion() return empty strings.
+</p><pre># Get this IP's decimal latitude (positive = north),<br># such as 37.3961<br>$lat = geo.getLatitude( "216.250.81.96" );</pre></div>
+      </div>
+
+      <div class="functionDoc" id="geo.getLocation">
+         <h4>geo.getLocation(  )</h4>
+         <div class="functionDescription"><p>
+Returns the name of the location in which this traffic manager is based.<br/> <br/> Note that traffic managers can be assigned to locations only when  Stingray Multi-Site Cluster Management is enabled.
+</p><pre># Run this part of the rule if the request was<br># sent to a traffic manager located in Cambridge<br>if( geo.getLocation() == "Cambridge" ) {<br>&nbsp;&nbsp;&nbsp;# ...<br>}</pre><b>See also:</b> <a href="./geo.html#geo.getLocationLonLat">geo.getLocationLonLat</a></div>
+      </div>
+
+      <div class="functionDoc" id="geo.getLocationLonLat">
+         <h4>geo.getLocationLonLat(  )</h4>
+         <div class="functionDescription"><p>
+Returns a hash containing the longitude and latitude of the location to which this request was sent.<br/> <br/> Note that traffic managers can be assigned to locations only when Stingray Multi-Site Cluster Management is enabled and locations can be assigned a latitude and longitude only when using the Global Load Balancing feature.
+</p><pre># How for away from the traffic manager did this<br># request originate from?<br>$loc = geo.getLocationLonLat();<br>$ip = request.getRemoteIP();<br>$reqlon = geo.getLongitude( $ip );<br>$reqlat = geo.getLatitude( $ip );<br>$reqloc = geo.getCountry( $ip );<br>log.info( "Request was sent from " .<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$reqloc . ", " .<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;geo.getDistanceMiles( $loc["latitude"],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$loc["longitude"],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$reqlat, $reqlon ) .<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" miles away from here" );</pre><b>See also:</b> <a href="./geo.html#geo.getLocation">geo.getLocation</a></div>
+      </div>
+
+      <div class="functionDoc" id="geo.getLongitude">
+         <h4>geo.getLongitude( ip )</h4>
+         <div class="functionDescription"><p>
+Returns the decimal longitude of the supplied IPv4 address, or the empty string if the location is unknown. This may be accurate to city, region or only country level: to find out, check whether geo.getCity() and geo.getRegion() return empty strings.
+</p><pre># Get this IP's decimal longitude (positive = east),<br># such as -121.962<br>$long = geo.getLongitude( "216.250.81.96" );</pre></div>
+      </div>
+
+      <div class="functionDoc" id="geo.getRegion">
+         <h4>geo.getRegion( ip )</h4>
+         <div class="functionDescription"><p>
+Returns the region (e.g. US state) of the supplied IPv4 address, or the empty string if the location is unknown or doesn't have a region.
+</p><pre># Get this IP's region, such as California<br>$state = geo.getRegion( "216.250.81.96" );</pre></div>
+      </div>
+
+      <div class="functionDoc" id="geo.getRegionCode">
+         <h4>geo.getRegionCode( ip )</h4>
+         <div class="functionDescription"><p>
+Returns the two-character region code (e.g. US state abbreviation) of the supplied IPv4 address, or the empty string. The code for a given region may differ between software versions.
+</p><pre># Get this IP's region code, such as CA<br>$stateCode = geo.getRegionCode( "64.69.78.223" );</pre></div>
+      </div>
+
+   </body>
+</html>

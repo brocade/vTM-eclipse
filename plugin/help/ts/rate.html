@@ -1,0 +1,36 @@
+<html>
+   <header>
+      <title>rate</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>rate</h2>
+
+      <div class="groupDescription">Functions that allow you to monitor and assign rate shaping classes.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#rate.getbacklog">rate.getbacklog</a>
+         </li>
+         <li>
+            <a href="#rate.use">rate.use</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="rate.getbacklog">
+         <h4>rate.getbacklog( class_name, [ context ] )</h4>
+         <div class="functionDescription"><p>
+Returns the number of connections that are currently waiting to be released by the supplied rate class.
+</p><pre>$backlog = rate.getbacklog( "gold-user",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request.getRemoteIP() );<br>if( $backlog > 10 ){<br>&nbsp;&nbsp;&nbsp;# Tell the customer to come back later<br>&nbsp;&nbsp;&nbsp;http.sendResponse( "503 Service Unavailable",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"text/html", "Go away",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Retry-After: 10" );<br>}</pre><b>See also:</b> <a href="./rate.html#rate.use">rate.use</a></div>
+      </div>
+
+      <div class="functionDoc" id="rate.use">
+         <h4>rate.use( class_name, [ context ] )</h4>
+         <div class="functionDescription"><p>
+Immediately queues a connection using the named rate class. <br/> The connection and the current TrafficScript rule is stalled until the rate class releases it, according to the rate limits defined in the class. When the connection is released, the rate.use() function returns and the TrafficScript rule continues to execute. <br/> If rate.use() is called with the optional 'context' value, it uses a new rate class which inherits all of the rate settings from the named rate class.  All connections called with the same 'context' value use the same new rate class.  This allows you to shape connections based on arbitary data, such as a user name or source IP address, shaping connections from different users or source IPs independently. <br/> If the connection has passed through the class successfully then the value 1 is returned. If the connection times out while it is queued, then the TrafficScript rule is abandoned.  If the connection could not be queued because an invalid rate class name was provided, rate.use() returns 0.
+</p><pre>rate.use( "protect_database" );<br><br>rate.use( "limit_user",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http.getCookie( "SessionID" ) );</pre></div>
+      </div>
+
+   </body>
+</html>

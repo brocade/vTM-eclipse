@@ -1,0 +1,76 @@
+<html>
+   <header>
+      <title>http.stream</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>http.stream</h2>
+
+      <div class="groupDescription">Functions for streaming HTTP data.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#http.stream.continueFromBackend">http.stream.continueFromBackend</a>
+         </li>
+         <li>
+            <a href="#http.stream.finishResponse">http.stream.finishResponse</a>
+         </li>
+         <li>
+            <a href="#http.stream.readBulkResponse">http.stream.readBulkResponse</a>
+         </li>
+         <li>
+            <a href="#http.stream.readResponse">http.stream.readResponse</a>
+         </li>
+         <li>
+            <a href="#http.stream.startResponse">http.stream.startResponse</a>
+         </li>
+         <li>
+            <a href="#http.stream.writeResponse">http.stream.writeResponse</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="http.stream.continueFromBackend">
+         <h4>http.stream.continueFromBackend( [data] )</h4>
+         <div class="functionDescription"><p>
+Stops streaming any data from the current rule and lets your traffic manager send remaining data from backend.  The 'data' parameter can be used to send the last block to be streamed.  Rule processing will finish and no further statements in this or subsequent rules will be executed. Unlike http.stream.finishResponse(), any data coming from the backend server will continue to be sent from the backend to the client normally. <br/> Note that this function will behave exactly like http.stream.finishResponse() if run from a request rule.
+</p><pre>http.stream.startResponse(<br>&nbsp;&nbsp;"200", "text/html", "", "Server: Stingray");<br><br>while( 1 ) {<br>&nbsp;&nbsp;# read full lines but at most 4k of data:<br>&nbsp;&nbsp;$data = http.stream.readBulkResponse( 4096, "\n" );<br>&nbsp;&nbsp;if( string.find( $data, "foo" ) >= 0 ) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$data = string.replace( $data,"foo","bar" );<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Job done, exit now. Any remaining body data<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# will continue to be sent from backend.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http.stream.continueFromBackend( $data );<br>&nbsp;&nbsp;}<br>&nbsp;&nbsp;# stream data to client if not found.<br>&nbsp;&nbsp;http.stream.writeResponse( $data );<br>}<br>http.stream.finishResponse();</pre><b>See also:</b> <a href="./http.stream.html#http.stream.startResponse">http.stream.startResponse</a>, <a href="./http.stream.html#http.stream.readBulkResponse">http.stream.readBulkResponse</a>, <a href="./http.stream.html#http.stream.readResponse">http.stream.readResponse</a>, <a href="./http.stream.html#http.stream.writeResponse">http.stream.writeResponse</a>, <a href="./http.stream.html#http.stream.finishResponse">http.stream.finishResponse</a></div>
+      </div>
+
+      <div class="functionDoc" id="http.stream.finishResponse">
+         <h4>http.stream.finishResponse( [data] )</h4>
+         <div class="functionDescription"><p>
+Indicates that 'data' is the last block to be streamed for the current transaction.  Rule processing will stop after http.stream.finishResponse() has been called, i.e. the remaining statements of the present rule will not be evaluated and no subsequent rules will be run.
+</p><pre>http.stream.startResponse(<br>&nbsp;&nbsp;"200", "text/html", "", "Server: Stingray");<br><br>while( 1 ) {<br>&nbsp;&nbsp;# read full lines but at most 4k of data:<br>&nbsp;&nbsp;$data = http.stream.readBulkResponse( 4096, "\n" );<br>&nbsp;&nbsp;if( $data == "" )<br>&nbsp;&nbsp;&nbsp;&nbsp;break; # server has finished the response<br>&nbsp;&nbsp;# invert server's logic:<br>&nbsp;&nbsp;$data = string.replaceAllI( $data, "yes", "no" );<br>&nbsp;&nbsp;http.stream.writeResponse( $data );<br>}<br><br>http.stream.finishResponse();</pre><b>See also:</b> <a href="./http.stream.html#http.stream.startResponse">http.stream.startResponse</a>, <a href="./http.stream.html#http.stream.readBulkResponse">http.stream.readBulkResponse</a>, <a href="./http.stream.html#http.stream.readResponse">http.stream.readResponse</a>, <a href="./http.stream.html#http.stream.writeResponse">http.stream.writeResponse</a>, <a href="./http.html#http.sendResponse">http.sendResponse</a></div>
+      </div>
+
+      <div class="functionDoc" id="http.stream.readBulkResponse">
+         <h4>http.stream.readBulkResponse( count, [delimiter] )</h4>
+         <div class="functionDescription"><p>
+Reads (and consumes) data from the server, so that TrafficScript can manipulate the data and send a modified version to the client. <br/> Reads the number of bytes specified by 'count' from the body of the HTTP response supplied by the server.  Data from the response is only returned up to and including the <b>last</b> occurrence of 'delimiter' if a non-empty delimiter has been specified.  Unlike http.getResponseBody(), it also removes the data returned from the server's response.  When the end of the response from the server has been reached, an empty string is returned. <br/> If the delimiter partially matches at the end of the specified number of bytes, the data returned will include the full delimiter (thus returning slightly more data than specified). If the delimiter is not found in the specified number of bytes, then the specified number of bytes of data will be returned.
+</p><pre># Stream a HTTP response back, changing the content<br># as it is read in.<br>http.stream.startResponse(<br>&nbsp;&nbsp;"200", "text/html", "", "Server: Stingray" );<br><br>while( 1 ) {<br>&nbsp;&nbsp;# read several full lines but at most 4k of data:<br>&nbsp;&nbsp;$data = http.stream.readBulkResponse( 4096, "\n" );<br>&nbsp;&nbsp;if( $data == "" )<br>&nbsp;&nbsp;&nbsp;&nbsp;break; # server has finished the response<br>&nbsp;&nbsp;# invert server's logic:<br>&nbsp;&nbsp;$data = string.replaceAllI( $data, "yes", "no" );<br>&nbsp;&nbsp;http.stream.writeResponse( $data );<br>}<br><br>http.stream.finishResponse();</pre><b>See also:</b> <a href="./http.stream.html#http.stream.readResponse">http.stream.readResponse</a>, <a href="./http.html#http.getResponseBody">http.getResponseBody</a>, <a href="./http.stream.html#http.stream.writeResponse">http.stream.writeResponse</a>, <a href="./http.stream.html#http.stream.finishResponse">http.stream.finishResponse</a>, <a href="./http.stream.html#http.stream.startResponse">http.stream.startResponse</a></div>
+      </div>
+
+      <div class="functionDoc" id="http.stream.readResponse">
+         <h4>http.stream.readResponse( count, [delimiter] )</h4>
+         <div class="functionDescription"><p>
+Similar to http.stream.readBulkResponse(), but only returns response body data up to and including the <b>first</b> occurrence of delimiter.  The two functions behave identically if no delimiter is provided.
+</p><pre>http.stream.startResponse(<br>&nbsp;&nbsp;"200", "text/html", "", "Server: Stingray" );<br><br>while( 1 ) {<br>&nbsp;&nbsp;# read full line but at most 4k of data:<br>&nbsp;&nbsp;$data = http.stream.readResponse( 4096, "\n" );<br>&nbsp;&nbsp;if( $data == "" )<br>&nbsp;&nbsp;&nbsp;&nbsp;break; # server has finished the response<br>&nbsp;&nbsp;# invert server's logic:<br>&nbsp;&nbsp;$data = string.replaceAllI( $data, "yes", "no" );<br>&nbsp;&nbsp;http.stream.writeResponse( $data );<br>}<br><br>http.stream.finishResponse();</pre><b>See also:</b> <a href="./http.stream.html#http.stream.readBulkResponse">http.stream.readBulkResponse</a>, <a href="./http.html#http.getResponseBody">http.getResponseBody</a>, <a href="./http.stream.html#http.stream.writeResponse">http.stream.writeResponse</a>, <a href="./http.stream.html#http.stream.finishResponse">http.stream.finishResponse</a>, <a href="./http.stream.html#http.stream.startResponse">http.stream.startResponse</a></div>
+      </div>
+
+      <div class="functionDoc" id="http.stream.startResponse">
+         <h4>http.stream.startResponse( resp_code, content_type, [content_length, headers] )</h4>
+         <div class="functionDescription"><p>
+Sets up an HTTP response from which data can be streamed later by calling http.stream.writeResponse(). http.stream.startResponse() can only be called once per HTTP transaction. Only 'resp_code' and 'content_type' are mandatory arguments.  However, it is recommended to specify the 'content_length' if possible.  If it is provided and a valid integer, your traffic manager will not stream more than that number of bytes.  A set of headers (separated by "\r\n") can be provided in the optional fourth argument.  In a response rule, if no fourth argument is given, the response headers from the back-end will be sent on to the client (note, however, that your traffic manager may override some of these headers, e.g. the 'Connection' header)
+</p><pre>http.stream.startResponse(<br>&nbsp;&nbsp;"200", "text/html", "",<br>&nbsp;&nbsp;"Server: Stingray\r\nX-Hello: World");<br><br>while( 1 ) {<br>&nbsp;&nbsp;# read full lines but at most 4k of data:<br>&nbsp;&nbsp;$data = http.stream.readBulkResponse( 4096, "\n" );<br>&nbsp;&nbsp;if( $data == "" )<br>&nbsp;&nbsp;&nbsp;&nbsp;break; # server has finished the response<br>&nbsp;&nbsp;# invert server's logic:<br>&nbsp;&nbsp;$data = string.replaceAllI( $data, "yes", "no" );<br>&nbsp;&nbsp;http.stream.writeResponse( $data );<br>}<br><br>http.stream.finishResponse();</pre><b>See also:</b> <a href="./http.stream.html#http.stream.writeResponse">http.stream.writeResponse</a>, <a href="./http.stream.html#http.stream.finishResponse">http.stream.finishResponse</a>, <a href="./http.stream.html#http.stream.readBulkResponse">http.stream.readBulkResponse</a>, <a href="./http.stream.html#http.stream.readResponse">http.stream.readResponse</a>, <a href="./http.html#http.sendResponse">http.sendResponse</a></div>
+      </div>
+
+      <div class="functionDoc" id="http.stream.writeResponse">
+         <h4>http.stream.writeResponse( data )</h4>
+         <div class="functionDescription"><p>
+Sends the data in the 'data' argument to the client.  http.stream.writeResponse() can be called multiple times but http.stream.startResponse() must have been called beforehand.
+</p><pre>http.stream.startResponse(<br>&nbsp;&nbsp;"200", "text/html", "", "Server: Stingray");<br><br>while( 1 ) {<br>&nbsp;&nbsp;# read full lines but at most 4k of data:<br>&nbsp;&nbsp;$data = http.stream.readBulkResponse( 4096, "\n" );<br>&nbsp;&nbsp;if( $data == "" )<br>&nbsp;&nbsp;&nbsp;&nbsp;break; # server has finished the response<br>&nbsp;&nbsp;# invert server's logic:<br>&nbsp;&nbsp;$data = string.replaceAllI( $data, "yes", "no" );<br>&nbsp;&nbsp;http.stream.writeResponse( $data );<br>}<br><br>http.stream.finishResponse();</pre><b>See also:</b> <a href="./http.stream.html#http.stream.startResponse">http.stream.startResponse</a>, <a href="./http.stream.html#http.stream.readBulkResponse">http.stream.readBulkResponse</a>, <a href="./http.stream.html#http.stream.readResponse">http.stream.readResponse</a>, <a href="./http.stream.html#http.stream.finishResponse">http.stream.finishResponse</a>, <a href="./http.html#http.sendResponse">http.sendResponse</a></div>
+      </div>
+
+   </body>
+</html>

@@ -1,0 +1,112 @@
+<html>
+   <header>
+      <title>sys</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>sys</h2>
+
+      <div class="groupDescription">Functions relating to the local machine.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#sys.domainname">sys.domainname</a>
+         </li>
+         <li>
+            <a href="#sys.getRestApiPort">sys.getRestApiPort</a>
+         </li>
+         <li>
+            <a href="#sys.getenv">sys.getenv</a>
+         </li>
+         <li>
+            <a href="#sys.getnetworkinterfaces">sys.getnetworkinterfaces</a>
+         </li>
+         <li>
+            <a href="#sys.getpid">sys.getpid</a>
+         </li>
+         <li>
+            <a href="#sys.hostname">sys.hostname</a>
+         </li>
+         <li>
+            <a href="#sys.isFIPS">sys.isFIPS</a>
+         </li>
+         <li>
+            <a href="#sys.time">sys.time</a>
+         </li>
+         <li>
+            <a href="#sys.timeToString">sys.timeToString</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="sys.domainname">
+         <h4>sys.domainname(  )</h4>
+         <div class="functionDescription"><p>
+Returns the domain name of the host machine. For example, if the machine is named "server1.example.com", sys.domainname() will return "example.com".
+</p><pre>$domainname = sys.domainname();</pre><b>Alternate name:</b> domainname<br>
+<b>See also:</b> <a href="./sys.html#sys.hostname">sys.hostname</a></div>
+      </div>
+
+      <div class="functionDoc" id="sys.getRestApiPort">
+         <h4>sys.getRestApiPort(  )</h4>
+         <div class="functionDescription"><p>
+Returns the TCP port number used by the REST API, such as 9070.
+</p><pre># get the REST API port<br>$restport = sys.getRestApiPort();<br><br># use that to get the root node from the REST API<br>$body = http.request.get(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"http://localhost:".$restport."/");<br><br># in this case an 'error: authentication required'<br># type response<br># will be returned</pre></div>
+      </div>
+
+      <div class="functionDoc" id="sys.getenv">
+         <h4>sys.getenv( variable )</h4>
+         <div class="functionDescription"><p>
+Returns the named environment variable, or the empty string if the environment variable does not exists.
+</p><pre>$zeushome = sys.getenv( "ZEUSHOME" );</pre><b>Alternate name:</b> getenv<br>
+</div>
+      </div>
+
+      <div class="functionDoc" id="sys.getnetworkinterfaces">
+         <h4>sys.getnetworkinterfaces( hash_of_options )</h4>
+         <div class="functionDescription"><p>
+Returns a list of network interfaces on the system, with a hash of the following for each one:    Bcast, pppdest, IfName, netmask, MacAddr, IP, up </p><p></p><p>  The following options can be supplied in a hash in order to alter the output:</p><p></p><p>  "include_lo" => [0|1]   This option controls whether the list returned should include loopback addresses.  (Default: 1)</p><p></p><p>  "up" => [0|1]   If 1, only return interfaces marked as UP. If 0, ignore the UP status. (Default: 0)
+</p><pre>$info = sys.getnetworkinterfaces( ["include_lo" => 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"up" => 1 ] );<br>if($info)<br>{<br>&nbsp;&nbsp;&nbsp;foreach( $ipinfo in $info )  {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ip = $ipinfo["IP"];<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$name = $ipinfo["IfName"];<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mac =  $ipinfo["MacAddr"];<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.info("---------------------"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;. "\n interface = " . $name<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;. "\n IP = " . $ip<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;. "\n MAC = " . $mac<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br>&nbsp;&nbsp;&nbsp;}<br>}else {<br>&nbsp;&nbsp;&nbsp;log.info("No network interfaces returned");<br>}</pre></div>
+      </div>
+
+      <div class="functionDoc" id="sys.getpid">
+         <h4>sys.getpid(  )</h4>
+         <div class="functionDescription"><p>
+Returns the process id of the current process.
+</p><pre>$mypid = sys.getpid();</pre><b>Alternate name:</b> getpid<br>
+</div>
+      </div>
+
+      <div class="functionDoc" id="sys.hostname">
+         <h4>sys.hostname(  )</h4>
+         <div class="functionDescription"><p>
+Returns the hostname of the host machine. For example, if the machine is named "server1.example.com", sys.hostname() will return "server1".
+</p><pre>$hostname = sys.hostname();</pre><b>Alternate name:</b> hostname<br>
+<b>See also:</b> <a href="./sys.html#sys.domainname">sys.domainname</a></div>
+      </div>
+
+      <div class="functionDoc" id="sys.isFIPS">
+         <h4>sys.isFIPS(  )</h4>
+         <div class="functionDescription"><p>
+Returns 1 if the traffic manager is operating in FIPS Mode, otherwise it returns 0.
+</p><pre>if( sys.isFIPS() ) {<br>&nbsp;&nbsp;&nbsp;# FIPS Mode is in operation<br>}</pre></div>
+      </div>
+
+      <div class="functionDoc" id="sys.time">
+         <h4>sys.time(  )</h4>
+         <div class="functionDescription"><p>
+Returns the current system time as the number of seconds since midnight, 1/1/1970.
+</p><pre>$unixtime = sys.time();</pre><b>Alternate name:</b> time<br>
+<b>See also:</b> <a href="./sys.html#sys.timeToString">sys.timeToString</a>, <a href="./sys.localtime.html#sys.localtime.format">sys.localtime.format</a>, <a href="./sys.gmtime.html#sys.gmtime.format">sys.gmtime.format</a>, <a href="./sys.time.html#sys.time.highres">sys.time.highres</a></div>
+      </div>
+
+      <div class="functionDoc" id="sys.timeToString">
+         <h4>sys.timeToString( unixtime )</h4>
+         <div class="functionDescription"><p>
+Takes the time in seconds since midnight, 1/1/1970 and if the optional unixtime parameter is provided, returns a formatted string representing that time. If the unixtime parameter is not given, it returns the current time as a formatted string.
+</p><pre># Returns "[01/Feb/2004:12:24:51 +2000]"<br>$tm = sys.timeToString( sys.time() );</pre><b>Alternate name:</b> timeToString<br>
+<b>See also:</b> <a href="./sys.html#sys.time">sys.time</a></div>
+      </div>
+
+   </body>
+</html>

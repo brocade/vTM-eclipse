@@ -1,0 +1,46 @@
+<html>
+   <head>
+      <title>Using the TrafficScript Editor</title>
+      <link rel="stylesheet" href="../../PRODUCT_PLUGIN/book.css" type="text/css" /> 
+   </head>
+
+   <body>
+      
+      <h2>Using the TrafficScript Editor</h2>
+      
+      <p>
+      The Eclipse TrafficScript editor is a basic <a href="editor/window.html">text editor</a>
+      customised with extra functionality:
+      <ul> 
+      <li><a href="editor/suggest.html">auto-completion</a></li> 
+      <li>syntax highlighting</li> 
+      <li><a href="editor/errors.html">error marking</a></li>
+      </ul>
+      </p>
+      
+      <p>
+      Using the SOAP API, it is possible to edit TrafficScript rules that are actually 
+      stored on a remote traffic manager.  If a rule being edited has changed remotely, 
+      Eclipse is able to inform the user of this and prompt for appropriate action.
+      </p>
+      
+      <p>  
+      It also uses this integration to check the TrafficScript code for syntax and spelling errors when 
+      a save is attempted, and subsequently to add markers in your code to show what needs to be changed
+      before the rule can actually be saved.
+      </p>
+      <img src="images/tserror.png" alt="An example of a TrafficScript error" />
+      <p>
+      Fig.1: An example of a TrafficScript error
+      </p>
+
+      <h3>Editing multiple rules</h3>
+      <p>
+      Multiple rules can be opened in this editor at any one time, appearing as tabs along the top.
+      It is possible to change the order in which rules appear by dragging a rule tab to it's new 
+      position. This does not change the contents, but can help when grouping similar rules being 
+      edited at the same time.
+      </p>
+      
+   </body>
+</html>

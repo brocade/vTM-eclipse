@@ -1,0 +1,266 @@
+<html>
+   <header>
+      <title>connection</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>connection</h2>
+
+      <div class="groupDescription">Generic functions that affect the current connection.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#connection.checkLimits">connection.checkLimits</a>
+         </li>
+         <li>
+            <a href="#connection.close">connection.close</a>
+         </li>
+         <li>
+            <a href="#connection.discard">connection.discard</a>
+         </li>
+         <li>
+            <a href="#connection.getBandwidthClass">connection.getBandwidthClass</a>
+         </li>
+         <li>
+            <a href="#connection.getData">connection.getData</a>
+         </li>
+         <li>
+            <a href="#connection.getDataLen">connection.getDataLen</a>
+         </li>
+         <li>
+            <a href="#connection.getLine">connection.getLine</a>
+         </li>
+         <li>
+            <a href="#connection.getLocalIP">connection.getLocalIP</a>
+         </li>
+         <li>
+            <a href="#connection.getLocalPort">connection.getLocalPort</a>
+         </li>
+         <li>
+            <a href="#connection.getMemoryUsage">connection.getMemoryUsage</a>
+         </li>
+         <li>
+            <a href="#connection.getNode">connection.getNode</a>
+         </li>
+         <li>
+            <a href="#connection.getPersistence">connection.getPersistence</a>
+         </li>
+         <li>
+            <a href="#connection.getPool">connection.getPool</a>
+         </li>
+         <li>
+            <a href="#connection.getRemoteIP">connection.getRemoteIP</a>
+         </li>
+         <li>
+            <a href="#connection.getRemotePort">connection.getRemotePort</a>
+         </li>
+         <li>
+            <a href="#connection.getServiceLevelClass">connection.getServiceLevelClass</a>
+         </li>
+         <li>
+            <a href="#connection.getVirtualServer">connection.getVirtualServer</a>
+         </li>
+         <li>
+            <a href="#connection.setBandwidthClass">connection.setBandwidthClass</a>
+         </li>
+         <li>
+            <a href="#connection.setData">connection.setData</a>
+         </li>
+         <li>
+            <a href="#connection.setIdempotent">connection.setIdempotent</a>
+         </li>
+         <li>
+            <a href="#connection.setPersistence">connection.setPersistence</a>
+         </li>
+         <li>
+            <a href="#connection.setPersistenceKey">connection.setPersistenceKey</a>
+         </li>
+         <li>
+            <a href="#connection.setPersistenceNode">connection.setPersistenceNode</a>
+         </li>
+         <li>
+            <a href="#connection.setServiceLevelClass">connection.setServiceLevelClass</a>
+         </li>
+         <li>
+            <a href="#connection.sleep">connection.sleep</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="connection.checkLimits">
+         <h4>connection.checkLimits( [poolname] )</h4>
+         <div class="functionDescription"><p>
+This function checks to see if the connection will be queued due to backend connection limits. The function returns 1 if the connection is within configured maximum limits  for the named pool ( See max_connections_pernode setting in Pool &gt; Connection Management ). The function returns 0 if the connection will exceed the configured maximum limits and will be queued. <br/> If the named pool does not exist, your traffic manager will log a warning message and a value of -1 will be returned. <br/>
+</p><pre># A connection is queued if it exceeds <br># max_connections_pernode. <br># Send a failure response to the client.<br>if( !connection.checkLimits( "pool" ) ) {<br>&nbsp;&nbsp;&nbsp;http.sendResponse( "500 Failure",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"text/plain", <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Reached maximum connections",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"" );<br>&nbsp;&nbsp;&nbsp;connection.discard();<br>}</pre></div>
+      </div>
+
+      <div class="functionDoc" id="connection.close">
+         <h4>connection.close( Data, [Read] )</h4>
+         <div class="functionDescription"><p>
+Writes the provided data directly back to the client. After the data has been sent, the connection is closed. <br/> The optional second argument specifies whether data should continue to be read in from the client after sending this response, and wait for it to close the connection. If set to 0, the connection will close immediately. If non-zero, the traffic manager will wait and read any remaining data from the connection before closing it. <br/> The default behaviour is to wait, because some client software will not read a response until it has sent its entire request.
+</p><pre># Send an instant response and close the connection<br>connection.close( "500 Go away\r\n" );</pre><b>See also:</b> <a href="./connection.html#connection.discard">connection.discard</a>, <a href="./http.html#http.sendResponse">http.sendResponse</a></div>
+      </div>
+
+      <div class="functionDoc" id="connection.discard">
+         <h4>connection.discard(  )</h4>
+         <div class="functionDescription"><p>
+Immediately closes the current connection and stops processing rules. This is equivalent to the function call 'pool.use( "discard" )'.
+</p><pre># Drop this connection NOW!<br>connection.discard();</pre><b>See also:</b> <a href="./connection.html#connection.close">connection.close</a>, <a href="./http.html#http.sendResponse">http.sendResponse</a></div>
+      </div>
+
+      <div class="functionDoc" id="connection.getBandwidthClass">
+         <h4>connection.getBandwidthClass(  )</h4>
+         <div class="functionDescription"><p>
+Returns the current bandwidth class for the connection to the client, or an empty string if no class is set.
+</p><p>This function has been deprecated; </div>
+      </div>
+
+      <div class="functionDoc" id="connection.getData">
+         <h4>connection.getData( count )</h4>
+         <div class="functionDescription"><p>
+Returns the first 'count' bytes of data provided by the client. <br/> Warning: you can stall a connection by asking it to read more data than the remote client will provide. Combine this with connection.getDataLen() to reliably read data from a connection.
+</p><p>This function has been deprecated; </div>
+      </div>
+
+      <div class="functionDoc" id="connection.getDataLen">
+         <h4>connection.getDataLen(  )</h4>
+         <div class="functionDescription"><p>
+Returns the number of bytes of data already received from the client. This can be combined with connection.getData() to reliably read data from a connection without stalling if no data is available.
+</p><p>This function has been deprecated; </div>
+      </div>
+
+      <div class="functionDoc" id="connection.getLine">
+         <h4>connection.getLine( offset )</h4>
+         <div class="functionDescription"><p>
+Returns a line of input data provided by the client. The line separator is '\n', and this is stripped off before returning the line. connection.getline() takes a single byte-count argument which indicates where to start scanning for a line; a value of '0' begins at the start, so returns the first line. <br/> When connection.getline() returns, the variable $1 is updated to point to the start of the next line in the datastream. <br/> You can iterate through the lines of input data by using $1 as the iterator variable.
+</p><p>This function has been deprecated; </div>
+      </div>
+
+      <div class="functionDoc" id="connection.getLocalIP">
+         <h4>connection.getLocalIP(  )</h4>
+         <div class="functionDescription"><p>
+Returns the IP address that the client connected to, i.e. the address local to this machine.
+</p><p>This function has been deprecated; </div>
+      </div>
+
+      <div class="functionDoc" id="connection.getLocalPort">
+         <h4>connection.getLocalPort(  )</h4>
+         <div class="functionDescription"><p>
+Returns the network port number that the client connected to. (e.g. port 80 is normal for a web server)
+</p><p>This function has been deprecated; </div>
+      </div>
+
+      <div class="functionDoc" id="connection.getMemoryUsage">
+         <h4>connection.getMemoryUsage(  )</h4>
+         <div class="functionDescription"><p>
+Returns an estimate of the amount of memory currently in use for this connection, in bytes. Memory is primarily used for buffering data, and the memory usage can be tuned using the various buffer size settings.
+</p><pre># How much memory are we using?<br>$memoryusage = connection.getMemoryUsage();</pre></div>
+      </div>
+
+      <div class="functionDoc" id="connection.getNode">
+         <h4>connection.getNode(  )</h4>
+         <div class="functionDescription"><p>
+Returns the name of the back-end node that this request is connected to. If a back-end node has not been chosen, which is normally the case in request rules, it returns the empty string.
+</p><pre># Which node is used for this connection<br>$nodename = connection.getNode();</pre><b>See also:</b> <a href="./connection.html#connection.getPool">connection.getPool</a>, <a href="./connection.html#connection.getVirtualServer">connection.getVirtualServer</a>, <a href="./request.html#request.avoidNode">request.avoidNode</a></div>
+      </div>
+
+      <div class="functionDoc" id="connection.getPersistence">
+         <h4>connection.getPersistence(  )</h4>
+         <div class="functionDescription"><p>
+In a Response rule this function returns the name of the current Session Persistence  class used for this connection, or whatever class has been set by a previous use of <tt>connection.setPersistence()</tt>.
+</p><pre>$class = connection.getPersistence();</pre><b>See also:</b> <a href="./connection.html#connection.setPersistence">connection.setPersistence</a></div>
+      </div>
+
+      <div class="functionDoc" id="connection.getPool">
+         <h4>connection.getPool(  )</h4>
+         <div class="functionDescription"><p>
+Returns the name of the pool that this request is connected to. If a pool has not been chosen, it returns the empty string.
+</p><pre># Where are we connected to?<br>$poolname = connection.getPool();</pre><b>See also:</b> <a href="./connection.html#connection.getNode">connection.getNode</a>, <a href="./connection.html#connection.getVirtualServer">connection.getVirtualServer</a></div>
+      </div>
+
+      <div class="functionDoc" id="connection.getRemoteIP">
+         <h4>connection.getRemoteIP(  )</h4>
+         <div class="functionDescription"><p>
+Returns the remote IP address of the client.
+</p><p>This function has been deprecated; </div>
+      </div>
+
+      <div class="functionDoc" id="connection.getRemotePort">
+         <h4>connection.getRemotePort(  )</h4>
+         <div class="functionDescription"><p>
+Returns the remote port of the client's connection.
+</p><p>This function has been deprecated; </div>
+      </div>
+
+      <div class="functionDoc" id="connection.getServiceLevelClass">
+         <h4>connection.getServiceLevelClass(  )</h4>
+         <div class="functionDescription"><p>
+Returns the current service level class for the connection, or an empty string if no class is set.
+</p><pre>$class = connection.getServiceLevelClass();</pre><b>See also:</b> <a href="./connection.html#connection.setServiceLevelClass">connection.setServiceLevelClass</a></div>
+      </div>
+
+      <div class="functionDoc" id="connection.getVirtualServer">
+         <h4>connection.getVirtualServer(  )</h4>
+         <div class="functionDescription"><p>
+Returns the name of the Virtual Server that the rule is running under.
+</p><pre># Are we on the secure site?<br>if( connection.getVirtualServer() == "secure" ) {<br>&nbsp;&nbsp;&nbsp;pool.use( "secure" );<br>}</pre><b>See also:</b> <a href="./connection.html#connection.getNode">connection.getNode</a>, <a href="./connection.html#connection.getPool">connection.getPool</a></div>
+      </div>
+
+      <div class="functionDoc" id="connection.setBandwidthClass">
+         <h4>connection.setBandwidthClass( name )</h4>
+         <div class="functionDescription"><p>
+Sets the bandwidth class for the current connection to the client. Providing an empty class name removes the bandwidth class from the connection. It returns zero if an error occurs (for example, if the bandwidth class does not exist), and 1 otherwise.
+</p><p>This function has been deprecated; </div>
+      </div>
+
+      <div class="functionDoc" id="connection.setData">
+         <h4>connection.setData( request data )</h4>
+         <div class="functionDescription"><p>
+Replaces the input data read from the client with the provided string. <br/> This is a low-level routine that should be used with care. For protocols with their own higher-level protocol managers (e.g. HTTP), use the higher level routines to alter the input data (e.g. http.setHeader() and http.setBody()).
+</p><p>This function has been deprecated; </div>
+      </div>
+
+      <div class="functionDoc" id="connection.setIdempotent">
+         <h4>connection.setIdempotent( resend )</h4>
+         <div class="functionDescription"><p>
+Marks a request as resendable or non-resendable. <br/> An <i>idempotent</i> request has no detrimental side effects, so it can safely be attempted multiple times. A non-idempotent request has a side effect - for example, it may update a database, or initiate a purchase. <br/> By default, all non-HTTP requests are marked as idempotent. If a back-end node fails to generate a correct response when a request is initially forwarded to it, your traffic manager will attempt to resend the request to another node. <br/> connection.setIdempotent() can override this behaviour. If 'resend' is zero, this indicates that the request should only be attempted against one back-end node. <br/> If 'resend' has a non-zero value, this indicates that if a request is made to a back-end node and a correct response is not received, your traffic manager should retry the request against another back-end node. <br/> Note that a request cannot be resent once it has begun streaming data between the client and the node. Additionally, UDP connections cannot be marked as resendable (the UDP client application should handle failed UDP responses).
+</p><p>This function has been deprecated; </div>
+      </div>
+
+      <div class="functionDoc" id="connection.setPersistence">
+         <h4>connection.setPersistence( name )</h4>
+         <div class="functionDescription"><p>
+Sets the Session Persistence class that will be used for the connection. This is used to override the default Session Persistence class that will be used once a Pool is selected. <br/> If no parameter is given then the current Session Persistence class will be removed and the Pool's default session persistence class will be used for this connection.
+</p><pre>connection.setPersistence( "sales" );</pre><b>See also:</b> <a href="./connection.html#connection.getPersistence">connection.getPersistence</a>, <a href="./connection.html#connection.setPersistenceKey">connection.setPersistenceKey</a></div>
+      </div>
+
+      <div class="functionDoc" id="connection.setPersistenceKey">
+         <h4>connection.setPersistenceKey( value )</h4>
+         <div class="functionDescription"><p>
+Sets the value of the Session Persistence key that is used by a Universal Session Persistence type class. <br/> Setting the value to the empty string will remove any persistence key from the connection. <br/> A Session Persistence class that uses Universal Session Persistence attempts to ensure that every connection that provides the same key is directed to the same back-end node. <br/> This function has no effect if a different type of session persistence class is ultimately used.
+</p><pre>$value = http.getHeader( "User-Agent" ) .<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request.getRemoteIP();<br>connection.setPersistenceKey( $value );<br>connection.setPersistence( "my persistence class" );</pre><b>See also:</b> <a href="./connection.html#connection.setPersistence">connection.setPersistence</a></div>
+      </div>
+
+      <div class="functionDoc" id="connection.setPersistenceNode">
+         <h4>connection.setPersistenceNode( value )</h4>
+         <div class="functionDescription"><p>
+Sets the back-end node to be used by a NamedNode Persistence class. <br/> A Session Persistence class that uses NamedNode Persistence will then ensure that this node will be used for the request. The node must be valid and exist in the Pool being used. If no port number is given, or if the port number is not valid, then if there is a node with a matching name, it will be used. For example, if the node 'web:80' is specified, but there is only a 'web:443', then that node will be used instead. This is to help share session persistence between different services on the same machine. <br/> This function has no effect if a different type of session persistence class is ultimately used.
+</p><pre># Use the node 'web:80' for this request<br>connection.setPersistenceNode( "web:80" );</pre><b>See also:</b> <a href="./connection.html#connection.setPersistence">connection.setPersistence</a></div>
+      </div>
+
+      <div class="functionDoc" id="connection.setServiceLevelClass">
+         <h4>connection.setServiceLevelClass( level )</h4>
+         <div class="functionDescription"><p>
+Sets the service level class for the current connection. It returns zero if an error occurs (for example, if the service level class does not exist), and 1 otherwise
+</p><pre>connection.setServiceLevelClass( "gold" );</pre><b>See also:</b> <a href="./connection.html#connection.getServiceLevelClass">connection.getServiceLevelClass</a></div>
+      </div>
+
+      <div class="functionDoc" id="connection.sleep">
+         <h4>connection.sleep( milliseconds )</h4>
+         <div class="functionDescription"><p>
+Pauses processing of the current connection for the specified number of milliseconds. This can be used to rate-limit particular clients; for example, those asking for particular files, or from particular locations, or using particular user-agents.
+</p><pre># Pause this connection for 2 seconds<br>connection.sleep( 2000 );</pre></div>
+      </div>
+
+   </body>
+</html>

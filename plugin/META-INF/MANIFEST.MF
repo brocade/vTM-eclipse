@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Stingray Plugin for Eclipse
+Bundle-SymbolicName: com.zeus.eclipsePlugin;singleton:=true
+Bundle-Version: 20140402.1.91597
+Bundle-ClassPath: com.zeus.eclipsePlugin/,
+ lib/axis.jar,
+ lib/axis-ant.jar,
+ lib/commons-discovery-0.2.jar,
+ lib/commons-logging-1.0.4.jar,
+ lib/jaxrpc.jar,
+ lib/log4j-1.2.8.jar,
+ lib/saaj.jar,
+ lib/wsdl4j-1.5.1.jar,
+ lib/zxtm-soap.jar,
+ lib/activation.jar,
+ lib/mail.jar
+Bundle-Activator: com.zeus.eclipsePlugin.ZXTMPlugin
+Bundle-Vendor: Brocade Communications Systems
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.jface.text,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.ide,
+ org.eclipse.ui.views,
+ org.eclipse.core.resources,
+ org.eclipse.core.filesystem,
+ org.eclipse.core.expressions
+Eclipse-LazyStart: true
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

@@ -1,0 +1,174 @@
+<html>
+   <header>
+      <title>lang</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>lang</h2>
+
+      <div class="groupDescription">Standard functions, mostly for converting data types.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#lang.assert">lang.assert</a>
+         </li>
+         <li>
+            <a href="#lang.chr">lang.chr</a>
+         </li>
+         <li>
+            <a href="#lang.dump">lang.dump</a>
+         </li>
+         <li>
+            <a href="#lang.isarray">lang.isarray</a>
+         </li>
+         <li>
+            <a href="#lang.ishash">lang.ishash</a>
+         </li>
+         <li>
+            <a href="#lang.max">lang.max</a>
+         </li>
+         <li>
+            <a href="#lang.min">lang.min</a>
+         </li>
+         <li>
+            <a href="#lang.ord">lang.ord</a>
+         </li>
+         <li>
+            <a href="#lang.toArray">lang.toArray</a>
+         </li>
+         <li>
+            <a href="#lang.toDouble">lang.toDouble</a>
+         </li>
+         <li>
+            <a href="#lang.toHash">lang.toHash</a>
+         </li>
+         <li>
+            <a href="#lang.toInt">lang.toInt</a>
+         </li>
+         <li>
+            <a href="#lang.toString">lang.toString</a>
+         </li>
+         <li>
+            <a href="#lang.tochar">lang.tochar</a>
+         </li>
+         <li>
+            <a href="#lang.warn">lang.warn</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="lang.assert">
+         <h4>lang.assert( condition, message )</h4>
+         <div class="functionDescription"><p>
+If the condition is false, prints a warning to the log with the current line number and terminates the rule.  If the condition is true then no messages will be printed and the rule will continue as normal.
+</p><pre># Make sure that this rule is only run with<br># Virtual Servers that are using SSL Decryption.<br>lang.assert( ssl.isSSL(),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"This rule should only be used \<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with decrypted SSL connections" );</pre><b>See also:</b> <a href="./lang.html#lang.warn">lang.warn</a></div>
+      </div>
+
+      <div class="functionDoc" id="lang.chr">
+         <h4>lang.chr( number )</h4>
+         <div class="functionDescription"><p>
+Converts a number to the corresponding ASCII character. chr() may be used as an alias for lang.chr().
+</p><pre># Pick a random letter from A - Z<br>$char = lang.chr( math.random( 26 ) + 65 );</pre><b>Alternate name:</b> chr<br>
+<b>See also:</b> <a href="./lang.html#lang.ord">lang.ord</a></div>
+      </div>
+
+      <div class="functionDoc" id="lang.dump">
+         <h4>lang.dump( variable )</h4>
+         <div class="functionDescription"><p>
+Converts the supplied variable into a human-readable string.  This function is useful for printing the contents of arrays and hashes when debugging TrafficScript rules.
+</p><pre># Print the headers of the current HTTP request<br>log.info( lang.dump( http.getHeaders() ) );</pre></div>
+      </div>
+
+      <div class="functionDoc" id="lang.isarray">
+         <h4>lang.isarray( data )</h4>
+         <div class="functionDescription"><p>
+Returns whether or not the supplied data is an array.
+</p><pre>sub passMeAnArray( $array ) {<br>&nbsp;&nbsp;&nbsp;# Test whether the supplied data is an array<br>&nbsp;&nbsp;&nbsp;if( !lang.isArray( $array ) ) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;<br>&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;# ...<br>}</pre><b>See also:</b> <a href="./lang.html#lang.ishash">lang.ishash</a></div>
+      </div>
+
+      <div class="functionDoc" id="lang.ishash">
+         <h4>lang.ishash( data )</h4>
+         <div class="functionDescription"><p>
+Returns whether or not the supplied data is a hash.
+</p><pre>sub passMeAHash( $hash ) {<br>&nbsp;&nbsp;&nbsp;# Test whether the supplied data is a hash<br>&nbsp;&nbsp;&nbsp;if( !lang.isHash( $hash ) ) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;<br>&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;# ...<br>}</pre><b>See also:</b> <a href="./lang.html#lang.isarray">lang.isarray</a></div>
+      </div>
+
+      <div class="functionDoc" id="lang.max">
+         <h4>lang.max( param1, param2 )</h4>
+         <div class="functionDescription"><p>
+Returns the maximum value of the two parameters provided. If both parameters are strings, it uses a string comparison; otherwise, the parameters are promoted to integers or doubles and compared.  max() may be used as a shorthand for lang.max().
+</p><pre>$r = lang.max( 9, 10 ); # returns 10<br>$s = lang.max( "9", "10" ); # returns "9"<br>$r = lang.max( 2, "4.8" ); # returns 4.8</pre><b>Alternate name:</b> max<br>
+<b>See also:</b> <a href="./lang.html#lang.min">lang.min</a></div>
+      </div>
+
+      <div class="functionDoc" id="lang.min">
+         <h4>lang.min( param1, param2 )</h4>
+         <div class="functionDescription"><p>
+Returns the minimum value of the two parameters provided. If both parameters are strings, it uses a string comparison; otherwise, the parameters are promoted to integers or doubles and compared.  min() may be used as a shorthand for lang.min().
+</p><pre>$r = lang.min( 9, 10 ); # returns 9<br>$s = lang.min( "9", "10" ); # returns "10"<br>$r = lang.min( 2, "4.8" ); # returns 2</pre><b>Alternate name:</b> min<br>
+<b>See also:</b> <a href="./lang.html#lang.max">lang.max</a></div>
+      </div>
+
+      <div class="functionDoc" id="lang.ord">
+         <h4>lang.ord( string )</h4>
+         <div class="functionDescription"><p>
+Converts an ascii character to an integer. ord() may be used as a shorthand alias for lang.ord().
+</p><pre># Get the integer value of a character.<br>$val = lang.ord( "A" );</pre><b>Alternate name:</b> ord<br>
+<b>See also:</b> <a href="./lang.html#lang.toString">lang.toString</a>, <a href="./lang.html#lang.chr">lang.chr</a></div>
+      </div>
+
+      <div class="functionDoc" id="lang.toArray">
+         <h4>lang.toArray( values )</h4>
+         <div class="functionDescription"><p>
+Returns an array of the supplied values.
+</p><pre>$arr = lang.toArray( "10", "hello" );</pre><b>See also:</b> <a href="./lang.html#lang.toDouble">lang.toDouble</a>, <a href="./lang.html#lang.toString">lang.toString</a>, <a href="./lang.html#lang.toInt">lang.toInt</a></div>
+      </div>
+
+      <div class="functionDoc" id="lang.toDouble">
+         <h4>lang.toDouble( value )</h4>
+         <div class="functionDescription"><p>
+Returns the double (floating point) value of its parameter, using the TrafficScript type-casting rules.
+</p><pre>$r = lang.toDouble( "3.14157" ); # returns 3.14157<br>$r = lang.toDouble( 10 );        # returns 10<br>$r = lang.toDouble( 3.14175 );   # returns 3.14175<br>$r = lang.toDouble( "!!!" );     # returns 0.0</pre><b>Alternate name:</b> toDouble<br>
+<b>See also:</b> <a href="./lang.html#lang.toInt">lang.toInt</a>, <a href="./lang.html#lang.toString">lang.toString</a></div>
+      </div>
+
+      <div class="functionDoc" id="lang.toHash">
+         <h4>lang.toHash( values )</h4>
+         <div class="functionDescription"><p>
+Returns an hash of the supplied key value pairs.
+</p><pre>$hash = lang.toHash( "ten", 10, "eleven", 11 );</pre><b>See also:</b> <a href="./lang.html#lang.toDouble">lang.toDouble</a>, <a href="./lang.html#lang.toString">lang.toString</a>, <a href="./lang.html#lang.toInt">lang.toInt</a>, <a href="./lang.html#lang.toArray">lang.toArray</a></div>
+      </div>
+
+      <div class="functionDoc" id="lang.toInt">
+         <h4>lang.toInt( value )</h4>
+         <div class="functionDescription"><p>
+Returns the integer value of its parameter, using the TrafficScript type-casting rules.
+</p><pre>$r = lang.toInt( "10xxx" ); # returns 10<br>$r = lang.toInt( 3.14157 ); # returns 3<br>$r = lang.toInt( 10 );      # returns 10<br>$r = lang.toInt( "!!!" );   # returns 0</pre><b>Alternate name:</b> toInt<br>
+<b>See also:</b> <a href="./lang.html#lang.toDouble">lang.toDouble</a>, <a href="./lang.html#lang.toString">lang.toString</a></div>
+      </div>
+
+      <div class="functionDoc" id="lang.toString">
+         <h4>lang.toString( value )</h4>
+         <div class="functionDescription"><p>
+Returns the string value of its parameter, using the TrafficScript type-casting rules.
+</p><pre>$s = lang.toString( 10 ); # returns "10"<br>$s = lang.toString( 3.14157 ); # returns "3.14157"<br>$s = lang.toString( "10" ); # returns "10"</pre><b>Alternate name:</b> toString<br>
+<b>See also:</b> <a href="./lang.html#lang.toInt">lang.toInt</a>, <a href="./lang.html#lang.toDouble">lang.toDouble</a>, <a href="./lang.html#lang.chr">lang.chr</a>, <a href="./lang.html#lang.ord">lang.ord</a></div>
+      </div>
+
+      <div class="functionDoc" id="lang.tochar">
+         <h4>lang.tochar( number )</h4>
+         <div class="functionDescription"><p>
+This function is an alias for lang.chr.
+</p><pre># Pick a random letter from A - Z<br>$char = lang.tochar( math.random( 26 ) + 65 );</pre><b>Alternate name:</b> tochar<br>
+<b>See also:</b> <a href="./lang.html#lang.chr">lang.chr</a></div>
+      </div>
+
+      <div class="functionDoc" id="lang.warn">
+         <h4>lang.warn( message )</h4>
+         <div class="functionDescription"><p>
+Prints a warning to the log with the line number that this function call appears on.  If strict error checking is enabled then the rule will abort.
+</p><pre>$decoded = string.decrypt( $password, "passphrase" );<br>if( !$decoded ) {<br>&nbsp;&nbsp;&nbsp;lang.warn( "Failed to decrypt string" );<br>} else {<br>&nbsp;&nbsp;&nbsp;# String decrypt succeeded...<br>}</pre><b>See also:</b> <a href="./lang.html#lang.assert">lang.assert</a></div>
+      </div>
+
+   </body>
+</html>

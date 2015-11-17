@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg4104"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   width="16"
+   height="16"
+   version="1.0"
+   sodipodi:docname="zxtm-error.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="/home/mhorney/work/eclipse-plugin/ZXTM Eclipse Plugin/img/zxtm-error.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <metadata
+     id="metadata4109">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs4107">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective4111" />
+  </defs>
+  <sodipodi:namedview
+     inkscape:window-height="953"
+     inkscape:window-width="1280"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showgrid="false"
+     inkscape:zoom="11.313708"
+     inkscape:cx="-11.251129"
+     inkscape:cy="-8.1864248"
+     inkscape:window-x="0"
+     inkscape:window-y="45"
+     inkscape:current-layer="svg4104" />
+  <image
+     xlink:href="/home/mhorney/work/eclipse-plugin/ZXTM Eclipse Plugin/img/zxtm.png"
+     sodipodi:absref="/home/mhorney/work/eclipse-plugin/ZXTM Eclipse Plugin/img/zxtm.png"
+     width="16"
+     height="16"
+     id="image4113"
+     x="0"
+     y="0" />
+  <path
+     style="fill:#ec0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.60000002;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="M 10.624335,6.5119526 C 10.458674,6.5206663 10.344378,6.6028258 10.23623,6.7302623 C 10.138443,6.8494812 10.056728,6.9925997 9.9694038,7.1183685 L 5.7002351,14.468134 C 5.5943391,14.6468 5.4819249,14.876085 5.4819249,15.074549 C 5.4819249,15.273014 5.5618473,15.36555 5.7002351,15.486914 C 5.8234589,15.594977 5.9759124,15.628713 6.0883408,15.632453 L 6.3309071,15.632453 L 10.624335,15.632453 L 14.917763,15.632453 L 15.16033,15.632453 C 15.272756,15.628713 15.425212,15.594977 15.548434,15.486914 C 15.686822,15.36555 15.766745,15.273014 15.766745,15.074549 C 15.766745,14.876085 15.654331,14.6468 15.548434,14.468134 L 11.279266,7.1183685 C 11.191942,6.9925997 11.110226,6.8494812 11.012439,6.7302623 C 10.904292,6.6028258 10.789995,6.5206663 10.624335,6.5119526 z"
+     id="path4922" />
+  <text
+     xml:space="preserve"
+     style="font-size:11.42463017px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+     x="6.373167"
+     y="18.366344"
+     id="text4967"
+     transform="scale(1.223495,0.8173307)"><tspan
+       sodipodi:role="line"
+       id="tspan4969"
+       x="6.373167"
+       y="18.366344">!</tspan></text>
+</svg>

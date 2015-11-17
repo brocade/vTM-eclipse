@@ -1,0 +1,2786 @@
+<?xml version="1.0"?>
+
+<codedata lang="en_us" version="3.0">
+   <keywords>
+      <keyword name="while" />
+      <keyword name="if" />
+      <keyword name="else" />
+      <keyword name="print" />
+      <keyword name="break" />
+      <keyword name="continue" />
+   </keywords>
+
+   <groups>
+      <group name="connection">
+         <description>Generic functions that affect the current connection.</description>
+         <functions>
+            <func name="connection.close">
+               <parameters min="1" max="2" regex=".|..">
+                  <param name="Data" />
+                  <param name="Read" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; connection.close() function writes the provided data directly back to the client. After the data has been sent, the connection is closed. &lt;/p&gt;&lt;p&gt; The optional second argument specifies whether ZXTM should continue to read in data from the client after sending this response, and wait for it to close the connection. If set to 0, ZXTM will close the connection immediately. If non-zero, ZXTM will wait and read any remaining data from the connection before closing it. &lt;/p&gt;&lt;p&gt; The default behaviour is to wait, because some client software will not read a response until it has sent its entire request. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.discard" />
+                  <related func="http.sendResponse" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.discard">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; connections.discard() immediately closes the current connection and stops processing rules. This is equivalent to the function call 'pool.use( "discard" )'. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.close" />
+                  <related func="http.sendResponse" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.getBandwidthClass">
+               <parameters min="0" max="0" regex="">
+                  <param name="Bandwidth Class" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_BW" />
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; connection.getBandwidthClass() gets the current bandwidth class for the connection. It will return an empty string if none is set. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.setBandwidthClass" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.getData">
+               <parameters min="1" max="1" regex=".">
+                  <param name="count" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+                  <restriction type="FEATURE_DEPRECATED" />
+               </restrictions>
+               <description>&lt;p&gt; connection.getData() returns the first 'count' bytes of data provided by the client. &lt;/p&gt;&lt;p&gt; Warning: you can stall a connection by asking it to read more data than the remote client will provide. Combine this with connection.getDataLen() to reliably read data from a connection. &lt;/p&gt;&lt;p&gt;&lt;b&gt;Function is deprecated.&lt;/b&gt;&lt;br /&gt;Replaced by request.get&lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.getDataLen" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.getDataLen">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+                  <restriction type="FEATURE_DEPRECATED" />
+               </restrictions>
+               <description>&lt;p&gt; connection.getDataLen() returns the amount of data already received from the client. This can be combined with connection.getData() to reliably read data from a connection without stalling if no data is available. &lt;/p&gt;&lt;p&gt;&lt;b&gt;Function is deprecated.&lt;/b&gt;&lt;br /&gt;Replaced by request.getLength&lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.getData" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.getLine">
+               <parameters min="1" max="1" regex=".">
+                  <param name="offset" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+                  <restriction type="FEATURE_DEPRECATED" />
+               </restrictions>
+               <description>&lt;p&gt; connection.getLine() returns a line of input data provided by the client. The line seperator is '\n', and this is stripped off before returning the line. connection.getline() takes a single byte-count argument which informs ZXTM where to start scanning for a line; a value of '0' begins at the start, so returns the first line. &lt;/p&gt;&lt;p&gt; When connection.getline() returns, the variable $1 is updated to point to the start of the next line in the datastream. &lt;/p&gt;&lt;p&gt; You can iterate through the lines of input data by using $1 as the iterator variable. &lt;/p&gt;&lt;p&gt;&lt;b&gt;Function is deprecated.&lt;/b&gt;&lt;br /&gt;Replaced by request.getLine&lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.getData" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.getLocalIP">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+                  <restriction type="FEATURE_DEPRECATED" />
+               </restrictions>
+               <description>&lt;p&gt; connection.getLocalIP() returns the local IP address that the client has connected to. &lt;/p&gt;&lt;p&gt;&lt;b&gt;Function is deprecated.&lt;/b&gt;&lt;br /&gt;Replaced by request.getLocalIP&lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.getLocalPort" />
+                  <related func="connection.getRemoteIP" />
+                  <related func="connection.getRemotePort" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.getLocalPort">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+                  <restriction type="FEATURE_DEPRECATED" />
+               </restrictions>
+               <description>&lt;p&gt; connection.getLocalPort() returns the local port that the client connected to. &lt;/p&gt;&lt;p&gt;&lt;b&gt;Function is deprecated.&lt;/b&gt;&lt;br /&gt;Replaced by request.getLocalPort&lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.getLocalIP" />
+                  <related func="connection.getRemoteIP" />
+                  <related func="connection.getRemotePort" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.getMemoryUsage">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; connection.getMemoryUsage() returns an estimate of the amount of memory currently in use for this connection, in bytes. Memory is primarily used for buffering data, and the memory usage can be tuned using the various buffer size settings. &lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+            <func name="connection.getNode">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; connection.getNode() returns the name of the back-end server that this connection is connected to. If a back-end server has not been chosen, it returns the empty string. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.getPool" />
+                  <related func="connection.getVirtualServer" />
+                  <related func="request.avoidNode" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.getPersistence">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; connection.getPersistence returns the name of the current Session Persistence class that will be used for this connection. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.setPersistence" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.getPool">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; connection.getPool() returns the name of the pool that this connection is conneted to. If a pool has not been chosen, it returns the empty string. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.getNode" />
+                  <related func="connection.getVirtualServer" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.getRemoteIP">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+                  <restriction type="FEATURE_DEPRECATED" />
+               </restrictions>
+               <description>&lt;p&gt; connection.getRemoteIP returns the remote IP address of the client's connection. &lt;/p&gt;&lt;p&gt;&lt;b&gt;Function is deprecated.&lt;/b&gt;&lt;br /&gt;Replaced by request.getRemoteIP&lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.getRemotePort" />
+                  <related func="connection.getLocalIP" />
+                  <related func="connection.getLocalPort" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.getRemotePort">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+                  <restriction type="FEATURE_DEPRECATED" />
+               </restrictions>
+               <description>&lt;p&gt; connection.getRemotePort() returns the remote port of the client's connection. &lt;/p&gt;&lt;p&gt;&lt;b&gt;Function is deprecated.&lt;/b&gt;&lt;br /&gt;Replaced by request.getRemotePort&lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.getRemoteIP" />
+                  <related func="connection.getLocalIP" />
+                  <related func="connection.getLocalPort" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.getServiceLevelClass">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_SLM" />
+               </restrictions>
+               <description>&lt;p&gt; connection.getServiceLevelClass gets the current service level class for the connection. It will return an empty string if none is set. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.setServiceLevelClass" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.getVirtualServer">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; connection.getVirtualServer() returns the name of the Virtual Server that the rule is running under. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.getNode" />
+                  <related func="connection.getPool" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.setBandwidthClass">
+               <parameters min="1" max="1" regex=".">
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_BW" />
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; connection.setBandwidthClass() sets the bandwidth class for the current connection. Providing an empty class name removes the bandwidth class from the connection. It returns zero if an error occurs (for example, if the bandwidth class does not exist), and 1 otherwise. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.getBandwidthClass" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.setData">
+               <parameters min="1" max="1" regex=".">
+                  <param name="request data" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+                  <restriction type="FEATURE_DEPRECATED" />
+               </restrictions>
+               <description>&lt;p&gt; connection.setData() replaces the input data read from the client with the provided string. &lt;/p&gt;&lt;p&gt; This is a low-level routine that should be used with care. For protocols with their own higher-level protocol managers (e.g. http), use the higher level routines to alter the input data (e.g. http.setHeader() and http.setBody()). &lt;/p&gt;&lt;p&gt;&lt;b&gt;Function is deprecated.&lt;/b&gt;&lt;br /&gt;Replaced by request.set&lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+            <func name="connection.setIdempotent">
+               <parameters min="1" max="1" regex=".">
+                  <param name="resend" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+                  <restriction type="FEATURE_DEPRECATED" />
+               </restrictions>
+               <description>&lt;p&gt; connection.setIdempotent() marks a request as resendable or non-resendable. &lt;/p&gt;&lt;p&gt; An &lt;i&gt;idempotent&lt;/i&gt; request has no detrimental side effects, so it can safely be attempted multiple times. A non-idempotent request has a side effect - for example, it may update a database, or initiate a purchase. &lt;/p&gt;&lt;p&gt; By default, all non-HTTP requests are marked as idempotent. If a back-end node fails to generate a correct response when a request is initially forwarded to it, ZXTM will attempt to resend the request to another node. &lt;/p&gt;&lt;p&gt; connection.setIdempotent() can override this behaviour. If 'resend' is zero, this indicates that the request should only be attempted against one back-end node. &lt;/p&gt;&lt;p&gt; If 'resend' has a non-zero value, this indicates that if a request is made to a back-end node and a correct response is not received, ZXTM should retry the request against another back-end node. &lt;/p&gt;&lt;p&gt; Note that ZXTM cannot resend a request once has begun streaming data between the client and the node. Additionally, UDP connections cannot be marked as resendable (the UDP client application should handle failed UDP responses). &lt;/p&gt;&lt;p&gt;&lt;b&gt;Function is deprecated.&lt;/b&gt;&lt;br /&gt;Replaced by request.setIdempotent&lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.setIdempotent" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.setPersistence">
+               <parameters min="0" max="1" regex=".?">
+                  <param name="Session Persistence class name" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; connection.setPersistence sets the Session Peristence class that will be used for the connection. If no parameter is given, it will remove any existing session persistence class. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.getPersistence" />
+                  <related func="connection.setPersistenceKey" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.setPersistenceKey">
+               <parameters min="1" max="1" regex=".">
+                  <param name="session persistence key" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; connection.setPersistenceKey sets the Session Peristence key that is used by a Universal Session Persistance type class. &lt;/p&gt;&lt;p&gt; A Session Persistance class that uses Universal Session Persistence attempts to ensure that every connection that provides the same key is directed to the same back-end node. &lt;/p&gt;&lt;p&gt; This function has no effect if a different type of session persistence class is ultimately used. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.setPersistence" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.setServiceLevelClass">
+               <parameters min="1" max="1" regex=".">
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_SLM" />
+               </restrictions>
+               <description>&lt;p&gt; connection.setServiceLevelClass sets the service level class for the current connection. It returns zero if an error occurs (for example, if the service level class does not exist), and 1 otherwise &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.getServiceLevelClass" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.sleep">
+               <parameters min="1" max="1" regex=".">
+                  <param name="milliseconds" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; connection.sleep() pauses processing of the current connection for the specified number of milliseconds. This can be used to rate-limit particular clients; for example, those asking for particular files, or from particular locations, or using particular user-agents. &lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="connection.data">
+         <description>Functions that allow you to store and retrieve data stored for the lifetime of the current connection.</description>
+         <functions>
+            <func name="connection.data.get">
+               <parameters min="1" max="1" regex=".">
+                  <param name="key" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; connection.data.get() returns the value that was previously stored with the given key using connection.data.set() in the current connection, or returns the empty string if no data was stored. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.data.set" />
+                  <related func="data.get" />
+               </relatedFunctions>
+            </func>
+            <func name="connection.data.set">
+               <parameters min="2" max="2" regex="..">
+                  <param name="key" />
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; connection.data.set() stores a value for this connection, associating it with the provided key. The value can be retrieved later when processing the same connection, using connection.data.get(). Once the connection finishes, the value cannot be retrieved. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.data.get" />
+                  <related func="data.set" />
+               </relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="data">
+         <description>Functions that allow you to store information shared between all rules.</description>
+         <functions>
+            <func name="data.get">
+               <parameters min="1" max="1" regex=".">
+                  <param name="key" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; data.get() returns the value that was previously stored with the given key using data.set(), or returns the empty string if no data was stored. &lt;/p&gt;&lt;p&gt; Values stored in this way are persistent; a value stored in one rule can later be retrieved by a different rule handling a different connection. Thus, a rule can maintain persistent state across connections. &lt;/p&gt;&lt;p&gt; Note that the data values are stored in each ZXTM process, so multi-CPU machines will have multiple separate copies of the state. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="data.set" />
+                  <related func="data.getMemoryUsage" />
+               </relatedFunctions>
+            </func>
+            <func name="data.getMemoryUsage">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; data.getMemoryUsage() returns an estimate of the amount of memory, in bytes, used by entries that have been stored by data.set(). &lt;/p&gt;&lt;p&gt; This can be used to verify if a rule is storing excessive amounts of data, starving the host machine of memory. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="data.set" />
+                  <related func="data.reset" />
+               </relatedFunctions>
+            </func>
+            <func name="data.reset">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; data.reset() removes all mappings created by data.set(). &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="data.set" />
+                  <related func="data.getMemoryUsage" />
+               </relatedFunctions>
+            </func>
+            <func name="data.set">
+               <parameters min="2" max="2" regex="..">
+                  <param name="key" />
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; data.set() stores a value persistently, associating it with the provided key. The value can be retrieved later using data.get(), even from a different rule or connection. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="data.get" />
+                  <related func="data.getMemoryUsage" />
+               </relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="http">
+         <description>HTTP protocol-specific functions.</description>
+         <functions>
+            <func name="http.addHeader">
+               <parameters min="2" max="2" regex="..">
+                  <param name="name" />
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.addHeader() modifies the current HTTP request, adding an HTTP header with the supplied value. If the header already exists, then this value will be appended to the existing value. The header name is automatically translated to the correct case before it is added. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.setHeader" />
+                  <related func="http.getHeader" />
+                  <related func="http.removeHeader" />
+                  <related func="http.headerExists" />
+                  <related func="http.addResponseHeader" />
+               </relatedFunctions>
+            </func>
+            <func name="http.addResponseHeader">
+               <parameters min="2" max="2" regex="..">
+                  <param name="name" />
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.addResponseHeader() adds an HTTP header to the HTTP response that will be sent back to the client. If the header already exists in the response, then this value will be appended to the existing value. The header name is automatically translated to the correct case before it is added. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.setResponseHeader" />
+                  <related func="http.getResponseHeader" />
+                  <related func="http.removeResponseHeader" />
+                  <related func="http.addHeader" />
+               </relatedFunctions>
+            </func>
+            <func name="http.cookie">
+               <parameters min="1" max="1" regex=".">
+                  <param name="name" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+                  <restriction type="FEATURE_DEPRECATED" />
+               </restrictions>
+               <description>&lt;p&gt; http.cookie() returns the value of the named cookie. &lt;/p&gt;&lt;p&gt;&lt;b&gt;Function is deprecated.&lt;/b&gt;&lt;br /&gt;Replaced by http.getCookie&lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.getCookie" />
+               </relatedFunctions>
+            </func>
+            <func name="http.getBody">
+               <parameters min="0" max="1" regex=".?">
+                  <param name="count" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.getBody() returns the body data of the request. &lt;/p&gt;&lt;p&gt; If the optional 'count' parameter is supplied, http.getBody() will only read and return this number of bytes. If count is 0, http.getBody() returns the entire request. &lt;/p&gt;&lt;p&gt; If the request has no body, then this returns an empty string. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.setBody" />
+                  <related func="http.getResponseBody" />
+               </relatedFunctions>
+            </func>
+            <func name="http.getCookie">
+               <parameters min="1" max="1" regex=".">
+                  <param name="name" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.getCookie() returns the value of the named cookie in the incoming HTTP request. &lt;/p&gt;&lt;p&gt; http.getCookie is a helper method that makes it easier to parse the HTTP Cookie header and extract the values of that particular cookie, rather than using http.getHeader() directly. &lt;/p&gt;&lt;p&gt; An HTTP 'Cookie' header can have multiple values, such as &lt;/p&gt;&lt;p&gt; &amp;nbsp;&amp;nbsp;Cookie: user-id=Joe; user-type=gold &lt;/p&gt;&lt;p&gt; http.getCookie( ... ) will retrieve the 'Cookie' header line and parse it, returning the value of the cookie. If the cookie does not exist, http.getCookie() will return the empty string. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.setCookie" />
+                  <related func="http.removeCookie" />
+                  <related func="http.getResponseCookie" />
+               </relatedFunctions>
+            </func>
+            <func name="http.getFormParam">
+               <parameters min="1" max="2" regex="..?">
+                  <param name="Parameter" />
+                  <param name="Separator" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.getFormParam() returns the %-decoded form parameter from the URL query string, or if not found and the request is a POST, from the POST body data. &lt;/p&gt;&lt;p&gt; If the parameter is provided twice, only the first will be returned, unless the optional Separator is provided, in which case all matches will be returned, separated with this string. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.setQueryString" />
+                  <related func="http.getRawURL" />
+                  <related func="http.getBody" />
+               </relatedFunctions>
+            </func>
+            <func name="http.getHeader">
+               <parameters min="1" max="1" regex=".">
+                  <param name="name" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.getHeader() returns the value of a named HTTP header in the HTTP request, or the empty string if the header does not exist or has an empty value. The header name is automatically translated into the proper case for the lookup. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.setHeader" />
+                  <related func="http.addHeader" />
+                  <related func="http.removeHeader" />
+                  <related func="http.headerExists" />
+                  <related func="http.getResponseHeader" />
+               </relatedFunctions>
+            </func>
+            <func name="http.getMethod">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.getMethod() returns the HTTP method that was used to make the request, such as GET or POST. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.setMethod" />
+               </relatedFunctions>
+            </func>
+            <func name="http.getPath">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.getPath() returns the %-decoded path in the HTTP request URL, stripping the query string if one was provided. If there is a leading scheme and authority prefix, this is removed as well, so a raw url of 'http://www.example.com/content?page=44' will be returned as '/content'. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.setPath" />
+                  <related func="http.getRawURL" />
+                  <related func="http.getQueryString" />
+                  <related func="http.normalisePath" />
+               </relatedFunctions>
+            </func>
+            <func name="http.getQueryString">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.getQueryString() returns the %-decoded query string in the URL, or the empty string if no query string was provided. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.setQueryString" />
+                  <related func="http.getRawURL" />
+               </relatedFunctions>
+            </func>
+            <func name="http.getRawURL">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.getRawURL() returns the raw URL data provided in the first line of the HTTP request, after the method and before the HTTP version specifier. &lt;/p&gt;&lt;p&gt; The raw URL data includes both the path and query string if supplied and is not decoded. It could contain %-escaped characters that can be used to disguise the contents of the URL. Use http.getPath() or http.getQueryString() to return the %-decoded version of the path or query string. &lt;/p&gt;&lt;p&gt; Similarly, the file path in the URL could be non-normalised. For example, it may contain '.' and '..' references, such as '/sales//.././../../etc/passwd'. Use http.normalisePath() on the decoded url to normalise (flatten) the file path. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.getPath" />
+                  <related func="http.getQueryString" />
+                  <related func="string.unescape" />
+                  <related func="http.normalisePath" />
+               </relatedFunctions>
+            </func>
+            <func name="http.getResponseBody">
+               <parameters min="0" max="1" regex=".?">
+                  <param name="count" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.getResponseBody() returns the body of the HTTP response. &lt;/p&gt;&lt;p&gt; If the optional 'count' parameter is provided, http.getResponseBody() will read and return the first 'count' bytes of the response. If count is 0, http.getResponseBody() will return the entire response. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.setResponseBody" />
+                  <related func="http.getBody" />
+               </relatedFunctions>
+            </func>
+            <func name="http.getResponseCode">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.getResponseCode() returns the status code from the first line of the HTTP response. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.setResponseCode" />
+               </relatedFunctions>
+            </func>
+            <func name="http.getResponseCookie">
+               <parameters min="1" max="1" regex=".">
+                  <param name="name" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.getResponseCookie() returns the value of the named cookie in the HTTP response. &lt;/p&gt;&lt;p&gt; http.getResponseCookie is a helper method to make it easier to parse the HTTP Set-Cookie header and extract the values of that particular cookie, rather than using http.getResponseHeader() directly. &lt;/p&gt;&lt;p&gt; If the cookie does not exist, http.getResponseCookie() will return the empty string. &lt;/p&gt;&lt;p&gt; This function should be called in a response rule; it has no effect in a request rule. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.setResponseCookie" />
+                  <related func="http.removeResponseCookie" />
+                  <related func="http.getCookie" />
+               </relatedFunctions>
+            </func>
+            <func name="http.getResponseHeader">
+               <parameters min="1" max="1" regex=".">
+                  <param name="name" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.getResponseHeader() returns the value of a named HTTP header in the HTTP response, or the empty string if the header does not exist or has an empty value. The header name is automatically translated into the proper case for the lookup. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.setResponseHeader" />
+                  <related func="http.addResponseHeader" />
+                  <related func="http.removeResponseHeader" />
+                  <related func="http.responseHeaderExists" />
+                  <related func="http.getHeader" />
+               </relatedFunctions>
+            </func>
+            <func name="http.getVersion">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.getVersion() returns the version of the HTTP protocol being used. It returns the version string in the HTTP/version specifier in the first line of the HTTP request, such as '1.1'. It will return the empty string in the case of HTTP/0.9, which does not have a version specifier in the request. &lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+            <func name="http.headerExists">
+               <parameters min="1" max="1" regex=".">
+                  <param name="name" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.headerExists() determines if a named header exists or not. It is similar to http.getHeader(), but makes it possible to distinguish between a header not being present and a header having no value. &lt;/p&gt;&lt;p&gt; The header name is automatically translated into the proper case for the lookup. &lt;/p&gt;&lt;p&gt; It returns 1 if the header exists, and 0 if it does not. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.getHeader" />
+               </relatedFunctions>
+            </func>
+            <func name="http.normalisePath">
+               <parameters min="1" max="1" regex=".">
+                  <param name="url" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.normalisePath() flattens a decoded URL path, converting '//' to '/', '/./' to '/', and flattening '/a/../' to '/'. It returns the flattened path string. &lt;/p&gt;&lt;p&gt; If the filesystem path is invalid, this function returns the empty string. Invalid paths include those that contain disallowed characters like '\0', or that use '../' sequences to reference a location outside the local root. &lt;/p&gt;&lt;p&gt; This function should be used on the retrieved URL before attempting path matching for access control. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.getRawURL" />
+               </relatedFunctions>
+            </func>
+            <func name="http.removeCookie">
+               <parameters min="1" max="1" regex=".">
+                  <param name="name" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.removeCookie() removes the named cookie from the incoming HTTP request. &lt;/p&gt;&lt;p&gt; http.removeCookie is a helper method that makes it easier to parse the HTTP Cookie header and remove a particular cookie, rather than using http.getHeader() and http.setHeader() directly. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.getCookie" />
+                  <related func="http.setCookie" />
+                  <related func="http.removeResponseCookie" />
+               </relatedFunctions>
+            </func>
+            <func name="http.removeHeader">
+               <parameters min="1" max="1" regex=".">
+                  <param name="name" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.removeHeader() removes a named header if it exists in the request. The header name is automatically translated to the correct case. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.getHeader" />
+                  <related func="http.addHeader" />
+                  <related func="http.setHeader" />
+                  <related func="http.removeResponseHeader" />
+               </relatedFunctions>
+            </func>
+            <func name="http.removeResponseCookie">
+               <parameters min="1" max="1" regex=".">
+                  <param name="name" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.removeResponseCookie() removes the named cookie from the HTTP response. &lt;/p&gt;&lt;p&gt; http.removeResponseCookie is a helper method, to avoid using http.removeResponseHeader() directly. It operates correctly when there are multiple Set-Cookie headers in the response. &lt;/p&gt;&lt;p&gt; This function should be called in a response rule; it has no effect in a request rule. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.getResponseCookie" />
+                  <related func="http.setResponseCookie" />
+                  <related func="http.removeCookie" />
+               </relatedFunctions>
+            </func>
+            <func name="http.removeResponseHeader">
+               <parameters min="1" max="1" regex=".">
+                  <param name="name" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.removeResponseHeader() removes the named HTTP header from the HTTP response. The header name is automatically translated to the correct case. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.setResponseHeader" />
+                  <related func="http.getResponseHeader" />
+                  <related func="http.addResponseHeader" />
+                  <related func="http.scrubResponseHeaders" />
+                  <related func="http.removeHeader" />
+               </relatedFunctions>
+            </func>
+            <func name="http.responseHeaderExists">
+               <parameters min="1" max="1" regex=".">
+                  <param name="name" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.responseHeaderExists() determines if a named header exists in the HTTP response. It is similar to http.getResponseHeader(), but makes it possible to distinguish between a header not being present and a header having no value. &lt;/p&gt;&lt;p&gt; The header name is automatically translated into the proper case for the lookup. &lt;/p&gt;&lt;p&gt; It returns 1 if the header exists, and 0 if it does not. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.getResponseHeader" />
+               </relatedFunctions>
+            </func>
+            <func name="http.scrubResponseHeaders">
+               <parameters min="1" max="INF" regex=".+">
+                  <param name="header1" />
+                  <param name="header2" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.scrubResponseHeaders() limits the allowed HTTP response headers to a known set. The allowed headers can either be passed in as a list or space separated in a single argument. &lt;/p&gt;&lt;p&gt; Care should be taken when using this function to ensure that the headers that are required for connection handling are let through. At the very least, the following should be allowed: &lt;blockquote&gt; &lt;tt&gt;Connection&lt;/tt&gt;, &lt;tt&gt;Content-Length&lt;/tt&gt;, &lt;tt&gt;Transfer-Encoding&lt;/tt&gt;, &lt;tt&gt;Location&lt;/tt&gt; &lt;/blockquote&gt; For a complete list of HTTP headers, refer to RFC2616. Protocols that extend HTTP, such as WebDAV, use other headers. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.removeResponseHeader" />
+               </relatedFunctions>
+            </func>
+            <func name="http.sendResponse">
+               <parameters min="4" max="4" regex="....">
+                  <param name="responsecode" />
+                  <param name="contenttype" />
+                  <param name="body" />
+                  <param name="headers" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.sendResponse() sends back an HTTP response to the client instead of balancing the request via a pool onto a node. It generates a correct HTTP response from the response code, content type, body data and headers supplied. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.close" />
+                  <related func="connection.discard" />
+               </relatedFunctions>
+            </func>
+            <func name="http.setBody">
+               <parameters min="1" max="1" regex=".">
+                  <param name="body" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.setBody() sets the request body for this HTTP request to the supplied string, replacing any request body already present. &lt;/p&gt;&lt;p&gt; This also updates the 'Content-Length' header in the request to the length of the new body data. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.getBody" />
+                  <related func="http.setResponseBody" />
+               </relatedFunctions>
+            </func>
+            <func name="http.setCookie">
+               <parameters min="2" max="2" regex="..">
+                  <param name="name" />
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.setCookie() sets the value of the named cookie in the incoming HTTP request. &lt;/p&gt;&lt;p&gt; http.setCookie is a helper method that makes it easier to parse the HTTP Cookie header and set the value of a particular cookie, rather than using http.getHeader() and http.setHeader() directly. &lt;/p&gt;&lt;p&gt; An HTTP 'Cookie' header can have multiple values, such as &lt;/p&gt;&lt;p&gt; &amp;nbsp;&amp;nbsp;Cookie: user-id=Joe; user-type=gold &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.getCookie" />
+                  <related func="http.removeCookie" />
+                  <related func="http.setResponseCookie" />
+               </relatedFunctions>
+            </func>
+            <func name="http.setHeader">
+               <parameters min="2" max="2" regex="..">
+                  <param name="name" />
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.setHeader() sets the value of the named HTTP header, replacing any existing value if the header already exists. &lt;/p&gt;&lt;p&gt; The header name is automatically translated to the correct case before it is added. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.addHeader" />
+                  <related func="http.getHeader" />
+                  <related func="http.headerExists" />
+                  <related func="http.removeHeader" />
+                  <related func="http.setResponseHeader" />
+               </relatedFunctions>
+            </func>
+            <func name="http.setIdempotent">
+               <parameters min="1" max="1" regex=".">
+                  <param name="resend" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.setIdempotent() marks a request as resendable or non-resendable. &lt;/p&gt;&lt;p&gt; An &lt;i&gt;idempotent&lt;/i&gt; request has no detrimental side effects, so it can safely be submitted multiple times. A simple page retrieval is generally idempotent. A non-idempotent request has a side effect - for example, it may update a database, or initiate a purchase. The HTTP/1.1 specification regards all GET, HEAD, PUT, DELETE, OPTIONS and TRACE requests as idempotent. &lt;/p&gt;&lt;p&gt; ZXTM tags these requests as 'resendable'; if the request is submitted to a back-end node and a correct response is not received, ZXTM will resubmit the request to another back-end node. All other requests, such as POST requests are not resent if a back-end node fails to generate a correct response. &lt;/p&gt;&lt;p&gt; http.setIdempotent() can override this behaviour. If 'resend' has a non-zero value, this indicates that if the request is submitted to a back-end node and a correct response is not received, ZXTM should resubmit the request to another back-end node. &lt;/p&gt;&lt;p&gt; If 'resend' is zero, this indicates that the request should only be attempted against one back-end node. &lt;/p&gt;&lt;p&gt; Note that ZXTM cannot resend a request if it has begun streaming data from the client to the node before it detects the failure. To avoid this, you can read the entire request within the TrafficScript rule so that it is buffered in its entireity internally in the TrafficManager. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="request.setIdempotent" />
+               </relatedFunctions>
+            </func>
+            <func name="http.setMethod">
+               <parameters min="1" max="1" regex=".">
+                  <param name="method" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.setMethod() sets the HTTP method to use when forwarding the request via a pool to a node. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.getMethod" />
+               </relatedFunctions>
+            </func>
+            <func name="http.setPath">
+               <parameters min="1" max="1" regex=".">
+                  <param name="url" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.setPath() replaces the Path portion of the request URL with the supplied value. If the replacement value contains a '?', this function will also replace the query string; otherwise, any query string is preserved. Any control characters are %-encoded in the replacement value. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.getPath" />
+               </relatedFunctions>
+            </func>
+            <func name="http.setQueryString">
+               <parameters min="1" max="1" regex=".">
+                  <param name="querystring" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.setQueryString() replaces the query-string portion of the request URL with the supplied replacement. Any control characters in the replacement are %-encoded. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.getQueryString" />
+               </relatedFunctions>
+            </func>
+            <func name="http.setResponseBody">
+               <parameters min="0" max="2" regex=".?.?">
+                  <param name="body" />
+                  <param name="transfer-encoding" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.setResponseBody() sets the response body for this HTTP response to the supplied string, replacing any response body already present. &lt;/p&gt;&lt;p&gt; This also updates the 'Content-Length' header in the response to the length of the new body data. &lt;/p&gt;&lt;p&gt; The optional transfer-encoding parameter indicates the encoding of the body data (for example, 'chunked'). &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.getResponseBody" />
+                  <related func="http.setBody" />
+               </relatedFunctions>
+            </func>
+            <func name="http.setResponseCode">
+               <parameters min="1" max="2" regex=".|..">
+                  <param name="code" />
+                  <param name="message" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.setResponseCode() sets the status code and message in the first line of the HTTP response. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.getResponseCode" />
+               </relatedFunctions>
+            </func>
+            <func name="http.setResponseCookie">
+               <parameters min="2" max="3" regex="..|...">
+                  <param name="name" />
+                  <param name="value" />
+                  <param name="options" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.setResponseCookie() sets the value of the named cookie in the HTTP response. &lt;/p&gt;&lt;p&gt; http.setResponseCookie is a helper method to make it easier to parse the HTTP Set-Cookie header and set the value of a particular cookie, rather than using http.getResponseHeader() and http.setResponseHeader() directly. &lt;/p&gt;&lt;p&gt; If 'options' are not provided, the current options for the named cookie are preserved. &lt;/p&gt;&lt;p&gt; This function should be called in a response rule; it has no effect in a request rule. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.getResponseCookie" />
+                  <related func="http.removeResponseCookie" />
+                  <related func="http.setCookie" />
+               </relatedFunctions>
+            </func>
+            <func name="http.setResponseHeader">
+               <parameters min="2" max="2" regex="..">
+                  <param name="name" />
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.setResponseHeader() sets a HTTP header in the HTTP response that will be sent back to the client. If the header already exists in the response, then it will be replaced with this new value. The header name is automatically translated to the correct case before it is added. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.addResponseHeader" />
+                  <related func="http.getResponseHeader" />
+                  <related func="http.removeResponseHeader" />
+                  <related func="http.setHeader" />
+               </relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="http.request">
+         <description>Functions that allow you to send HTTP requests within TrafficScript rules.</description>
+         <functions>
+            <func name="http.request.get">
+               <parameters min="1" max="2" regex="..?">
+                  <param name="url" />
+                  <param name="headers" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.request.get() issues an HTTP request for a remote web page and returns the body of the page requested. $1 is set to the HTTP response code (e.g. 200 for OK), or is 0 if there was an error. $2 is set to the Content-Type of the response. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.request.post" />
+               </relatedFunctions>
+            </func>
+            <func name="http.request.post">
+               <parameters min="2" max="3" regex="...?">
+                  <param name="url" />
+                  <param name="POST data" />
+                  <param name="headers" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_HTTP" />
+               </restrictions>
+               <description>&lt;p&gt; http.request.post() issues an HTTP POST request for a remote web page, and returns the body of the page requested. $1 is set to the HTTP response code (e.g. 200 for OK), or is 0 if there was an error. $2 is set to the Content-Type of the response. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.request.get" />
+               </relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="lang">
+         <description>Standard functions, mostly for converting data types.</description>
+         <functions>
+            <func name="lang.chr">
+               <parameters min="1" max="1" regex=".">
+                  <param name="number" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; lang.chr() converts its parameter to the corresponding ASCII character. chr() may be used an a shorthand alias for lang.chr(). &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="lang.ord" />
+               </relatedFunctions>
+            </func>
+            <func name="lang.max">
+               <parameters min="2" max="2" regex="..">
+                  <param name="param1" />
+                  <param name="param2" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; lang.max() returns the maximum value of the two parameters provided. If both parameters are strings, it uses a string comparison; otherwise, the parameters are promoted to integers or doubles and compared. max() may be used as a shorthand for lang.max(). &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="lang.min" />
+               </relatedFunctions>
+            </func>
+            <func name="lang.min">
+               <parameters min="2" max="2" regex="..">
+                  <param name="param1" />
+                  <param name="param2" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; lang.min() returns the minimum value of the two parameters provided. If both parameters are strings, it uses a string comparison; otherwise, the parameters are promoted to integers or doubles and compared. min() may be used as a shorthand for lang.min(). &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="lang.max" />
+               </relatedFunctions>
+            </func>
+            <func name="lang.ord">
+               <parameters min="1" max="1" regex=".">
+                  <param name="string" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; lang.ord() converts its parameter, an ascii character, to an integer. ord() may be used as a shorthand alias for lang.ord(). &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="lang.toString" />
+                  <related func="lang.chr" />
+               </relatedFunctions>
+            </func>
+            <func name="lang.toDouble">
+               <parameters min="1" max="1" regex=".">
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; lang.toDouble() returns the double (floating point) value of its parameter, using the TrafficScript type-casting rules. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="lang.toInt" />
+                  <related func="lang.toString" />
+               </relatedFunctions>
+            </func>
+            <func name="lang.toInt">
+               <parameters min="1" max="1" regex=".">
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; lang.toInt() returns the integer value of its parameter, using the TrafficScript type-casting rules. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="lang.toDouble" />
+                  <related func="lang.toString" />
+               </relatedFunctions>
+            </func>
+            <func name="lang.toString">
+               <parameters min="1" max="1" regex=".">
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; lang.toString() returns the string value of its parameter, using the TrafficScript type-casting rules. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="lang.toInt" />
+                  <related func="lang.toDouble" />
+                  <related func="lang.chr" />
+                  <related func="lang.ord" />
+               </relatedFunctions>
+            </func>
+            <func name="lang.tochar">
+               <parameters min="1" max="1" regex=".">
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; This function is an alias for lang.chr. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="lang.chr" />
+               </relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="log">
+         <description>Functions for writing to the event log.</description>
+         <functions>
+            <func name="log.error">
+               <parameters min="1" max="1" regex=".">
+                  <param name="message" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; log.error() writes an error message to ZXTM's log file at &lt;i&gt;ZEUSHOME&lt;/i&gt;/zxtm/log/errors: &lt;/p&gt;&lt;p&gt; &lt;/p&gt;&lt;p&gt; &amp;nbsp;&amp;nbsp;[21/Jan/2004:10:42:50 +0000] SERIOUS:Insert coffee to continue &lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+            <func name="log.info">
+               <parameters min="1" max="1" regex=".">
+                  <param name="message" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; log.info() writes an informational message to ZXTM's log file at &lt;i&gt;ZEUSHOME&lt;/i&gt;/zxtm/log/errors: &lt;/p&gt;&lt;p&gt; &lt;/p&gt;&lt;p&gt; &amp;nbsp;&amp;nbsp;[21/Jan/2004:10:42:50 +0000] INFO:Everything is OK &lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+            <func name="log.warn">
+               <parameters min="1" max="1" regex=".">
+                  <param name="message" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; log.warn() writes a warning message to ZXTM's log file at &lt;i&gt;ZEUSHOME&lt;/i&gt;/zxtm/log/errors: &lt;/p&gt;&lt;p&gt; &lt;/p&gt;&lt;p&gt; &amp;nbsp;&amp;nbsp;[21/Jan/2004:10:42:52 +0000] WARN:There may be trouble ahead &lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="math">
+         <description>Mathematical functions for manipulating numbers.</description>
+         <functions>
+            <func name="math.acos">
+               <parameters min="1" max="1" regex=".">
+                  <param name="x" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; math.acos() calculates the arc cosine of x and returns an angle in radians in the range 0 to pi. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="math.cos" />
+               </relatedFunctions>
+            </func>
+            <func name="math.asin">
+               <parameters min="1" max="1" regex=".">
+                  <param name="x" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; math.asin() calculates the arc sine of x and returns an angle in radians in the range -pi/2 to pi/2. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="math.sin" />
+               </relatedFunctions>
+            </func>
+            <func name="math.atan">
+               <parameters min="1" max="1" regex=".">
+                  <param name="angle" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; math.atan() calculates the arc tangent of x and returns an angle in radians in the range -pi/2 to pi/2. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="math.tan" />
+               </relatedFunctions>
+            </func>
+            <func name="math.ceil">
+               <parameters min="1" max="1" regex=".">
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; math.ceil() returns the smallest integer greater than or equal to its parameter. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="math.floor" />
+                  <related func="math.rint" />
+                  <related func="math.fabs" />
+               </relatedFunctions>
+            </func>
+            <func name="math.cos">
+               <parameters min="1" max="1" regex=".">
+                  <param name="angle" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; math.cos() interprets its parameter as an angle in radians and returns its cosine. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="math.sin" />
+                  <related func="math.tan" />
+               </relatedFunctions>
+            </func>
+            <func name="math.exp">
+               <parameters min="1" max="1" regex=".">
+                  <param name="power" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; math.exp() calculates e raised to the power of its parameter and returns the result. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="math.ln" />
+                  <related func="math.pow" />
+               </relatedFunctions>
+            </func>
+            <func name="math.fabs">
+               <parameters min="1" max="1" regex=".">
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; math.fabs() interprets its parameter as a floating point number and returns its absolute value. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="math.floor" />
+                  <related func="math.ceil" />
+                  <related func="math.rint" />
+               </relatedFunctions>
+            </func>
+            <func name="math.floor">
+               <parameters min="1" max="1" regex=".">
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; math.floor() returns the largest integer not greater than its parameter. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="math.ceil" />
+                  <related func="math.rint" />
+                  <related func="math.fabs" />
+               </relatedFunctions>
+            </func>
+            <func name="math.ln">
+               <parameters min="1" max="1" regex=".">
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; math.ln() returns the natural logarithm of its parameter. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="math.log" />
+                  <related func="math.exp" />
+               </relatedFunctions>
+            </func>
+            <func name="math.log">
+               <parameters min="1" max="1" regex=".">
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; math.log() returns the base10 logarithm of its parameter. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="math.ln" />
+                  <related func="math.pow" />
+               </relatedFunctions>
+            </func>
+            <func name="math.pow">
+               <parameters min="2" max="2" regex="..">
+                  <param name="num" />
+                  <param name="power" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; math.pow() raises its first parameter to the power of its second parameter and returns the result. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="math.ln" />
+                  <related func="math.exp" />
+                  <related func="math.sqrt" />
+               </relatedFunctions>
+            </func>
+            <func name="math.random">
+               <parameters min="1" max="1" regex=".">
+                  <param name="range" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; math.random() returns a pseudorandom integer greater than or equal to zero, and less than its parameter. &lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+            <func name="math.rint">
+               <parameters min="1" max="1" regex=".">
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; math.rint() rounds its parameter by returning the integer closest to its value. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="math.floor" />
+                  <related func="math.ceil" />
+                  <related func="math.fabs" />
+               </relatedFunctions>
+            </func>
+            <func name="math.sin">
+               <parameters min="1" max="1" regex=".">
+                  <param name="angle" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; math.sin() interprets its parameter as an angle in radians and returns its sine. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="math.cos" />
+                  <related func="math.tan" />
+               </relatedFunctions>
+            </func>
+            <func name="math.sqrt">
+               <parameters min="1" max="1" regex=".">
+                  <param name="num" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; math.sqrt() returns the square root of its parameter. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="math.pow" />
+               </relatedFunctions>
+            </func>
+            <func name="math.tan">
+               <parameters min="1" max="1" regex=".">
+                  <param name="angle" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; math.tan() interprets its parameter as an angle in radians and returns its tangent. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="math.sin" />
+                  <related func="math.cos" />
+               </relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="net.dns">
+         <description>DNS lookup functions.</description>
+         <functions>
+            <func name="net.dns.resolveHost">
+               <parameters min="1" max="1" regex=".">
+                  <param name="hostname" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; net.dns.resolveHost() resolves a hostname into an IP address, using the DNS name servers configured on the local system. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="net.dns.resolveIP" />
+               </relatedFunctions>
+            </func>
+            <func name="net.dns.resolveIP">
+               <parameters min="1" max="1" regex=".">
+                  <param name="IP address" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; net.dns.resolveIP() resolves an IP address to a hostname, using the DNS name servers configured on the local system. &lt;/p&gt;&lt;p&gt; It returns a hostname, or the IP address if the address cannot be resolved. An empty string is returned if the parameter is not a valid IP address. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="net.dns.resolveHost" />
+               </relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="pool">
+         <description> Functions that allow you to look up and alter which pool the current request will be assigned to.</description>
+         <functions>
+            <func name="pool.activenodes">
+               <parameters min="1" max="1" regex=".">
+                  <param name="Pool" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; pool.activeNodes() returns the number of nodes that are alive in the named pool. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="pool.use" />
+               </relatedFunctions>
+            </func>
+            <func name="pool.select">
+               <parameters min="1" max="2" regex=".|..">
+                  <param name="Pool" />
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; pool.select() selects a pool to load-balance this connection with. The pool name must be a literal string. ZXTM will continue to process any request rules. &lt;/p&gt;&lt;p&gt; If the pool named does not exist, ZXTM will log a warning message. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="pool.use" />
+               </relatedFunctions>
+            </func>
+            <func name="pool.use">
+               <parameters min="1" max="2" regex=".|..">
+                  <param name="Pool" />
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; pool.use() selects a pool to load-balance this connection with, and stops processing any more rules. The pool name must be a literal string. &lt;/p&gt;&lt;p&gt; If the optional second argument is specified, this string is used as the input to the universal session persistence engine. This usage is deprecated - use connection.setPersistenceKey() instead. &lt;/p&gt;&lt;p&gt; If the pool named does not exist, ZXTM will log a warning message and use the default pool configured for the virtual server. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="pool.select" />
+               </relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="request">
+         <description>Functions that allow you to access information about and modify the current request.</description>
+         <functions>
+            <func name="request.avoidNode">
+               <parameters min="1" max="1" regex=".">
+                  <param name="value" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; request.avoidNode() can be used to indicate that ZXTM should avoid using the named node if at all possible, if it retries the request. &lt;/p&gt;&lt;p&gt; When retrying a request, ZXTM will not use any nodes that have been named by request.avoidNode() unless session persistence mandates it, or unless there are no other nodes available. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="request.retry" />
+                  <related func="request.getRetries" />
+                  <related func="connection.getNode" />
+               </relatedFunctions>
+            </func>
+            <func name="request.endsAt">
+               <parameters min="1" max="1" regex=".">
+                  <param name="offset" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; request.endsAt() marks the end of the current request. Any more data read in from the network is not handled until ZXTM begins to handle the next request. &lt;/p&gt;&lt;p&gt; This function is useful to synchronise requests and responses. An example of its use would be for a line-oriented protocol such as POP3, where you wish to process each command. &lt;/p&gt;&lt;p&gt; It returns the entire request. &lt;/p&gt;&lt;p&gt; This function allows you to program layer-7 intelligence to correctly parse and manage generic TCP protocols. The function is not needed, and has no effect for protocols that ZXTM can natively parse and manage, such as SMTP, HTTP, FTP or SSL. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="request.endsWith" />
+               </relatedFunctions>
+            </func>
+            <func name="request.endsWith">
+               <parameters min="1" max="1" regex=".">
+                  <param name="regex" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; request.endsWith() marks the end of the current request. Any more data read in from the network is not handled until ZXTM begins to handle the next request. &lt;/p&gt;&lt;p&gt; This function is useful to synchronise requests and responses. An example of its use would be for a line-oriented protocol such as POP3, where you wish to process each command. &lt;/p&gt;&lt;p&gt; It returns the entire request. &lt;/p&gt;&lt;p&gt; This function allows you to program layer-7 intelligence to correctly parse and manage generic TCP protocols. The function is not needed, and has no effect for protocols that ZXTM can natively parse and manage, such as SMTP, HTTP, FTP or SSL. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="request.endsAt" />
+               </relatedFunctions>
+            </func>
+            <func name="request.get">
+               <parameters min="0" max="1" regex=".?">
+                  <param name="count" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; request.get() returns the first 'count' bytes of data provided by the client in the current request. If no count parameter is provided, then ZXTM immediately returns all available data. &lt;/p&gt;&lt;p&gt; Warning: you can stall a connection by asking it to read more data than the remote client will provide. Combine this with request.getLength() or request.getLine() to reliably read data from a connection. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="request.getLength" />
+                  <related func="request.getLine" />
+                  <related func="request.set" />
+                  <related func="response.get" />
+               </relatedFunctions>
+            </func>
+            <func name="request.getLength">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; request.getLength() returns the amount of data already received from the client. This can be combined with request.get() to reliably read data from a connection without stalling if no data is available. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="request.get" />
+                  <related func="response.getLength" />
+               </relatedFunctions>
+            </func>
+            <func name="request.getLine">
+               <parameters min="0" max="2" regex=".?.?">
+                  <param name="regex" />
+                  <param name="offset" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; request.getLine() returns a line of request data provided by the client. The line is terminated by the supplied regular expression, or by '\n'. If 'offset' is provided, request.getLine() returns the data from that offset to the terminating expression. &lt;/p&gt;&lt;p&gt; When request.getline() returns, the variable $1 is updated to point to the start of the next line in the datastream. &lt;/p&gt;&lt;p&gt; You can iterate through the lines of request data by using $1 as the iterator variable. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="request.get" />
+                  <related func="response.getLine" />
+               </relatedFunctions>
+            </func>
+            <func name="request.getLocalIP">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; request.getLocalIP returns the local (destination) IP address of the client's connection. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="request.getLocalPort" />
+                  <related func="request.getRemoteIP" />
+                  <related func="request.getRemotePort" />
+                  <related func="response.getLocalIP" />
+                  <related func="response.getLocalPort" />
+                  <related func="response.getRemoteIP" />
+                  <related func="response.getRemotePort" />
+               </relatedFunctions>
+            </func>
+            <func name="request.getLocalPort">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; request.getLocalPort returns the local (destination) port of the client's connection. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="request.getLocalIP" />
+                  <related func="request.getRemotePort" />
+                  <related func="request.getRemoteIP" />
+                  <related func="response.getLocalPort" />
+                  <related func="response.getLocalIP" />
+                  <related func="response.getRemotePort" />
+                  <related func="response.getRemoteIP" />
+               </relatedFunctions>
+            </func>
+            <func name="request.getRemoteIP">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; request.getRemoteIP returns the remote IP address of the client's connection. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="request.getRemotePort" />
+                  <related func="request.getLocalIP" />
+                  <related func="request.getLocalPort" />
+                  <related func="response.getRemoteIP" />
+                  <related func="response.getRemotePort" />
+                  <related func="response.getLocalIP" />
+                  <related func="response.getLocalPort" />
+               </relatedFunctions>
+            </func>
+            <func name="request.getRemotePort">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; request.getRemotePort returns the remote port of the client's connection. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="request.getRemoteIP" />
+                  <related func="request.getLocalPort" />
+                  <related func="request.getLocalIP" />
+                  <related func="response.getRemotePort" />
+                  <related func="response.getRemoteIP" />
+                  <related func="response.getLocalPort" />
+                  <related func="response.getLocalIP" />
+               </relatedFunctions>
+            </func>
+            <func name="request.getRetries">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; request.getRetries() returns the number of times that this request has been explicitly retried by request.retry(). &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="request.retry" />
+                  <related func="request.isResendable" />
+                  <related func="pool.select" />
+               </relatedFunctions>
+            </func>
+            <func name="request.isResendable">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; request.isResendable() is used in a response rule to test if it is possible to resend a request to a different node. It is only possible to resend a request if the entire request has been buffered up in ZXTM, for example, by explicitly reading it in in a request rule. &lt;/p&gt;&lt;p&gt; If the request was streamed through to the client, for example, as a large HTTP POST, it will not have been buffered and therefore cannot be resent. &lt;/p&gt;&lt;p&gt; Note that request.isResendable detects if it is possible to resend a request; request.setIdempotent can be used to tell ZXTM not to automatically resend a request if it fails. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="request.retry" />
+                  <related func="request.getRetries" />
+                  <related func="request.setIdempotent" />
+               </relatedFunctions>
+            </func>
+            <func name="request.retry">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; request.retry() is used in a response rule to retry the request against the selected pool. Load-balancing and session persistence decisions are recalculated, and the request is resubmitted - possibly to the same node as previous, although request.avoidNode() can prevent this. &lt;/p&gt;&lt;p&gt; The response rule can modify the request in before resubmitting it. &lt;/p&gt;&lt;p&gt; It's only generally possible to resend a request if the entire request was read before the request rules completed. Otherwise, request data will have been streamed to the server and not cached. Use request.isResendable() to test this speculatively. &lt;/p&gt;&lt;p&gt; request.getRetries() returns the number of times this request has been tried already. &lt;/p&gt;&lt;p&gt; On success, request.retry() does not return, but the response rules will be run again. On failure, request.retry() returns 0. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="request.isResendable" />
+                  <related func="request.getRetries" />
+                  <related func="pool.select" />
+               </relatedFunctions>
+            </func>
+            <func name="request.sendResponse">
+               <parameters min="1" max="1" regex=".">
+                  <param name="Data" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; request.sendResponse() writes the provided data directly back to the client. &lt;/p&gt;&lt;p&gt; Any data that has been read is discarded, and nothing is forwarded to the back-end server. Once the response data has been written, control returns to the next request. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.discard" />
+                  <related func="http.sendResponse" />
+                  <related func="response.set" />
+                  <related func="response.append" />
+                  <related func="connection.close" />
+               </relatedFunctions>
+            </func>
+            <func name="request.set">
+               <parameters min="1" max="1" regex=".">
+                  <param name="request data" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; request.set() replaces the input data read from the client with the provided string. &lt;/p&gt;&lt;p&gt; This is a low-level routine that should be used with care. For protocols with their own higher-level protocol managers (e.g. http), use the higher level routines to alter the input data (e.g. http.setHeader() and http.setBody()). &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="request.get" />
+                  <related func="response.set" />
+               </relatedFunctions>
+            </func>
+            <func name="request.setIdempotent">
+               <parameters min="1" max="1" regex=".">
+                  <param name="resend" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; request.setIdempotent() marks a request as resendable or non-resendable. &lt;/p&gt;&lt;p&gt; An &lt;i&gt;idempotent&lt;/i&gt; request has no detrimental side effects, so it can safely be attempted multiple times. A non-idempotent request has a side effect - for example, it may update a database, or initiate a purchase. &lt;/p&gt;&lt;p&gt; By default, all non-HTTP requests are marked as idempotent. If a back-end node fails to generate a correct response when a request is initially forwarded to it, ZXTM will attempt to resend the request to another node. &lt;/p&gt;&lt;p&gt; request.setIdempotent() can override this behaviour. If 'resend' is zero, this indicates that the request should only be attempted against one back-end node. &lt;/p&gt;&lt;p&gt; If 'resend' has a non-zero value, this indicates that if a request is made to a back-end node and a correct response is not received, ZXTM should retry the request against another back-end node. &lt;/p&gt;&lt;p&gt; Note that ZXTM cannot resend a request once has begun streaming data between the client and the node. Additionally, UDP connections cannot be marked as resendable (the UDP client application should handle failed UDP responses). &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="http.setIdempotent" />
+               </relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="resource">
+         <description>Functions that allow you to access files uploaded to the 'Extra Files' section of the traffic manager.</description>
+         <functions>
+            <func name="resource.exists">
+               <parameters min="1" max="1" regex=".">
+                  <param name="filename" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; resource.exists() checks whether or not the named file exists in &lt;i&gt;ZEUSHOME&lt;/i&gt;/zxtm/conf/extra/. If it exists 1 is returned, 0 otherwise. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="resource.get" />
+                  <related func="resource.getMD5" />
+               </relatedFunctions>
+            </func>
+            <func name="resource.get">
+               <parameters min="1" max="1" regex=".">
+                  <param name="filename" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; resource.get() returns the contents of a named file stored in the &lt;i&gt;ZEUSHOME&lt;/i&gt;/zxtm/conf/extra/ directory. If the file doesn't exist, then an empty string is returned. &lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+            <func name="resource.getMD5">
+               <parameters min="1" max="1" regex=".">
+                  <param name="filename" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; resource.getMD5() returns the MD5 of the current contents of the file in &lt;i&gt;ZEUSHOME&lt;/i&gt;/zxtm/conf/extra/. If the file doesn't exist, an empty string is returned. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="resource.exists" />
+                  <related func="resource.get" />
+               </relatedFunctions>
+            </func>
+            <func name="resource.getMTime">
+               <parameters min="1" max="1" regex=".">
+                  <param name="filename" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; resource.getMTime() returns the last time that the named file in &lt;i&gt;ZEUSHOME&lt;/i&gt;/zxtm/conf/extra/ was modified, in seconds since the epoch (i.e. unixtime). If the file doesn't exist, 0 is returned. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="resource.exists" />
+                  <related func="resource.get" />
+                  <related func="resource.getMD5" />
+                  <related func="sys.timeToString" />
+                  <related func="sys.time" />
+               </relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="response">
+         <description>Functions that allow you to access information about and modify the current response.</description>
+         <functions>
+            <func name="response.append">
+               <parameters min="1" max="1" regex=".">
+                  <param name="response data" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; response.append() appends the provided string to the response data &lt;/p&gt;&lt;p&gt; This is a low-level routine that should be used with care. For protocols with their own higher-level protocol managers (e.g. http), use the higher level routines to alter the input data (e.g. http.setHeader() and http.setBody()). &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="response.set" />
+               </relatedFunctions>
+            </func>
+            <func name="response.close">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; response.close() immediately closes the connection to the back-end server machine. Any response data that has already been read from the server will be forwarded to the client, but no more response data will be read. &lt;/p&gt;&lt;p&gt; ZXTM will reconnect to a back-end server when it next needs to forward request data to it; the back-end server is specified by either calling pool.use() or pool.se.ect() in a request rule, or by the default pool. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="connection.close" />
+                  <related func="connection.discard" />
+                  <related func="pool.use" />
+                  <related func="pool.select" />
+               </relatedFunctions>
+            </func>
+            <func name="response.flush">
+               <parameters min="0" max="1" regex=".?">
+                  <param name="count" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; response.flush() transfers the first count bytes of the response back to the client. These bytes are removed from the underlying response buffer. If count is not specified, all current response data is flushed. &lt;/p&gt;&lt;p&gt; This function is useful in generic client- and server-first protocols, to synchronise responses with the next request. This may be necessary if ZXTM is likely to respond directly to some requests, and the back-end server responds to others. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="response.get" />
+                  <related func="response.getLine" />
+               </relatedFunctions>
+            </func>
+            <func name="response.get">
+               <parameters min="0" max="1" regex=".?">
+                  <param name="count" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; response.get() returns the first 'count' bytes of data provided by the client in the current response. If you do not supply a count parameter, then the entire response will be read in. &lt;/p&gt;&lt;p&gt; Warning: you can stall a connection by asking it to read more data than the remote client will provide. Combine this with response.getLength() or response.getLine() to reliably read data from a connection. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="response.getLength" />
+                  <related func="response.getLine" />
+                  <related func="response.set" />
+                  <related func="request.get" />
+               </relatedFunctions>
+            </func>
+            <func name="response.getLength">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; response.getLength() returns the amount of data already received from the client. This can be combined with response.get() to reliably read data from a connection without stalling if no data is available. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="response.get" />
+                  <related func="request.getLength" />
+               </relatedFunctions>
+            </func>
+            <func name="response.getLine">
+               <parameters min="0" max="2" regex=".?.?">
+                  <param name="regex" />
+                  <param name="offset" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; response.getLine() returns a line of response data provided by the server. The line is terminated by the supplied regular expression, or by '\n'. If 'offset' is provided, response.getLine() returns the data from that offset to the terminating expression. &lt;/p&gt;&lt;p&gt; When response.getline() returns, the variable $1 is updated to point to the start of the next line in the datastream. &lt;/p&gt;&lt;p&gt; You can iterate through the lines of response data by using $1 as the iterator variable. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="response.get" />
+                  <related func="request.getLine" />
+               </relatedFunctions>
+            </func>
+            <func name="response.getLocalIP">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; response.getLocalIP returns the local IP address of the connection to the back-end server. It returns the empty string if no connection exists. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="response.getLocalPort" />
+                  <related func="response.getRemoteIP" />
+                  <related func="response.getRemotePort" />
+                  <related func="request.getLocalIP" />
+                  <related func="request.getLocalPort" />
+                  <related func="request.getRemoteIP" />
+                  <related func="request.getRemotePort" />
+               </relatedFunctions>
+            </func>
+            <func name="response.getLocalPort">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; response.getLocalPort returns the local (destination) port of the connection to the back-end server. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="response.getLocalIP" />
+                  <related func="response.getRemotePort" />
+                  <related func="response.getRemoteIP" />
+                  <related func="request.getLocalPort" />
+                  <related func="request.getLocalIP" />
+                  <related func="request.getRemotePort" />
+                  <related func="request.getRemoteIP" />
+               </relatedFunctions>
+            </func>
+            <func name="response.getRemoteIP">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; response.getRemoteIP returns the remote IP address of the connection to the back-end server. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="response.getRemotePort" />
+                  <related func="response.getLocalIP" />
+                  <related func="response.getLocalPort" />
+                  <related func="request.getRemoteIP" />
+                  <related func="request.getRemotePort" />
+                  <related func="request.getLocalIP" />
+                  <related func="request.getLocalPort" />
+               </relatedFunctions>
+            </func>
+            <func name="response.getRemotePort">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; response.getRemotePort returns the remote port of the connection to the back-end server. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="response.getRemoteIP" />
+                  <related func="response.getLocalPort" />
+                  <related func="response.getLocalIP" />
+                  <related func="request.getRemotePort" />
+                  <related func="request.getRemoteIP" />
+                  <related func="request.getLocalPort" />
+                  <related func="request.getLocalIP" />
+               </relatedFunctions>
+            </func>
+            <func name="response.set">
+               <parameters min="1" max="1" regex=".">
+                  <param name="response data" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; response.set() sets the server response to the provided string &lt;/p&gt;&lt;p&gt; This is a low-level routine that should be used with care. For protocols with their own higher-level protocol managers (e.g. http), use the higher level routines to alter the input data (e.g. http.setHeader() and http.setBody()). &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="request.sendResponse" />
+                  <related func="response.append" />
+                  <related func="response.get" />
+                  <related func="request.set" />
+               </relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="slm">
+         <description>Functions for accessing information from the Service Level Monitoring class assigned to this connection.</description>
+         <functions>
+            <func name="slm.conforming">
+               <parameters min="0" max="1" regex=".?">
+                  <param name="class name" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_SLM" />
+               </restrictions>
+               <description>&lt;p&gt; slm.conforming() returns the current percentage of requests that are meeting the SLM response time threshold. If no class name is provided, it will use the SLM class currently associated with this connection; if no SLM class is associated with this connection it returns 100. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="slm.threshold" />
+                  <related func="slm.isOK" />
+               </relatedFunctions>
+            </func>
+            <func name="slm.isOK">
+               <parameters min="0" max="1" regex=".?">
+                  <param name="class_name" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_SLM" />
+               </restrictions>
+               <description>&lt;p&gt; slm.isOK() returns whether a particular SLM class is meeting its response time objectives. If no class name is provided, it will use the SLM class currently associated with this connection; if no SLM class is associated with the connection, it returns 1. This function is a convenience shorthand for 'slm.conforming() &gt; slm.threshold()'. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="slm.conforming" />
+                  <related func="slm.threshold" />
+               </relatedFunctions>
+            </func>
+            <func name="slm.threshold">
+               <parameters min="0" max="1" regex=".?">
+                  <param name="class_name" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_SLM" />
+               </restrictions>
+               <description>&lt;p&gt; slm.threshold() returns the percentage of connections that need to meet the SLM class response time threshold to be for the SLM class to be considered OK. If no class name is provided, it will use the SLM class currently associated with this connection; if no SLM class is assocated with the connection, it returns 0. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="slm.conforming" />
+                  <related func="slm.isOK" />
+               </relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="ssl">
+         <description>Functions relating to the encryption applied to the current connection.</description>
+         <functions>
+            <func name="ssl.clientCertAlgorithm">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; If the connection is SSL-encrypted and the client has supplied a valid certificate, ssl.clientCertAlgorithm() returns either 'rsaEncryption', 'md2withRSAEncryption', 'md5withRSAEncryption', 'sha1withRSAEncryption' or 'RSA', depending on the certificate's encryption and hash algorithms. Otherwise, it returns the empty string. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="ssl.isSSL" />
+               </relatedFunctions>
+            </func>
+            <func name="ssl.clientCertEndDate">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; If the connection is SSL-encrypted and the client has supplied a valid certificate, ssl.clientCertEndDate() returns the date when the certificate is no longer valid. The date is an integer, representing seconds since the epoch. &lt;/p&gt;&lt;p&gt; Otherwise, this function returns 0. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="ssl.isSSL" />
+                  <related func="ssl.clientCertStartDate" />
+                  <related func="sys.timeToString" />
+               </relatedFunctions>
+            </func>
+            <func name="ssl.clientCertHash">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; ssl.clientCertHash() returns a hex-encoded MD5 hash of the client certificate, or the empty string if the connection was not SSL-encrypted or if a certificate was not supplied. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="ssl.isSSL" />
+               </relatedFunctions>
+            </func>
+            <func name="ssl.clientCertIssuer">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; ssl.clientCertIssuer() returns a string representing the issuer of the client certificate, or the empty string if the connection was not SSL-encrypted or if a certificate was not supplied. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="ssl.isSSL" />
+               </relatedFunctions>
+            </func>
+            <func name="ssl.clientCertPublicKey">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; ssl.clientCertPublicKey() returns a string representation of the public key of the client certificate, or the empty string if the connection was not SSL-encrypted or if a certificate was not supplied. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="ssl.isSSL" />
+               </relatedFunctions>
+            </func>
+            <func name="ssl.clientCertSerial">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; This function returns the serial of the client certificate, or the empty string if the connection was not SSL-encrypted or if a certificate was not supplied. &lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+            <func name="ssl.clientCertStartDate">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; If the connection is SSL-encrypted and the client has supplied a valid certificate, ssl.clientCertStartDate() returns the date when the certificate became valid. The date is an integer, representing seconds since the epoch. &lt;/p&gt;&lt;p&gt; Otherwise, this function returns 0. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="ssl.isSSL" />
+                  <related func="ssl.clientCertEndDate" />
+                  <related func="sys.timeToString" />
+               </relatedFunctions>
+            </func>
+            <func name="ssl.clientCertStatus">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; ssl.clientCertStatus() returns 'OK' if the client certificate is valid, or 'NoClientCert' if it was missing or not valid. It returns the empty string if the connection was not SSL-encrypted. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="ssl.isSSL" />
+               </relatedFunctions>
+            </func>
+            <func name="ssl.clientCertSubject">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; ssl.clientCertSubject() returns a string representing the subject of the client certificate, or the empty string if the connection was not SSL-encrypted or if a certificate was not supplied. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="ssl.isSSL" />
+               </relatedFunctions>
+            </func>
+            <func name="ssl.clientCertVersion">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; ssl.clientCertVersion() returns "1", "2" or "3" denoting the version of the client certificate, or the empty string if the connection was not SSL-encrypted or if a certificate was not supplied. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="ssl.isSSL" />
+               </relatedFunctions>
+            </func>
+            <func name="ssl.clientCipher">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; ssl.clientCipher() returns the cipher used by the client to SSL-encrypt the connection. It returns an empty string if the connection was not SSL-encrypted. &lt;/p&gt;&lt;p&gt; The string returned contains the cipher algorithm, SSL version and effective cipher strength, such as: &lt;/p&gt;&lt;p&gt; &lt;/p&gt;&lt;p&gt; &amp;nbsp;&amp;nbsp;SSL_RSA_WITH_RC4_128_SHA, version=SSLv3, bits=128 &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="ssl.isSSL" />
+               </relatedFunctions>
+            </func>
+            <func name="ssl.isSSL">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; ssl.isSSL() returns 1 if this connection from the remote client was SSL encrypted and ZXTM has decrypted the traffic. Otherwise, it returns 0. &lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+            <func name="ssl.sslSessionID">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="ZXTM_TCP" />
+               </restrictions>
+               <description>&lt;p&gt; ssl.sslSessionID() returns the session-id of the current SSL connection, or the empty string if the connection was not SSL-encrypted. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="ssl.isSSL" />
+               </relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="string">
+         <description>Functions for manipulating and encoding strings.</description>
+         <functions>
+            <func name="string.BERToInt">
+               <parameters min="1" max="1" regex=".">
+                  <param name="string" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.BERToInt() converts a BER compressed integer into an integer. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.intToBER" />
+                  <related func="string.bytesToInt" />
+               </relatedFunctions>
+            </func>
+            <func name="string.append">
+               <parameters min="1" max="INF" regex=".+">
+                  <param name="str1" />
+                  <param name="str2" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.append() takes any number of parameters. It interprets each as a string and returns the result of concatenating them all together. &lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+            <func name="string.base64decode">
+               <parameters min="1" max="1" regex=".">
+                  <param name="string" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.base64decode() decodes a base64-encoded string and returns the result. &lt;/p&gt;&lt;p&gt; Base64 encoding is used for MIME-encoded messages, and in the HTTP Basic Authorization header. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.base64encode" />
+                  <related func="string.hexdecode" />
+                  <related func="string.unescape" />
+               </relatedFunctions>
+            </func>
+            <func name="string.base64encode">
+               <parameters min="1" max="1" regex=".">
+                  <param name="string" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.base64encode() returns the base64-encoded version of the provided string. This converts each group of three characters into a 4-character string containing just [A-Za-z0-9+/], and '=' for padding. &lt;/p&gt;&lt;p&gt; Base64 encoding is used for MIME-encoded messages, and in the HTTP Basic Authorization header. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.base64decode" />
+                  <related func="string.hexencode" />
+                  <related func="string.escape" />
+               </relatedFunctions>
+            </func>
+            <func name="string.bytesToDotted">
+               <parameters min="1" max="1" regex=".">
+                  <param name="string" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.bytesToDotted() converts a network ordered byte string into an IP address. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.dottedToBytes" />
+                  <related func="string.bytesToInt" />
+               </relatedFunctions>
+            </func>
+            <func name="string.bytesToInt">
+               <parameters min="1" max="1" regex=".">
+                  <param name="string" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.bytesToInt() converts a byte string in network order to an integer. The byte string should be either 1, 2 or 4 bytes long. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.intToBytes" />
+                  <related func="string.bytesToDotted" />
+                  <related func="string.BERToInt" />
+               </relatedFunctions>
+            </func>
+            <func name="string.cmp">
+               <parameters min="2" max="2" regex="..">
+                  <param name="str1" />
+                  <param name="str2" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.cmp() compares its two parameters as strings in a case-sensitive manner. It returns a negative value if str1 is less than str2; zero if they are equal, and a positive value if str1 is greater than str2. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.icmp" />
+               </relatedFunctions>
+            </func>
+            <func name="string.contains">
+               <parameters min="2" max="2" regex="..">
+                  <param name="haystack" />
+                  <param name="needle" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.contains() determines whether the provided search string (the needle) is contained inside the given string (the haystack). &lt;/p&gt;&lt;p&gt; It returns 1 if the 'needle' was found, or 0 otherwise. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.find" />
+                  <related func="string.startsWith" />
+                  <related func="string.endsWith" />
+               </relatedFunctions>
+            </func>
+            <func name="string.decrypt">
+               <parameters min="2" max="2" regex="..">
+                  <param name="string" />
+                  <param name="passphrase" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.decrypt() decrypts a string that has previously been encrypted using string.encrypt(). The passphrase supplied must match that given to string.encrypt(), otherwise the decoding will fail. &lt;/p&gt;&lt;p&gt; An empty string is returned if the decrypt or the integrity check fails. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.encrypt" />
+               </relatedFunctions>
+            </func>
+            <func name="string.dottedToBytes">
+               <parameters min="1" max="1" regex=".">
+                  <param name="IP address" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.dottedToBytes() converts an IP address to a network order byte string. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.bytesToDotted" />
+                  <related func="string.intToBytes" />
+               </relatedFunctions>
+            </func>
+            <func name="string.drop">
+               <parameters min="2" max="2" regex="..">
+                  <param name="string" />
+                  <param name="count" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.drop() removes the last 'count' characters from the end of the provided string and returns the result. An empty string will be returned if 'count' is greater than the length of the original string. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.skip" />
+                  <related func="string.trim" />
+               </relatedFunctions>
+            </func>
+            <func name="string.encrypt">
+               <parameters min="2" max="2" regex="..">
+                  <param name="string" />
+                  <param name="passphrase" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.encrypt() encrypts a string using the provided pass phrase. The string is encrypted using the AES block cipher, using an expanded form of the passphrase as the cipher key. A MAC is also added to ensure the integrity of the string. &lt;/p&gt;&lt;p&gt; This is open to replay attacks, and as such, should not be used to encrypt sensitive data, such as credit card details. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.decrypt" />
+               </relatedFunctions>
+            </func>
+            <func name="string.endsWith">
+               <parameters min="2" max="2" regex="..">
+                  <param name="string" />
+                  <param name="suffix" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.endsWith() returns 1 if the provided string ends with the given suffix, and 0 otherwise. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.startsWith" />
+                  <related func="string.contains" />
+               </relatedFunctions>
+            </func>
+            <func name="string.escape">
+               <parameters min="1" max="1" regex=".">
+                  <param name="string" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.escape() returns a percent-encoded version of its parameter. &lt;/p&gt;&lt;p&gt; Control characters and spaces (character value &lt;= 32) and '%' characters are each replaced by a '%' symbol, followed by their 2-digit hex value. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.unescape" />
+                  <related func="string.hexencode" />
+               </relatedFunctions>
+            </func>
+            <func name="string.find">
+               <parameters min="2" max="2" regex="..">
+                  <param name="haystack" />
+                  <param name="needle" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.find() determines whether the provided search string (the needle) is contained inside the given string (the haystack). &lt;/p&gt;&lt;p&gt; It returns the location; note that character positions start at 0. &lt;/p&gt;&lt;p&gt; If it could not find the search string, it returns -1. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.contains" />
+               </relatedFunctions>
+            </func>
+            <func name="string.hashMD5">
+               <parameters min="1" max="1" regex=".">
+                  <param name="string" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.hashMD5() returns the MD5 hash of the provided string. The returned string will be 16 bytes long, and may contain non-printable characters. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.hexencode" />
+                  <related func="string.hashSHA1" />
+               </relatedFunctions>
+            </func>
+            <func name="string.hashSHA1">
+               <parameters min="1" max="1" regex=".">
+                  <param name="string" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.hashSHA1() returns the SHA1 hash of the provided string. The returned string will be 20 bytes long, and may contain non-printable characters. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.hexencode" />
+                  <related func="string.hashMD5" />
+               </relatedFunctions>
+            </func>
+            <func name="string.hexdecode">
+               <parameters min="1" max="1" regex=".">
+                  <param name="encoded string" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.hexdecode() returns the hex-decoded version of the provided string. This interprets each character pair as a 2-digit hex value, replacing it with the corresponding 8-bit character. It does not verify that the original string was correctly encoded. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.hexencode" />
+                  <related func="string.base64decode" />
+                  <related func="string.unescape" />
+               </relatedFunctions>
+            </func>
+            <func name="string.hexencode">
+               <parameters min="1" max="1" regex=".">
+                  <param name="string" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.hexencode() returns the hex-encoded version of the provided string . This converts each character into a two-character hex representation, doubling the length of the string. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.hexdecode" />
+                  <related func="string.base64encode" />
+                  <related func="string.escape" />
+               </relatedFunctions>
+            </func>
+            <func name="string.htmldecode">
+               <parameters min="1" max="1" regex=".">
+                  <param name="encodedstring" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.htmldecode() decodes HTML encodings such as &amp;amp;lt; and &amp;amp;quot; in the supplied string. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.htmlencode" />
+               </relatedFunctions>
+            </func>
+            <func name="string.htmlencode">
+               <parameters min="1" max="1" regex=".">
+                  <param name="string" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.htmlencode() encodes the supplied string to make it safe for including in HTML. It converts '&lt;' to &amp;amp;lt; '&gt;' to &amp;amp;gt;, '"' to &amp;amp;quot; and '&amp;' to &amp;amp;amp;. Control characters are hex-encoded. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.htmldecode" />
+               </relatedFunctions>
+            </func>
+            <func name="string.icmp">
+               <parameters min="2" max="2" regex="..">
+                  <param name="str1" />
+                  <param name="str2" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.icmp() compares its two parameters as strings in a case-insensitive manner. It returns a negative value if str1 is less than str2; zero if they are equal, and a positive value if str1 is greater than str2. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.cmp" />
+               </relatedFunctions>
+            </func>
+            <func name="string.insertBytes">
+               <parameters min="3" max="3" regex="...">
+                  <param name="original string" />
+                  <param name="insertion string" />
+                  <param name="offset" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.insertBytes() inserts a string into another string at the supplied offset, and returns the resulting string. If offset &lt; 0, or offset &gt; length( string ), the original string is returned unchanged. If offset == 0 the insertion string is prepended; if offset == length( string ) the insertion string is appended. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.replaceBytes" />
+               </relatedFunctions>
+            </func>
+            <func name="string.intToBER">
+               <parameters min="1" max="1" regex=".">
+                  <param name="number" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.intToBER() converts an integer into a BER compressed integer (which is a variable-length binary string encoding). &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.BERToInt" />
+                  <related func="string.intToBytes" />
+               </relatedFunctions>
+            </func>
+            <func name="string.intToBytes">
+               <parameters min="1" max="2" regex=".|..">
+                  <param name="number" />
+                  <param name="width" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.intToBytes() converts an integer to a network order byte string of the specified width. Only widths of 1, 2 and 4 are permitted, and the width defaults to 4 if it is not supplied. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.bytesToInt" />
+                  <related func="string.bytesToDotted" />
+                  <related func="string.intToBER" />
+               </relatedFunctions>
+            </func>
+            <func name="string.ipmaskmatch">
+               <parameters min="2" max="2" regex="..">
+                  <param name="IP Address" />
+                  <param name="IP Mask" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.ipmaskmatch() returns 1 if the provided IP address is contained in the IP mask, and 0 otherwise. &lt;/p&gt;&lt;p&gt; It interprets its first parameter as a string containing an IP address, and its second parameter as an IP address mask. Masks can be of the form "10.0.1.0/24", "10.0.1.0/255.255.255.0", "10.0.1." or "10.0.1.1". &lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+            <func name="string.len">
+               <parameters min="1" max="1" regex=".">
+                  <param name="string" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.len() interprets its parameter as a string and returns its length (in bytes). &lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+            <func name="string.lowercase">
+               <parameters min="1" max="1" regex=".">
+                  <param name="string" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.lowercase() converts all characters in the provided string to lowercase and returns the result. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.uppercase" />
+               </relatedFunctions>
+            </func>
+            <func name="string.regexmatch">
+               <parameters min="2" max="3" regex="...?">
+                  <param name="string" />
+                  <param name="pattern" />
+                  <param name="flags" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.regexmatch() performs a regular expression match on the supplied string. If the regular expression 'pattern' contains bracketed sub-expressions, then the variables $1 ... $9 will be set to the matching substrings. &lt;/p&gt;&lt;p&gt; The optional 'flags' parameter contains a string of single-letter options. The following options are supported: &lt;ul&gt; &lt;li&gt;'i', meaning 'case insensitive' - letters in the pattern match both upper and lower case letters.&lt;/li&gt; &lt;/ul&gt; &lt;/p&gt;&lt;p&gt; It returns 1 if matched, and 0 otherwise. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.wildmatch" />
+                  <related func="string.regexsub" />
+               </relatedFunctions>
+            </func>
+            <func name="string.regexsub">
+               <parameters min="3" max="4" regex="...|....">
+                  <param name="string" />
+                  <param name="pattern" />
+                  <param name="replacement" />
+                  <param name="flags" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.regexsub() performs a regular expression match on the supplied string, then replaces each matching substring with the supplied replacement. The replacement string may contain $1 .. $9 substitutions, which reference bracketed sub-expressions in the regular expression. &lt;/p&gt;&lt;p&gt; The optional 'flags' parameter contains a string of single-letter options. The following options are supported: &lt;ul&gt; &lt;li&gt;'g', meaning 'global replace' - apply the regex pattern as many times as possible.&lt;/li&gt; &lt;li&gt;'i', meaning 'case insensitive' - letters in the pattern match both upper and lower case letters.&lt;/li&gt; &lt;/ul&gt; &lt;/p&gt;&lt;p&gt; string.regexsub() returns the string with the replacements. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.regexmatch" />
+               </relatedFunctions>
+            </func>
+            <func name="string.replaceBytes">
+               <parameters min="3" max="3" regex="...">
+                  <param name="original string" />
+                  <param name="replacement string" />
+                  <param name="offset" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.replaceBytes() replaces a portion of a string with a replacement string at the supplied offset. It returns a modified version of the original string of the same length as the original with the appropriate bytes replaced from the replacement string. &lt;/p&gt;&lt;p&gt; If offset &lt; 0, or offset &gt; length( string ), or length( replacement ) == 0, string.replaceBytes returns the original string. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.insertBytes" />
+               </relatedFunctions>
+            </func>
+            <func name="string.reverse">
+               <parameters min="1" max="1" regex=".">
+                  <param name="string" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.reverse() reverses the characters in a string and returns the result. &lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+            <func name="string.skip">
+               <parameters min="2" max="2" regex="..">
+                  <param name="string" />
+                  <param name="count" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.skip() removes the first 'count' characters of the provided string and returns the result. An empty string will be returned if 'count' is greater than the length of the original string. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.drop" />
+                  <related func="string.trim" />
+               </relatedFunctions>
+            </func>
+            <func name="string.sprintf">
+               <parameters min="1" max="INF" regex=".+">
+                  <param name="format string" />
+                  <param name="arguments" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.snprintf() behaves like the C library sprintf() function. Only %s, %c, %d and %f are supported. The function returns the generated string. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.append" />
+               </relatedFunctions>
+            </func>
+            <func name="string.startsWith">
+               <parameters min="2" max="2" regex="..">
+                  <param name="string" />
+                  <param name="prefix" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.startsWith() returns 1 if the provided string starts with the given prefix, and 0 otherwise. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.endsWith" />
+                  <related func="string.contains" />
+               </relatedFunctions>
+            </func>
+            <func name="string.substring">
+               <parameters min="3" max="3" regex="...">
+                  <param name="string" />
+                  <param name="base" />
+                  <param name="end" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.substring() returns the substring starting at character position 'base' and ending at position 'end'. &lt;/p&gt;&lt;p&gt; Note that character positions start at 0. &lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+            <func name="string.trim">
+               <parameters min="1" max="1" regex=".">
+                  <param name="string" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.trim() returns the result of removing leading and trailing white space from its parameter. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.skip" />
+                  <related func="string.drop" />
+               </relatedFunctions>
+            </func>
+            <func name="string.unescape">
+               <parameters min="1" max="1" regex=".">
+                  <param name="escaped string" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.unescape() returns the escape-decoded version of its parameter. &lt;/p&gt;&lt;p&gt; %-encoded characters are replaced with their decoded versions. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.escape" />
+                  <related func="string.hexdecode" />
+               </relatedFunctions>
+            </func>
+            <func name="string.uppercase">
+               <parameters min="1" max="1" regex=".">
+                  <param name="string" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.uppercase() converts all characters in the provided string to uppercase and returns the result. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.lowercase" />
+               </relatedFunctions>
+            </func>
+            <func name="string.wildmatch">
+               <parameters min="2" max="2" regex="..">
+                  <param name="string" />
+                  <param name="pattern" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; string.wildmatch() performs a shell-like wild match on the supplied string. The pattern may contain the wildcard characters '?' (which matches a single character) and '*' (which matches any substring). &lt;/p&gt;&lt;p&gt; It returns 1 if matched, and 0 otherwise. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="string.regexmatch" />
+               </relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="sys">
+         <description>Functions relating to the local machine.</description>
+         <functions>
+            <func name="sys.domainname">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; sys.domainname() returns the domain name of the host machine. For example, if the machine is named 'server1.example.com', sys.domainname() will return 'example.com'. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="sys.hostname" />
+               </relatedFunctions>
+            </func>
+            <func name="sys.getenv">
+               <parameters min="1" max="1" regex=".">
+                  <param name="variable" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; sys.getenv() returns the named environment variable, or the empty string if the environment variable does not exists. &lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+            <func name="sys.getpid">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; sys.getpid() returns the process id of the current process. &lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+            <func name="sys.hostname">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; sys.hostname() returns the hostname of the host machine. For example, if the machine is named 'server1.example.com', sys.hostname() will return 'server1'. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="sys.domainname" />
+               </relatedFunctions>
+            </func>
+            <func name="sys.time">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; sys.time() returns the current system time as the number of seconds since midnight, 1/1/1970. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="sys.timeToString" />
+               </relatedFunctions>
+            </func>
+            <func name="sys.timeToString">
+               <parameters min="1" max="1" regex=".">
+                  <param name="unixtime" />
+               </parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; sys.timeToString() takes the time in seconds since midnight, 1/1/1970, and returns the time in a formatted string. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="sys.time" />
+               </relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="sys.time">
+         <description>General date functions.</description>
+         <functions>
+            <func name="sys.time.hour">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; sys.time.hour() returns the current hour of the day in local time (0-23). &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="sys.time" />
+                  <related func="sys.time.seconds" />
+                  <related func="sys.time.minutes" />
+                  <related func="sys.time.weekday" />
+                  <related func="sys.time.monthday" />
+                  <related func="sys.time.yearday" />
+                  <related func="sys.time.month" />
+                  <related func="sys.time.year" />
+               </relatedFunctions>
+            </func>
+            <func name="sys.time.minutes">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; sys.time.minutes() returns the current minutes after the hour in local time (0-59). &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="sys.time" />
+                  <related func="sys.time.seconds" />
+                  <related func="sys.time.hour" />
+                  <related func="sys.time.weekday" />
+                  <related func="sys.time.monthday" />
+                  <related func="sys.time.yearday" />
+                  <related func="sys.time.month" />
+                  <related func="sys.time.year" />
+               </relatedFunctions>
+            </func>
+            <func name="sys.time.month">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; sys.time.month() returns the current month of the year in local time (1-12). &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="sys.time" />
+                  <related func="sys.time.seconds" />
+                  <related func="sys.time.minutes" />
+                  <related func="sys.time.hour" />
+                  <related func="sys.time.weekday" />
+                  <related func="sys.time.monthday" />
+                  <related func="sys.time.yearday" />
+                  <related func="sys.time.year" />
+               </relatedFunctions>
+            </func>
+            <func name="sys.time.monthday">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; sys.time.monthday() returns the current day of the month in local time (1-31). &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="sys.time" />
+                  <related func="sys.time.seconds" />
+                  <related func="sys.time.minutes" />
+                  <related func="sys.time.hour" />
+                  <related func="sys.time.weekday" />
+                  <related func="sys.time.yearday" />
+                  <related func="sys.time.month" />
+                  <related func="sys.time.year" />
+               </relatedFunctions>
+            </func>
+            <func name="sys.time.seconds">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; sys.time.seconds() returns the current seconds after the minute in local time. Normally, it returns a number in the range of (0-59), but can be up to 61 to allow for leap seconds. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="sys.time" />
+                  <related func="sys.time.minutes" />
+                  <related func="sys.time.hour" />
+                  <related func="sys.time.weekday" />
+                  <related func="sys.time.monthday" />
+                  <related func="sys.time.yearday" />
+                  <related func="sys.time.month" />
+                  <related func="sys.time.year" />
+               </relatedFunctions>
+            </func>
+            <func name="sys.time.weekday">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; sys.time.weekday() returns the current day of the week in local time (1-7). Sunday has the value 1; Saturday has the value 7. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="sys.time" />
+                  <related func="sys.time.seconds" />
+                  <related func="sys.time.minutes" />
+                  <related func="sys.time.hour" />
+                  <related func="sys.time.monthday" />
+                  <related func="sys.time.yearday" />
+                  <related func="sys.time.month" />
+                  <related func="sys.time.year" />
+               </relatedFunctions>
+            </func>
+            <func name="sys.time.year">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; sys.time.year() returns the current year in local time (1970-2038). &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="sys.time" />
+                  <related func="sys.time.seconds" />
+                  <related func="sys.time.minutes" />
+                  <related func="sys.time.hour" />
+                  <related func="sys.time.weekday" />
+                  <related func="sys.time.monthday" />
+                  <related func="sys.time.yearday" />
+                  <related func="sys.time.month" />
+               </relatedFunctions>
+            </func>
+            <func name="sys.time.yearday">
+               <parameters min="0" max="0" regex=""></parameters>
+               <restrictions>
+                  <restriction type="FEATURE_CORE" />
+               </restrictions>
+               <description>&lt;p&gt; sys.time.yearday() returns the current day of the year in local time (1-366). &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="sys.time" />
+                  <related func="sys.time.seconds" />
+                  <related func="sys.time.minutes" />
+                  <related func="sys.time.hour" />
+                  <related func="sys.time.weekday" />
+                  <related func="sys.time.monthday" />
+                  <related func="sys.time.month" />
+                  <related func="sys.time.year" />
+               </relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="xml">
+         <description>Functions for parsing and manipulating the eXtensible Markup Language.</description>
+         <functions>
+            <func name="xml.validate">
+               <parameters min="2" max="2" regex="..">
+                  <param name="document" />
+                  <param name="DTD" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_XML" />
+                  <restriction type="FEATURE_DEPRECATED" />
+               </restrictions>
+               <description>&lt;p&gt; xml.validate() validates an XML document against a DTD. It returns 1 if the document validated correctly, and 0 if it did not. It returns -1 if there was an error parsing the XML document or the DTD. &lt;/p&gt;&lt;p&gt; The xml-processing functionality must be enabled by the software license. &lt;/p&gt;&lt;p&gt;&lt;b&gt;Function is deprecated.&lt;/b&gt;&lt;br /&gt;Replaced by xml.validate.dtd&lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="xml.validate">
+         <description>Functions for validating the eXtensible Markup Language.</description>
+         <functions>
+            <func name="xml.validate.dtd">
+               <parameters min="2" max="2" regex="..">
+                  <param name="document" />
+                  <param name="DTD" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_XML" />
+               </restrictions>
+               <description>&lt;p&gt; xml.validate.dtd() validates an XML document against a DTD. It returns 1 if the document validated correctly, and 0 if it did not. It returns -1 if there was an error parsing the XML document or the DTD. &lt;/p&gt;&lt;p&gt; The xml-processing functionality must be enabled by the software license. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="xml.validate.xsd" />
+               </relatedFunctions>
+            </func>
+            <func name="xml.validate.xsd">
+               <parameters min="2" max="2" regex="..">
+                  <param name="document" />
+                  <param name="schema" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_XML" />
+               </restrictions>
+               <description>&lt;p&gt; xml.validate.xsd() validates an XML document against an XML schema. It returns 1 if the document validated correctly, and 0 if it did not. It returns -1 if there was an error parsing the XML document or the schema. &lt;/p&gt;&lt;p&gt; The xml-processing functionality must be enabled by the software license. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="xml.validate.dtd" />
+               </relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="xml.xpath">
+         <description>Functions for preforming XPath queries on XML data.</description>
+         <functions>
+            <func name="xml.xpath.matchNodeCount">
+               <parameters min="3" max="3" regex="...">
+                  <param name="document" />
+                  <param name="namespace" />
+                  <param name="query" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_XML" />
+               </restrictions>
+               <description>&lt;p&gt; xml.xpath.matchNodeCount() applies an XPath query to an XML document, and returns the number of entries in the result node set. &lt;/p&gt;&lt;p&gt; It returns -1 if there was an error parsing the XML document, XML namespace or XPath query. &lt;/p&gt;&lt;p&gt; The xml-processing functionality must be enabled by the software license. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="xml.xpath.matchNodeSet" />
+               </relatedFunctions>
+            </func>
+            <func name="xml.xpath.matchNodeSet">
+               <parameters min="3" max="3" regex="...">
+                  <param name="document" />
+                  <param name="namespace" />
+                  <param name="query" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_XML" />
+               </restrictions>
+               <description>&lt;p&gt; xml.xpath.matchNodeSet() applies an XPath query to an XML document, and returns a string representation of the result node set. &lt;/p&gt;&lt;p&gt; It returns the empty string if there was an error parsing the XML document, XML namespace or XPath query. &lt;/p&gt;&lt;p&gt; The xml-processing functionality must be enabled by the software license. &lt;/p&gt;</description>
+               <relatedFunctions>
+                  <related func="xml.xpath.matchNodeCount" />
+               </relatedFunctions>
+            </func>
+         </functions>
+      </group>
+      <group name="xml.xslt">
+         <description>XSLT transformation functions.</description>
+         <functions>
+            <func name="xml.xslt.transform">
+               <parameters min="2" max="2" regex="..">
+                  <param name="document" />
+                  <param name="stylesheet" />
+               </parameters>
+               <restrictions>
+                  <restriction type="ZXTM_XML" />
+               </restrictions>
+               <description>&lt;p&gt; xml.xslt.transform() performs an XSLT transformation on a XML document. It returns the transformed document, or -1 on failure. &lt;/p&gt;&lt;p&gt; The xml-processing functionality must be enabled by the software license. &lt;/p&gt;</description>
+               <relatedFunctions></relatedFunctions>
+            </func>
+         </functions>
+      </group>
+   </groups>
+</codedata>

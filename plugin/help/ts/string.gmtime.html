@@ -1,0 +1,26 @@
+<html>
+   <header>
+      <title>string.gmtime</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>string.gmtime</h2>
+
+      <div class="groupDescription">Time parsing functions.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#string.gmtime.parse">string.gmtime.parse</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="string.gmtime.parse">
+         <h4>string.gmtime.parse( str )</h4>
+         <div class="functionDescription"><p>
+Parses the supplied string as a time stamp and returns the time in seconds since the epoch (1st Jan 1970). Dates before the epoch or after 2038 will produce unexpected results. <br/> Note: Timezone information contained inside the time string is ignored. The time is always assumed to be in GMT.
+</p><pre># Parse a string into unix time format<br>$str = "Tue, 21 Oct 2008 13:44:26 GMT";<br>$time = string.gmtime.parse( $str );</pre><b>See also:</b> <a href="./sys.gmtime.html#sys.gmtime.format">sys.gmtime.format</a></div>
+      </div>
+
+   </body>
+</html>

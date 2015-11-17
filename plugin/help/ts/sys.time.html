@@ -1,0 +1,115 @@
+<html>
+   <header>
+      <title>sys.time</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>sys.time</h2>
+
+      <div class="groupDescription">General date functions.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#sys.time.highres">sys.time.highres</a>
+         </li>
+         <li>
+            <a href="#sys.time.hour">sys.time.hour</a>
+         </li>
+         <li>
+            <a href="#sys.time.minutes">sys.time.minutes</a>
+         </li>
+         <li>
+            <a href="#sys.time.month">sys.time.month</a>
+         </li>
+         <li>
+            <a href="#sys.time.monthday">sys.time.monthday</a>
+         </li>
+         <li>
+            <a href="#sys.time.seconds">sys.time.seconds</a>
+         </li>
+         <li>
+            <a href="#sys.time.weekday">sys.time.weekday</a>
+         </li>
+         <li>
+            <a href="#sys.time.year">sys.time.year</a>
+         </li>
+         <li>
+            <a href="#sys.time.yearday">sys.time.yearday</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="sys.time.highres">
+         <h4>sys.time.highres(  )</h4>
+         <div class="functionDescription"><p>
+Returns the current system time as the number of seconds and microseconds since midnight, 1/1/1970. The value is returned as a double, e.g. 1138417190.823265
+</p><pre>$time = sys.time.highres();</pre><b>Alternate name:</b> time.highres<br>
+<b>See also:</b> <a href="./sys.html#sys.timeToString">sys.timeToString</a>, <a href="./sys.localtime.html#sys.localtime.format">sys.localtime.format</a>, <a href="./sys.gmtime.html#sys.gmtime.format">sys.gmtime.format</a>, <a href="./sys.html#sys.time">sys.time</a></div>
+      </div>
+
+      <div class="functionDoc" id="sys.time.hour">
+         <h4>sys.time.hour( unixtime )</h4>
+         <div class="functionDescription"><p>
+Returns the hour of the day in local time (0-23). <p> If optional parameter 'unixtime' is supplied, then this specifies the time since midnight 1/1/1970 otherwise the current time will be used.
+</p><pre>$hour = sys.time.hour();</pre><b>Alternate name:</b> time.hour<br>
+<b>See also:</b> <a href="./sys.html#sys.time">sys.time</a>, <a href="./sys.time.html#sys.time.seconds">sys.time.seconds</a>, <a href="./sys.time.html#sys.time.minutes">sys.time.minutes</a>, <a href="./sys.time.html#sys.time.weekday">sys.time.weekday</a>, <a href="./sys.time.html#sys.time.monthday">sys.time.monthday</a>, <a href="./sys.time.html#sys.time.yearday">sys.time.yearday</a>, <a href="./sys.time.html#sys.time.month">sys.time.month</a>, <a href="./sys.time.html#sys.time.year">sys.time.year</a>, <a href="./sys.localtime.html#sys.localtime.format">sys.localtime.format</a></div>
+      </div>
+
+      <div class="functionDoc" id="sys.time.minutes">
+         <h4>sys.time.minutes( unixtime )</h4>
+         <div class="functionDescription"><p>
+Returns the minutes after the hour in local time (0-59). <p> If optional parameter 'unixtime' is supplied, then this specifies the time since midnight 1/1/1970 otherwise the current time will be used.
+</p><pre>$mins = sys.time.minutes();</pre><b>Alternate name:</b> time.minutes<br>
+<b>See also:</b> <a href="./sys.html#sys.time">sys.time</a>, <a href="./sys.time.html#sys.time.seconds">sys.time.seconds</a>, <a href="./sys.time.html#sys.time.hour">sys.time.hour</a>, <a href="./sys.time.html#sys.time.weekday">sys.time.weekday</a>, <a href="./sys.time.html#sys.time.monthday">sys.time.monthday</a>, <a href="./sys.time.html#sys.time.yearday">sys.time.yearday</a>, <a href="./sys.time.html#sys.time.month">sys.time.month</a>, <a href="./sys.time.html#sys.time.year">sys.time.year</a>, <a href="./sys.localtime.html#sys.localtime.format">sys.localtime.format</a></div>
+      </div>
+
+      <div class="functionDoc" id="sys.time.month">
+         <h4>sys.time.month( value )</h4>
+         <div class="functionDescription"><p>
+Returns the month of the year in local time (1-12). <p> If optional parameter 'unixtime' is supplied, then this specifies the time since midnight 1/1/1970 otherwise the current time will be used.
+</p><pre># Find out what the month is tomorrow.<br>$month = sys.time.month( sys.time() + 86400);</pre><b>Alternate name:</b> time.month<br>
+<b>See also:</b> <a href="./sys.html#sys.time">sys.time</a>, <a href="./sys.time.html#sys.time.seconds">sys.time.seconds</a>, <a href="./sys.time.html#sys.time.minutes">sys.time.minutes</a>, <a href="./sys.time.html#sys.time.hour">sys.time.hour</a>, <a href="./sys.time.html#sys.time.weekday">sys.time.weekday</a>, <a href="./sys.time.html#sys.time.monthday">sys.time.monthday</a>, <a href="./sys.time.html#sys.time.yearday">sys.time.yearday</a>, <a href="./sys.time.html#sys.time.year">sys.time.year</a>, <a href="./sys.localtime.html#sys.localtime.format">sys.localtime.format</a></div>
+      </div>
+
+      <div class="functionDoc" id="sys.time.monthday">
+         <h4>sys.time.monthday( unixtime )</h4>
+         <div class="functionDescription"><p>
+Returns the day of the month in local time (1-31). <p> If optional parameter 'unixtime' is supplied, then this specifies the time since midnight 1/1/1970 otherwise the current time will be used.
+</p><pre>$dayofmonth = sys.time.monthday();</pre><b>Alternate name:</b> time.monthday<br>
+<b>See also:</b> <a href="./sys.html#sys.time">sys.time</a>, <a href="./sys.time.html#sys.time.seconds">sys.time.seconds</a>, <a href="./sys.time.html#sys.time.minutes">sys.time.minutes</a>, <a href="./sys.time.html#sys.time.hour">sys.time.hour</a>, <a href="./sys.time.html#sys.time.weekday">sys.time.weekday</a>, <a href="./sys.time.html#sys.time.yearday">sys.time.yearday</a>, <a href="./sys.time.html#sys.time.month">sys.time.month</a>, <a href="./sys.time.html#sys.time.year">sys.time.year</a>, <a href="./sys.localtime.html#sys.localtime.format">sys.localtime.format</a></div>
+      </div>
+
+      <div class="functionDoc" id="sys.time.seconds">
+         <h4>sys.time.seconds( unixtime )</h4>
+         <div class="functionDescription"><p>
+Returns the seconds after the minute in local time. Normally, it returns a number in the range of (0-59), but can be up to 61 to allow for leap seconds. <p> If optional parameter 'unixtime' is supplied, then this specifies the time since midnight 1/1/1970 otherwise the current time will be used.
+</p><pre>$secs = sys.time.seconds();</pre><b>Alternate name:</b> time.seconds<br>
+<b>See also:</b> <a href="./sys.html#sys.time">sys.time</a>, <a href="./sys.time.html#sys.time.minutes">sys.time.minutes</a>, <a href="./sys.time.html#sys.time.hour">sys.time.hour</a>, <a href="./sys.time.html#sys.time.weekday">sys.time.weekday</a>, <a href="./sys.time.html#sys.time.monthday">sys.time.monthday</a>, <a href="./sys.time.html#sys.time.yearday">sys.time.yearday</a>, <a href="./sys.time.html#sys.time.month">sys.time.month</a>, <a href="./sys.time.html#sys.time.year">sys.time.year</a>, <a href="./sys.localtime.html#sys.localtime.format">sys.localtime.format</a></div>
+      </div>
+
+      <div class="functionDoc" id="sys.time.weekday">
+         <h4>sys.time.weekday( unixtime )</h4>
+         <div class="functionDescription"><p>
+Returns the day of the week in local time (1-7). Sunday has the value 1; Saturday has the value 7. <p> If optional parameter 'unixtime' is supplied, then this specifies the time since midnight 1/1/1970 otherwise the current time will be used.
+</p><pre>$dayofweek = sys.time.weekday();</pre><b>Alternate name:</b> time.weekday<br>
+<b>See also:</b> <a href="./sys.html#sys.time">sys.time</a>, <a href="./sys.time.html#sys.time.seconds">sys.time.seconds</a>, <a href="./sys.time.html#sys.time.minutes">sys.time.minutes</a>, <a href="./sys.time.html#sys.time.hour">sys.time.hour</a>, <a href="./sys.time.html#sys.time.monthday">sys.time.monthday</a>, <a href="./sys.time.html#sys.time.yearday">sys.time.yearday</a>, <a href="./sys.time.html#sys.time.month">sys.time.month</a>, <a href="./sys.time.html#sys.time.year">sys.time.year</a>, <a href="./sys.localtime.html#sys.localtime.format">sys.localtime.format</a></div>
+      </div>
+
+      <div class="functionDoc" id="sys.time.year">
+         <h4>sys.time.year( unixtime )</h4>
+         <div class="functionDescription"><p>
+Returns the year in local time (1970-2038). <p> If optional parameter 'unixtime' is supplied, then this specifies the time since midnight 1/1/1970 otherwise the current time will be used.
+</p><pre>$year = sys.time.year();</pre><b>Alternate name:</b> time.year<br>
+<b>See also:</b> <a href="./sys.html#sys.time">sys.time</a>, <a href="./sys.time.html#sys.time.seconds">sys.time.seconds</a>, <a href="./sys.time.html#sys.time.minutes">sys.time.minutes</a>, <a href="./sys.time.html#sys.time.hour">sys.time.hour</a>, <a href="./sys.time.html#sys.time.weekday">sys.time.weekday</a>, <a href="./sys.time.html#sys.time.monthday">sys.time.monthday</a>, <a href="./sys.time.html#sys.time.yearday">sys.time.yearday</a>, <a href="./sys.time.html#sys.time.month">sys.time.month</a>, <a href="./sys.localtime.html#sys.localtime.format">sys.localtime.format</a></div>
+      </div>
+
+      <div class="functionDoc" id="sys.time.yearday">
+         <h4>sys.time.yearday( unixtime )</h4>
+         <div class="functionDescription"><p>
+Returns the day of the year in local time (1-366). <p> If optional parameter 'unixtime' is supplied, then this specifies the time since midnight 1/1/1970 otherwise the current time will be used.
+</p><pre>$dayofyear = sys.time.yearday();</pre><b>Alternate name:</b> time.yearday<br>
+<b>See also:</b> <a href="./sys.html#sys.time">sys.time</a>, <a href="./sys.time.html#sys.time.seconds">sys.time.seconds</a>, <a href="./sys.time.html#sys.time.minutes">sys.time.minutes</a>, <a href="./sys.time.html#sys.time.hour">sys.time.hour</a>, <a href="./sys.time.html#sys.time.weekday">sys.time.weekday</a>, <a href="./sys.time.html#sys.time.monthday">sys.time.monthday</a>, <a href="./sys.time.html#sys.time.month">sys.time.month</a>, <a href="./sys.time.html#sys.time.year">sys.time.year</a>, <a href="./sys.localtime.html#sys.localtime.format">sys.localtime.format</a></div>
+      </div>
+
+   </body>
+</html>

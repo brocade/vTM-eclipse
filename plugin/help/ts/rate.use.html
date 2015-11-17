@@ -1,0 +1,26 @@
+<html>
+   <header>
+      <title>rate.use</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>rate.use</h2>
+
+      <div class="groupDescription">Functions that conditionally activate a rate shaping class.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#rate.use.noQueue">rate.use.noQueue</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="rate.use.noQueue">
+         <h4>rate.use.noQueue( class_name, [ context ] )</h4>
+         <div class="functionDescription"><p>
+Checks if this connection will exceed the rate limits of the named rate class. If connection is within rate limits, a value of 1 is  returned and the connection is added to rate usage data.  If usage has exceeded rate limits, a value of 0 is returned. If the rate class does not exist, a value of -1 will be returned.   <br/> Optionally a context value can be used to check rate limits based on  a context, for example, rate limits for a specific client IP address. See rate.use for more details on context. <br/> Unlike rate.use(), this will not queue connections if the rate limit is exceeded. <br/> Note that calling rate.use() after rate.use.noQueue() will mean that the connection is counted twice, halving the allowed rate.
+</p><pre>$use = rate.use.noQueue( "protect_database" );<br># usage is over rate limits.<br>if( $use == 0 ){<br>&nbsp;&nbsp;&nbsp;http.sendResponse( "503 Service Unavailable",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"text/html", "Go away",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Retry-After: 10" );<br>&nbsp;&nbsp;&nbsp;connection.discard();<br>} else if( $use > 0 ){ # usage is within rate limits<br>&nbsp;&nbsp;&nbsp;log.info( "No queueing" );<br>} else { # Rate class does not exist<br>&nbsp;&nbsp;&nbsp;log.info( "Rate class doesn't exist" );<br>}</pre><b>See also:</b> <a href="./rate.html#rate.use">rate.use</a></div>
+      </div>
+
+   </body>
+</html>

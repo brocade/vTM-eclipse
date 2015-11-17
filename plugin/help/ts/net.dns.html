@@ -1,0 +1,46 @@
+<html>
+   <header>
+      <title>net.dns</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>net.dns</h2>
+
+      <div class="groupDescription">DNS lookup functions.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#net.dns.resolveHost">net.dns.resolveHost</a>
+         </li>
+         <li>
+            <a href="#net.dns.resolveHost6">net.dns.resolveHost6</a>
+         </li>
+         <li>
+            <a href="#net.dns.resolveIP">net.dns.resolveIP</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="net.dns.resolveHost">
+         <h4>net.dns.resolveHost( hostname )</h4>
+         <div class="functionDescription"><p>
+Resolves a hostname into an IPv4 address, using the DNS name servers configured on the local system. If the lookup fails, an empty string is returned.
+</p><pre># Do a double-dns lookup<br>$rip = request.getRemoteIP();<br>$rhost = net.dns.resolveIP( $rip );<br>$ip = net.dns.resolveHost( $rhost );<br>if( $ip != $rip ) {<br>&nbsp;&nbsp;&nbsp;log.warn( "Double lookup failed" );<br>}</pre><b>See also:</b> <a href="./net.dns.html#net.dns.resolveIP">net.dns.resolveIP</a>, <a href="./net.dns.html#net.dns.resolveHost6">net.dns.resolveHost6</a></div>
+      </div>
+
+      <div class="functionDoc" id="net.dns.resolveHost6">
+         <h4>net.dns.resolveHost6( hostname )</h4>
+         <div class="functionDescription"><p>
+Resolves a hostname into an IPv6 address, using the DNS name servers configured on the local system. If the lookup fails, an empty string is returned.
+</p><pre># Do a double-dns lookup for an IPv6 address<br>$rip = request.getRemoteIP();<br>$rhost = net.dns.resolveIP( $rip );<br>$ip = net.dns.resolveHost6( $rhost );<br>if( $ip != $rip ) {<br>&nbsp;&nbsp;&nbsp;log.warn( "Double lookup failed" );<br>}</pre><b>See also:</b> <a href="./net.dns.html#net.dns.resolveHost">net.dns.resolveHost</a>, <a href="./net.dns.html#net.dns.resolveIP">net.dns.resolveIP</a></div>
+      </div>
+
+      <div class="functionDoc" id="net.dns.resolveIP">
+         <h4>net.dns.resolveIP( IP address )</h4>
+         <div class="functionDescription"><p>
+Resolves an IP address to a hostname, using the DNS name servers configured on the local system. <br/> Returns a hostname, or the IP address if the address cannot be resolved. An empty string is returned if the parameter is not a valid IP address.
+</p><pre>$rip = request.getRemoteIP();<br>$rhost = net.dns.resolveIP( $rip );<br>log.info( "Request from ".$rhost );</pre><b>See also:</b> <a href="./net.dns.html#net.dns.resolveHost">net.dns.resolveHost</a>, <a href="./net.dns.html#net.dns.resolveHost6">net.dns.resolveHost6</a></div>
+      </div>
+
+   </body>
+</html>

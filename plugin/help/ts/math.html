@@ -1,0 +1,192 @@
+<html>
+   <header>
+      <title>math</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>math</h2>
+
+      <div class="groupDescription">Mathematical functions for manipulating numbers.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#math.acos">math.acos</a>
+         </li>
+         <li>
+            <a href="#math.asin">math.asin</a>
+         </li>
+         <li>
+            <a href="#math.atan">math.atan</a>
+         </li>
+         <li>
+            <a href="#math.ceil">math.ceil</a>
+         </li>
+         <li>
+            <a href="#math.cos">math.cos</a>
+         </li>
+         <li>
+            <a href="#math.exp">math.exp</a>
+         </li>
+         <li>
+            <a href="#math.fabs">math.fabs</a>
+         </li>
+         <li>
+            <a href="#math.floor">math.floor</a>
+         </li>
+         <li>
+            <a href="#math.ln">math.ln</a>
+         </li>
+         <li>
+            <a href="#math.log">math.log</a>
+         </li>
+         <li>
+            <a href="#math.pow">math.pow</a>
+         </li>
+         <li>
+            <a href="#math.random">math.random</a>
+         </li>
+         <li>
+            <a href="#math.rint">math.rint</a>
+         </li>
+         <li>
+            <a href="#math.sin">math.sin</a>
+         </li>
+         <li>
+            <a href="#math.sqrt">math.sqrt</a>
+         </li>
+         <li>
+            <a href="#math.tan">math.tan</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="math.acos">
+         <h4>math.acos( x )</h4>
+         <div class="functionDescription"><p>
+Calculates the arc cosine of x and returns an angle in radians in the range 0 to pi.
+</p><pre>$acos = math.acos( 0 ); # returns pi/2 (approx.)</pre><b>Alternate name:</b> acos<br>
+<b>See also:</b> <a href="./math.html#math.cos">math.cos</a></div>
+      </div>
+
+      <div class="functionDoc" id="math.asin">
+         <h4>math.asin( x )</h4>
+         <div class="functionDescription"><p>
+Calculates the arc sine of x and returns an angle in radians in the range -pi/2 to pi/2.
+</p><pre>$asin = math.asin( 0 ); # returns 0 (approx.)</pre><b>Alternate name:</b> asin<br>
+<b>See also:</b> <a href="./math.html#math.sin">math.sin</a></div>
+      </div>
+
+      <div class="functionDoc" id="math.atan">
+         <h4>math.atan( angle )</h4>
+         <div class="functionDescription"><p>
+Calculates the arc tangent of x and returns an angle in radians in the range -pi/2 to pi/2.
+</p><pre>$atan = math.atan( 0 ); # returns 0 (approx.)</pre><b>Alternate name:</b> atan<br>
+<b>See also:</b> <a href="./math.html#math.tan">math.tan</a></div>
+      </div>
+
+      <div class="functionDoc" id="math.ceil">
+         <h4>math.ceil( value )</h4>
+         <div class="functionDescription"><p>
+Returns the smallest integer greater than or equal to its parameter.
+</p><pre>$r = math.ceil( 6.28 ); # returns 7<br>$r = math.ceil( "4" ); # returns 4</pre><b>Alternate name:</b> ceil<br>
+<b>See also:</b> <a href="./math.html#math.floor">math.floor</a>, <a href="./math.html#math.rint">math.rint</a>, <a href="./math.html#math.fabs">math.fabs</a></div>
+      </div>
+
+      <div class="functionDoc" id="math.cos">
+         <h4>math.cos( angle )</h4>
+         <div class="functionDescription"><p>
+Interprets its parameter as an angle in radians and returns its cosine.
+</p><pre>$cos = math.cos( 6.28314 ); # returns 1 (approx.)</pre><b>Alternate name:</b> cos<br>
+<b>See also:</b> <a href="./math.html#math.sin">math.sin</a>, <a href="./math.html#math.tan">math.tan</a></div>
+      </div>
+
+      <div class="functionDoc" id="math.exp">
+         <h4>math.exp( power )</h4>
+         <div class="functionDescription"><p>
+Calculates e raised to the power of its parameter and returns the result.
+</p><pre>$r = math.exp( math.ln( 10 ) ); # returns 10</pre><b>Alternate name:</b> exp<br>
+<b>See also:</b> <a href="./math.html#math.ln">math.ln</a>, <a href="./math.html#math.pow">math.pow</a></div>
+      </div>
+
+      <div class="functionDoc" id="math.fabs">
+         <h4>math.fabs( value )</h4>
+         <div class="functionDescription"><p>
+Interprets its parameter as a floating point number and returns its absolute value.
+</p><pre>$r = math.fabs( -6.28 ); # returns 6.28</pre><b>Alternate name:</b> fabs<br>
+<b>See also:</b> <a href="./math.html#math.floor">math.floor</a>, <a href="./math.html#math.ceil">math.ceil</a>, <a href="./math.html#math.rint">math.rint</a></div>
+      </div>
+
+      <div class="functionDoc" id="math.floor">
+         <h4>math.floor( value )</h4>
+         <div class="functionDescription"><p>
+Returns the largest integer not greater than its parameter.
+</p><pre>$r = math.floor( 4.001 ); # returns 4<br>$r = math.floor( 17 ); # returns 17</pre><b>Alternate name:</b> floor<br>
+<b>See also:</b> <a href="./math.html#math.ceil">math.ceil</a>, <a href="./math.html#math.rint">math.rint</a>, <a href="./math.html#math.fabs">math.fabs</a></div>
+      </div>
+
+      <div class="functionDoc" id="math.ln">
+         <h4>math.ln( value )</h4>
+         <div class="functionDescription"><p>
+Returns the natural logarithm of its parameter.
+</p><pre>$ln = math.ln( 2.71828 ); # returns 1 (approximately)</pre><b>Alternate name:</b> ln<br>
+<b>See also:</b> <a href="./math.html#math.log">math.log</a>, <a href="./math.html#math.exp">math.exp</a></div>
+      </div>
+
+      <div class="functionDoc" id="math.log">
+         <h4>math.log( value )</h4>
+         <div class="functionDescription"><p>
+Returns the base10 logarithm of its parameter.
+</p><pre>$log = math.log( 100 ); # returns 2</pre><b>Alternate name:</b> log<br>
+<b>See also:</b> <a href="./math.html#math.ln">math.ln</a>, <a href="./math.html#math.pow">math.pow</a></div>
+      </div>
+
+      <div class="functionDoc" id="math.pow">
+         <h4>math.pow( num, power )</h4>
+         <div class="functionDescription"><p>
+Raises its first parameter to the power of its second parameter and returns the result.
+</p><pre>$r = math.pow( 2, 3 ); # returns 8</pre><b>Alternate name:</b> pow<br>
+<b>See also:</b> <a href="./math.html#math.ln">math.ln</a>, <a href="./math.html#math.exp">math.exp</a>, <a href="./math.html#math.sqrt">math.sqrt</a></div>
+      </div>
+
+      <div class="functionDoc" id="math.random">
+         <h4>math.random( range )</h4>
+         <div class="functionDescription"><p>
+Returns a pseudorandom integer greater than or equal to zero, and less than its parameter.
+</p><pre># returns a value in the range 0 to 99<br>$rand = math.random( 100 );</pre><b>Alternate name:</b> random<br>
+</div>
+      </div>
+
+      <div class="functionDoc" id="math.rint">
+         <h4>math.rint( value )</h4>
+         <div class="functionDescription"><p>
+Rounds its parameter by returning the integer closest to its value.
+</p><pre>$r = math.rint( 4.25 ); # returns 4<br>$r = math.rint( 4.75 ); # returns 5</pre><b>Alternate name:</b> rint<br>
+<b>See also:</b> <a href="./math.html#math.floor">math.floor</a>, <a href="./math.html#math.ceil">math.ceil</a>, <a href="./math.html#math.fabs">math.fabs</a></div>
+      </div>
+
+      <div class="functionDoc" id="math.sin">
+         <h4>math.sin( angle )</h4>
+         <div class="functionDescription"><p>
+Interprets its parameter as an angle in radians and returns its sine.
+</p><pre>$sin = math.sin( 6.28314 ); # returns 0 (approx.)</pre><b>Alternate name:</b> sin<br>
+<b>See also:</b> <a href="./math.html#math.cos">math.cos</a>, <a href="./math.html#math.tan">math.tan</a></div>
+      </div>
+
+      <div class="functionDoc" id="math.sqrt">
+         <h4>math.sqrt( num )</h4>
+         <div class="functionDescription"><p>
+Returns the square root of its parameter.
+</p><pre>$root = math.sqrt( 2 ); # returns 1.414 (approx.)<br><br>if( lang.toString( math.sqrt( $num ) ) == "nan" ) {<br>&nbsp;&nbsp;&nbsp;# $num is negative or NaN ...<br>}</pre><b>Alternate name:</b> sqrt<br>
+<b>See also:</b> <a href="./math.html#math.pow">math.pow</a></div>
+      </div>
+
+      <div class="functionDoc" id="math.tan">
+         <h4>math.tan( angle )</h4>
+         <div class="functionDescription"><p>
+Interprets its parameter as an angle in radians and returns its tangent.
+</p><pre>$tan = math.tan( 6.28314 ); # returns 0 (approx.)</pre><b>Alternate name:</b> tan<br>
+<b>See also:</b> <a href="./math.html#math.sin">math.sin</a>, <a href="./math.html#math.cos">math.cos</a></div>
+      </div>
+
+   </body>
+</html>

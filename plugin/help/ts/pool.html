@@ -1,0 +1,56 @@
+<html>
+   <header>
+      <title>pool</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>pool</h2>
+
+      <div class="groupDescription"> Functions that allow you to look up and alter which pool the current request will be assigned to.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#pool.activenodes">pool.activenodes</a>
+         </li>
+         <li>
+            <a href="#pool.checknode">pool.checknode</a>
+         </li>
+         <li>
+            <a href="#pool.select">pool.select</a>
+         </li>
+         <li>
+            <a href="#pool.use">pool.use</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="pool.activenodes">
+         <h4>pool.activenodes( Pool )</h4>
+         <div class="functionDescription"><p>
+Returns the number of nodes that are alive in the named pool. This will not include any nodes that have been marked as 'draining'.
+</p><pre># Throw a warning if the number of live nodes<br># drops to below 3<br><br>if( pool.activeNodes( "database" ) < 3 ) {<br>&nbsp;&nbsp;&nbsp;log.warn( "Database nodes are low" );<br>}<br><br># If there are less than two nodes, use a different<br># pool.<br># Better to use priority nodes in a pool for this<br># though.<br><br>if( pool.activeNodes( "database" ) < 2 ) {<br>&nbsp;&nbsp;&nbsp;pool.use( "database-offsite" );<br>} else {<br>&nbsp;&nbsp;&nbsp;pool.use( "database" );<br>}</pre><b>See also:</b> <a href="./pool.html#pool.use">pool.use</a>, <a href="./pool.html#pool.select">pool.select</a></div>
+      </div>
+
+      <div class="functionDoc" id="pool.checknode">
+         <h4>pool.checknode( Pool, Host, Port )</h4>
+         <div class="functionDescription"><p>
+Query the pool to determine the status of a node. Will return one of : "NOTINPOOL","NOSUCHPOOL","NOSUCHHOST","DEAD"      "ACTIVE","DISABLED","DRAINING"
+</p><pre>$status = pool.checknode("FTP Server","app1",21);<br>if($status != "Active") {<br>&nbsp;&nbsp;&nbsp;log.warn("FTP Server app1 unavailable ".$status);<br>}</pre></div>
+      </div>
+
+      <div class="functionDoc" id="pool.select">
+         <h4>pool.select( Pool, [ Host, Port ] )</h4>
+         <div class="functionDescription"><p>
+Selects a pool to load-balance this connection with. By default, the pool name should be a literal string (i.e. not dynamically generated and not containing any variables), however, if you enable the "trafficscript!variable_pool_use" global setting variables can be used too. Please refer to the Troubleshooting section of  the Stingray TrafficScript Overview and Reference Manual for more information about this setting. Unlike pool.use(), your traffic manager will continue  to process further request rules after this function. <br/> If the pool named does not exist, your traffic manager will log a warning message. <br/> Optionally, a specific machine can be specified that will be used to forward the request on to. This machine does not have to be in the pool selected, or in fact in any pool. In this mode, the selected pool is used only for its configuration settings (e.g. timeout values, SSL encryption options, etc.)
+</p><pre># Use the pool named 'Content Pool'<br>pool.select( "Content Pool" );<br><br># Send this request to www.brocade.com:80,<br># using config from pool 'Brocade'<br>pool.select( "Brocade", "www.brocade.com", 80 );</pre><b>See also:</b> <a href="./pool.html#pool.use">pool.use</a></div>
+      </div>
+
+      <div class="functionDoc" id="pool.use">
+         <h4>pool.use( Pool, [ Host, Port ] )</h4>
+         <div class="functionDescription"><p>
+Selects a pool to load-balance this connection with, and stops processing any more rules. It must only be used in request rules. <br/> By default the pool name should be a literal string, however, if you enable the "trafficscript!variable_pool_use" global setting, variables can be used too. Please refer to the Troubleshooting section of the Stingray TrafficScript Overview and Reference Manual for more information about this setting. <br/> If the pool named does not exist, your traffic manager will log a warning message and use the default pool configured for the virtual server. <br/> Optionally, a specific machine can be specified that will be used to forward the request on to. This machine does not have to be in the pool selected, or in fact in any pool. In this mode, the selected pool is used only for its configuration settings (e.g. timeout values, SSL encryption options, etc.)
+</p><pre># Use the pool named 'Content Pool'<br>pool.use( "Content Pool" );<br><br># Send this request to www.brocade.com:80,<br># using config from pool 'Stingray'<br>pool.use( "Stingray", "www.brocade.com", 80 );</pre><b>See also:</b> <a href="./pool.html#pool.select">pool.select</a></div>
+      </div>
+
+   </body>
+</html>
