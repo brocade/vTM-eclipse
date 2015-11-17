@@ -1,0 +1,36 @@
+<html>
+   <header>
+      <title>http.compress</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>http.compress</h2>
+
+      <div class="groupDescription">Functions affecting the HTTP compression of this connection.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#http.compress.disable">http.compress.disable</a>
+         </li>
+         <li>
+            <a href="#http.compress.enable">http.compress.enable</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="http.compress.disable">
+         <h4>http.compress.disable(  )</h4>
+         <div class="functionDescription"><p>
+Stops this HTTP response from being compressed.  This function overrides the Virtual Server Content Compression settings, so this is useful for stopping particular MIME types for certain browsers from being compressed.
+</p><pre># Don't compress text/css pages<br>if( $contenttype == "text/css" ) {<br>&nbsp;&nbsp;&nbsp;&nbsp;http.compress.disable();<br>}</pre><b>See also:</b> <a href="./http.compress.html#http.compress.enable">http.compress.enable</a></div>
+      </div>
+
+      <div class="functionDoc" id="http.compress.enable">
+         <h4>http.compress.enable(  )</h4>
+         <div class="functionDescription"><p>
+Allows this individual HTTP response to be compressed.  If this function is called for an HTTP response, then the Virtual Server settings for Content Compression are ignored, and the response will be compressed, assuming that the client supports compression.  This function return 0 if it successfully enables compression
+</p><pre># Compress all text pages for Gecko<br>if( string.startswith( $contenttype, "text/" ) &&<br>&nbsp;&nbsp;&nbsp;&nbsp;string.contains( $useragent, "Gecko" ) ) {<br><br>&nbsp;&nbsp;&nbsp;&nbsp;http.compress.enable();<br>}</pre><b>See also:</b> <a href="./http.compress.html#http.compress.disable">http.compress.disable</a></div>
+      </div>
+
+   </body>
+</html>

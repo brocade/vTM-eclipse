@@ -1,0 +1,70 @@
+<html>
+   <head>
+      <title>Connecting to a Traffic Manager</title>
+      <link rel="stylesheet" href="../../PRODUCT_PLUGIN/book.css" type="text/css" /> 
+   </head>
+   
+   <body>
+      
+      <h2>Connecting to a Traffic Manager</h2>
+        
+      <p>
+      In order to use the Zeus plug-in, you must first create a connection to
+      a working Zeus installation.  This can be done via the 'Add new Zeus project'
+      icon in the <a href="viewer.html">Zeus viewer</a> pane.  You will be
+      presented with the New Connection dialog box shown below.
+      </p>
+      <img src="images/newconn.png" alt="New connection dialog" />
+      <p>
+      Fig.1: The new connection dialog
+      </p>  
+            
+      <p>
+      A new connection requires you to provide a project name, along with the 
+      following Zeus software credentials:
+      <ul>
+      <li><b>Hostname/IP address</b></li>
+      <p>
+      This is the hostname or IP address of the Zeus admin server
+      </p>
+      
+      <li><b>Project Location</b></li>
+      <p>
+      This setting gives you the option to save the new Zeus project somewhere
+      other than your current Eclipse project workspace.  You can specify
+      an alternative if it suits your needs.
+      </p>
+      
+      <li><b>Port</b></li>
+      <p>
+      This is the port number of the Zeus admin server. By default this is 9090.
+      </p>
+      
+      <li><b>Admin User</b></li>
+      <p>
+      The user you want to connect to the Zeus SOAP API with. This user must 
+      be a member of the a group with 'Zeus Control API' permissions.
+      </p>
+      
+      <li><b>Admin Password</b></li>
+      <p>
+      This is the password of the user you are connecting with.
+      </p>
+      </ul>
+      </p>
+      
+      <p>
+      You can choose to save the password with the new connection/project, so
+      you are not prompted for it each time you start Eclipse.  This is only 
+      recommended if you are sure your locally-stored data is secure.
+      </p>
+      
+      <p>
+      Provided your credentials are correct, you should be presented with a new
+      Zeus project in the Zeus Viewer pane, and a list of the rules will
+      appear under each project.  See the <a href="viewer.html">Zeus Viewer</a> help page 
+      for more details.
+      </p>
+           
+   </body>
+</html>

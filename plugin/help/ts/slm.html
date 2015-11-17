@@ -1,0 +1,46 @@
+<html>
+   <header>
+      <title>slm</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>slm</h2>
+
+      <div class="groupDescription">Functions for accessing information from the Service Level Monitoring class assigned to this connection.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#slm.conforming">slm.conforming</a>
+         </li>
+         <li>
+            <a href="#slm.isOK">slm.isOK</a>
+         </li>
+         <li>
+            <a href="#slm.threshold">slm.threshold</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="slm.conforming">
+         <h4>slm.conforming( [ class name ] )</h4>
+         <div class="functionDescription"><p>
+Returns the current percentage of requests that are meeting the Service Level Monitoring objectives. If no class name is provided, it will use the SLM class currently associated with this connection; if no SLM class is associated with this connection, it returns 100.
+</p><pre># If the Gold customers are starting to get slow,<br># gradually reroute other services...<br>$conforming = slm.conforming( "gold requests" );<br>if( ( $level == "bronze" && $conforming < 70 ) ||<br>&nbsp;&nbsp;&nbsp;&nbsp;( $level == "silver" && $conforming < 50 )) {<br>&nbsp;&nbsp;# tell lower value customers to come back later to<br>&nbsp;&nbsp;# reduce load on back-end node to ensure premium<br>&nbsp;&nbsp;# customers get good response<br>&nbsp;&nbsp;http.sendResponse( "302", "text/html", "",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Location: /toobusy.html" );<br>}<br>if( $conforming < 80 && $level != "gold" ) {<br>&nbsp;&nbsp;# slow down rate of responding to non-premium<br>&nbsp;&nbsp;# customers<br>&nbsp;&nbsp;connection.sleep( 500 );<br>}</pre><b>See also:</b> <a href="./slm.html#slm.threshold">slm.threshold</a>, <a href="./slm.html#slm.isOK">slm.isOK</a></div>
+      </div>
+
+      <div class="functionDoc" id="slm.isOK">
+         <h4>slm.isOK( [ class_name ] )</h4>
+         <div class="functionDescription"><p>
+Returns whether a particular Service Level Monitoring class is meeting its objectives. If no class name is provided, it will use the SLM class currently associated with this connection; if no SLM class is associated with the connection, it returns 1.  This function is a convenience shorthand for 'slm.conforming() > slm.threshold()'.
+</p><pre># If the search nodes are under-utilised, use this<br># spare capacity to process web page requests too<br>if( slm.isOK( "search-nodes" )) {<br>&nbsp;&nbsp;pool.use( "search+web nodes");<br>} else {<br>&nbsp;&nbsp;pool.use( "web nodes" );<br>}</pre><b>See also:</b> <a href="./slm.html#slm.conforming">slm.conforming</a>, <a href="./slm.html#slm.threshold">slm.threshold</a></div>
+      </div>
+
+      <div class="functionDoc" id="slm.threshold">
+         <h4>slm.threshold( [ class_name ] )</h4>
+         <div class="functionDescription"><p>
+returns the value of the serious_threshold setting in the given  SLM class.  If no class name is provided, it will use the SLM  class currently associated with this connection; if no SLM class  is associated with the connection, it returns 0.
+</p><pre># If we are within 10% of our threshold, divert a<br># portion of traffic elsewhere.  If we are less than<br># 25% below of our threshold, take evasive action to<br># get our site's end user experience under control!<br><br>if( slm.conforming() < slm.threshold()*0.75 ) {<br>&nbsp;&nbsp;&nbsp;# evasive action!<br>&nbsp;&nbsp;&nbsp;log.warn(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Site performance requires evasive action" );<br>&nbsp;&nbsp;&nbsp;if( $level == "bronze" ) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# send away low priority traffic<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http.sendResponse( "302", "text/html", "",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Location: /toobusy.html" );<br>&nbsp;&nbsp;&nbsp;} else if( $level == "silver" ) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# slow down processing of medium traffic<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;connection.sleep( 500 );<br>&nbsp;&nbsp;&nbsp;} else if( $level == "gold" ) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# use reserved bandwidth QoS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response.setBandwidthClass(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"premium reserved bandwidth" );<br>&nbsp;&nbsp;}<br>} else if( slm.conforming() < slm.threshold()*1.1 ) {<br>&nbsp;&nbsp;&nbsp;# getting slow to the danger level; start<br>&nbsp;&nbsp;&nbsp;# proactive traffic management<br>&nbsp;&nbsp;&nbsp;if( $customer != "gold" ) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pool.use( "non-priority-nodes" );<br>&nbsp;&nbsp;}<br>}</pre><b>See also:</b> <a href="./slm.html#slm.conforming">slm.conforming</a>, <a href="./slm.html#slm.isOK">slm.isOK</a></div>
+      </div>
+
+   </body>
+</html>

@@ -1,0 +1,26 @@
+<html>
+   <header>
+      <title>event</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>event</h2>
+
+      <div class="groupDescription">Functions to generate custom events.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#event.emit">event.emit</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="event.emit">
+         <h4>event.emit( custom event name, message )</h4>
+         <div class="functionDescription"><p>
+Triggers a Custom Event identified by the 'custom event name'. Actions can be associated with the Custom Event by configuring an Event Type to contain a Custom Event with the specified 'custom event name', and then associating that Event Type with an Action. <br/> The 'custom event name' cannot contain '/' or control codes. <br/> In addition to custom actions, a log message will be produced containing the eventid and the message.
+</p><pre># Emit a debug statement.<br>event.emit( "debug1", "Some debug information" );</pre><b>See also:</b> <a href="./log.html#log.info">log.info</a>, <a href="./log.html#log.warn">log.warn</a>, <a href="./log.html#log.error">log.error</a></div>
+      </div>
+
+   </body>
+</html>

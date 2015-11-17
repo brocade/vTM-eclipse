@@ -1,0 +1,76 @@
+<html>
+   <header>
+      <title>data</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>data</h2>
+
+      <div class="groupDescription">Functions that allow you to store information shared between all rules.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#data.get">data.get</a>
+         </li>
+         <li>
+            <a href="#data.getMemoryFree">data.getMemoryFree</a>
+         </li>
+         <li>
+            <a href="#data.getMemoryUsage">data.getMemoryUsage</a>
+         </li>
+         <li>
+            <a href="#data.remove">data.remove</a>
+         </li>
+         <li>
+            <a href="#data.reset">data.reset</a>
+         </li>
+         <li>
+            <a href="#data.set">data.set</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="data.get">
+         <h4>data.get( key )</h4>
+         <div class="functionDescription"><p>
+Returns the value that was previously stored with the given key using data.set(), or returns the empty string if no data was stored. <br/> Values stored in this way are persistent; a value stored in one rule can later be retrieved by a different rule handling a different connection. Thus, a rule can maintain persistent state across connections. <br/>
+</p><pre>data.set( "count", 7 );<br><br># In another rule or connection...<br>$value = data.get( "count" ); # Returns 7</pre><b>See also:</b> <a href="./data.html#data.set">data.set</a>, <a href="./data.html#data.remove">data.remove</a>, <a href="./data.html#data.getMemoryUsage">data.getMemoryUsage</a></div>
+      </div>
+
+      <div class="functionDoc" id="data.getMemoryFree">
+         <h4>data.getMemoryFree(  )</h4>
+         <div class="functionDescription"><p>
+Returns the amount of free space, in bytes, available for storing information with data.set(). <br/> If memory space is low, then data.reset() can be used to clear some or all of the entries from the storage. Alternatively, the upper limit on memory can be configured using trafficscript!data_size on the Global Settings page.
+</p><pre># If running low on storage, clear some temporary<br># data that other rules have stored.<br>$bytes = data.getMemoryFree();<br>if( $bytes < 1024 ) {<br>&nbsp;&nbsp;&nbsp;data.reset( "temp-" );<br>}</pre><b>See also:</b> <a href="./data.html#data.set">data.set</a>, <a href="./data.html#data.reset">data.reset</a>, <a href="./data.html#data.getMemoryUsage">data.getMemoryUsage</a></div>
+      </div>
+
+      <div class="functionDoc" id="data.getMemoryUsage">
+         <h4>data.getMemoryUsage(  )</h4>
+         <div class="functionDescription"><p>
+Returns an estimate of the amount of memory, in bytes, used by entries that have been stored by data.set(). <br/> This can be used to verify if a rule is storing excessive amounts of data, starving the host machine of memory.
+</p><pre>$bytes = data.getMemoryUsage();</pre><b>See also:</b> <a href="./data.html#data.set">data.set</a>, <a href="./data.html#data.reset">data.reset</a>, <a href="./data.html#data.getMemoryFree">data.getMemoryFree</a></div>
+      </div>
+
+      <div class="functionDoc" id="data.remove">
+         <h4>data.remove( key )</h4>
+         <div class="functionDescription"><p>
+Removes the value that was previously associated with the given key using data.set(). <br/> data.remove() returns 1 if the item did exist, or 0 if it was not found.
+</p><pre>data.set( "cache-$url", $obj );<br><br># In another rule or connection...<br>data.remove( "cache-$url" );</pre><b>See also:</b> <a href="./data.html#data.set">data.set</a>, <a href="./data.html#data.get">data.get</a>, <a href="./data.html#data.reset">data.reset</a></div>
+      </div>
+
+      <div class="functionDoc" id="data.reset">
+         <h4>data.reset( [prefix] )</h4>
+         <div class="functionDescription"><p>
+Removes some or all of the mappings created by data.set(). With no arguments, it removes all keys. With a single argument, it removes all keys that begin with the supplied string. <br/> NOTE: Should you intend to delete a specific individual key, data.remove() is more suited to this task. It offers greater performance and also ensures there is no risk of accidentally deleting other keys that start with the same string.
+</p><pre># Free some memory if we've used too much<br>if( data.getMemoryUsage() > 102400 ) {<br>&nbsp;&nbsp;&nbsp;data.reset( "mappings-" );<br>}</pre><b>See also:</b> <a href="./data.html#data.set">data.set</a>, <a href="./data.html#data.remove">data.remove</a>, <a href="./data.html#data.getMemoryUsage">data.getMemoryUsage</a>, <a href="./data.html#data.getMemoryFree">data.getMemoryFree</a></div>
+      </div>
+
+      <div class="functionDoc" id="data.set">
+         <h4>data.set( key, value )</h4>
+         <div class="functionDescription"><p>
+Stores a value, associating it with the provided key. The value can be retrieved later using data.get(), even from a different rule or connection. <br/> The value will be stored as a string, implicit conversion of floating point numbers to strings can cause some precision loss. You can convert a floating point number into a string with no precision loss using 'string.sprintf( "%f", $val )'. Arrays and hashes are serialised before storing and will be deserialised into their original form when retrieved with data.get(). <br/> To prevent memory problems, there is an upper limit on the amount of data that can be stored in the TrafficScript data storage. This means that the data.set() may fail. The upper limit can be configured using trafficscript!data_size on the Global Settings page. <br/> data.set() returns true if the entry was stored, or false if there was no room.
+</p><pre># Associate $value with $key for future retrieval<br>data.set( $key, $value );<br><br># Run this code only once:<br>if( !data.get( "runonce" ) ) {<br>&nbsp;&nbsp;&nbsp;# Do initialization<br>&nbsp;&nbsp;&nbsp;# ...<br>&nbsp;&nbsp;&nbsp;data.set( "runonce", 1 );<br>}</pre><b>See also:</b> <a href="./data.html#data.get">data.get</a>, <a href="./data.html#data.remove">data.remove</a>, <a href="./data.html#data.getMemoryUsage">data.getMemoryUsage</a></div>
+      </div>
+
+   </body>
+</html>

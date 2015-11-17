@@ -1,0 +1,66 @@
+<html>
+   <header>
+      <title>http.cache</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>http.cache</h2>
+
+      <div class="groupDescription">Functions affecting the HTTP cache.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#http.cache.disable">http.cache.disable</a>
+         </li>
+         <li>
+            <a href="#http.cache.enable">http.cache.enable</a>
+         </li>
+         <li>
+            <a href="#http.cache.exists">http.cache.exists</a>
+         </li>
+         <li>
+            <a href="#http.cache.respondIfCached">http.cache.respondIfCached</a>
+         </li>
+         <li>
+            <a href="#http.cache.setkey">http.cache.setkey</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="http.cache.disable">
+         <h4>http.cache.disable(  )</h4>
+         <div class="functionDescription"><p>
+Prevents this response from being cached. In a request rule, this additionally prevents a cache lookup for this request.
+</p><pre># don't cache static content...<br>if( $staticcontent ) { http.cache.disable(); }</pre><b>See also:</b> <a href="./http.cache.html#http.cache.enable">http.cache.enable</a>, <a href="./http.cache.html#http.cache.setkey">http.cache.setkey</a></div>
+      </div>
+
+      <div class="functionDoc" id="http.cache.enable">
+         <h4>http.cache.enable(  )</h4>
+         <div class="functionDescription"><p>
+Performs the opposite function to http.cache.disable(), and re-enables the default caching behaviour when the dynamic caching option in the virtual server is enabled.
+</p><pre># only cache what we explicitly enable<br>http.cache.disable();  # turn off everything<br>if( $agent == "googlebot" || $is_app1 ) {<br>&nbsp;&nbsp;&nbsp;http.cache.enable();<br>}</pre><b>See also:</b> <a href="./http.cache.html#http.cache.disable">http.cache.disable</a>, <a href="./http.cache.html#http.cache.setkey">http.cache.setkey</a></div>
+      </div>
+
+      <div class="functionDoc" id="http.cache.exists">
+         <h4>http.cache.exists( [poolname] )</h4>
+         <div class="functionDescription"><p>
+Returns 1 if the current request can (currently) be responded to from the cache, otherwise 0.  <br/>Note that even if the request is in the cache at the time of this call, it may be removed from the cache by the time that TrafficScript processing has finished and the traffic manager can send it. If a cached response must be guaranteed, http.cache.respondIfCached() should be used.  <br/> A pool name can be provided as optional argument in order to make the lookup use the specified pool.  Without this argument, the lookup will use the pool previously selected with pool.select or the virtual server's default pool.  <br/> This function always returns 0 if called in a response rule.
+</p><pre># Use a rate class only if the page is going to be<br># served from the backend.<br>if( !http.cache.exists() ) {<br>&nbsp;&nbsp;&nbsp;# The page cannot be served from the cache.<br>&nbsp;&nbsp;&nbsp;# The traffic manager will have to get the page<br>&nbsp;&nbsp;&nbsp;# from a back-end server, so rate-limit the<br>&nbsp;&nbsp;&nbsp;# connection:<br>&nbsp;&nbsp;&nbsp;rate.use( "rate" );<br>}</pre><b>See also:</b> <a href="./http.cache.html#http.cache.enable">http.cache.enable</a>, <a href="./http.cache.html#http.cache.disable">http.cache.disable</a>, <a href="./http.cache.html#http.cache.respondIfCached">http.cache.respondIfCached</a>, <a href="./pool.html#pool.select">pool.select</a></div>
+      </div>
+
+      <div class="functionDoc" id="http.cache.respondIfCached">
+         <h4>http.cache.respondIfCached( [poolname] )</h4>
+         <div class="functionDescription"><p>
+Sends a cached response to the client without any further rule processing and without connecting to a back-end server.  If no match is found in the cache or if the request does not allow cached responses, rule processing continues normally.  If the response can be served from the cache, no statements after this function call will be processed and the client will get the cached page.  <br/> A pool name can be provided as optional argument in order to make the lookup use the specified pool.  Without this argument, the lookup will use the pool previously selected with pool.select or the virtual server's default pool.  <br/> This function does nothing if called in a response rule.
+</p><pre># Use a rate class only if the page is going to be<br># served from the backend.<br>http.cache.respondIfCached();<br>#<br># If we get here, the page could not be served<br># from the cache.  The traffic manager will have<br># to get the page from a back-end server, so<br># rate-limit the connection:<br>rate.use( "rate" );</pre><b>See also:</b> <a href="./http.cache.html#http.cache.enable">http.cache.enable</a>, <a href="./http.cache.html#http.cache.disable">http.cache.disable</a>, <a href="./http.cache.html#http.cache.exists">http.cache.exists</a>, <a href="./pool.html#pool.select">pool.select</a></div>
+      </div>
+
+      <div class="functionDoc" id="http.cache.setkey">
+         <h4>http.cache.setkey( key )</h4>
+         <div class="functionDescription"><p>
+Allows multiple variants of the same URL to be considered distinct objects, even if the standard 'Vary' RFC semantics would consider the pages identical.  Cached objects will be stored with this key, and subsequent requests for the same URL will only match if the same key is provided.  An example use is to provided different cached content based on a portion of the User-Agent field of the request. Note that successive uses of this function will overwrite the  previous use rather than append the new key to it.
+</p><pre># internal/external users see different pages<br>http.cache.setkey( $am_internal_user );</pre><b>See also:</b> <a href="./http.cache.html#http.cache.enable">http.cache.enable</a>, <a href="./http.cache.html#http.cache.disable">http.cache.disable</a></div>
+      </div>
+
+   </body>
+</html>

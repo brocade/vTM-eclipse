@@ -1,0 +1,27 @@
+<html>
+   <header>
+      <title>sys.localtime</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>sys.localtime</h2>
+
+      <div class="groupDescription">Date functions using the local time of the system.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#sys.localtime.format">sys.localtime.format</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="sys.localtime.format">
+         <h4>sys.localtime.format( format, unixtime )</h4>
+         <div class="functionDescription"><p>
+Converts the time into a string format. This function converts using localtime - see sys.gmtime.format() to convert using GMT. <p> <table border=1 cellspacing=0 cellpadding=0> <tr><th>Format</th><th>Meaning</th><th>Format</th><th>Meaning</th></tr> <tr><td>%a</td><td>Mon Tue Wed ...</td><td>%A</td><td>Monday Tuesday ...</td></tr> <tr><td>%b</td><td>Jan Feb Mar ...</td><td>%B</td><td>January February ...</td></tr> <tr><td>%d</td><td>Day of month "01"-"31"</td><td>%D</td><td>%m/%d/%y</td></tr> <tr><td>%e</td><td>Day of month " 1"-"31"</td><td>%H</td><td>Hour of day "00-23"</td></tr> <tr><td>%h</td><td>Equivalent to %b</td><td>%I</td><td>Hour of day "01" - "12"</td></tr> <tr><td>%j</td><td>Julian day of the year "001" to "366"</td><td>%m</td><td>Month of year "01" - "12"</td></tr> <tr><td>%M</td><td>Minute "00" - "59"</td><td>%n</td><td>Newline character</td></tr> <tr><td>%p</td><td>AM/PM</td><td>%r</td><td>Time in %I:%M:%S [AM|PM]</td></tr> <tr><td>%R</td><td>%H:%M</td><td>%S</td><td>Seconds, output as a number between "00" and "61"</td></tr> <tr><td>%t</td><td>Tab character</td><td>%T</td><td>%H:%M:%S</td></tr> <tr><td>%u</td><td>Day of week (1 = Monday, 7 = Sunday)</td><td>%w</td><td>Day of week (0 = Sunday, 6 = Saturday)</td></tr> <tr><td>%y</td><td>Year (without century) "00" to "99"</td><td>%Y</td><td>Year "0000"  to "9999"</td></tr> <tr><td>%Z</td><td>Time zone (from $TZ)</td><td>%%</td><td>"%"</td></tr> </table> <p> If supplied, the optional 'unixtime' parameter specifies the number of seconds since midnight 1/1/1970, and the function returns a formatted string representing that time.  If the 'unixtime' value is not provided, the current time will be returned.
+</p><pre># Return a formatted string<br># e.g. Mon, 14 Aug 2006 12:39:01 EST<br>$str = sys.localtime.format( "%a, %d %b %Y %T EST" );</pre><b>Alternate name:</b> localtime.format<br>
+<b>See also:</b> <a href="./sys.html#sys.time">sys.time</a>, <a href="./sys.time.html#sys.time.seconds">sys.time.seconds</a>, <a href="./sys.time.html#sys.time.minutes">sys.time.minutes</a>, <a href="./sys.time.html#sys.time.hour">sys.time.hour</a>, <a href="./sys.time.html#sys.time.weekday">sys.time.weekday</a>, <a href="./sys.time.html#sys.time.monthday">sys.time.monthday</a>, <a href="./sys.time.html#sys.time.month">sys.time.month</a>, <a href="./sys.time.html#sys.time.year">sys.time.year</a>, <a href="./sys.time.html#sys.time.yearday">sys.time.yearday</a>, <a href="./sys.gmtime.html#sys.gmtime.format">sys.gmtime.format</a></div>
+      </div>
+
+   </body>
+</html>

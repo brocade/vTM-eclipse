@@ -1,0 +1,346 @@
+<html>
+   <header>
+      <title>sip</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>sip</h2>
+
+      <div class="groupDescription">SIP protocol-specific functions.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#sip.addRequestHeader">sip.addRequestHeader</a>
+         </li>
+         <li>
+            <a href="#sip.addResponseHeader">sip.addResponseHeader</a>
+         </li>
+         <li>
+            <a href="#sip.getMethod">sip.getMethod</a>
+         </li>
+         <li>
+            <a href="#sip.getRequest">sip.getRequest</a>
+         </li>
+         <li>
+            <a href="#sip.getRequestBody">sip.getRequestBody</a>
+         </li>
+         <li>
+            <a href="#sip.getRequestBodyLines">sip.getRequestBodyLines</a>
+         </li>
+         <li>
+            <a href="#sip.getRequestHeader">sip.getRequestHeader</a>
+         </li>
+         <li>
+            <a href="#sip.getRequestHeaderNames">sip.getRequestHeaderNames</a>
+         </li>
+         <li>
+            <a href="#sip.getRequestHeaders">sip.getRequestHeaders</a>
+         </li>
+         <li>
+            <a href="#sip.getRequestURI">sip.getRequestURI</a>
+         </li>
+         <li>
+            <a href="#sip.getResponse">sip.getResponse</a>
+         </li>
+         <li>
+            <a href="#sip.getResponseBody">sip.getResponseBody</a>
+         </li>
+         <li>
+            <a href="#sip.getResponseBodyLines">sip.getResponseBodyLines</a>
+         </li>
+         <li>
+            <a href="#sip.getResponseCode">sip.getResponseCode</a>
+         </li>
+         <li>
+            <a href="#sip.getResponseHeader">sip.getResponseHeader</a>
+         </li>
+         <li>
+            <a href="#sip.getResponseHeaderNames">sip.getResponseHeaderNames</a>
+         </li>
+         <li>
+            <a href="#sip.getResponseHeaders">sip.getResponseHeaders</a>
+         </li>
+         <li>
+            <a href="#sip.getVersion">sip.getVersion</a>
+         </li>
+         <li>
+            <a href="#sip.listRequestHeaderNames">sip.listRequestHeaderNames</a>
+         </li>
+         <li>
+            <a href="#sip.listResponseHeaderNames">sip.listResponseHeaderNames</a>
+         </li>
+         <li>
+            <a href="#sip.redirect">sip.redirect</a>
+         </li>
+         <li>
+            <a href="#sip.removeRequestHeader">sip.removeRequestHeader</a>
+         </li>
+         <li>
+            <a href="#sip.removeResponseHeader">sip.removeResponseHeader</a>
+         </li>
+         <li>
+            <a href="#sip.requestHeaderExists">sip.requestHeaderExists</a>
+         </li>
+         <li>
+            <a href="#sip.responseHeaderExists">sip.responseHeaderExists</a>
+         </li>
+         <li>
+            <a href="#sip.sendResponse">sip.sendResponse</a>
+         </li>
+         <li>
+            <a href="#sip.setMethod">sip.setMethod</a>
+         </li>
+         <li>
+            <a href="#sip.setRequestBody">sip.setRequestBody</a>
+         </li>
+         <li>
+            <a href="#sip.setRequestHeader">sip.setRequestHeader</a>
+         </li>
+         <li>
+            <a href="#sip.setRequestURI">sip.setRequestURI</a>
+         </li>
+         <li>
+            <a href="#sip.setResponseBody">sip.setResponseBody</a>
+         </li>
+         <li>
+            <a href="#sip.setResponseCode">sip.setResponseCode</a>
+         </li>
+         <li>
+            <a href="#sip.setResponseHeader">sip.setResponseHeader</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="sip.addRequestHeader">
+         <h4>sip.addRequestHeader( name, value, at_top )</h4>
+         <div class="functionDescription"><p>
+Modifies the current SIP request, adding a SIP header with the supplied value. If the header already exists, then this value will be appended to the existing value. If at_top is set then the value will be prepended to the header. The header name lookup is case-insensitive. <br/> You can specify the long or short form of the header name, so 'Via' and 'v' will both match the Via header field.
+</p><pre># Add a priority header if it is missing<br>if( !sip.requestHeaderExists( "Priority" ) ) {<br>&nbsp;&nbsp;&nbsp;sip.addRequestHeader( "Priority", "normal", 0 );<br>}</pre><b>See also:</b> <a href="./sip.html#sip.setRequestHeader">sip.setRequestHeader</a>, <a href="./sip.html#sip.getRequestHeader">sip.getRequestHeader</a>, <a href="./sip.html#sip.removeRequestHeader">sip.removeRequestHeader</a>, <a href="./sip.html#sip.requestHeaderExists">sip.requestHeaderExists</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.addResponseHeader">
+         <h4>sip.addResponseHeader( name, value, at_top )</h4>
+         <div class="functionDescription"><p>
+Adds a header to the SIP response that will be sent back to the client. If the header already exists in the response, via a case-insensitive lookup, then this value will be appended to the existing  value. If at_top is set then the value will be prepended  to the existing value. <br/> You can specify the long or short form of the header name, so 'Via' and 'v' will both match the Via header field.
+</p><pre># Use an internal webpage to see if the callee is<br>#  logged into their system<br>$loggedin = http.request.get(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"http://internal.example.com/".<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"lookupuser=bob" );<br>if( $loggedin = "No" ) {<br>&nbsp;&nbsp;&nbsp;# Set a warning if they are not<br>&nbsp;&nbsp;&nbsp;sip.addResponseHeader( "Warning",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"399 brocade.com User is not logged in. ".<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" Your call might not be answered.", 0 );<br>}</pre><b>See also:</b> <a href="./sip.html#sip.setResponseHeader">sip.setResponseHeader</a>, <a href="./sip.html#sip.getResponseHeader">sip.getResponseHeader</a>, <a href="./sip.html#sip.removeResponseHeader">sip.removeResponseHeader</a>, <a href="./sip.html#sip.addRequestHeader">sip.addRequestHeader</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.getMethod">
+         <h4>sip.getMethod(  )</h4>
+         <div class="functionDescription"><p>
+Returns the SIP method that was used to make the request, such as INVITE or REGISTER.
+</p><pre># Direct REGISTER requests to Registrar<br>if( sip.getMethod() == "REGISTER" ) {<br>&nbsp;&nbsp;&nbsp;# set pool to Registrar pool<br>}</pre><b>See also:</b> <a href="./sip.html#sip.setMethod">sip.setMethod</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.getRequest">
+         <h4>sip.getRequest(  )</h4>
+         <div class="functionDescription"><p>
+Returns the full SIP request and headers, but does not include any body data.
+</p><pre># Get the full SIP headers<br>$request = sip.getRequest();</pre><b>See also:</b> <a href="./sip.html#sip.listRequestHeaderNames">sip.listRequestHeaderNames</a>, <a href="./sip.html#sip.getRequestHeader">sip.getRequestHeader</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.getRequestBody">
+         <h4>sip.getRequestBody(  )</h4>
+         <div class="functionDescription"><p>
+Returns the data contained in the body of the request.
+</p><pre># Get the inbound Session Description to check for<br>#  unsupported content<br>if( sip.getMethod() == "INVITE" ) {<br>&nbsp;&nbsp;&nbsp;$body = sip.getRequestBody();<br>&nbsp;&nbsp;&nbsp;# inspect packet body<br>}</pre><b>See also:</b> <a href="./sip.html#sip.setRequestBody">sip.setRequestBody</a>, <a href="./sip.html#sip.getResponseBody">sip.getResponseBody</a>, <a href="./sip.html#sip.getRequestBodyLines">sip.getRequestBodyLines</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.getRequestBodyLines">
+         <h4>sip.getRequestBodyLines(  )</h4>
+         <div class="functionDescription"><p>
+Splits the body data of the SIP request into individual lines and returns an array of the data. <br/> If the request has no body, then this returns an empty array.
+</p><pre># Read the request body<br>$body = sip.getRequestBodyLines();<br><br># See if it's an SDP<br>if( string.startswith( $body[0], "v=0" ) ) {<br>&nbsp;&nbsp;&nbsp;# Process SDP data<br>}</pre><b>See also:</b> <a href="./sip.html#sip.getRequestBody">sip.getRequestBody</a>, <a href="./sip.html#sip.getResponseBodyLines">sip.getResponseBodyLines</a>, <a href="./sip.html#sip.setRequestBody">sip.setRequestBody</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.getRequestHeader">
+         <h4>sip.getRequestHeader( name )</h4>
+         <div class="functionDescription"><p>
+Returns the named SIP header in the SIP request, or the empty string if the header does not exist. The header name lookup is case-insensitive. <br/> You can specify the long or short form of the header name, so 'Via' and 'v' will both match the Via header field.
+</p><pre># Get information about the UAC<br>#  originating this request<br>$uac = sip.getRequestHeader( "User-Agent" );<br><br># this returns the same value<br>$uac = sip.getRequestHeader( "user-agent" );</pre><b>See also:</b> <a href="./sip.html#sip.setRequestHeader">sip.setRequestHeader</a>, <a href="./sip.html#sip.addRequestHeader">sip.addRequestHeader</a>, <a href="./sip.html#sip.removeRequestHeader">sip.removeRequestHeader</a>, <a href="./sip.html#sip.requestHeaderExists">sip.requestHeaderExists</a>, <a href="./sip.html#sip.getRequestHeaders">sip.getRequestHeaders</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.getRequestHeaderNames">
+         <h4>sip.getRequestHeaderNames(  )</h4>
+         <div class="functionDescription"><p>
+Returns a list of all the headers that are present in the request. <br/> The headers are returned as a single string, separated by spaces.
+</p><p>This function has been deprecated; </div>
+      </div>
+
+      <div class="functionDoc" id="sip.getRequestHeaders">
+         <h4>sip.getRequestHeaders(  )</h4>
+         <div class="functionDescription"><p>
+Returns a hash containing all the header names in the request mapped to their values.
+</p><pre># Show all the headers in the request<br>$headers = sip.getRequestHeaders();<br><br>foreach( $header in hash.keys( $headers ) ) {<br>&nbsp;&nbsp;&nbsp;log.info( $header . "=" . $headers[$header] );<br>}</pre><b>See also:</b> <a href="./sip.html#sip.getRequestHeader">sip.getRequestHeader</a>, <a href="./sip.html#sip.setRequestHeader">sip.setRequestHeader</a>, <a href="./sip.html#sip.addRequestHeader">sip.addRequestHeader</a>, <a href="./sip.html#sip.removeRequestHeader">sip.removeRequestHeader</a>, <a href="./sip.html#sip.requestHeaderExists">sip.requestHeaderExists</a>, <a href="./sip.html#sip.getResponseHeaders">sip.getResponseHeaders</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.getRequestURI">
+         <h4>sip.getRequestURI(  )</h4>
+         <div class="functionDescription"><p>
+Returns the target of the SIP request.
+</p><pre># Check a status file to see if this user<br>#  wants to accept calls.<br>if( sip.getRequestURI() == "sip:bob@example.com" ) {<br>&nbsp;&nbsp;&nbsp;# see if this user is available<br>&nbsp;&nbsp;&nbsp;$status = http.request.get(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"http://www.example.com/status.cgi?user=bob" );<br>&nbsp;&nbsp;&nbsp;if( $status != "available" ) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sip.sendResponse( "486",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"User is currently " . $status );<br>&nbsp;&nbsp;&nbsp;}<br>}</pre><b>See also:</b> <a href="./sip.html#sip.setRequestURI">sip.setRequestURI</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.getResponse">
+         <h4>sip.getResponse(  )</h4>
+         <div class="functionDescription"><p>
+Returns the full SIP response and headers, but does not include any body data.
+</p><pre># Get the full SIP headers<br>$request = sip.getResponse();</pre><b>See also:</b> <a href="./sip.html#sip.listResponseHeaderNames">sip.listResponseHeaderNames</a>, <a href="./sip.html#sip.getResponseHeader">sip.getResponseHeader</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.getResponseBody">
+         <h4>sip.getResponseBody(  )</h4>
+         <div class="functionDescription"><p>
+Returns the session description of the SIP response.
+</p><pre># Read the entire response body<br>$sdp = sip.getResponseBody();</pre><b>See also:</b> <a href="./sip.html#sip.setResponseBody">sip.setResponseBody</a>, <a href="./sip.html#sip.getRequestBody">sip.getRequestBody</a>, <a href="./sip.html#sip.getResponseBodyLines">sip.getResponseBodyLines</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.getResponseBodyLines">
+         <h4>sip.getResponseBodyLines(  )</h4>
+         <div class="functionDescription"><p>
+Splits the body data of the SIP response into individual lines and returns an array of the data. <br/> If the response has no body, then this returns an empty array.
+</p><pre># Get the response body<br>$sdp = sip.getResponseBodyLines();<br><br># Process it line-by-line<br>foreach( $line in $sdp ) {<br>&nbsp;&nbsp;&nbsp;# ...<br>}</pre><b>See also:</b> <a href="./sip.html#sip.getResponseBody">sip.getResponseBody</a>, <a href="./sip.html#sip.setResponseBody">sip.setResponseBody</a>, <a href="./sip.html#sip.getRequestBodyLines">sip.getRequestBodyLines</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.getResponseCode">
+         <h4>sip.getResponseCode(  )</h4>
+         <div class="functionDescription"><p>
+Returns the status code from the first line of the SIP response.
+</p><pre># Is the status '200'<br>if( sip.getResponseCode() == 200 ) {<br>&nbsp;&nbsp;&nbsp;# ...<br>}</pre><b>See also:</b> <a href="./sip.html#sip.setResponseCode">sip.setResponseCode</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.getResponseHeader">
+         <h4>sip.getResponseHeader( name )</h4>
+         <div class="functionDescription"><p>
+Returns the value of a header in the SIP response, or the empty string if the header does not exist. The header name lookup is case-insensitive. <br/> You can specify the long or short form of the header name, so 'Via' and 'v' will both match the Via header field.
+</p><pre># Get the route all future requests will take<br>$rr = sip.getResponseHeader( "Record-Route" );</pre><b>See also:</b> <a href="./sip.html#sip.setResponseHeader">sip.setResponseHeader</a>, <a href="./sip.html#sip.addResponseHeader">sip.addResponseHeader</a>, <a href="./sip.html#sip.removeResponseHeader">sip.removeResponseHeader</a>, <a href="./sip.html#sip.responseHeaderExists">sip.responseHeaderExists</a>, <a href="./sip.html#sip.getRequestHeader">sip.getRequestHeader</a>, <a href="./sip.html#sip.getResponseHeaders">sip.getResponseHeaders</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.getResponseHeaderNames">
+         <h4>sip.getResponseHeaderNames(  )</h4>
+         <div class="functionDescription"><p>
+Returns a list of all the headers that are present in the response. <br/> The headers are returned as a single string, separated by spaces.
+</p><p>This function has been deprecated; </div>
+      </div>
+
+      <div class="functionDoc" id="sip.getResponseHeaders">
+         <h4>sip.getResponseHeaders(  )</h4>
+         <div class="functionDescription"><p>
+Returns a hash containing all the header names in the response mapped to their values.
+</p><pre># Show all the headers in the response<br>$headers = sip.getResponseHeaders();<br><br>foreach( $header in hash.keys( $headers ) ) {<br>&nbsp;&nbsp;&nbsp;log.info( $header . "=" . $headers[$header] );<br>}</pre><b>See also:</b> <a href="./sip.html#sip.getResponseHeader">sip.getResponseHeader</a>, <a href="./sip.html#sip.setResponseHeader">sip.setResponseHeader</a>, <a href="./sip.html#sip.addResponseHeader">sip.addResponseHeader</a>, <a href="./sip.html#sip.removeResponseHeader">sip.removeResponseHeader</a>, <a href="./sip.html#sip.responseHeaderExists">sip.responseHeaderExists</a>, <a href="./sip.html#sip.getRequestHeaders">sip.getRequestHeaders</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.getVersion">
+         <h4>sip.getVersion(  )</h4>
+         <div class="functionDescription"><p>
+Returns the version of the SIP protocol being used. It returns the version string in the SIP/version specifier in the first line of the SIP request, such as 'SIP/2.0'.
+</p><pre># Get the SIP version<br>$version = sip.getVersion();</pre></div>
+      </div>
+
+      <div class="functionDoc" id="sip.listRequestHeaderNames">
+         <h4>sip.listRequestHeaderNames(  )</h4>
+         <div class="functionDescription"><p>
+Returns a list of all the headers that are present in the request. <br/> The headers are returned as an array.
+</p><pre># Log all of the header names and values<br>$headers = sip.listRequestHeaderNames();<br>foreach( $header in $headers ) {<br>&nbsp;&nbsp;&nbsp;log.info($header . "=" .<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sip.getRequestHeader($header));<br>}</pre><b>See also:</b> <a href="./sip.html#sip.getRequestHeader">sip.getRequestHeader</a>, <a href="./sip.html#sip.removeRequestHeader">sip.removeRequestHeader</a>, <a href="./sip.html#sip.getRequest">sip.getRequest</a>, <a href="./sip.html#sip.listResponseHeaderNames">sip.listResponseHeaderNames</a>, <a href="./sip.html#sip.getRequestHeaders">sip.getRequestHeaders</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.listResponseHeaderNames">
+         <h4>sip.listResponseHeaderNames(  )</h4>
+         <div class="functionDescription"><p>
+Returns a list of all the headers that are present in the response. <br/> The headers are returned as an array.
+</p><pre># Log all of the header names and values<br>$headers = sip.listResponseHeaderNames();<br>foreach( $header in $headers ) {<br>&nbsp;&nbsp;&nbsp;log.info($header . "=" .<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sip.getResponseHeader($header));<br>}</pre><b>See also:</b> <a href="./sip.html#sip.getResponseHeader">sip.getResponseHeader</a>, <a href="./sip.html#sip.removeResponseHeader">sip.removeResponseHeader</a>, <a href="./sip.html#sip.listRequestHeaderNames">sip.listRequestHeaderNames</a>, <a href="./sip.html#sip.getResponseHeaders">sip.getResponseHeaders</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.redirect">
+         <h4>sip.redirect( contact )</h4>
+         <div class="functionDescription"><p>
+Sends back a 302 Moved Temporarily response. This response instructs the client to retry the request at the new address(es) given in the 'contact' parameter. This is equivalent to sip.sendResponse( "302", "Moved Temporarily", "Contact: " .    $uri, "" );
+</p><pre># Example's offices are closed, redirect all their<br># calls to voicemail.<br>$user = sip.getRequestURI();<br>if( string.EndsWith( $user, "@example.com" ) ) {<br>&nbsp;&nbsp;&nbsp;$username = string.left( $user,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string.find( $user, "@" ) );<br>&nbsp;&nbsp;&nbsp;$contact = $username . "@voicemail.example.com";<br>&nbsp;&nbsp;&nbsp;sip.redirect( $contact );<br>}</pre><b>See also:</b> <a href="./sip.html#sip.sendResponse">sip.sendResponse</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.removeRequestHeader">
+         <h4>sip.removeRequestHeader( name )</h4>
+         <div class="functionDescription"><p>
+Removes a header if it exists in the request. The header name lookup is case-insensitive. <br/> You can specify the long or short form of the header name, so 'Via' and 'v' will both match the Via header field.
+</p><pre># Filter out any custom alert tones that have<br>#  been specified by the client<br>sip.removeRequestHeader( "Alert-Info" );</pre><b>See also:</b> <a href="./sip.html#sip.getRequestHeader">sip.getRequestHeader</a>, <a href="./sip.html#sip.addRequestHeader">sip.addRequestHeader</a>, <a href="./sip.html#sip.setRequestHeader">sip.setRequestHeader</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.removeResponseHeader">
+         <h4>sip.removeResponseHeader( name )</h4>
+         <div class="functionDescription"><p>
+Removes a header from the SIP response.  <br/> The header name lookup is case-insensitive. You can specify the long or short form of the header name, so 'Via' and 'v' will both match the Via header field.
+</p><pre># Remove the server header, if it exists, to avoid<br>#  application-specific exploits being used<br>sip.removeResponseHeader( "Server" );</pre><b>See also:</b> <a href="./sip.html#sip.setResponseHeader">sip.setResponseHeader</a>, <a href="./sip.html#sip.getResponseHeader">sip.getResponseHeader</a>, <a href="./sip.html#sip.addResponseHeader">sip.addResponseHeader</a>, <a href="./sip.html#sip.removeRequestHeader">sip.removeRequestHeader</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.requestHeaderExists">
+         <h4>sip.requestHeaderExists( name )</h4>
+         <div class="functionDescription"><p>
+Reports if a named header exists or not. It is similar to sip.getRequestHeader(), but makes it possible to distinguish between a header not being present and a header having no value. <br/> The header name lookup is case-insensitive. <br/> You can specify the long or short form of the header name, so 'Via' and 'v' will both match the Via header field. <br/> It returns 1 if the header exists, and 0 if it does not.
+</p><pre># Add a Priority header if it is missing<br>if( !sip.requestHeaderExists( "Priority" ) ) {<br>&nbsp;&nbsp;&nbsp;sip.addRequestHeader( "Priority", "normal", 0 );<br>}</pre><b>See also:</b> <a href="./sip.html#sip.getRequestHeader">sip.getRequestHeader</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.responseHeaderExists">
+         <h4>sip.responseHeaderExists( name )</h4>
+         <div class="functionDescription"><p>
+Reports if a named header exists in the SIP response. It is similar to sip.getResponseHeader(), but makes it possible to distinguish between a header not being present and a header having no value. <br/> The header name lookup is case-insensitive. <br/> You can specify the long or short form of the header name, so 'Via' and 'v' will both match the Via header field. <br/> It returns 1 if the header exists, and 0 if it does not.
+</p><pre># Test for the 'Warning' response header<br>if( sip.responseHeaderExists( "Warning" ) ) {<br>&nbsp;&nbsp;&nbsp;# ...<br>}</pre><b>See also:</b> <a href="./sip.html#sip.getResponseHeader">sip.getResponseHeader</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.sendResponse">
+         <h4>sip.sendResponse( code, reason, [headers], [body] )</h4>
+         <div class="functionDescription"><p>
+Sends back a SIP response to the client instead of balancing the request via a pool onto a node. The Statue-Line of the response has the form:  SIP/2.0 code reason Via, Record-Route, From, To, CSeq, Call-ID and Content-Length headers are automatically added to the response. Any headers supplied in the headers parameter will also be added to the response. Multiple headers must be separated by \r\n. Any body data specified is appended to the response.
+</p><pre># Send Forbidden response if the user is blacklisted<br>$contact = sip.getRequestHeader( "Contact" );<br>if( string.contains( $contact, "10.234.12.42" ) ) {<br>&nbsp;&nbsp;&nbsp;sip.sendResponse( "403", "Forbidden" );<br>}</pre><b>See also:</b> <a href="./sip.html#sip.redirect">sip.redirect</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.setMethod">
+         <h4>sip.setMethod( method )</h4>
+         <div class="functionDescription"><p>
+Sets the SIP method to use when forwarding the request via a pool to a node.
+</p><pre># Force non-standard PING requests to become OPTIONS<br>if( sip.getMethod() == "PING" ) {<br>&nbsp;&nbsp;&nbsp;sip.setMethod( "OPTIONS" );<br>&nbsp;&nbsp;&nbsp;sip.setRequestHeader( "Max-Forwards", "1" );<br>}</pre><b>See also:</b> <a href="./sip.html#sip.getMethod">sip.getMethod</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.setRequestBody">
+         <h4>sip.setRequestBody( body )</h4>
+         <div class="functionDescription"><p>
+Sets the request body for this SIP request to the supplied string, replacing any request body already present. <br/> This also updates the 'Content-Length' header in the request to the length of the new body data.
+</p><pre>$body = sip.getRequestBody();<br># Forward all data from the server through an<br>#  intermediate machine<br>$body = string.regexsub($body, request.getRemoteIP(),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"192.168.9.100", "g");<br>sip.setRequestBody( $body );</pre><b>See also:</b> <a href="./sip.html#sip.getRequestBody">sip.getRequestBody</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.setRequestHeader">
+         <h4>sip.setRequestHeader( name, value )</h4>
+         <div class="functionDescription"><p>
+Sets a SIP header, replacing any existing value if the header already exists. <br/> You can specify the long or short form of the header name, so 'Via' and 'v' will both match the Via header field.
+</p><pre># Add a reference to an information page about<br>#  a known company when a call is received from<br>#  them, and an icon to help identify them.<br>if( sip.getRequestHeader( "Organization" )<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;== "Brocade" ) {<br>&nbsp;&nbsp;&nbsp;sip.setRequestHeader( "Call-Info",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&lt;http://www.brocade.com/" .<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"assets/img/logo.gif&gt; ;purpose=icon,".<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&lt;http://www.brocade.com/" .<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"about/&gt; ;purpose=info"<br>&nbsp;&nbsp;&nbsp;);<br>}</pre><b>See also:</b> <a href="./sip.html#sip.addRequestHeader">sip.addRequestHeader</a>, <a href="./sip.html#sip.getRequestHeader">sip.getRequestHeader</a>, <a href="./sip.html#sip.requestHeaderExists">sip.requestHeaderExists</a>, <a href="./sip.html#sip.removeRequestHeader">sip.removeRequestHeader</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.setRequestURI">
+         <h4>sip.setRequestURI( uri )</h4>
+         <div class="functionDescription"><p>
+Sets the target of the SIP request.
+</p><pre># If the user has recently changed username, rewrite<br>#  requests that address their old username.<br>if( sip.getRequestURI() == "sip:jond@example.com" ) {<br>&nbsp;&nbsp;&nbsp;sip.setRequestURI( "sip:jdoe@example.com" );<br>}</pre><b>See also:</b> <a href="./sip.html#sip.getRequestURI">sip.getRequestURI</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.setResponseBody">
+         <h4>sip.setResponseBody( body )</h4>
+         <div class="functionDescription"><p>
+Sets the response body for this SIP response, replacing any response body already present. <br/> This also updates the 'Content-Length' header in the response to the length of the new body data. If the server is still sending the original response body when this function is called, the connection to the server will be harmlessly dropped. <br/>
+</p><pre>$body = sip.getResponseBody();<br># Forward all data from the client through an<br>#  intermediate machine<br>$body = string.regexsub( $body,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"c=.*",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"c=IN IP4 "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;."192.168.9.100",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"g");<br>sip.setResponseBody( $body );</pre><b>See also:</b> <a href="./sip.html#sip.getResponseBody">sip.getResponseBody</a>, <a href="./sip.html#sip.setRequestBody">sip.setRequestBody</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.setResponseCode">
+         <h4>sip.setResponseCode( code, [message] )</h4>
+         <div class="functionDescription"><p>
+Sets the status code and message in the first line of the SIP response.
+</p><pre># Redirect client to a backup server if the proxy<br>#  has an internal error.<br>if( sip.getResponseCode() == "500" ) {<br>&nbsp;&nbsp;&nbsp;sip.setResponseHeader( "Contact",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"sip:backup.example.com" );<br>&nbsp;&nbsp;&nbsp;sip.setResponseCode( "305", "Use Proxy" );<br>}</pre><b>See also:</b> <a href="./sip.html#sip.getResponseCode">sip.getResponseCode</a></div>
+      </div>
+
+      <div class="functionDoc" id="sip.setResponseHeader">
+         <h4>sip.setResponseHeader( name, value )</h4>
+         <div class="functionDescription"><p>
+Sets a header in the SIP response that will be sent back to the client. If the header already exists in the response, via a case-insensitive  lookup, then it will be replaced with this new value. <br/> You can specify the long or short form of the header name, so 'Via' and 'v' will both match the Via header field.
+</p><pre># Change the server string<br>sip.setResponseHeader( "Server",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Stingray 5.0 (Linux/i386)" );</pre><b>See also:</b> <a href="./sip.html#sip.addResponseHeader">sip.addResponseHeader</a>, <a href="./sip.html#sip.getResponseHeader">sip.getResponseHeader</a>, <a href="./sip.html#sip.removeResponseHeader">sip.removeResponseHeader</a>, <a href="./sip.html#sip.setRequestHeader">sip.setRequestHeader</a></div>
+      </div>
+
+   </body>
+</html>

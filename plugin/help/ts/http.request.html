@@ -1,0 +1,66 @@
+<html>
+   <header>
+      <title>http.request</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>http.request</h2>
+
+      <div class="groupDescription">Functions that allow you to send HTTP requests within TrafficScript rules.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#http.request.delete">http.request.delete</a>
+         </li>
+         <li>
+            <a href="#http.request.get">http.request.get</a>
+         </li>
+         <li>
+            <a href="#http.request.head">http.request.head</a>
+         </li>
+         <li>
+            <a href="#http.request.post">http.request.post</a>
+         </li>
+         <li>
+            <a href="#http.request.put">http.request.put</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="http.request.delete">
+         <h4>http.request.delete( url, [ headers ], [ timeout ] )</h4>
+         <div class="functionDescription"><p>
+Issues an HTTP DELETE request for a remote web page. $1 is set to the HTTP response code (e.g. 204 for OK), or is 0 if there was an error. $2 is set to the Content-Type of the response (or an error message if there was an error).  $3 is set to the content-headers of the response, in the format: [&lt;header-line&gt;\r\n]*.  $4 is set to the first line of the HTTP response.  The entire original response may be reconstructed as $4."\r\n".$3."\r\n".$body, where $body is the result of http.request.get. <br/> HTTPS pages can be requested by using the https:// prefix for the url. <br/> A timeout parameter can be given (in seconds). If the request does not complete in this time, then an error will be given instead. <br/> Requests made with http.request.delete() will use keepalive connections to the destination server.  Provided the request was completed successfully, these keepalive connections will be re-used by any invocation of http.request.delete(), http.request.head() or http.request.get() to the same destination host:port, from any rule, in any virtual server.  If the request is to a node in a pool, the connection will be shared with other requests your traffic manager makes to the same node. If the request made with http.request.delete() was unsuccessful, your traffic manager closes the connection.
+</p><pre># Delete a resource from the server<br>$book_id = http.getHeader( "X-Book-ID" );<br>http.request.delete( "http://www.example.com/books/"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;. $book_id );<br>if( $1 != 204 ) {<br>&nbsp;&nbsp;&nbsp;http.sendResponse( $1, "text/plain", "",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Could not delete book " . $book_id );<br>}</pre><b>See also:</b> <a href="./http.request.html#http.request.get">http.request.get</a>, <a href="./http.request.html#http.request.post">http.request.post</a>, <a href="./http.request.html#http.request.put">http.request.put</a>, <a href="./http.request.html#http.request.head">http.request.head</a></div>
+      </div>
+
+      <div class="functionDoc" id="http.request.get">
+         <h4>http.request.get( url, [ headers ], [ timeout ] )</h4>
+         <div class="functionDescription"><p>
+Issues an HTTP request for a remote web page and returns the body of the page requested. $1 is set to the HTTP response code (e.g. 200 for OK), or is 0 if there was an error. $2 is set to the Content-Type of the response (or an error message if there was an error).  $3 is set to the content-headers of the response, in the format: [&lt;header-line&gt;\r\n]*.  $4 is set to the first line of the HTTP response.  The entire original response may be reconstructed as $4."\r\n".$3."\r\n".$body, where $body is the result of http.request.get. <br/> HTTPS pages can be requested by using the https:// prefix for the url. <br/> A timeout parameter can be given (in seconds). If the request does not complete in this time, then an error will be given instead. <br/> Requests made with http.request.get() will use keepalive connections to the destination server.  Provided the request was completed successfully, these keepalive connections will be re-used by any invocation of http.request.get() or http.request.head() to the same destination host:port, from any rule, in any virtual server.  If the request is to a node in a pool, the connection will be shared with other requests your traffic manager makes to the same node. If the request made with http.request.get() was unsuccessful, your traffic manager closes the connection.
+</p><pre>$body = http.request.get( "https://www.example.com/",<br>&nbsp;&nbsp;&nbsp;"Cookie: foo=bar" );<br>if( $1 ) {<br>&nbsp;&nbsp;&nbsp;http.sendResponse( $1, $2, $body, "" );<br>} else {<br>&nbsp;&nbsp;&nbsp;log.info( "An error occurred: " . $2 );<br>}</pre><b>See also:</b> <a href="./http.request.ssl.html#http.request.ssl.get">http.request.ssl.get</a>, <a href="./http.request.html#http.request.head">http.request.head</a>, <a href="./http.request.html#http.request.post">http.request.post</a>, <a href="./http.request.html#http.request.put">http.request.put</a>, <a href="./http.request.html#http.request.delete">http.request.delete</a></div>
+      </div>
+
+      <div class="functionDoc" id="http.request.head">
+         <h4>http.request.head( url, [ headers ], [ timeout ] )</h4>
+         <div class="functionDescription"><p>
+Issues an HTTP HEAD request for a remote web page. $1 is set to the HTTP response code (e.g. 200 for OK), or is 0 if there was an error. $2 is set to the Content-Type of the response (or an error message if there was an error).  $3 is set to the content-headers of the response, in the format: [&lt;header-line&gt;\r\n]*.  $4 is set to the first line of the HTTP response.  The entire original response may be reconstructed as $4."\r\n".$3."\r\n".$body, where $body is the result of http.request.get. <br/> HTTPS pages can be requested by using the https:// prefix for the url. <br/> A timeout parameter can be given (in seconds). If the request does not complete in this time, then an error will be given instead. <br/> Requests made with http.request.head() will use keepalive connections to the destination server.  Provided the request was completed successfully, these keepalive connections will be re-used by any invocation of http.request.head() or http.request.get() to the same destination host:port, from any rule, in any virtual server.  If the request is to a node in a pool, the connection will be shared with other requests your traffic manager makes to the same node. If the request made with http.request.head() was unsuccessful, your traffic manager closes the connection.
+</p><pre># Check that this site is working<br>http.request.head( "http://www.example.com/" );<br>if( $1 != 200 ) {<br>&nbsp;&nbsp;&nbsp;pool.use( "Backup site" );<br>}</pre><b>See also:</b> <a href="./http.request.html#http.request.get">http.request.get</a>, <a href="./http.request.html#http.request.post">http.request.post</a>, <a href="./http.request.html#http.request.put">http.request.put</a>, <a href="./http.request.html#http.request.delete">http.request.delete</a></div>
+      </div>
+
+      <div class="functionDoc" id="http.request.post">
+         <h4>http.request.post( url, POST data, [ headers ], [ timeout ] )</h4>
+         <div class="functionDescription"><p>
+Issues an HTTP POST request for a remote web page, and returns the body of the page requested. $1 is set to the HTTP response code (e.g. 200 for OK), or is 0 if there was an error. $2 is set to the Content-Type of the response (or an error message if there was an error).  $3 is set to the content-headers of the response, in the format: [&lt;header-line&gt;\r\n]*.  $4 is set to the first line of the HTTP response.  The entire original response may be reconstructed as $4."\r\n".$3."\r\n".$body, where $body is the result of http.request.post. <br/> HTTPS pages can be requested by using the https:// prefix for the url. <br/> A timeout parameter can be given (in seconds). If the request does not complete in this time, then an error will be given instead. <br/> Requests made with http.request.post() will always create a new connection to the destination server and will <i>not</i> use an existing connection.  After a request made with http.request.post() has finished successfully, its connection can be re-used by any invocation of http.request.get() or http.request.head() to the same destination host:port, from any rule, in any virtual server.  If the request was to a node in a pool, the connection will also be shared with other requests your traffic manager makes to the same node. If the request made with http.request.post() was unsuccessful, your traffic manager closes the connection.
+</p><pre>$body = http.request.post("http://www.example.com/",<br>&nbsp;&nbsp;&nbsp;"data",<br>&nbsp;&nbsp;&nbsp;"Cookie: foo=bar\nContent-Type: text/plain" );<br>if( $1 ) {<br>&nbsp;&nbsp;&nbsp;http.sendResponse( $1, $2, $body, "" );<br>}</pre><b>See also:</b> <a href="./http.request.html#http.request.get">http.request.get</a>, <a href="./http.request.html#http.request.head">http.request.head</a>, <a href="./http.request.html#http.request.put">http.request.put</a>, <a href="./http.request.html#http.request.delete">http.request.delete</a></div>
+      </div>
+
+      <div class="functionDoc" id="http.request.put">
+         <h4>http.request.put( url, PUT data, [ headers ], [ timeout ] )</h4>
+         <div class="functionDescription"><p>
+Issues an HTTP PUT request for a remote web page, and returns the body of the page requested. $1 is set to the HTTP response code (e.g. 200 for OK), or is 0 if there was an error. $2 is set to the Content-Type of the response (or an error message if there was an error). $3 is set to the content-headers of the response, in the format: [&lt;header-line&gt;\r\n]*. $4 is set to the first line of the HTTP response. The entire original response may be reconstructed as $4."\r\n".$3."\r\n".$body, where $body is the result of http.request.put. <br/> HTTPS pages can be requested by using the https:// prefix for the url. <br/> A timeout parameter can be given (in seconds). If the request does not complete in this time, then an error will be given instead. <br/> Requests made with http.request.put() will always create a new connection to the destination server and will <i>not</i> use an existing connection. After a request made with http.request.put() has finished successfully, its connection can be re-used by any invocation of http.request.get() or http.request.head() to the same destination host:port, from any rule, in any virtual server.  If the request was to a node in a pool, the connection will also be shared with other requests your traffic manager makes to the same node. If the request made with http.request.put() was unsuccessful, your traffic manager closes the connection.
+</p><pre>$body = http.request.put("http://www.example.com/",<br>&nbsp;&nbsp;&nbsp;"data",<br>&nbsp;&nbsp;&nbsp;"Cookie: foo=bar\nContent-Type: text/plain" );<br>if( $1 ) {<br>&nbsp;&nbsp;&nbsp;http.sendResponse( $1, $2, $body, "" );<br>}</pre><b>See also:</b> <a href="./http.request.html#http.request.get">http.request.get</a>, <a href="./http.request.html#http.request.head">http.request.head</a>, <a href="./http.request.html#http.request.post">http.request.post</a>, <a href="./http.request.html#http.request.delete">http.request.delete</a></div>
+      </div>
+
+   </body>
+</html>

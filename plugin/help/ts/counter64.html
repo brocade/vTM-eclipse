@@ -1,0 +1,26 @@
+<html>
+   <header>
+      <title>counter64</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>counter64</h2>
+
+      <div class="groupDescription"></div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#counter64.increment">counter64.increment</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="counter64.increment">
+         <h4>counter64.increment( counter, [amount] )</h4>
+         <div class="functionDescription"><p>
+Increments the numbered 64 bit counter. These counters are readable via SNMP, and can be graphed on the Current Activity page on the Administration Server. 64 bit counters exist in a separate name- and storage space from the 32 bit counters, i.e. they don't overlap in any way. <br/> By default, the counter is incremented by one, but you can also supply an amount to increment the counter by. If a negative amount is supplied the counter is decremented, but please keep in mind that a decrement is indiscernible from a wrap-around. Also please note that the supplied increment amount is limited to signed 32 bit range even though the counter is 64 bit.
+</p><pre># Increment the first 64 bit user counter by 100<br>counter64.increment( 1, 100 );<br># Increment the first 64 bit user counter by 1<br>counter64.increment( 1 );</pre><b>See also:</b> <a href="./counter.html#counter.increment">counter.increment</a></div>
+      </div>
+
+   </body>
+</html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="com.zeus.eclipsePlugin_20140402.1.91597.jar" id="com.zeus.eclipsePlugin" version="20140402.1.91597">
+      <category name="Brocade"/>
+   </feature>
+   <category-def name="Brocade" label="Brocade Communications Systems">
+      <description>
+         Zeus Technology
+      </description>
+   </category-def>
+</site>

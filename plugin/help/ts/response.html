@@ -1,0 +1,166 @@
+<html>
+   <header>
+      <title>response</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>response</h2>
+
+      <div class="groupDescription">Functions that allow you to access information about and modify the current response.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#response.append">response.append</a>
+         </li>
+         <li>
+            <a href="#response.close">response.close</a>
+         </li>
+         <li>
+            <a href="#response.flush">response.flush</a>
+         </li>
+         <li>
+            <a href="#response.get">response.get</a>
+         </li>
+         <li>
+            <a href="#response.getBandwidthClass">response.getBandwidthClass</a>
+         </li>
+         <li>
+            <a href="#response.getLength">response.getLength</a>
+         </li>
+         <li>
+            <a href="#response.getLine">response.getLine</a>
+         </li>
+         <li>
+            <a href="#response.getLocalIP">response.getLocalIP</a>
+         </li>
+         <li>
+            <a href="#response.getLocalPort">response.getLocalPort</a>
+         </li>
+         <li>
+            <a href="#response.getRemoteIP">response.getRemoteIP</a>
+         </li>
+         <li>
+            <a href="#response.getRemotePort">response.getRemotePort</a>
+         </li>
+         <li>
+            <a href="#response.getToS">response.getToS</a>
+         </li>
+         <li>
+            <a href="#response.set">response.set</a>
+         </li>
+         <li>
+            <a href="#response.setBandwidthClass">response.setBandwidthClass</a>
+         </li>
+         <li>
+            <a href="#response.setToS">response.setToS</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="response.append">
+         <h4>response.append( response data )</h4>
+         <div class="functionDescription"><p>
+Appends the provided string to the response data. <br/> This is a low-level routine that should be used with care. For protocols with their own higher-level protocol managers (e.g. HTTP), you must use the higher level routines to alter the input data (e.g. http.setResponseHeader() and http.setResponseBody()).
+</p><pre>response.append(<br>&nbsp;&nbsp;&nbsp;"I always have to have the last word." );</pre><b>See also:</b> <a href="./response.html#response.set">response.set</a></div>
+      </div>
+
+      <div class="functionDoc" id="response.close">
+         <h4>response.close(  )</h4>
+         <div class="functionDescription"><p>
+Immediately closes the connection to the back-end node. Any response data that has already been read from the server will be forwarded to the client, but no more response data will be read. <br/> Your traffic manager will reconnect to a back-end node when it next needs to forward request data to it; the back-end node is specified by either calling pool.use() or pool.select() in a request rule, or by the default pool.
+</p><pre>if( $neednewnode ) {<br>&nbsp;&nbsp;&nbsp;response.close();<br>&nbsp;&nbsp;&nbsp;pool.use( "servers" );<br>}</pre><b>See also:</b> <a href="./connection.html#connection.close">connection.close</a>, <a href="./connection.html#connection.discard">connection.discard</a>, <a href="./pool.html#pool.use">pool.use</a>, <a href="./pool.html#pool.select">pool.select</a></div>
+      </div>
+
+      <div class="functionDoc" id="response.flush">
+         <h4>response.flush( count )</h4>
+         <div class="functionDescription"><p>
+Transfers the first count bytes of the response back to the client.  These bytes are removed from the underlying response buffer.  If count is not specified, all current response data is flushed. <br/> This function is useful in generic client- and server-first protocols, to synchronise responses with the next request.  This may be necessary if your traffic manager is likely to respond directly to some requests, and the back-end node responds to others.
+</p><pre># keep flushing response data until we get<br># an empty line...<br><br>$res = response.getLine();<br><br>while( $res != "\n" ) {<br>&nbsp;&nbsp;&nbsp;response.flush( string.len( $res ) );<br>&nbsp;&nbsp;&nbsp;$res = response.getLine();<br>}<br><br># the remainder of the response buffer will be<br># flushed when all response rules complete</pre><b>See also:</b> <a href="./response.html#response.get">response.get</a>, <a href="./response.html#response.getLine">response.getLine</a></div>
+      </div>
+
+      <div class="functionDoc" id="response.get">
+         <h4>response.get( [count] )</h4>
+         <div class="functionDescription"><p>
+Returns the first 'count' bytes of data provided by the server in the current response. If you do not supply a count parameter, then the entire response will be read in. <br/> Warning: you can stall a connection by asking it to read more data than the back-end server will provide. Combine this with response.getLength() or response.getLine() to reliably read data from a connection. For HTTP, you must use  the HTTP specific functions like http.getResponseBody() to read the response.
+</p><pre># Get the first 1K of data<br>$data = response.get( 1024 );</pre><b>See also:</b> <a href="./response.html#response.getLength">response.getLength</a>, <a href="./response.html#response.getLine">response.getLine</a>, <a href="./response.html#response.set">response.set</a>, <a href="./request.html#request.get">request.get</a></div>
+      </div>
+
+      <div class="functionDoc" id="response.getBandwidthClass">
+         <h4>response.getBandwidthClass(  )</h4>
+         <div class="functionDescription"><p>
+Returns the current bandwidth class for the connection to the client, or an empty string if no class is set.
+</p><pre>$class = response.getBandwidthClass();</pre><b>See also:</b> <a href="./response.html#response.setBandwidthClass">response.setBandwidthClass</a>, <a href="./request.html#request.setBandwidthClass">request.setBandwidthClass</a>, <a href="./request.html#request.getBandwidthClass">request.getBandwidthClass</a></div>
+      </div>
+
+      <div class="functionDoc" id="response.getLength">
+         <h4>response.getLength(  )</h4>
+         <div class="functionDescription"><p>
+Returns the amount of data already received from the server. This can be combined with response.get() to reliably read data from a connection without stalling if no data is available.
+</p><pre>$data = response.get( response.getLength() );</pre><b>See also:</b> <a href="./response.html#response.get">response.get</a>, <a href="./request.html#request.getLength">request.getLength</a></div>
+      </div>
+
+      <div class="functionDoc" id="response.getLine">
+         <h4>response.getLine( [regex], [offset] )</h4>
+         <div class="functionDescription"><p>
+Returns a line of response data provided by the server. The line is terminated by the supplied regular expression, or by '\n'. If 'offset' is provided, response.getLine() returns the data from that offset to the terminating expression. <br/> When response.getLine() returns, the variable $1 is updated to point to the start of the next line in the datastream. <br/> You can iterate through the lines of response data by using $1 as the iterator variable.
+</p><pre># Process the lines in the response until an empty<br>&nbsp;# line is found<br>&nbsp;$line = response.getLine( "\n" );<br>&nbsp;while( $line != "\n" ) {<br>&nbsp;&nbsp;&nbsp;&nbsp;# process $line...<br>&nbsp;&nbsp;&nbsp;&nbsp;$line = response.getLine( "\n", $1 );<br>&nbsp;}</pre><b>See also:</b> <a href="./response.html#response.get">response.get</a>, <a href="./request.html#request.getLine">request.getLine</a></div>
+      </div>
+
+      <div class="functionDoc" id="response.getLocalIP">
+         <h4>response.getLocalIP(  )</h4>
+         <div class="functionDescription"><p>
+Returns the local IP address of the connection to the node in use, i.e. an IP address on the local machine that your traffic manager connected from. It returns the empty string if no connection exists.
+</p><pre># Find the IP address we connected from, such as<br># "10.1.4.21" or "2001:200::8002:203:30:40:3085"<br>$ip = response.getLocalIP();</pre><b>See also:</b> <a href="./response.html#response.getLocalPort">response.getLocalPort</a>, <a href="./response.html#response.getRemoteIP">response.getRemoteIP</a>, <a href="./response.html#response.getRemotePort">response.getRemotePort</a>, <a href="./request.html#request.getLocalIP">request.getLocalIP</a>, <a href="./request.html#request.getLocalPort">request.getLocalPort</a>, <a href="./request.html#request.getRemoteIP">request.getRemoteIP</a>, <a href="./request.html#request.getRemotePort">request.getRemotePort</a></div>
+      </div>
+
+      <div class="functionDoc" id="response.getLocalPort">
+         <h4>response.getLocalPort(  )</h4>
+         <div class="functionDescription"><p>
+Returns the local port of the connection to the node in use, i.e. the port number on the local machine that the traffic manager connected from. It returns 0 if there is no current connection to a node.
+</p><pre>$port = response.getLocalPort();</pre><b>See also:</b> <a href="./response.html#response.getLocalIP">response.getLocalIP</a>, <a href="./response.html#response.getRemotePort">response.getRemotePort</a>, <a href="./response.html#response.getRemoteIP">response.getRemoteIP</a>, <a href="./request.html#request.getLocalPort">request.getLocalPort</a>, <a href="./request.html#request.getLocalIP">request.getLocalIP</a>, <a href="./request.html#request.getRemotePort">request.getRemotePort</a>, <a href="./request.html#request.getRemoteIP">request.getRemoteIP</a></div>
+      </div>
+
+      <div class="functionDoc" id="response.getRemoteIP">
+         <h4>response.getRemoteIP(  )</h4>
+         <div class="functionDescription"><p>
+Returns the remote IP address of the node used. If there is no current connection, it will return an empty string.
+</p><pre># Get the IP address of the node used, such as<br># "10.1.4.21" or "2001:200::8002:203:a:1:3085"<br>$ip = response.getRemoteIP();</pre><b>See also:</b> <a href="./response.html#response.getRemotePort">response.getRemotePort</a>, <a href="./response.html#response.getLocalIP">response.getLocalIP</a>, <a href="./response.html#response.getLocalPort">response.getLocalPort</a>, <a href="./request.html#request.getRemoteIP">request.getRemoteIP</a>, <a href="./request.html#request.getRemotePort">request.getRemotePort</a>, <a href="./request.html#request.getLocalIP">request.getLocalIP</a>, <a href="./request.html#request.getLocalPort">request.getLocalPort</a></div>
+      </div>
+
+      <div class="functionDoc" id="response.getRemotePort">
+         <h4>response.getRemotePort(  )</h4>
+         <div class="functionDescription"><p>
+Returns the network port number on which the traffic manager connected to a node. (e.g. port 80 is normal for a web server). If there is no current connection, it will return 0.
+</p><pre>$port = response.getRemotePort();</pre><b>See also:</b> <a href="./response.html#response.getRemoteIP">response.getRemoteIP</a>, <a href="./response.html#response.getLocalPort">response.getLocalPort</a>, <a href="./response.html#response.getLocalIP">response.getLocalIP</a>, <a href="./request.html#request.getRemotePort">request.getRemotePort</a>, <a href="./request.html#request.getRemoteIP">request.getRemoteIP</a>, <a href="./request.html#request.getLocalPort">request.getLocalPort</a>, <a href="./request.html#request.getLocalIP">request.getLocalIP</a></div>
+      </div>
+
+      <div class="functionDoc" id="response.getToS">
+         <h4>response.getToS(  )</h4>
+         <div class="functionDescription"><p>
+Returns the Type of Service (ToS) of traffic going to the client. The return value is either "LOWDELAY", "THROUGHPUT", "RELIABILITY" or "NONE".
+</p><pre>if( response.getToS() == "LOWDELAY" ) {<br>&nbsp;&nbsp;&nbsp;connection.sleep( 1000 );<br>}</pre><b>See also:</b> <a href="./request.html#request.getToS">request.getToS</a>, <a href="./response.html#response.setToS">response.setToS</a></div>
+      </div>
+
+      <div class="functionDoc" id="response.set">
+         <h4>response.set( response data )</h4>
+         <div class="functionDescription"><p>
+Sets the server response to the provided string. <br/> This is a low-level routine that should be used with care. For protocols with their own higher-level protocol managers (e.g. HTTP), you must use the higher level routines to alter the input data (e.g. http.setResponseHeader() and http.setResponseBody()).
+</p><pre>$data = response.get();<br>$data = string.regexsub( $data,<br>&nbsp;&nbsp;&nbsp;"From: ", "To: ", "g" );<br>response.set( $data );</pre><b>See also:</b> <a href="./request.html#request.sendResponse">request.sendResponse</a>, <a href="./response.html#response.append">response.append</a>, <a href="./response.html#response.get">response.get</a>, <a href="./request.html#request.set">request.set</a></div>
+      </div>
+
+      <div class="functionDoc" id="response.setBandwidthClass">
+         <h4>response.setBandwidthClass( name )</h4>
+         <div class="functionDescription"><p>
+Sets the bandwidth class for the current connection to the client. Providing an empty class name removes the bandwidth class from the connection. It returns zero if an error occurs (for example, if the bandwidth class does not exist), and 1 otherwise.
+</p><pre>response.setBandwidthClass( "gold customers" );</pre><b>See also:</b> <a href="./response.html#response.getBandwidthClass">response.getBandwidthClass</a>, <a href="./request.html#request.getBandwidthClass">request.getBandwidthClass</a>, <a href="./request.html#request.setBandwidthClass">request.setBandwidthClass</a></div>
+      </div>
+
+      <div class="functionDoc" id="response.setToS">
+         <h4>response.setToS( Type of Service )</h4>
+         <div class="functionDescription"><p>
+Sets the Type of Service (ToS) flags of traffic going to the client. Valid options are "LOWDELAY", "THROUGHPUT", "RELIABILITY" or "NONE".  ToS flags may be used by network equipment to change how they route network traffic.
+</p><pre>response.setToS("LOWDELAY");</pre><b>See also:</b> <a href="./request.html#request.setToS">request.setToS</a>, <a href="./response.html#response.getToS">response.getToS</a></div>
+      </div>
+
+   </body>
+</html>

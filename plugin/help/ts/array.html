@@ -1,0 +1,176 @@
+<html>
+   <header>
+      <title>array</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>array</h2>
+
+      <div class="groupDescription"></div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#array.append">array.append</a>
+         </li>
+         <li>
+            <a href="#array.contains">array.contains</a>
+         </li>
+         <li>
+            <a href="#array.copy">array.copy</a>
+         </li>
+         <li>
+            <a href="#array.create">array.create</a>
+         </li>
+         <li>
+            <a href="#array.filter">array.filter</a>
+         </li>
+         <li>
+            <a href="#array.join">array.join</a>
+         </li>
+         <li>
+            <a href="#array.length">array.length</a>
+         </li>
+         <li>
+            <a href="#array.pop">array.pop</a>
+         </li>
+         <li>
+            <a href="#array.push">array.push</a>
+         </li>
+         <li>
+            <a href="#array.resize">array.resize</a>
+         </li>
+         <li>
+            <a href="#array.reverse">array.reverse</a>
+         </li>
+         <li>
+            <a href="#array.shift">array.shift</a>
+         </li>
+         <li>
+            <a href="#array.sort">array.sort</a>
+         </li>
+         <li>
+            <a href="#array.sortNumerical">array.sortNumerical</a>
+         </li>
+         <li>
+            <a href="#array.splice">array.splice</a>
+         </li>
+         <li>
+            <a href="#array.unshift">array.unshift</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="array.append">
+         <h4>array.append( array1, array2 )</h4>
+         <div class="functionDescription"><p>
+Appends each element of array2 to the end of array1. Note that this behaviour is different to that of array.push(), which would add one new element to the end of array1 containing array2.  The return value of this function can be used as the argument to another function to perform multiple operations on the same array.
+</p><pre># Append 4, 5 and 6 to the array<br>$numbers = [ 1, 2, 3 ];<br>array.append( $numbers, [ 4, 5, 6 ] );<br><br># $numbers is now [ 1, 2, 3, 4, 5, 6 ]</pre><b>See also:</b> <a href="./array.html#array.push">array.push</a></div>
+      </div>
+
+      <div class="functionDoc" id="array.contains">
+         <h4>array.contains( array, value )</h4>
+         <div class="functionDescription"><p>
+Returns whether or not the supplied array contains the specified value as an element. Note that it will not match elements inside sub-arrays.
+</p><pre>$array = [ "one", "two", [ "three", "four" ] ];<br><br># true<br>array.contains( $array, "one" );<br><br># false<br>array.contains( $array, "three" );</pre><b>See also:</b> <a href="./array.html#array.filter">array.filter</a></div>
+      </div>
+
+      <div class="functionDoc" id="array.copy">
+         <h4>array.copy( array )</h4>
+         <div class="functionDescription"><p>
+Returns a copy of the supplied array.  This is semantically equivalent to `$arraycopy = $array`, however it will warn if the variable passed to it is not an array.
+</p><pre># Loop around a sorted version of an array without<br># permanently sorting it<br>$arr = [ "London", "Berlin", "Lisbon", "Paris" ];<br>foreach( $val in array.sort( array.copy( $arr ) )) {<br>&nbsp;&nbsp;&nbsp;log.info( $val );<br>}<br><br># $arr will be unsorted here</pre><b>See also:</b> <a href="./array.html#array.create">array.create</a></div>
+      </div>
+
+      <div class="functionDoc" id="array.create">
+         <h4>array.create( size, [default] )</h4>
+         <div class="functionDescription"><p>
+Creates a new array of the specified size and optionally fills the array with the default data.
+</p><pre># Create an array of length 20 with all the elements<br># set to zero.<br>$zeroarray = array.create( 20, 0 );</pre><b>See also:</b> <a href="./array.html#array.resize">array.resize</a>, <a href="./array.html#array.copy">array.copy</a></div>
+      </div>
+
+      <div class="functionDoc" id="array.filter">
+         <h4>array.filter( array, pattern, [flags] )</h4>
+         <div class="functionDescription"><p>
+Removes elements from the supplied array that do not match the pattern.  The optional 'flags' parameter contains a string of single-letter options. The following options are supported: <ul>   <li>'i', meaning 'case insensitive' - letters in the pattern       match both upper and lower case letters.</li>   <li>'!', meaning negate - elements of the array that       match the regular expression are removed.</li> </ul> <br/>  The return value of this function can be used as the argument to another function to perform multiple operations on the same array.
+</p><pre># Get the extension headers for this request<br>$headers = http.listHeaderNames();<br>$extensions = array.filter( $headers, "^X-", "i" );</pre></div>
+      </div>
+
+      <div class="functionDoc" id="array.join">
+         <h4>array.join( array, [separator] )</h4>
+         <div class="functionDescription"><p>
+Concatenates all the elements of the supplied array into a string separated by the separator. The elements will be separated by a space if no separator is supplied.  Note that a warning will be printed should the supplied array itself contain any arrays or hashes.
+</p><pre># Print a comma-separated list of names<br>$names = [ "alice", "bob", "mallory" ];<br>log.info( array.join( $names, ", " ) );</pre><b>See also:</b> <a href="./string.html#string.split">string.split</a></div>
+      </div>
+
+      <div class="functionDoc" id="array.length">
+         <h4>array.length( array )</h4>
+         <div class="functionDescription"><p>
+Returns the length of the supplied array
+</p><pre># See how many HTTP headers there are<br>$headers = http.listHeaderNames();<br>log.info( "There are "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;. array.length( $headers )<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;. " headers in this request" );</pre></div>
+      </div>
+
+      <div class="functionDoc" id="array.pop">
+         <h4>array.pop( array )</h4>
+         <div class="functionDescription"><p>
+Removes the last element of the supplied array and returns it as the result of the function.
+</p><pre>$stack = [];<br>array.push( $stack, 3 );<br>array.push( $stack, 2 );<br>array.push( $stack, 1 );<br># $stack is now [ 3, 2, 1 ];<br><br># Prints 1 2 3<br>while( array.length( $stack ) > 0 ) {<br>&nbsp;&nbsp;&nbsp;log.info( array.pop( $stack ) );<br>}</pre><b>See also:</b> <a href="./array.html#array.unshift">array.unshift</a>, <a href="./array.html#array.push">array.push</a>, <a href="./array.html#array.shift">array.shift</a></div>
+      </div>
+
+      <div class="functionDoc" id="array.push">
+         <h4>array.push( array, value )</h4>
+         <div class="functionDescription"><p>
+Adds the supplied value to the end of the supplied array.  The return value of this function can be used as the argument to another function to perform multiple operations on the same array.
+</p><pre># Append 4 to the array<br>$numbers = [ 1, 2, 3 ];<br>array.push( $numbers, 4 );</pre><b>See also:</b> <a href="./array.html#array.shift">array.shift</a>, <a href="./array.html#array.unshift">array.unshift</a>, <a href="./array.html#array.pop">array.pop</a></div>
+      </div>
+
+      <div class="functionDoc" id="array.resize">
+         <h4>array.resize( array, size, [default] )</h4>
+         <div class="functionDescription"><p>
+Resizes the supplied array to the specified size.  If the size of the array is being increased and the default parameter is specified then the new elements added to the array will be set to the default parameter.  If the new size is smaller than the original size then the appropriate number of elements will be removed from the end of the array.  The return value of this function can be used as the argument to another function to perform multiple operations on the same array.
+</p><pre># We're only interested in the first<br># 10 lines of body data - but fill in the<br># rest with blank lines if there are fewer<br># than 10 lines.<br>$body = array.resize( http.getBodyLines(), 10, "" );</pre><b>See also:</b> <a href="./array.html#array.create">array.create</a></div>
+      </div>
+
+      <div class="functionDoc" id="array.reverse">
+         <h4>array.reverse( array )</h4>
+         <div class="functionDescription"><p>
+Reverses the elements of the supplied array.  The return value of this function can be used as the argument to another function to perform multiple operations on the same array.
+</p><pre>$array = [ 1, 2, 3, [ 4, 5 ] ];<br><br># array will be [ [ 4, 5 ], 3, 2, 1 ]<br>array.reverse( $array );</pre><b>See also:</b> <a href="./array.html#array.sort">array.sort</a></div>
+      </div>
+
+      <div class="functionDoc" id="array.shift">
+         <h4>array.shift( array )</h4>
+         <div class="functionDescription"><p>
+Removes the first element of the supplied array and returns it as the result of the function.
+</p><pre>$array = [ 1, 2, 3, 4 ];<br># Empty an array from the front while printing<br># its contents<br>while( array.length( $array ) > 0 ) {<br>&nbsp;&nbsp;&nbsp;log.info( array.shift( $array ) );<br>}</pre><b>See also:</b> <a href="./array.html#array.unshift">array.unshift</a>, <a href="./array.html#array.push">array.push</a>, <a href="./array.html#array.pop">array.pop</a></div>
+      </div>
+
+      <div class="functionDoc" id="array.sort">
+         <h4>array.sort( array, [reverse] )</h4>
+         <div class="functionDescription"><p>
+Sorts the supplied array alphanumerically. If the reverse parameter is supplied then the array will be sorted in reverse.  The return value of this function can be used as the argument to another function to perform multiple operations on the same array.
+</p><pre># Sort the keys of a hash before iterating over them<br>foreach( $key in array.sort( hash.keys( $hash ) ) ) {<br>&nbsp;&nbsp;&nbsp;log.info( $key . " maps to " . $hash[$keys] );<br>}<br><br># Sort these numbers alphanumerically<br>$sorted = array.sort( [ 1, 2, 3, 4, 10, 11 ] );<br><br># The result will be [ 1, 10, 11, 2, 3, 4 ]</pre><b>See also:</b> <a href="./array.html#array.sortNumerical">array.sortNumerical</a></div>
+      </div>
+
+      <div class="functionDoc" id="array.sortNumerical">
+         <h4>array.sortNumerical( array, [reverse] )</h4>
+         <div class="functionDescription"><p>
+Sort the supplied array numerically in ascending order. If the reverse parameter is supplied then the array will be sorted in descending order.  The return value of this function can be used as the argument to another function to perform multiple operations on the same array.
+</p><pre># Sort an array of numbers<br>$numbers = [ 2, 10, "3", "4", 24, "11" ];<br>array.sortNumerical( $numbers );<br><br># $numbers is now [ 2, "3", "4", 10, "11", 24 ]</pre><b>See also:</b> <a href="./array.html#array.sort">array.sort</a></div>
+      </div>
+
+      <div class="functionDoc" id="array.splice">
+         <h4>array.splice( array, offset, length, [values] )</h4>
+         <div class="functionDescription"><p>
+Replace elements in the supplied array.  Any elements between offset and length will be removed from the array and any extra values specified after the length parameter will be inserted into the array at that location.  The return value of this function can be used as the argument to another function to perform multiple operations on the same array.
+</p><pre>$numbers = [ 0, 1, 2, 3, 4, 5 ];<br><br># Starting from element 2, remove one element<br># and insert "a" and "b" into the array<br>array.splice( $numbers, 2, 1, "a", "b" );<br><br># $numbers is now [ 0, 1, "a", "b", 3, 4, 5 ]<br><br># Starting at element 0, remove 3 elements<br>array.splice( $numbers, 0, 3 );<br><br># $numbers is now [ "b", 3, 4, 5 ]</pre><b>See also:</b> <a href="./array.html#array.filter">array.filter</a></div>
+      </div>
+
+      <div class="functionDoc" id="array.unshift">
+         <h4>array.unshift( array, value )</h4>
+         <div class="functionDescription"><p>
+Adds the supplied value to the front of the supplied array.  The return value of this function can be used as the argument to another function to perform multiple operations on the same array.
+</p><pre># Prepend 1 to the array<br>$numbers = [ 2, 3, 4 ];<br>array.unshift( $numbers, 1 );</pre><b>See also:</b> <a href="./array.html#array.shift">array.shift</a>, <a href="./array.html#array.push">array.push</a>, <a href="./array.html#array.pop">array.pop</a></div>
+      </div>
+
+   </body>
+</html>

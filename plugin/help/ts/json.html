@@ -1,0 +1,36 @@
+<html>
+   <header>
+      <title>json</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>json</h2>
+
+      <div class="groupDescription"></div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#json.deserialize">json.deserialize</a>
+         </li>
+         <li>
+            <a href="#json.serialize">json.serialize</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="json.deserialize">
+         <h4>json.deserialize( json_string )</h4>
+         <div class="functionDescription"><p>
+Converts the supplied string in JavaScript Object Notation (JSON) into a TrafficScript array or hash variable.  If the supplied string is not in the correct format then a warning will be printed and the result will be empty.
+</p><pre># Deserialising a JSON array<br>$json_array = '[ "element 1", "element 2" ]';<br>$array = json.deserialize( $json_array );<br><br># Deserialising a JSON hash<br>$json_object = '{ "key 1":"value 1", \<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"key 2":[ "array element" ] }';<br>$hash = json.deserialize( $json_object );</pre><b>See also:</b> <a href="./json.html#json.serialize">json.serialize</a></div>
+      </div>
+
+      <div class="functionDoc" id="json.serialize">
+         <h4>json.serialize( object )</h4>
+         <div class="functionDescription"><p>
+Converts the supplied array or hash variable into JavaScript Object Notation (JSON). This format is commonly used to exchange data between online applications.
+</p><pre># Serialising an array<br>$array = [ "element 1", "element 2" ];<br>$json_array = json.serialize( $array );<br><br># Serialising a hash<br>$hash = [ "key 1" => "value 1",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"key 2" => [ "array element" ] ];<br>$json_object = json.serialize( $hash );</pre><b>See also:</b> <a href="./json.html#json.deserialize">json.deserialize</a></div>
+      </div>
+
+   </body>
+</html>

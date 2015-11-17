@@ -1,0 +1,36 @@
+<html>
+   <header>
+      <title>connection.data</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>connection.data</h2>
+
+      <div class="groupDescription">Functions that allow you to store and retrieve data stored for the lifetime of the current connection.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#connection.data.get">connection.data.get</a>
+         </li>
+         <li>
+            <a href="#connection.data.set">connection.data.set</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="connection.data.get">
+         <h4>connection.data.get( key )</h4>
+         <div class="functionDescription"><p>
+Returns the value that was previously stored with the given key using connection.data.set() in the current connection, or returns the empty string if no data was stored.
+</p><pre># Track the state of this connection so that we<br># can process the response correctly<br>$req = request.get( 5 );<br>if( string.startsWith( $req, "LOGIN" ) ) {<br>&nbsp;&nbsp;&nbsp;connection.data.set( "state", "login" );<br>} else {<br>&nbsp;&nbsp;&nbsp;connection.data.set( "state", "" );<br>}<br><br># ...<br># in the response, ...<br>$state = connection.data.get( "state" );</pre><b>See also:</b> <a href="./connection.data.html#connection.data.set">connection.data.set</a>, <a href="./data.html#data.get">data.get</a></div>
+      </div>
+
+      <div class="functionDoc" id="connection.data.set">
+         <h4>connection.data.set( key, value )</h4>
+         <div class="functionDescription"><p>
+Stores a value for this connection, associating it with the provided key. The value can be retrieved later when processing the same connection, using connection.data.get().  Once the connection finishes, the value cannot be retrieved.
+</p><pre># Track the state of this connection so that we<br># can process the response correctly<br>$req = request.get( 5 );<br>if( string.startsWith( $req, "LOGIN" ) ) {<br>&nbsp;&nbsp;&nbsp;connection.data.set( "state", "login" );<br>} else {<br>&nbsp;&nbsp;&nbsp;connection.data.set( "state", "" );<br>}<br><br># ...<br># in the response, ...<br>$state = connection.data.get( "state" );</pre><b>See also:</b> <a href="./connection.data.html#connection.data.get">connection.data.get</a>, <a href="./data.html#data.set">data.set</a></div>
+      </div>
+
+   </body>
+</html>

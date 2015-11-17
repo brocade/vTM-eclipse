@@ -1,0 +1,36 @@
+<html>
+   <header>
+      <title>xml.validate</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>xml.validate</h2>
+
+      <div class="groupDescription">Functions for validating the eXtensible Markup Language.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#xml.validate.dtd">xml.validate.dtd</a>
+         </li>
+         <li>
+            <a href="#xml.validate.xsd">xml.validate.xsd</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="xml.validate.dtd">
+         <h4>xml.validate.dtd( document, DTD )</h4>
+         <div class="functionDescription"><p>
+Validates an XML document against a DTD. It returns 1 if the document validated correctly, and 0 if it did not. It returns -1 if there was an error parsing the XML document or the DTD. <br/> The XML processing functionality must be enabled by the software license.
+</p><pre># Validate the HTTP body against the DTD stored in<br># the resource 'mydtd'<br>$theDoc = http.getBody( 0 );<br>$theDTD = resource.get( "mydtd" );<br>if( xml.validate.dtd( $theDoc, $theDTD ) != 1 ) {<br>&nbsp;&nbsp;&nbsp;# validation failed ...<br>}</pre><b>See also:</b> <a href="./xml.validate.html#xml.validate.xsd">xml.validate.xsd</a></div>
+      </div>
+
+      <div class="functionDoc" id="xml.validate.xsd">
+         <h4>xml.validate.xsd( document, schema )</h4>
+         <div class="functionDescription"><p>
+Validates an XML document against an XML schema. It returns 1 if the document validated correctly, and 0 if it did not. It returns -1 if there was an error parsing the XML document or the schema. <br/> If the schema against which the document is being validated needs to import another schema file, it will search for it inside Catalog > Extra Files > Miscellaneous Files. <br/> The XML processing functionality must be enabled by the software license.
+</p><pre># Validate the HTTP body against the schema stored in<br># the resource 'myschema'<br>$theDoc = http.getBody( 0 );<br>$theSchema = resource.get( "myschema" );<br>if( xml.validate.xsd( $theDoc, $theSchema ) != 1 ) {<br>&nbsp;&nbsp;&nbsp;# validation failed ...<br>}</pre><b>See also:</b> <a href="./xml.validate.html#xml.validate.dtd">xml.validate.dtd</a></div>
+      </div>
+
+   </body>
+</html>

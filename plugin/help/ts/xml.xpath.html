@@ -1,0 +1,36 @@
+<html>
+   <header>
+      <title>xml.xpath</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>xml.xpath</h2>
+
+      <div class="groupDescription">Functions for preforming XPath queries on XML data.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#xml.xpath.matchNodeCount">xml.xpath.matchNodeCount</a>
+         </li>
+         <li>
+            <a href="#xml.xpath.matchNodeSet">xml.xpath.matchNodeSet</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="xml.xpath.matchNodeCount">
+         <h4>xml.xpath.matchNodeCount( doc, nspacemap, query )</h4>
+         <div class="functionDescription"><p>
+Applies an XPath query to the supplied XML document. It returns the number of entries in the result node set. <br/> The function will return -1 if there was an error parsing the XML document, XML namespace or XPath query. <br/> Namespaces can be used in the XPath query by defining them in the <b>nspacemap</b> parameter. This parameter is specified as a space-separated list of identifiers mapped to namespaces. For example, specifying 'xmlns:myns=http://www.example.com/mynamespace' allows you to use the identifier 'myns' in the XPath query to find elements in the 'http://www.example.com/mynamespace' namespace within the XML document. <br/> The XML processing functionality must be enabled by the software license.
+</p><pre># A sample XML document<br>$theDoc =<br>'<?xml version="1.0" encoding="UTF-8"?><br>&nbsp;<mybook xmlns="http://www.example.com/book"<br>&nbsp;&nbsp;&nbsp;xmlns:recent="http://www.example.com/newitems"><br><br>&nbsp;&nbsp;&nbsp;&nbsp;<item>Item 1</item><br>&nbsp;&nbsp;&nbsp;&nbsp;<recent:item>Item 2</recent:item><br>&nbsp;&nbsp;&nbsp;&nbsp;<item>Item 3</item><br>&nbsp;&nbsp;&nbsp;&nbsp;<recent:item>Item 4</recent:item><br>&nbsp;</mybook><br>';<br><br># How many items are in the 'newitems' namespace<br># under the 'mybook' element of the 'book' namespace?<br># Note: namespace identifiers in the XPath query<br># do not have to be the same as those used in the XML<br># document itself.<br>$items = xml.xpath.matchNodeCount(<br>&nbsp;&nbsp;&nbsp;$theDoc,<br>&nbsp;&nbsp;&nbsp;"xmlns:book=http://www.example.com/book ".<br>&nbsp;&nbsp;&nbsp;"xmlns:new=http://www.example.com/newitems",<br>&nbsp;&nbsp;&nbsp;"//book:mybook/new:item"<br>);<br><br># $items = 2</pre><b>See also:</b> <a href="./xml.xpath.html#xml.xpath.matchNodeSet">xml.xpath.matchNodeSet</a></div>
+      </div>
+
+      <div class="functionDoc" id="xml.xpath.matchNodeSet">
+         <h4>xml.xpath.matchNodeSet( doc, nspacemap, query )</h4>
+         <div class="functionDescription"><p>
+Applies an XPath query to the supplied XML document. It returns a string representation of the result node set. <br/> The function will return an empty string if there was an error parsing the XML document, XML namespace or XPath query. <br/> Namespaces can be used in the XPath query by defining them in the <b>nspacemap</b> parameter. This parameter is specified as a space-separated list of identifiers mapped to namespaces. For example, specifying 'xmlns:myns=http://www.example.com/mynamespace' allows you to use the identifier 'myns' in the XPath query to find elements in the 'http://www.example.com/mynamespace' namespace within the XML document. <br/> The XML processing functionality must be enabled by the software license.
+</p><pre># A sample XML document<br>$theDoc =<br>'<?xml version="1.0" encoding="UTF-8"?><br>&nbsp;<mybook xmlns="http://www.example.com/book"<br>&nbsp;&nbsp;&nbsp;xmlns:recent="http://www.example.com/newitems"><br><br>&nbsp;&nbsp;&nbsp;&nbsp;<item>Item 1</item><br>&nbsp;&nbsp;&nbsp;&nbsp;<recent:item>Item 2</recent:item><br>&nbsp;</mybook><br>';<br><br># Get the value of the 'item' node in the 'newitems'<br># namespace under the 'mybook' element of the 'book'<br># namespace.<br># Note: namespace identifiers in the XPath query<br># do not have to be the same as those used in the XML<br># document itself.<br>$set = xml.xpath.matchNodeSet(<br>&nbsp;&nbsp;&nbsp;$theDoc,<br>&nbsp;&nbsp;&nbsp;"xmlns:book=http://www.example.com/book ".<br>&nbsp;&nbsp;&nbsp;"xmlns:new=http://www.example.com/newitems",<br>&nbsp;&nbsp;&nbsp;"//book:mybook/new:item/text()"<br>);<br><br># $set = 'Item 2'</pre><b>See also:</b> <a href="./xml.xpath.html#xml.xpath.matchNodeCount">xml.xpath.matchNodeCount</a></div>
+      </div>
+
+   </body>
+</html>

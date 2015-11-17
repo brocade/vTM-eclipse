@@ -1,0 +1,316 @@
+<html>
+   <header>
+      <title>request</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>request</h2>
+
+      <div class="groupDescription">Functions that allow you to access information about and modify the current request.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#request.avoidNode">request.avoidNode</a>
+         </li>
+         <li>
+            <a href="#request.endsAt">request.endsAt</a>
+         </li>
+         <li>
+            <a href="#request.endsWith">request.endsWith</a>
+         </li>
+         <li>
+            <a href="#request.get">request.get</a>
+         </li>
+         <li>
+            <a href="#request.getBandwidthClass">request.getBandwidthClass</a>
+         </li>
+         <li>
+            <a href="#request.getDestIP">request.getDestIP</a>
+         </li>
+         <li>
+            <a href="#request.getDestPort">request.getDestPort</a>
+         </li>
+         <li>
+            <a href="#request.getLength">request.getLength</a>
+         </li>
+         <li>
+            <a href="#request.getLine">request.getLine</a>
+         </li>
+         <li>
+            <a href="#request.getLocalIP">request.getLocalIP</a>
+         </li>
+         <li>
+            <a href="#request.getLocalPort">request.getLocalPort</a>
+         </li>
+         <li>
+            <a href="#request.getLogEnabled">request.getLogEnabled</a>
+         </li>
+         <li>
+            <a href="#request.getRemoteIP">request.getRemoteIP</a>
+         </li>
+         <li>
+            <a href="#request.getRemotePort">request.getRemotePort</a>
+         </li>
+         <li>
+            <a href="#request.getRetries">request.getRetries</a>
+         </li>
+         <li>
+            <a href="#request.getToS">request.getToS</a>
+         </li>
+         <li>
+            <a href="#request.isResendable">request.isResendable</a>
+         </li>
+         <li>
+            <a href="#request.retry">request.retry</a>
+         </li>
+         <li>
+            <a href="#request.sendResponse">request.sendResponse</a>
+         </li>
+         <li>
+            <a href="#request.set">request.set</a>
+         </li>
+         <li>
+            <a href="#request.setBandwidthClass">request.setBandwidthClass</a>
+         </li>
+         <li>
+            <a href="#request.setIdempotent">request.setIdempotent</a>
+         </li>
+         <li>
+            <a href="#request.setLogEnabled">request.setLogEnabled</a>
+         </li>
+         <li>
+            <a href="#request.setMaxConnectionAttempts">request.setMaxConnectionAttempts</a>
+         </li>
+         <li>
+            <a href="#request.setMaxReplyTime">request.setMaxReplyTime</a>
+         </li>
+         <li>
+            <a href="#request.setMaxTimedOutConnectionAttempts">request.setMaxTimedOutConnectionAttempts</a>
+         </li>
+         <li>
+            <a href="#request.setRemoteIP">request.setRemoteIP</a>
+         </li>
+         <li>
+            <a href="#request.setToS">request.setToS</a>
+         </li>
+         <li>
+            <a href="#request.setVirtualServerTimeout">request.setVirtualServerTimeout</a>
+         </li>
+         <li>
+            <a href="#request.skip">request.skip</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="request.avoidNode">
+         <h4>request.avoidNode( node )</h4>
+         <div class="functionDescription"><p>
+Indicates that the named node should be avoided if at all possible. <br/> When picking a node to use for a request, the traffic manager will not use any nodes that have been named by request.avoidNode() unless session persistence mandates it, or unless there are no other nodes available.
+</p><pre># if we get a 503 Too Busy response, retry<br>if( http.getResponseCode() == 503 ) {<br>&nbsp;&nbsp;&nbsp;if( request.getRetries() < 3 ) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request.avoidNode( connection.getNode() );<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request.retry();<br>&nbsp;&nbsp;&nbsp;}<br>}</pre><b>See also:</b> <a href="./request.html#request.retry">request.retry</a>, <a href="./request.html#request.getRetries">request.getRetries</a>, <a href="./connection.html#connection.getNode">connection.getNode</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.endsAt">
+         <h4>request.endsAt( offset )</h4>
+         <div class="functionDescription"><p>
+Marks the end of the current request.  Any more data read in from the network is not handled until the next request has started to be handled. <br/> This function is useful to synchronise requests and responses.  An example of its use would be for a line-oriented protocol such as POP3, where you wish to process each command. <br/> It returns the entire request. <br/> This function allows you to program layer-7 intelligence to correctly parse and manage generic TCP protocols.
+</p><pre># get one line from input<br>$req = request.getLine();<br><br># this is the end of the current request<br>request.endsAt( string.len( $req ) );<br><br># Note: request.endsAt will return the request,<br># but we've already got this in $req</pre><b>See also:</b> <a href="./request.html#request.endsWith">request.endsWith</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.endsWith">
+         <h4>request.endsWith( regex )</h4>
+         <div class="functionDescription"><p>
+Marks the end of the current request.  Any more data read in from the network is not handled until the next request has started to be handled. <br/> This function is useful to synchronise requests and responses.  An example of its use would be for a line-oriented protocol such as POP3, where you wish to process each command. <br/> It returns the entire request. <br/> This function allows you to program layer-7 intelligence to correctly parse and manage generic TCP protocols.
+</p><pre># this is the end of the current request<br>$req = request.endsWith( "\n" );</pre><b>See also:</b> <a href="./request.html#request.endsAt">request.endsAt</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.get">
+         <h4>request.get( [count] )</h4>
+         <div class="functionDescription"><p>
+Returns the first 'count' bytes of data provided by the client in the current request. If no count parameter is provided, all data read so far is returned, which may be none unless request.get() has previously been called with a positive count. If you cannot determine how much data to read, use request.getLine or request.endsWith instead. <br/> Warning: you can stall a connection by asking it to read more data than the remote client will provide. Combine this with request.getLength() or request.getLine() to reliably read data from a connection. For HTTP, you are required to use the HTTP specific functions like http.getBody() to read the request.
+</p><pre># Get a length<br>$buf = request.get( 4 );<br>$l = string.bytesToInt( $buf );<br># Now we know how much more data to ask for<br>$data = request.get( 4 + $l );</pre><b>See also:</b> <a href="./request.html#request.getLength">request.getLength</a>, <a href="./request.html#request.getLine">request.getLine</a>, <a href="./request.html#request.endsWith">request.endsWith</a>, <a href="./request.html#request.set">request.set</a>, <a href="./response.html#response.get">response.get</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.getBandwidthClass">
+         <h4>request.getBandwidthClass(  )</h4>
+         <div class="functionDescription"><p>
+Returns the current bandwidth class for the connection to the backend node, or an empty string if no class is set.
+</p><pre>$class = request.getBandwidthClass();</pre><b>See also:</b> <a href="./request.html#request.setBandwidthClass">request.setBandwidthClass</a>, <a href="./response.html#response.setBandwidthClass">response.setBandwidthClass</a>, <a href="./response.html#response.getBandwidthClass">response.getBandwidthClass</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.getDestIP">
+         <h4>request.getDestIP(  )</h4>
+         <div class="functionDescription"><p>
+Returns the original IP address that the client attempted to connect to. This will be the same as request.getLocalIP() unless the connection was redirected via firewall rules (e.g. using iptables on Linux)
+</p><pre># Get the local IP address, such as "10.1.4.21" or<br># "2001:200::8002:203:47ff:fea5:3085"<br>$ip = request.getDestIP();</pre><b>See also:</b> <a href="./request.html#request.getDestPort">request.getDestPort</a>, <a href="./request.html#request.getRemoteIP">request.getRemoteIP</a>, <a href="./request.html#request.getRemotePort">request.getRemotePort</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.getDestPort">
+         <h4>request.getDestPort(  )</h4>
+         <div class="functionDescription"><p>
+Returns the original network port number that the client attempted to connect to. This will be the same as request.getLocalPort() unless the connection was redirected via firewall rules (e.g. using iptables on Linux)
+</p><pre># Get the port number on the traffic manager,<br># such as 80<br>$port = request.getDestPort();</pre><b>See also:</b> <a href="./request.html#request.getDestIP">request.getDestIP</a>, <a href="./request.html#request.getRemotePort">request.getRemotePort</a>, <a href="./request.html#request.getRemoteIP">request.getRemoteIP</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.getLength">
+         <h4>request.getLength(  )</h4>
+         <div class="functionDescription"><p>
+Returns the number of bytes of data already received from the client. This can be combined with request.get() to reliably read data from a connection without stalling if no data is available.
+</p><pre>$data = request.get( request.getLength() );</pre><b>See also:</b> <a href="./request.html#request.get">request.get</a>, <a href="./response.html#response.getLength">response.getLength</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.getLine">
+         <h4>request.getLine( [regex], [offset] )</h4>
+         <div class="functionDescription"><p>
+Returns a line of request data provided by the client. The line is terminated by the supplied regular expression, or by '\n'. If 'offset' is provided, request.getLine() returns the data from that offset to the terminating expression.  The terminating expression is included in the returned string. <br/> When request.getline() returns, the variable $1 is updated to point to the start of the next line in the datastream. <br/> You can iterate through the lines of request data by using $1 as the iterator variable. <br/> To prevent excessive data usage, if the line ending is not found within trafficscript!memory_warning bytes (configurable on the Global Settings page), then that many bytes will be returned.
+</p><pre># Process the lines in the request until an empty<br># line is found<br>$line = request.getLine( "\n" );<br>while( $line != "\n" ) {<br>&nbsp;&nbsp;&nbsp;# process $line...<br>&nbsp;&nbsp;&nbsp;$line = request.getLine( "\n", $1 );<br>}</pre><b>See also:</b> <a href="./request.html#request.get">request.get</a>, <a href="./response.html#response.getLine">response.getLine</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.getLocalIP">
+         <h4>request.getLocalIP(  )</h4>
+         <div class="functionDescription"><p>
+Returns the IP address that the client connected to, i.e. the address local to this machine.
+</p><pre># Get the local IP address, such as "10.1.4.21" or<br># "2001:200::8002:203:47ff:fea5:3085"<br>$ip = request.getLocalIP();</pre><b>See also:</b> <a href="./request.html#request.getLocalPort">request.getLocalPort</a>, <a href="./request.html#request.getDestIP">request.getDestIP</a>, <a href="./request.html#request.getRemoteIP">request.getRemoteIP</a>, <a href="./request.html#request.getRemotePort">request.getRemotePort</a>, <a href="./response.html#response.getLocalIP">response.getLocalIP</a>, <a href="./response.html#response.getLocalPort">response.getLocalPort</a>, <a href="./response.html#response.getRemoteIP">response.getRemoteIP</a>, <a href="./response.html#response.getRemotePort">response.getRemotePort</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.getLocalPort">
+         <h4>request.getLocalPort(  )</h4>
+         <div class="functionDescription"><p>
+Returns the network port number that the client connected to. (e.g. port 80 is normal for a web server)
+</p><pre># Get the local port, such as 80<br>$port = request.getLocalPort();</pre><b>See also:</b> <a href="./request.html#request.getLocalIP">request.getLocalIP</a>, <a href="./request.html#request.getRemotePort">request.getRemotePort</a>, <a href="./request.html#request.getDestPort">request.getDestPort</a>, <a href="./request.html#request.getRemoteIP">request.getRemoteIP</a>, <a href="./response.html#response.getLocalPort">response.getLocalPort</a>, <a href="./response.html#response.getLocalIP">response.getLocalIP</a>, <a href="./response.html#response.getRemotePort">response.getRemotePort</a>, <a href="./response.html#response.getRemoteIP">response.getRemoteIP</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.getLogEnabled">
+         <h4>request.getLogEnabled(  )</h4>
+         <div class="functionDescription"><p>
+Returns 1 if logging is enabled for this request, and 0 otherwise.
+</p><pre>if( request.getLogEnabled() ) {<br>&nbsp;&nbsp;&nbsp;http.addResponseHeader( "X-Logged", "Yes" );<br>}</pre><b>See also:</b> <a href="./request.html#request.setLogEnabled">request.setLogEnabled</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.getRemoteIP">
+         <h4>request.getRemoteIP(  )</h4>
+         <div class="functionDescription"><p>
+Returns the remote IP address of the client.
+</p><pre># Get the remote IP address, such as "10.1.4.21"<br># or "2001:200::8002:203:47ff:fea5:3085"<br>$ip = request.getRemoteIP();</pre><b>See also:</b> <a href="./request.html#request.getRemotePort">request.getRemotePort</a>, <a href="./request.html#request.getLocalIP">request.getLocalIP</a>, <a href="./request.html#request.setRemoteIP">request.setRemoteIP</a>, <a href="./request.html#request.getLocalPort">request.getLocalPort</a>, <a href="./response.html#response.getRemoteIP">response.getRemoteIP</a>, <a href="./response.html#response.getRemotePort">response.getRemotePort</a>, <a href="./response.html#response.getLocalIP">response.getLocalIP</a>, <a href="./response.html#response.getLocalPort">response.getLocalPort</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.getRemotePort">
+         <h4>request.getRemotePort(  )</h4>
+         <div class="functionDescription"><p>
+Returns the remote network port of the client's connection.
+</p><pre># Get the remote port, such as 20427<br>$port = request.getRemotePort();</pre><b>See also:</b> <a href="./request.html#request.getRemoteIP">request.getRemoteIP</a>, <a href="./request.html#request.getLocalPort">request.getLocalPort</a>, <a href="./request.html#request.getLocalIP">request.getLocalIP</a>, <a href="./response.html#response.getRemotePort">response.getRemotePort</a>, <a href="./response.html#response.getRemoteIP">response.getRemoteIP</a>, <a href="./response.html#response.getLocalPort">response.getLocalPort</a>, <a href="./response.html#response.getLocalIP">response.getLocalIP</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.getRetries">
+         <h4>request.getRetries(  )</h4>
+         <div class="functionDescription"><p>
+Returns the number of times that this request has been explicitly retried by request.retry().
+</p><pre>$code = http.getResponseCode();<br>if( $code == 404 || $code >= 500 ) {<br>&nbsp;&nbsp;if( request.getRetries() < 3 ) {<br>&nbsp;&nbsp;&nbsp;&nbsp;# Avoid the current node when we retry,<br>&nbsp;&nbsp;&nbsp;&nbsp;# if possible<br>&nbsp;&nbsp;&nbsp;&nbsp;request.avoidNode( connection.getNode() );<br>&nbsp;&nbsp;&nbsp;&nbsp;request.retry();<br>&nbsp;&nbsp;} else {<br>&nbsp;&nbsp;&nbsp;&nbsp;http.sendResponse( "302 Redirect",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"text/plain", "", "Location: /" );<br>&nbsp;&nbsp;}<br>}</pre><b>See also:</b> <a href="./request.html#request.retry">request.retry</a>, <a href="./request.html#request.isResendable">request.isResendable</a>, <a href="./pool.html#pool.select">pool.select</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.getToS">
+         <h4>request.getToS(  )</h4>
+         <div class="functionDescription"><p>
+Returns the Type of Service (ToS) of traffic going to the server. The return value is either "LOWDELAY", "THROUGHPUT", "RELIABILITY" or "NONE".
+</p><pre>if( request.getToS() != "LOWDELAY" ) {<br>&nbsp;&nbsp;&nbsp;connection.sleep( 1000 );<br>}</pre><b>See also:</b> <a href="./response.html#response.getToS">response.getToS</a>, <a href="./request.html#request.setToS">request.setToS</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.isResendable">
+         <h4>request.isResendable(  )</h4>
+         <div class="functionDescription"><p>
+Test if it is possible to resend this request to a different node.  It is only possible to resend a request if the entire request has been buffered up in the traffic manager, for example, by explicitly reading it in a request rule. <br/> If the request was streamed through to the client, for example, as a large HTTP POST, it will not have been buffered and therefore cannot be resent. <br/> Note that request.isResendable detects if it is possible to resend a request; request.setIdempotent can be used to tell the traffic manager not to automatically resend a request if it fails.
+</p><pre>if( request.isResendable() ) {<br>&nbsp;&nbsp;&nbsp;log.info( "Retrying request" );<br>&nbsp;&nbsp;&nbsp;request.retry();<br>}</pre><b>See also:</b> <a href="./request.html#request.retry">request.retry</a>, <a href="./request.html#request.getRetries">request.getRetries</a>, <a href="./request.html#request.setIdempotent">request.setIdempotent</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.retry">
+         <h4>request.retry(  )</h4>
+         <div class="functionDescription"><p>
+Retry the request (using the currently selected pool). Load-balancing and session persistence decisions are recalculated, and the request is resubmitted - possibly to the same node as previously, although request.avoidNode() can prevent this. <br/> If request.retry() is called, any request rules are not run again.  When a new response is collected after request.retry(), the response rules are run again. <br/> The response rule can modify the request in before resubmitting it. <br/> It is only generally possible to resend a request if the entire request was read before the request rules completed.  Otherwise, request data will have been streamed to the server and not cached.  Use request.isResendable() to test for this. <br/> request.getRetries() returns the number of times this request has already been tried. <br/> On success, request.retry() does not return, but the response rules will be run again on the new response.  On failure, request.retry() returns 0. request.retry() will do nothing if used in a request rule.
+</p><pre>$code = http.getResponseCode();<br>if( $code == 404 || $code >= 500 ) {<br>&nbsp;&nbsp;if( request.getRetries() < 3 ) {<br>&nbsp;&nbsp;&nbsp;&nbsp;# Avoid the current node when we retry,<br>&nbsp;&nbsp;&nbsp;&nbsp;# if possible<br>&nbsp;&nbsp;&nbsp;&nbsp;request.avoidNode( connection.getNode() );<br>&nbsp;&nbsp;&nbsp;&nbsp;request.retry();<br>&nbsp;&nbsp;} else {<br>&nbsp;&nbsp;&nbsp;&nbsp;http.sendResponse( "302 Redirect",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"text/plain", "", "Location: /" );<br>&nbsp;&nbsp;}<br>}</pre><b>See also:</b> <a href="./request.html#request.isResendable">request.isResendable</a>, <a href="./request.html#request.getRetries">request.getRetries</a>, <a href="./pool.html#pool.select">pool.select</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.sendResponse">
+         <h4>request.sendResponse( Data )</h4>
+         <div class="functionDescription"><p>
+Writes the provided data directly back to the client. <br/> Any data that has been read is discarded, and nothing is forwarded to the back-end node.  Unlike its counterpart  http.sendRequest(), this function does not terminate rule  processing immediately.  Instead, it stores the provided  string for sending back to the client when rule  processing has finished. <br/> If you are managing HTTP traffic the http.sendResponse() function should be used instead.
+</p><pre># Send a response<br>request.sendResponse( "530 Login incorrect\r\n" );</pre><b>See also:</b> <a href="./connection.html#connection.discard">connection.discard</a>, <a href="./http.html#http.sendResponse">http.sendResponse</a>, <a href="./response.html#response.set">response.set</a>, <a href="./response.html#response.append">response.append</a>, <a href="./connection.html#connection.close">connection.close</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.set">
+         <h4>request.set( request data )</h4>
+         <div class="functionDescription"><p>
+Replaces the input data read from the client with the provided string. <br/> This is a low-level routine that should be used with care. For protocols with their own higher-level protocol managers (e.g. HTTP), use the higher level routines to alter the input data (e.g. http.setHeader() and http.setBody()).
+</p><pre>$data = request.get();<br>$data = string.regexsub( $data, "From", "To", "g" );<br>request.set( $data );</pre><b>See also:</b> <a href="./request.html#request.get">request.get</a>, <a href="./response.html#response.set">response.set</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.setBandwidthClass">
+         <h4>request.setBandwidthClass( name )</h4>
+         <div class="functionDescription"><p>
+Sets the bandwidth class for the current connection to the backend node. Providing an empty class name removes the bandwidth class from the connection. It returns zero if an error occurs (for example, if the bandwidth class does not exist), and 1 otherwise.
+</p><pre>request.setBandwidthClass( "gold customers" );</pre><b>See also:</b> <a href="./request.html#request.getBandwidthClass">request.getBandwidthClass</a>, <a href="./response.html#response.setBandwidthClass">response.setBandwidthClass</a>, <a href="./response.html#response.getBandwidthClass">response.getBandwidthClass</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.setIdempotent">
+         <h4>request.setIdempotent( resend )</h4>
+         <div class="functionDescription"><p>
+Marks a request as resendable or non-resendable. <br/> An <i>idempotent</i> request has no detrimental side effects, so it can safely be attempted multiple times. A non-idempotent request has a side effect - for example, it may update a database, or initiate a purchase. <br/> By default, all non-HTTP requests are marked as idempotent. If a back-end node fails to generate a correct response when a request is initially forwarded to it, an attempt will be made to resend the request to another node.  An exception to this is requests received through a virtual server using one of the <i>generic</i>-type protocols. In order to be idempotent by  default, an end-point to the request must first be defined  (using functions such as request.endsWith() or request.endsAt()). Only then can failures be measured and alternative nodes tried. <br/> request.setIdempotent() can override this behaviour. If 'resend' is zero, this indicates that the request should only be attempted against one back-end node. <br/> If 'resend' has a non-zero value, this indicates that if a request is made to a back-end node and a correct response is not received, the request should be retried against another back-end node. <br/> Note that a request cannot be resent once it has begun streaming data between the client and the node. Additionally, UDP connections cannot be marked as resendable (the UDP client application should handle failed UDP responses).
+</p><pre># Mark this request as resendable<br>request.setIdempotent( 1 );</pre><b>See also:</b> <a href="./http.html#http.setIdempotent">http.setIdempotent</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.setLogEnabled">
+         <h4>request.setLogEnabled( enabled )</h4>
+         <div class="functionDescription"><p>
+Enables or disables logging for the current request. Note that if logging for the current virtual server is disabled, then this function cannot currently enable it. <br/> Returns 1 if logging is now enabled, and 0 if it is now disabled.
+</p><pre># Only log errors from the web server<br>if( http.getResponseCode() < 400 ) {<br>&nbsp;&nbsp;&nbsp;request.setLogEnabled( 0 );<br>}</pre><b>See also:</b> <a href="./request.html#request.getLogEnabled">request.getLogEnabled</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.setMaxConnectionAttempts">
+         <h4>request.setMaxConnectionAttempts( int )</h4>
+         <div class="functionDescription"><p>
+Overrides the pool's maximum number of connection attempts for this request. Connections to different nodes will be attempted until the maximum number of attempts is exceeded or the connection is successful. A value of 0 means unlimited attempts.
+</p><pre>if( http.getMethod() == "POST" ) {<br>&nbsp;&nbsp;&nbsp;# This is the same as request.setIdempotent( 0 )<br>&nbsp;&nbsp;&nbsp;request.setMaxConnectionAttempts( 1 );<br>}</pre><b>See also:</b> <a href="./request.html#request.setMaxReplyTime">request.setMaxReplyTime</a>, <a href="./request.html#request.setMaxTimedOutConnectionAttempts">request.setMaxTimedOutConnectionAttempts</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.setMaxReplyTime">
+         <h4>request.setMaxReplyTime( seconds )</h4>
+         <div class="functionDescription"><p>
+Overrides the pool's max reply time for this request, also overriding the virtual server timeout if necessary. A node must start its reply within this time or it will be timed out.
+</p><pre>if( http.getMethod() == "POST" ) {<br>&nbsp;&nbsp;&nbsp;# Allow more time to send data to server.<br>&nbsp;&nbsp;&nbsp;request.setMaxReplyTime( 60 );<br>}</pre><b>See also:</b> <a href="./request.html#request.setVirtualServerTimeout">request.setVirtualServerTimeout</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.setMaxTimedOutConnectionAttempts">
+         <h4>request.setMaxTimedOutConnectionAttempts( int )</h4>
+         <div class="functionDescription"><p>
+Overrides the pool's maximum number of timed-out connection attempts for this request. If the connection to the node fails due to max_reply_time being exceeded, connections to other nodes will be attempted until the maximum number of attempts is exceeded or the connection is successful. A value of 0 means unlimited attempts.
+</p><pre>if( http.getMethod() == "POST" ) {<br>&nbsp;&nbsp;&nbsp;request.setMaxTimedOutConnectionAttempts( 2 );<br>}</pre><b>See also:</b> <a href="./request.html#request.setMaxConnectionAttempts">request.setMaxConnectionAttempts</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.setRemoteIP">
+         <h4>request.setRemoteIP( ipAddr )</h4>
+         <div class="functionDescription"><p>
+Sets the remote IP address of the client. This function should be used with care, as it will alter what is logged in request logs and the address seen by a back-end node in 'transparent' mode.  0 is returned if the IP address is invalid, and 1 otherwise.
+</p><pre># Set the remote IP address, such as "10.1.4.21"<br>request.setRemoteIP( "10.1.4.21" );<br>request.setRemoteIP( "2001:200::3085" );</pre><b>See also:</b> <a href="./request.html#request.getRemoteIP">request.getRemoteIP</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.setToS">
+         <h4>request.setToS( Type of Service )</h4>
+         <div class="functionDescription"><p>
+Sets the Type of Service (ToS) flags of traffic going to the server. Valid options are "LOWDELAY", "THROUGHPUT", "RELIABILITY" or "NONE".  ToS flags may be used by network equipment to change how they route network traffic.
+</p><pre>request.setToS("LOWDELAY");</pre><b>See also:</b> <a href="./response.html#response.setToS">response.setToS</a>, <a href="./request.html#request.getToS">request.getToS</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.setVirtualServerTimeout">
+         <h4>request.setVirtualServerTimeout( seconds )</h4>
+         <div class="functionDescription"><p>
+Overrides the virtual server's timeout for this request. The connection to the client will be closed after this period of time, regardless of what state it is in.
+</p><pre>$path = http.GetPath();<br>if( string.startsWith( $path, "/downloads" ) ) {<br>&nbsp;&nbsp;&nbsp;request.setVirtualServerTimeout( 60 );<br>}</pre><b>See also:</b> <a href="./request.html#request.setMaxReplyTime">request.setMaxReplyTime</a></div>
+      </div>
+
+      <div class="functionDoc" id="request.skip">
+         <h4>request.skip( count )</h4>
+         <div class="functionDescription"><p>
+Removes the specified number of bytes from the start of the request provided by the client. This can be used in combination with request.get() and request.getLine() to stream data from a client, or to alter a request before passing it on to a server. <br/> Successive calls to this function will remove further data.
+</p><pre># Skip the first 1K of data<br>request.skip( 1024 );<br><br># Now skip another 1K<br>request.skip( 1024 );</pre><b>See also:</b> <a href="./request.html#request.getLength">request.getLength</a>, <a href="./request.html#request.getLine">request.getLine</a>, <a href="./request.html#request.set">request.set</a>, <a href="./request.html#request.get">request.get</a></div>
+      </div>
+
+   </body>
+</html>

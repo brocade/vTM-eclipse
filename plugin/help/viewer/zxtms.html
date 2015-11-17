@@ -1,0 +1,57 @@
+<html>
+   <head>
+      <title>Managing Traffic Managers</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" type="text/css" /> 
+   </head>
+   
+   <body>
+      
+      <h2>Managing Traffic Managers</h2>
+      
+      <p>
+      All your Zeus projects are displayed in the <a href="../viewer.html">Zeus Viewer</a> pane.  Each connection is
+      identified by the <b>hostname</b> and <b>port</b> (the name you gave to the connection when it was 
+      created is shown in brackets).  You cannot create more than one connection to a 
+      traffic manager.
+      </p>
+      
+      <h3>Disconnecting from a Traffic Manager</h3>
+      
+      <p>
+      If you wish to disconnect from a traffic manager, right-click on it and choose 'Disconnect (Close Project)'.
+      This will simply close the connection, yet retain the local Eclipse project files associated with it.
+      Disconnecting a project frees up local memory and resources, and stops the 
+      plug-in polling the remote admin server.  Disconnected projects are still shown
+      in the Zeus Viewer, but are distinguished by a greyed-out icon next to the name and no available rules.
+      You can also easily reconnect to a closed Zeus project by right-clicking on it and selecting 
+      'Reconnect (Open Project)'.
+      </p>
+      <img src="../images/disconnected.png" alt="A disconnected Zeus Project" />
+      <p>
+      Fig.1: 'Development' is now disconnected
+      </p>
+
+      <h3>Removing a Zeus project completely</h3>
+      
+      <p>
+      If you wish to remove a Zeus project altogether, you can right-click on it and choose
+      'Remove Project'. This will not affect any resources on the remote traffic
+      manager.
+      </p>
+
+      <h3>Zeus project settings</h3>
+      
+      <p>
+      Individual Zeus project settings can be modified by right-clicking on the entry in the viewer and 
+      choosing 'Edit Settings'.  You can review and modify various properties for this project.  
+      Specifically, Zeus connection and authentication settings are available by 
+      clicking the Zeus link on the left hand pane.  
+      Here you can modify the <b>hostname</b>, <b>port</b>, <b>admin user</b> and <b>admin password</b> stored with the project.
+      </p>
+      <img src="../images/projectsettings.png" alt="Project Settings dialog" />
+      <p>
+      Fig.2: The Project Settings dialog
+      </p>
+
+   </body>
+</html>

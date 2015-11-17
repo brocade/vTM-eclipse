@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <!-- Main Editor -->
+   <extension point="org.eclipse.ui.editors">
+      <editor id="com.zeus.eclipsePlugin.id.TrafficScriptEditor"
+         name="Traffic Script Editor"
+         extensions="zts"
+         icon="img/rule.png"
+         contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+         class="com.zeus.eclipsePlugin.editor.TrafficScriptEditor">
+      </editor>
+   </extension>
+
+   <!-- View for seeing whats on ZXTMs -->
+   <extension point="org.eclipse.ui.views">
+      <category id="com.zeus.eclipsePlugin.id.ViewCategory"
+         name="Zeus">
+      </category>
+
+      <view id="com.zeus.eclipsePlugin.id.ZXTMView"
+         name="Zeus Viewer"
+         icon="img/zxtm.png"
+         category="com.zeus.eclipsePlugin.id.ViewCategory"
+         class="com.zeus.eclipsePlugin.zxtmview.ZXTMViewer">
+      </view>
+	</extension>
+
+   <!-- Used to add partioners to documents -->
+   <extension point="org.eclipse.core.filebuffers.documentSetup">
+      <participant class="com.zeus.eclipsePlugin.editor.TrafficScriptSetup"
+         extensions="zts"/>
+   </extension>
+
+   <!-- Custom ZXTM Filesytem -->
+   <extension id="com.zeus.eclipsePlugin.id.FileSystem" 
+      name="Remote Zeus Traffic Manager Access" 
+      point="org.eclipse.core.filesystem.filesystems"> 
+      
+      <filesystem scheme="zxtm">
+           <run class="com.zeus.eclipsePlugin.filesystem.ZXTMFileSystem"/> 
+       </filesystem> 
+   </extension>
+
+   <!-- Custom Project (Nature) -->
+   <extension point="org.eclipse.core.resources.natures"
+      id="com.zeus.eclipsePlugin.id.ZXTMProjectNature"
+      name="Zeus Project">
+      
+      <runtime>
+         <run class="com.zeus.eclipsePlugin.project.ZXTMProject"/>
+      </runtime>
+   </extension>
+
+   <extension point="org.eclipse.ui.ide.projectNatureImages">
+      <image id="org.eclipse.ui.javaNatureImage"
+         natureId="com.zeus.eclipsePlugin.id.ZXTMProjectNature"
+         icon="img/zxtm-corner.png"/>
+   </extension>
+
+   <!-- Wizards -->	
+   <extension point = "org.eclipse.ui.newWizards">
+      
+      <category id="com.zeus.eclipsePlugin.id.WizardCategory"
+         name="Zeus"/>
+      
+      <wizard id="com.zeus.eclipsePlugin.id.wizards.NewZXTMWizard"
+         name = "New Zeus Project"
+         class="com.zeus.eclipsePlugin.wizards.NewZXTMWizard"
+         category="com.zeus.eclipsePlugin.id.WizardCategory"
+         project="true"
+         icon="img/zxtm.png">
+         
+         <description>Create a new project which is syncronised with a Zeus traffic manager</description>
+         <selection class="org.eclipse.core.resources.IResource"/>		   	
+      </wizard>
+
+      <wizard id="com.zeus.eclipsePlugin.id.wizards.NewRuleWizard"
+         name = "New TrafficScript Rule"
+         class="com.zeus.eclipsePlugin.wizards.NewRuleWizard"
+         category="com.zeus.eclipsePlugin.id.WizardCategory"
+         project="false"
+         icon="img/rule.png">
+         
+         <description>Add a TrafficScript rule to a Zeus project.</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+
+   </extension>
+
+   <!-- Zeus Perspective -->
+   <extension point="org.eclipse.ui.perspectives">
+      <perspective id="com.zeus.eclipsePlugin.id.ZXTMPerspective"
+         name="Zeus"
+         class="com.zeus.eclipsePlugin.perspective.ZXTMPerspective"      
+         icon="img/zxtm.png"/>
+   </extension>
+   
+   <!-- Preference Pages -->
+   <extension point="org.eclipse.ui.preferencePages">
+      <page id="com.zeus.eclipsePlugin.id.prefs.MainPage"
+         class="com.zeus.eclipsePlugin.preferences.MainPage"
+         name="Zeus"/>
+         
+      <page id="com.zeus.eclipsePlugin.id.prefs.Editor"
+         class="com.zeus.eclipsePlugin.preferences.EditorPage"
+         category="com.zeus.eclipsePlugin.id.prefs.MainPage"
+         name="Editor"/>
+                  
+      <page id="com.zeus.eclipsePlugin.id.prefs.Assist"
+         class="com.zeus.eclipsePlugin.preferences.AssistPage"
+         category="com.zeus.eclipsePlugin.id.prefs.Editor"
+         name="Code Assistance"/>
+         
+      <page id="com.zeus.eclipsePlugin.id.prefs.Task"
+         class="com.zeus.eclipsePlugin.preferences.TaskPage"
+         category="com.zeus.eclipsePlugin.id.prefs.Editor"
+         name="Task Markers"/>    
+   </extension>
+   
+   <!-- Preference Manager -->
+   <extension point="org.eclipse.core.runtime.preferences">     
+      <initializer class="com.zeus.eclipsePlugin.PreferenceManager"/>
+   </extension>
+   
+   <!-- Project Preference Pages -->
+   <extension point="org.eclipse.ui.propertyPages"> 
+      <page id="com.zeus.eclipsePlugin.id.resourcePrefs.ZXTMPage"
+         class="com.zeus.eclipsePlugin.preferences.resource.ZXTMPage"
+         name="Zeus Settings">
+         
+         <enabledWhen>
+            <instanceof value="org.eclipse.core.resources.IProject"/>
+         </enabledWhen>
+         
+         <filter name="projectNature"
+            value="com.zeus.eclipsePlugin.id.ZXTMProjectNature">
+         </filter>
+         
+      </page>      
+   </extension>
+   
+   <!-- Condition definitions -->      
+  <extension point="org.eclipse.core.expressions.definitions">
+   
+      <definition id="com.zeus.eclipsePlugin.id.def.InZXTMViewer">
+         <with variable="activePartId">
+            <equals value="com.zeus.eclipsePlugin.id.ZXTMView"/>
+         </with>
+      </definition>
+      
+      <definition id="com.zeus.eclipsePlugin.id.def.InTrafficScriptEditor">
+         <with variable="activePartId">
+            <equals value="com.zeus.eclipsePlugin.id.TrafficScriptEditor"/>
+         </with>
+      </definition>
+      
+   </extension>
+   
+   <!-- Command Handlers -->
+   <extension point="org.eclipse.ui.handlers">
+   
+      <handler class="com.zeus.eclipsePlugin.actions.CopyRuleAction"
+         commandId="org.eclipse.ui.edit.copy">
+         <activeWhen>
+            <reference definitionId="com.zeus.eclipsePlugin.id.def.InZXTMViewer"/>
+         </activeWhen>
+      </handler>
+      
+      <handler class="com.zeus.eclipsePlugin.actions.CutRuleAction"
+         commandId="org.eclipse.ui.edit.cut">
+         <activeWhen>
+            <reference definitionId="com.zeus.eclipsePlugin.id.def.InZXTMViewer"/>
+         </activeWhen>
+      </handler>
+      
+      <handler class="com.zeus.eclipsePlugin.actions.PasteRuleAction"
+         commandId="org.eclipse.ui.edit.paste">
+         <activeWhen>
+            <reference definitionId="com.zeus.eclipsePlugin.id.def.InZXTMViewer"/>
+         </activeWhen>
+      </handler>
+      
+      <handler class="com.zeus.eclipsePlugin.actions.DeleteRuleAction"
+         commandId="org.eclipse.ui.edit.delete">
+         <activeWhen>
+            <reference definitionId="com.zeus.eclipsePlugin.id.def.InZXTMViewer"/>
+         </activeWhen>
+      </handler>
+      
+      <handler class="com.zeus.eclipsePlugin.actions.RenameRuleAction"
+         commandId="org.eclipse.ui.edit.rename">
+         <activeWhen>
+            <reference definitionId="com.zeus.eclipsePlugin.id.def.InZXTMViewer"/>
+         </activeWhen>
+      </handler>
+      
+      <handler class="com.zeus.eclipsePlugin.actions.ContentAssistAction"
+         commandId="org.eclipse.ui.edit.text.contentAssist.proposals">
+         <activeWhen>
+            <reference definitionId="com.zeus.eclipsePlugin.id.def.InTrafficScriptEditor"/>
+         </activeWhen>
+      </handler>
+      
+   </extension>
+   
+   <!-- Help -->   
+   <extension point="org.eclipse.help.toc">
+      <toc file="toc.xml" primary="true"/>
+      <toc file="ts-toc.xml" />      
+   </extension>
+
+   
+   
+   
+</plugin>

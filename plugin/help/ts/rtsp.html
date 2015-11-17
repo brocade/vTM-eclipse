@@ -1,0 +1,356 @@
+<html>
+   <header>
+      <title>rtsp</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>rtsp</h2>
+
+      <div class="groupDescription">RTSP protocol-specific functions.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#rtsp.addRequestHeader">rtsp.addRequestHeader</a>
+         </li>
+         <li>
+            <a href="#rtsp.addResponseHeader">rtsp.addResponseHeader</a>
+         </li>
+         <li>
+            <a href="#rtsp.getMethod">rtsp.getMethod</a>
+         </li>
+         <li>
+            <a href="#rtsp.getPath">rtsp.getPath</a>
+         </li>
+         <li>
+            <a href="#rtsp.getRawURL">rtsp.getRawURL</a>
+         </li>
+         <li>
+            <a href="#rtsp.getRequest">rtsp.getRequest</a>
+         </li>
+         <li>
+            <a href="#rtsp.getRequestBody">rtsp.getRequestBody</a>
+         </li>
+         <li>
+            <a href="#rtsp.getRequestBodyLines">rtsp.getRequestBodyLines</a>
+         </li>
+         <li>
+            <a href="#rtsp.getRequestHeader">rtsp.getRequestHeader</a>
+         </li>
+         <li>
+            <a href="#rtsp.getRequestHeaderNames">rtsp.getRequestHeaderNames</a>
+         </li>
+         <li>
+            <a href="#rtsp.getRequestHeaders">rtsp.getRequestHeaders</a>
+         </li>
+         <li>
+            <a href="#rtsp.getResponse">rtsp.getResponse</a>
+         </li>
+         <li>
+            <a href="#rtsp.getResponseBody">rtsp.getResponseBody</a>
+         </li>
+         <li>
+            <a href="#rtsp.getResponseBodyLines">rtsp.getResponseBodyLines</a>
+         </li>
+         <li>
+            <a href="#rtsp.getResponseCode">rtsp.getResponseCode</a>
+         </li>
+         <li>
+            <a href="#rtsp.getResponseHeader">rtsp.getResponseHeader</a>
+         </li>
+         <li>
+            <a href="#rtsp.getResponseHeaderNames">rtsp.getResponseHeaderNames</a>
+         </li>
+         <li>
+            <a href="#rtsp.getResponseHeaders">rtsp.getResponseHeaders</a>
+         </li>
+         <li>
+            <a href="#rtsp.getVersion">rtsp.getVersion</a>
+         </li>
+         <li>
+            <a href="#rtsp.listRequestHeaderNames">rtsp.listRequestHeaderNames</a>
+         </li>
+         <li>
+            <a href="#rtsp.listResponseHeaderNames">rtsp.listResponseHeaderNames</a>
+         </li>
+         <li>
+            <a href="#rtsp.redirect">rtsp.redirect</a>
+         </li>
+         <li>
+            <a href="#rtsp.removeRequestHeader">rtsp.removeRequestHeader</a>
+         </li>
+         <li>
+            <a href="#rtsp.removeResponseHeader">rtsp.removeResponseHeader</a>
+         </li>
+         <li>
+            <a href="#rtsp.requestHeaderExists">rtsp.requestHeaderExists</a>
+         </li>
+         <li>
+            <a href="#rtsp.responseHeaderExists">rtsp.responseHeaderExists</a>
+         </li>
+         <li>
+            <a href="#rtsp.sendResponse">rtsp.sendResponse</a>
+         </li>
+         <li>
+            <a href="#rtsp.setMethod">rtsp.setMethod</a>
+         </li>
+         <li>
+            <a href="#rtsp.setPath">rtsp.setPath</a>
+         </li>
+         <li>
+            <a href="#rtsp.setRequestBody">rtsp.setRequestBody</a>
+         </li>
+         <li>
+            <a href="#rtsp.setRequestHeader">rtsp.setRequestHeader</a>
+         </li>
+         <li>
+            <a href="#rtsp.setResponseBody">rtsp.setResponseBody</a>
+         </li>
+         <li>
+            <a href="#rtsp.setResponseCode">rtsp.setResponseCode</a>
+         </li>
+         <li>
+            <a href="#rtsp.setResponseHeader">rtsp.setResponseHeader</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="rtsp.addRequestHeader">
+         <h4>rtsp.addRequestHeader( name, value )</h4>
+         <div class="functionDescription"><p>
+Adds an RTSP header. If the header already exists, via a  case-insensitive lookup, this value will be appended to the  existing value.
+</p><pre># Add a transport header<br>$my_header = "RTP/AVP/TCP; interleaved=0-1";<br>rtsp.addRequestHeader( "Transport", $my_header );</pre><b>See also:</b> <a href="./rtsp.html#rtsp.setRequestHeader">rtsp.setRequestHeader</a>, <a href="./rtsp.html#rtsp.getRequestHeader">rtsp.getRequestHeader</a>, <a href="./rtsp.html#rtsp.removeRequestHeader">rtsp.removeRequestHeader</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.addResponseHeader">
+         <h4>rtsp.addResponseHeader( name, value )</h4>
+         <div class="functionDescription"><p>
+Adds an RTSP header to the RTSP response that will be sent back to the client. If the header already exists in the response, via a case-insensitive lookup, this value will be appended to the existing value.
+</p><pre># Add a new transport header<br>$my_header = "RTP/AVP/TCP; interleaved=0-1";<br>rtsp.addResponseHeader( "Transport", $my_header );</pre><b>See also:</b> <a href="./rtsp.html#rtsp.setResponseHeader">rtsp.setResponseHeader</a>, <a href="./rtsp.html#rtsp.getResponseHeader">rtsp.getResponseHeader</a>, <a href="./rtsp.html#rtsp.removeResponseHeader">rtsp.removeResponseHeader</a>, <a href="./rtsp.html#rtsp.addRequestHeader">rtsp.addRequestHeader</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.getMethod">
+         <h4>rtsp.getMethod(  )</h4>
+         <div class="functionDescription"><p>
+Returns the RTSP method that was used to make the request, such as SETUP or PLAY.
+</p><pre># Direct DESCRIBE requests to separate pool<br>if( rtsp.getMethod() == "DESCRIBE" ) {<br>&nbsp;&nbsp;&nbsp;# set pool to Describe pool<br>}</pre><b>See also:</b> <a href="./rtsp.html#rtsp.setMethod">rtsp.setMethod</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.getPath">
+         <h4>rtsp.getPath(  )</h4>
+         <div class="functionDescription"><p>
+Returns the %-decoded path in the RTSP request URL
+</p><pre># Retrieve the requested file<br>$file = rtsp.getPath();</pre><b>See also:</b> <a href="./rtsp.html#rtsp.setPath">rtsp.setPath</a>, <a href="./rtsp.html#rtsp.getRawURL">rtsp.getRawURL</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.getRawURL">
+         <h4>rtsp.getRawURL(  )</h4>
+         <div class="functionDescription"><p>
+Returns the raw URL data provided by the client in the first line of the RTSP request, after the method and before the RTSP version specifier. No %-decoding is performed on the URL.
+</p><pre>$rawurl = rtsp.getRawURL();<br>if( string.contains( $rawurl, "../" ) ) {<br>&nbsp;&nbsp;&nbsp;# Something suspicious here ...<br>&nbsp;&nbsp;&nbsp;connection.discard();<br>}</pre><b>See also:</b> <a href="./rtsp.html#rtsp.getPath">rtsp.getPath</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.getRequest">
+         <h4>rtsp.getRequest(  )</h4>
+         <div class="functionDescription"><p>
+Returns the full RTSP request and headers, but does not include any body data.
+</p><pre># Get the complete rtsp request<br>$request = rtsp.getRequest();</pre><b>See also:</b> <a href="./rtsp.html#rtsp.listRequestHeaderNames">rtsp.listRequestHeaderNames</a>, <a href="./rtsp.html#rtsp.getRequestHeader">rtsp.getRequestHeader</a>, <a href="./rtsp.html#rtsp.getRequestBody">rtsp.getRequestBody</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.getRequestBody">
+         <h4>rtsp.getRequestBody( [count] )</h4>
+         <div class="functionDescription"><p>
+Returns the body data of the request. <br/> If the optional 'count' parameter is supplied, rtsp.getRequestBody() will only read and return this number of bytes.  If count is 0, rtsp.getRequestBody() returns the entire request. <br/> If the request has no body, then this returns an empty string. This function is not useable in response rules, as the body data of the request will no longer be accessible.
+</p><pre># Read the entire request body<br>$body = rtsp.getRequestBody();</pre><b>See also:</b> <a href="./rtsp.html#rtsp.getResponseBody">rtsp.getResponseBody</a>, <a href="./rtsp.html#rtsp.setRequestBody">rtsp.setRequestBody</a>, <a href="./rtsp.html#rtsp.getRequestBodyLines">rtsp.getRequestBodyLines</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.getRequestBodyLines">
+         <h4>rtsp.getRequestBodyLines( count )</h4>
+         <div class="functionDescription"><p>
+Splits the body data of the RTSP request into individual lines and returns an array of the data. <br/> If the request has no body, then this returns an empty array.
+</p><pre># Read the entire request body<br>$body = rtsp.getRequestBodyLines();<br><br># Process it line-by-line<br>foreach( $line in $body ) {<br>&nbsp;&nbsp;&nbsp;# ...<br>}</pre><b>See also:</b> <a href="./rtsp.html#rtsp.getRequestBody">rtsp.getRequestBody</a>, <a href="./rtsp.html#rtsp.getResponseBodyLines">rtsp.getResponseBodyLines</a>, <a href="./rtsp.html#rtsp.setRequestBody">rtsp.setRequestBody</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.getRequestHeader">
+         <h4>rtsp.getRequestHeader( name )</h4>
+         <div class="functionDescription"><p>
+Returns the value of a named RTSP header in the RTSP request, or the empty string if the header does not exist. The header name lookup is case-insensitive.
+</p><pre># Get the transport detail<br>$transport = rtsp.getRequestHeader( "Transport" );</pre><b>See also:</b> <a href="./rtsp.html#rtsp.setRequestHeader">rtsp.setRequestHeader</a>, <a href="./rtsp.html#rtsp.addRequestHeader">rtsp.addRequestHeader</a>, <a href="./rtsp.html#rtsp.removeRequestHeader">rtsp.removeRequestHeader</a>, <a href="./rtsp.html#rtsp.getRequestHeaders">rtsp.getRequestHeaders</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.getRequestHeaderNames">
+         <h4>rtsp.getRequestHeaderNames(  )</h4>
+         <div class="functionDescription"><p>
+Returns a list of all the headers that are present in the request. <br/> The headers are returned as a single string, separated by spaces.
+</p><p>This function has been deprecated; </div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.getRequestHeaders">
+         <h4>rtsp.getRequestHeaders(  )</h4>
+         <div class="functionDescription"><p>
+Returns a hash containing all the header names in the request mapped to their values.
+</p><pre># Show all the headers in the request<br>$headers = rtsp.getRequestHeaders();<br><br>foreach( $header in hash.keys( $headers ) ) {<br>&nbsp;&nbsp;&nbsp;log.info( $header . "=" . $headers[$header] );<br>}</pre><b>See also:</b> <a href="./rtsp.html#rtsp.getRequestHeader">rtsp.getRequestHeader</a>, <a href="./rtsp.html#rtsp.setRequestHeader">rtsp.setRequestHeader</a>, <a href="./rtsp.html#rtsp.addRequestHeader">rtsp.addRequestHeader</a>, <a href="./rtsp.html#rtsp.removeRequestHeader">rtsp.removeRequestHeader</a>, <a href="./rtsp.html#rtsp.requestHeaderExists">rtsp.requestHeaderExists</a>, <a href="./rtsp.html#rtsp.getResponseHeaders">rtsp.getResponseHeaders</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.getResponse">
+         <h4>rtsp.getResponse(  )</h4>
+         <div class="functionDescription"><p>
+Returns the full RTSP response and headers, but does not include any body data.
+</p><pre># Get the complete rtsp response<br>$request = rtsp.getResponse();</pre><b>See also:</b> <a href="./rtsp.html#rtsp.listResponseHeaderNames">rtsp.listResponseHeaderNames</a>, <a href="./rtsp.html#rtsp.getResponseHeader">rtsp.getResponseHeader</a>, <a href="./rtsp.html#rtsp.getResponseBody">rtsp.getResponseBody</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.getResponseBody">
+         <h4>rtsp.getResponseBody( [count] )</h4>
+         <div class="functionDescription"><p>
+Returns the body of the RTSP response. This could be an SDP response. <br/> If the optional 'count' parameter is provided, rtsp.getResponseBody() will read and return the first 'count' bytes of the response.  If count is 0, rtsp.getResponseBody() will return the entire response.
+</p><pre># Read the entire response body<br>$body = rtsp.getResponseBody();</pre><b>See also:</b> <a href="./rtsp.html#rtsp.getRequestBody">rtsp.getRequestBody</a>, <a href="./rtsp.html#rtsp.setResponseBody">rtsp.setResponseBody</a>, <a href="./rtsp.html#rtsp.getResponseBodyLines">rtsp.getResponseBodyLines</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.getResponseBodyLines">
+         <h4>rtsp.getResponseBodyLines( count )</h4>
+         <div class="functionDescription"><p>
+Splits the body data of the RTSP request into individual lines and returns an array of the data. <br/> If the request has no body, then this returns an empty array.
+</p><pre># Read the entire request body<br>$body = rtsp.getResponseBodyLines();<br><br># Process it line-by-line<br>foreach( $line in $body ) {<br>&nbsp;&nbsp;&nbsp;# ...<br>}</pre><b>See also:</b> <a href="./rtsp.html#rtsp.getResponseBody">rtsp.getResponseBody</a>, <a href="./rtsp.html#rtsp.getRequestBodyLines">rtsp.getRequestBodyLines</a>, <a href="./rtsp.html#rtsp.setResponseBody">rtsp.setResponseBody</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.getResponseCode">
+         <h4>rtsp.getResponseCode(  )</h4>
+         <div class="functionDescription"><p>
+Returns the status code from the first line of the RTSP response.
+</p><pre># Is the status '200'<br>if( rtsp.getResponseCode() == 200 ) {<br>&nbsp;&nbsp;&nbsp;# ...<br>}</pre><b>See also:</b> <a href="./rtsp.html#rtsp.setResponseCode">rtsp.setResponseCode</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.getResponseHeader">
+         <h4>rtsp.getResponseHeader( name )</h4>
+         <div class="functionDescription"><p>
+Returns the value of a RTSP header in the RTSP response, or the empty string if the header does not exist. The header name lookup is  case-insensitive.
+</p><pre># Get the transport header<br>$transport = rtsp.getResponseHeader( "Transport" );</pre><b>See also:</b> <a href="./rtsp.html#rtsp.setResponseHeader">rtsp.setResponseHeader</a>, <a href="./rtsp.html#rtsp.addResponseHeader">rtsp.addResponseHeader</a>, <a href="./rtsp.html#rtsp.removeResponseHeader">rtsp.removeResponseHeader</a>, <a href="./rtsp.html#rtsp.responseHeaderExists">rtsp.responseHeaderExists</a>, <a href="./rtsp.html#rtsp.getRequestHeader">rtsp.getRequestHeader</a>, <a href="./rtsp.html#rtsp.getResponseHeaders">rtsp.getResponseHeaders</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.getResponseHeaderNames">
+         <h4>rtsp.getResponseHeaderNames(  )</h4>
+         <div class="functionDescription"><p>
+Returns a list of all the headers that are present in the response. <br/> The headers are returned as a single string, separated by spaces.
+</p><p>This function has been deprecated; </div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.getResponseHeaders">
+         <h4>rtsp.getResponseHeaders(  )</h4>
+         <div class="functionDescription"><p>
+Returns a hash containing all the header names in the response mapped to their values.
+</p><pre># Show all the headers in the response<br>$headers = rtsp.getResponseHeaders();<br><br>foreach( $header in hash.keys( $headers ) ) {<br>&nbsp;&nbsp;&nbsp;log.info( $header . "=" . $headers[$header] );<br>}</pre><b>See also:</b> <a href="./rtsp.html#rtsp.getResponseHeader">rtsp.getResponseHeader</a>, <a href="./rtsp.html#rtsp.setResponseHeader">rtsp.setResponseHeader</a>, <a href="./rtsp.html#rtsp.addResponseHeader">rtsp.addResponseHeader</a>, <a href="./rtsp.html#rtsp.removeResponseHeader">rtsp.removeResponseHeader</a>, <a href="./rtsp.html#rtsp.responseHeaderExists">rtsp.responseHeaderExists</a>, <a href="./rtsp.html#rtsp.getRequestHeaders">rtsp.getRequestHeaders</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.getVersion">
+         <h4>rtsp.getVersion(  )</h4>
+         <div class="functionDescription"><p>
+Returns the version of the RTSP protocol being used. It returns the version string in the RTSP/version specifier in the first line of the RTSP request, such as 'RTSP/1.0'.
+</p><pre># Get the RTSP version<br>$version = rtsp.getVersion();</pre></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.listRequestHeaderNames">
+         <h4>rtsp.listRequestHeaderNames(  )</h4>
+         <div class="functionDescription"><p>
+Returns a list of all the headers that are present in the request. <br/> The headers are returned as a an array.
+</p><pre># Log all of the header names and values<br>$headers = rtsp.listRequestHeaderNames();<br>foreach( $header in $headers ) {<br>&nbsp;&nbsp;&nbsp;log.info($header . "=" .<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rtsp.getRequestHeader($header));<br>}</pre><b>See also:</b> <a href="./rtsp.html#rtsp.listResponseHeaderNames">rtsp.listResponseHeaderNames</a>, <a href="./rtsp.html#rtsp.getRequestHeader">rtsp.getRequestHeader</a>, <a href="./rtsp.html#rtsp.getRequestHeaders">rtsp.getRequestHeaders</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.listResponseHeaderNames">
+         <h4>rtsp.listResponseHeaderNames(  )</h4>
+         <div class="functionDescription"><p>
+Returns a list of all the headers that are present in the response. <br/> The headers are returned as an array.
+</p><pre># Log all of the header names and values<br>$headers = rtsp.listResponseHeaderNames();<br>foreach( $header in $headers ) {<br>&nbsp;&nbsp;&nbsp;log.info($header . "=" .<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rtsp.getRequestHeader($header));<br>}</pre><b>See also:</b> <a href="./rtsp.html#rtsp.getResponseHeader">rtsp.getResponseHeader</a>, <a href="./rtsp.html#rtsp.removeResponseHeader">rtsp.removeResponseHeader</a>, <a href="./rtsp.html#rtsp.getResponseHeaders">rtsp.getResponseHeaders</a>, <a href="./rtsp.html#rtsp.listRequestHeaderNames">rtsp.listRequestHeaderNames</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.redirect">
+         <h4>rtsp.redirect( path )</h4>
+         <div class="functionDescription"><p>
+Sends back an RTSP 302 redirect response, which will send the client to a different URL. This is equivalent to rtsp.sendResponse( "302 Moved Temporarily", "", "Location: " .  $url );
+</p><pre># Redirect requests for a particular file elsewhere<br>$path = rtsp.getPath();<br>if( $path == "specialfile" ) {<br>&nbsp;&nbsp;&nbsp;rtsp.redirect( "rtsp://otherserver/" . $path );<br>}</pre><b>See also:</b> <a href="./rtsp.html#rtsp.sendResponse">rtsp.sendResponse</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.removeRequestHeader">
+         <h4>rtsp.removeRequestHeader( name )</h4>
+         <div class="functionDescription"><p>
+Removes an RTSP header if it exists in the request. The header name  lookup is case-insensitive.
+</p><pre># Remove the transport header<br>rtsp.removeRequestHeader( "Transport" );</pre><b>See also:</b> <a href="./rtsp.html#rtsp.setRequestHeader">rtsp.setRequestHeader</a>, <a href="./rtsp.html#rtsp.getRequestHeader">rtsp.getRequestHeader</a>, <a href="./rtsp.html#rtsp.addRequestHeader">rtsp.addRequestHeader</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.removeResponseHeader">
+         <h4>rtsp.removeResponseHeader( name )</h4>
+         <div class="functionDescription"><p>
+Removes a RTSP header from the RTSP response. The header name is automatically translated to the correct case.
+</p><pre># Remove the GET_PARAMETER header<br>rtsp.removeResponseHeader( "GET_PARAMETER" );</pre><b>See also:</b> <a href="./rtsp.html#rtsp.setResponseHeader">rtsp.setResponseHeader</a>, <a href="./rtsp.html#rtsp.getResponseHeader">rtsp.getResponseHeader</a>, <a href="./rtsp.html#rtsp.addResponseHeader">rtsp.addResponseHeader</a>, <a href="./rtsp.html#rtsp.removeRequestHeader">rtsp.removeRequestHeader</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.requestHeaderExists">
+         <h4>rtsp.requestHeaderExists( names )</h4>
+         <div class="functionDescription"><p>
+Reports if a header exists or not. It is similar to rtsp.getRequestHeader(), but makes it possible to distinguish between a header not being present and a header having no value. <br/> The header name lookup is case-insensitive. <br/> It returns 1 if the header exists, and 0 if it does not.
+</p><pre># Check for the Transport header<br>if( rtsp.requestHeaderExists( "Transport" ) ) {<br>&nbsp;&nbsp;&nbsp;# Modify the transport options<br>}</pre></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.responseHeaderExists">
+         <h4>rtsp.responseHeaderExists( name )</h4>
+         <div class="functionDescription"><p>
+Reports if a named header exists in the RTSP response. It is similar to rtsp.getResponseHeader(), but makes it possible to distinguish between a header not being present and a header having no value. <br/> The header name lookup is case-insensitive. <br/> It returns 1 if the header exists, and 0 if it does not.
+</p><pre># Test for the 'Transport' response header<br>if( rtsp.responseHeaderExists( "Transport" ) ) {<br>&nbsp;&nbsp;&nbsp;# modify the parameters<br>}</pre><b>See also:</b> <a href="./rtsp.html#rtsp.getResponseHeader">rtsp.getResponseHeader</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.sendResponse">
+         <h4>rtsp.sendResponse( code, body, headers )</h4>
+         <div class="functionDescription"><p>
+Sends back an RTSP response to the client instead of balancing the request via a pool onto a node. It generates a correct RTSP response from the response code, body data and headers supplied.  Multiple headers should be separated with \r\n.
+</p><pre># Discard SET_PARAMETER requests if the server<br># does not support it<br>if( rtsp.getMethod() == "SET_PARAMETER" ) {<br>&nbsp;&nbsp;&nbsp;rtsp.sendResponse( "401 Unauthorised", "", "" );<br>}</pre></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.setMethod">
+         <h4>rtsp.setMethod( method )</h4>
+         <div class="functionDescription"><p>
+Sets the RTSP method to use when forwarding the request via a pool to a node.
+</p><pre># Force the client to send an OPTIONS packet<br>rtsp.setMethod( "OPTIONS" );</pre><b>See also:</b> <a href="./rtsp.html#rtsp.getMethod">rtsp.getMethod</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.setPath">
+         <h4>rtsp.setPath( url )</h4>
+         <div class="functionDescription"><p>
+Replaces the Path portion of the request URL with the supplied value.
+</p><pre># Make customer view specific file:<br>rtsp.setPath( "myvideo.rm" );</pre><b>See also:</b> <a href="./rtsp.html#rtsp.getPath">rtsp.getPath</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.setRequestBody">
+         <h4>rtsp.setRequestBody( body )</h4>
+         <div class="functionDescription"><p>
+Sets the request body for this RTSP request, replacing any request body already present. <br/> This also updates the 'Content-Length' header in the request to the length of the new body data.
+</p><pre>$body = rtsp.getRequestBody( 0 );<br>$body = string.regexsub( $body, "Buy", "Sell", "g" );<br>rtsp.setRequestBody( $body );</pre><b>See also:</b> <a href="./rtsp.html#rtsp.getRequestBody">rtsp.getRequestBody</a>, <a href="./rtsp.html#rtsp.setResponseBody">rtsp.setResponseBody</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.setRequestHeader">
+         <h4>rtsp.setRequestHeader( name, value )</h4>
+         <div class="functionDescription"><p>
+Sets the value of a RTSP header, replacing any existing value if the header already exists. <br/> Note that this function should not be used with the Connection header, i.e. setRequestHeader("Connection", value) since it may not give the expected results. <br/> The header name lookup is case-insensitive.
+</p><pre># Replace the transport header<br>$my_header = "RTP/AVP/TCP; interleaved=0-1";<br>rtsp.setRequestHeader( "Transport", $my_header );</pre><b>See also:</b> <a href="./rtsp.html#rtsp.getRequestHeader">rtsp.getRequestHeader</a>, <a href="./rtsp.html#rtsp.addRequestHeader">rtsp.addRequestHeader</a>, <a href="./rtsp.html#rtsp.removeRequestHeader">rtsp.removeRequestHeader</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.setResponseBody">
+         <h4>rtsp.setResponseBody( body )</h4>
+         <div class="functionDescription"><p>
+Sets the response body for this RTSP response, replacing any response body already present. <br/> This also updates the 'Content-Length' header in the response to the length of the new body data. If the server is still sending the original response body when this function is called, the connection to the server will be harmlessly dropped.
+</p><pre>$body = rtsp.getResponseBody( 0 );<br>$body = string.regexsub( $body, "Buy", "Sell", "g" );<br>rtsp.setResponseBody( $body );</pre><b>See also:</b> <a href="./rtsp.html#rtsp.getResponseBody">rtsp.getResponseBody</a>, <a href="./rtsp.html#rtsp.setRequestBody">rtsp.setRequestBody</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.setResponseCode">
+         <h4>rtsp.setResponseCode( code, [message] )</h4>
+         <div class="functionDescription"><p>
+Sets the status code and message in the first line of the RTSP response.
+</p><pre># Stop clients receiving a particular file<br>$path = rtsp.getPath();<br>if( $path == "specialfile" ) {<br>&nbsp;&nbsp;&nbsp;rtsp.setResponseCode( "401", "Unauthorised" );<br>}</pre><b>See also:</b> <a href="./rtsp.html#rtsp.getResponseCode">rtsp.getResponseCode</a></div>
+      </div>
+
+      <div class="functionDoc" id="rtsp.setResponseHeader">
+         <h4>rtsp.setResponseHeader( name, value )</h4>
+         <div class="functionDescription"><p>
+Sets a RTSP header in the RTSP response that will be sent back to the client. If the header already exists in the response, via a case-insensitive lookup, it will be replaced with this new value. <br/> Note that this function should not be used with the Connection header, i.e. setResponseHeader("Connection", value) since it may not give the expected results.
+</p><pre># Replace the transport header<br>$my_header = "RTP/AVP/TCP; interleaved=0-1";<br>rtsp.setResponseHeader( "Transport", $my_header );</pre><b>See also:</b> <a href="./rtsp.html#rtsp.addResponseHeader">rtsp.addResponseHeader</a>, <a href="./rtsp.html#rtsp.getResponseHeader">rtsp.getResponseHeader</a>, <a href="./rtsp.html#rtsp.removeResponseHeader">rtsp.removeResponseHeader</a>, <a href="./rtsp.html#rtsp.setRequestHeader">rtsp.setRequestHeader</a></div>
+      </div>
+
+   </body>
+</html>

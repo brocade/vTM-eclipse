@@ -1,0 +1,30 @@
+<toc label="Zeus Plug-in Guide">  
+   <topic label="Introduction" href="help/intro.html"/>
+   <topic href="help/perspective.html" label="The Zeus Perspective"/>
+   
+   <topic label="Connecting to a Traffic Mananger" href="help/connecting.html"/>
+   
+   <topic label="The Zeus Viewer" href="help/viewer.html">
+      <topic label="Managing Traffic Managers" href="help/viewer/zxtms.html"/>
+      <topic label="Adding New Rules" href="help/viewer/newrules.html"/>
+      <topic label="Managing Rules" href="help/viewer/managingrules.html"/>
+   </topic>
+   
+   <topic label="Using the TrafficScript Editor" href="help/editor.html">
+      <topic label="The Editor Window" href="help/editor/window.html"/>
+      <topic label="Code Auto-compete" href="help/editor/suggest.html"/>
+      <topic label="Problems with your Code" href="help/editor/errors.html"/>
+      <topic label="Task Markers" href="help/editor/tasks.html"/>
+   </topic>
+
+   <topic label="Plug-in Preferences" href="help/preferences.html">
+      <topic label="Editor Preferences" href="help/preferences/editor.html">
+         <topic label="Code Assistance Preferences" href="help/preferences/editor/assist.html"/>
+         <topic label="Task Marker Preferences" href="help/preferences/editor/tasks.html"/>
+      </topic>
+   </topic>
+   
+   <topic label="TrafficScript Reference" href="help/ts.html">
+      <link toc="ts-toc.xml"/>   
+   </topic>
+</toc>

@@ -1,0 +1,92 @@
+<html>
+   <head>
+      <title>The Zeus Perspective</title>
+      <link rel="stylesheet" href="../../PRODUCT_PLUGIN/book.css" type="text/css" /> 
+   </head>
+   
+   <body>
+      
+      <h2>The Zeus Perspective</h2>
+      
+      <h3>What is a perspective and why do I need one?</h3>
+      
+      <img src="images/perspectivechooser.png" alt="The Perspective Selector" />
+      <p>
+      Fig.1: The Perspective Selector (with Zeus selected)
+      </p>
+      
+      <p>
+      A perspective is a group of views and editors in the main Eclipse window that
+      make up an environment suitable for a particular development purpose.
+      The Zeus plug-in provides a suitable perspective for TrafficScript rule 
+      development, and this can be selected via the menu bar under "Window -&gt; 
+      Open Perspective -&gt; Other.." or by clicking the 'Add perspective' icon
+      in the Selector and choosing 'Other...'. If you have correctly installed 
+      the Zeus plug-in, the Zeus perspective should be available in the 
+      subsequent list.
+      </p>
+      
+      <p>
+      Once selected, Zeus will be added to the list of available perspectives, and the 
+      windows and icons will arrange themselves into the structure defined within 
+      the perspective, ready for use. Zeus will appear as the current perspective 
+      in the Selector control.
+      </p>
+      
+      <p>
+      The Zeus perspective is made up of three main window panes:
+      <ul>
+      <li>A general <a href="editor.html">Editor</a> window in the centre</li>
+      <li>The <a href="viewer.html">Zeus Viewer</a> and Navigator on the left</li>
+      <li>The <a href="editor/errors.html">Problems</a> and <a href="editor/tasks.html">Tasks</a> views at the bottom</li>
+      </ul>
+      </p>
+      <img src="images/main.png" alt="Main window" />
+      <p>
+      Fig.2: The Main Window
+      </p> 
+      
+      <h3>The Zeus Viewer and Navigator pane</h3>
+      
+      <p>
+      The Zeus Viewer tab will list the currently active Zeus projects, and 
+      the rules associated with each one. This pane allows you to manipulate 
+      (copy/move/delete etc) the rules by using the right mouse menu or dragging 
+      them.
+      </p>
+      
+      <p>
+      The Navigator tab is an alternative view of the same information, but given
+      as a file system.  Each Zeus project will still appear, but rules will
+      be listed under a Rules sub-folder.  This sub-folder is essentially a short-cut
+      (or symbolic link) to indicate that these rules exist on a Zeus instance, and
+      not actually on your local file-system.  Note how each rule has the extension
+      <b>.zts</b> - simply used to identify files of this type.  The <b>.project</b> and 
+      <b>.zxtmConf</b> files are internal plug-in config files and should not 
+      be edited manually.
+      </p> 
+
+      <img src="images/navigator.png" alt="Navigator tab" />
+      <p>
+      Fig.3: The Navigator tab
+      </p>
+           
+      <h3>The Editor pane</h3>
+      
+      <p>
+      The Editor pane provides the means to add or edit rules, and to view the output
+      of various other Eclipse operations.
+      </p>
+
+      <h3>Problems and Tasks pane</h3>
+      
+      <p>
+      Finally, there is a tasks and problems pane at the bottom of the screen.  
+      Any errors, warnings or informational messages encountered are displayed 
+      in the Problems tab. Any task labels are displayed in the Tasks tab. More 
+      information about Tasks can be found on the <a href="editor/tasks.html">
+      Task Markers</a> page.
+      </p>
+      
+   </body>
+</html>

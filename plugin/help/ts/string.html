@@ -1,0 +1,781 @@
+<html>
+   <header>
+      <title>string</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>string</h2>
+
+      <div class="groupDescription">Functions for manipulating and encoding strings.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#string.BERToInt">string.BERToInt</a>
+         </li>
+         <li>
+            <a href="#string.Ireplace">string.Ireplace</a>
+         </li>
+         <li>
+            <a href="#string.IreplaceAll">string.IreplaceAll</a>
+         </li>
+         <li>
+            <a href="#string.append">string.append</a>
+         </li>
+         <li>
+            <a href="#string.base64decode">string.base64decode</a>
+         </li>
+         <li>
+            <a href="#string.base64encode">string.base64encode</a>
+         </li>
+         <li>
+            <a href="#string.bytesToDotted">string.bytesToDotted</a>
+         </li>
+         <li>
+            <a href="#string.bytesToInt">string.bytesToInt</a>
+         </li>
+         <li>
+            <a href="#string.cmp">string.cmp</a>
+         </li>
+         <li>
+            <a href="#string.contains">string.contains</a>
+         </li>
+         <li>
+            <a href="#string.containsI">string.containsI</a>
+         </li>
+         <li>
+            <a href="#string.count">string.count</a>
+         </li>
+         <li>
+            <a href="#string.decrypt">string.decrypt</a>
+         </li>
+         <li>
+            <a href="#string.dottedToBytes">string.dottedToBytes</a>
+         </li>
+         <li>
+            <a href="#string.drop">string.drop</a>
+         </li>
+         <li>
+            <a href="#string.encrypt">string.encrypt</a>
+         </li>
+         <li>
+            <a href="#string.endsWith">string.endsWith</a>
+         </li>
+         <li>
+            <a href="#string.endsWithI">string.endsWithI</a>
+         </li>
+         <li>
+            <a href="#string.escape">string.escape</a>
+         </li>
+         <li>
+            <a href="#string.extractHost">string.extractHost</a>
+         </li>
+         <li>
+            <a href="#string.extractPort">string.extractPort</a>
+         </li>
+         <li>
+            <a href="#string.find">string.find</a>
+         </li>
+         <li>
+            <a href="#string.findI">string.findI</a>
+         </li>
+         <li>
+            <a href="#string.findr">string.findr</a>
+         </li>
+         <li>
+            <a href="#string.hash">string.hash</a>
+         </li>
+         <li>
+            <a href="#string.hashMD5">string.hashMD5</a>
+         </li>
+         <li>
+            <a href="#string.hashSHA1">string.hashSHA1</a>
+         </li>
+         <li>
+            <a href="#string.hashSHA256">string.hashSHA256</a>
+         </li>
+         <li>
+            <a href="#string.hashSHA384">string.hashSHA384</a>
+         </li>
+         <li>
+            <a href="#string.hashSHA512">string.hashSHA512</a>
+         </li>
+         <li>
+            <a href="#string.hexToInt">string.hexToInt</a>
+         </li>
+         <li>
+            <a href="#string.hexdecode">string.hexdecode</a>
+         </li>
+         <li>
+            <a href="#string.hexencode">string.hexencode</a>
+         </li>
+         <li>
+            <a href="#string.htmldecode">string.htmldecode</a>
+         </li>
+         <li>
+            <a href="#string.htmlencode">string.htmlencode</a>
+         </li>
+         <li>
+            <a href="#string.icmp">string.icmp</a>
+         </li>
+         <li>
+            <a href="#string.insertBytes">string.insertBytes</a>
+         </li>
+         <li>
+            <a href="#string.intToBER">string.intToBER</a>
+         </li>
+         <li>
+            <a href="#string.intToBytes">string.intToBytes</a>
+         </li>
+         <li>
+            <a href="#string.intToHex">string.intToHex</a>
+         </li>
+         <li>
+            <a href="#string.ipmaskmatch">string.ipmaskmatch</a>
+         </li>
+         <li>
+            <a href="#string.left">string.left</a>
+         </li>
+         <li>
+            <a href="#string.len">string.len</a>
+         </li>
+         <li>
+            <a href="#string.length">string.length</a>
+         </li>
+         <li>
+            <a href="#string.lowercase">string.lowercase</a>
+         </li>
+         <li>
+            <a href="#string.normalizeIPAddress">string.normalizeIPAddress</a>
+         </li>
+         <li>
+            <a href="#string.randomBytes">string.randomBytes</a>
+         </li>
+         <li>
+            <a href="#string.regexescape">string.regexescape</a>
+         </li>
+         <li>
+            <a href="#string.regexmatch">string.regexmatch</a>
+         </li>
+         <li>
+            <a href="#string.regexsub">string.regexsub</a>
+         </li>
+         <li>
+            <a href="#string.replace">string.replace</a>
+         </li>
+         <li>
+            <a href="#string.replaceAll">string.replaceAll</a>
+         </li>
+         <li>
+            <a href="#string.replaceAllI">string.replaceAllI</a>
+         </li>
+         <li>
+            <a href="#string.replaceBytes">string.replaceBytes</a>
+         </li>
+         <li>
+            <a href="#string.replaceI">string.replaceI</a>
+         </li>
+         <li>
+            <a href="#string.reverse">string.reverse</a>
+         </li>
+         <li>
+            <a href="#string.right">string.right</a>
+         </li>
+         <li>
+            <a href="#string.skip">string.skip</a>
+         </li>
+         <li>
+            <a href="#string.split">string.split</a>
+         </li>
+         <li>
+            <a href="#string.sprintf">string.sprintf</a>
+         </li>
+         <li>
+            <a href="#string.startsWith">string.startsWith</a>
+         </li>
+         <li>
+            <a href="#string.startsWithI">string.startsWithI</a>
+         </li>
+         <li>
+            <a href="#string.substring">string.substring</a>
+         </li>
+         <li>
+            <a href="#string.trim">string.trim</a>
+         </li>
+         <li>
+            <a href="#string.unescape">string.unescape</a>
+         </li>
+         <li>
+            <a href="#string.uppercase">string.uppercase</a>
+         </li>
+         <li>
+            <a href="#string.urlencode">string.urlencode</a>
+         </li>
+         <li>
+            <a href="#string.urlencodeexceptreserved">string.urlencodeexceptreserved</a>
+         </li>
+         <li>
+            <a href="#string.validIPAddress">string.validIPAddress</a>
+         </li>
+         <li>
+            <a href="#string.wildmatch">string.wildmatch</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="string.BERToInt">
+         <h4>string.BERToInt( string )</h4>
+         <div class="functionDescription"><p>
+Converts a BER compressed integer into an integer.
+</p><pre># $r = 200<br>$r = string.BERToInt( "\201\110" );</pre><b>Alternate name:</b> BERToInt<br>
+<b>See also:</b> <a href="./string.html#string.intToBER">string.intToBER</a>, <a href="./string.html#string.bytesToInt">string.bytesToInt</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.Ireplace">
+         <h4>string.Ireplace( string, search, replacement )</h4>
+         <div class="functionDescription"><p>
+Replaces the first occurrence of the search string in the supplied string with the replacement. It is case-insensitive and returns the string with the replacement.
+</p><p>This function has been deprecated; </div>
+      </div>
+
+      <div class="functionDoc" id="string.IreplaceAll">
+         <h4>string.IreplaceAll( string, search, replacement )</h4>
+         <div class="functionDescription"><p>
+Replaces all occurrences of the search string in the supplied string with the replacement. It is case-insensitive and returns the string with the replacements.
+</p><p>This function has been deprecated; </div>
+      </div>
+
+      <div class="functionDoc" id="string.append">
+         <h4>string.append( str1, str2, ... )</h4>
+         <div class="functionDescription"><p>
+Returns the result of concatenating all of its inputs together as strings.
+</p><pre># Returns "The answer is 42"<br>$s = string.append( "The ", "answer ", "is " , 42 );</pre><b>Alternate name:</b> append<br>
+</div>
+      </div>
+
+      <div class="functionDoc" id="string.base64decode">
+         <h4>string.base64decode( string )</h4>
+         <div class="functionDescription"><p>
+Decodes a base64-encoded string and returns the result. <br/> Base64 encoding is used for MIME-encoded messages, and in the HTTP Basic Authorization header.
+</p><pre># Decodes a username and password from HTTP<br># BASIC authentication<br>$h = http.getHeader( "Authorization" );<br>if( string.startsWith( $h, "Basic " ) ) {<br>&nbsp;&nbsp;&nbsp;$enc = string.skip( $h, 6 );<br>&nbsp;&nbsp;&nbsp;$userpasswd = string.base64decode( $enc );<br>&nbsp;&nbsp;&nbsp;log.info( "User used: ".$userpasswd );<br>}</pre><b>Alternate name:</b> base64decode<br>
+<b>See also:</b> <a href="./string.html#string.base64encode">string.base64encode</a>, <a href="./string.html#string.hexdecode">string.hexdecode</a>, <a href="./string.html#string.unescape">string.unescape</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.base64encode">
+         <h4>string.base64encode( string )</h4>
+         <div class="functionDescription"><p>
+Returns the base64-encoded version of the provided string. This converts each group of three characters into a 4-character string containing just [A-Za-z0-9+/], and '=' for padding. <br/> Base64 encoding is used for MIME-encoded messages, and in the HTTP Basic Authorization header.
+</p><pre># Encodes a username and password for HTTP<br># BASIC authentication<br>$enc = string.base64encode( "user:passwd" );<br>$h = "Basic ".$enc;<br>http.setHeader( "Authorization", $h );</pre><b>Alternate name:</b> base64encode<br>
+<b>See also:</b> <a href="./string.html#string.base64decode">string.base64decode</a>, <a href="./string.html#string.hexencode">string.hexencode</a>, <a href="./string.html#string.escape">string.escape</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.bytesToDotted">
+         <h4>string.bytesToDotted( string )</h4>
+         <div class="functionDescription"><p>
+Converts a network ordered byte string into an IP address.
+</p><pre># The first 4 bytes are the IP address<br>$ipstr = string.substring( $msg, 0, 3 );<br>log.info( "IP is ".string.bytesToDotted( $ipstr ) );</pre><b>Alternate name:</b> bytesToDotted<br>
+<b>See also:</b> <a href="./string.html#string.dottedToBytes">string.dottedToBytes</a>, <a href="./string.html#string.bytesToInt">string.bytesToInt</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.bytesToInt">
+         <h4>string.bytesToInt( string )</h4>
+         <div class="functionDescription"><p>
+Converts a byte string in network order to an integer. The byte string should be either 1, 2 or 4 bytes long.
+</p><pre># $msg starts with a 2-bytes length<br>$lenstr = string.substring( $msg, 0, 1 );<br>$len = string.bytesToInt( $lenstr );<br>$msg = string.substring( $msg, 2, 2+$len-1 );</pre><b>Alternate name:</b> bytesToInt<br>
+<b>See also:</b> <a href="./string.html#string.intToBytes">string.intToBytes</a>, <a href="./string.html#string.bytesToDotted">string.bytesToDotted</a>, <a href="./string.html#string.BERToInt">string.BERToInt</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.cmp">
+         <h4>string.cmp( str1, str2 )</h4>
+         <div class="functionDescription"><p>
+Compares its two parameters as strings in a case-sensitive manner. It returns a negative value if str1 is less than str2; zero if they are equal, and a positive value if str1 is greater than str2.
+</p><pre>if( string.cmp( $a, "HTTP/1.0" ) == 0 ) {<br>&nbsp;&nbsp;&nbsp;# $a is "HTTP/1.0"<br>}<br><br>if( string.cmp( $a, $b ) < 0 ) {<br>&nbsp;&nbsp;&nbsp;# $a is less than $b<br>}</pre><b>Alternate name:</b> cmp<br>
+<b>See also:</b> <a href="./string.html#string.icmp">string.icmp</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.contains">
+         <h4>string.contains( haystack, needle )</h4>
+         <div class="functionDescription"><p>
+Searches for the provided string (the needle) in the given source (the haystack). <br/> It returns 1 if the 'needle' was found, or 0 otherwise.
+</p><pre>if( string.contains( $cookie, "chocolate" ) ) {<br>&nbsp;&nbsp;&nbsp;# The cookie contains chocolate ...<br>}</pre><b>Alternate name:</b> contains<br>
+<b>See also:</b> <a href="./string.html#string.containsI">string.containsI</a>, <a href="./string.html#string.find">string.find</a>, <a href="./string.html#string.findr">string.findr</a>, <a href="./string.html#string.startsWith">string.startsWith</a>, <a href="./string.html#string.endsWith">string.endsWith</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.containsI">
+         <h4>string.containsI( haystack, needle )</h4>
+         <div class="functionDescription"><p>
+Searches for the provided string (the needle) in the given source (the haystack). It is case-insensitive. <br/> It returns 1 if the 'needle' was found, or 0 otherwise.
+</p><pre>if( string.containsI( $path, "danger" ) ) {<br>&nbsp;&nbsp;&nbsp;# The path contains danger ...<br>}</pre><b>Alternate name:</b> containsI<br>
+<b>See also:</b> <a href="./string.html#string.contains">string.contains</a>, <a href="./string.html#string.findI">string.findI</a>, <a href="./string.html#string.startsWithI">string.startsWithI</a>, <a href="./string.html#string.endsWithI">string.endsWithI</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.count">
+         <h4>string.count( haystack, needle, [start] )</h4>
+         <div class="functionDescription"><p>
+Searches from the start of a string, counting the number of times that the provided search string (the needle) is found inside the given string (the haystack). An optional parameter can specify the start position for the search. <br/> It returns the number of times that the string is found.
+</p><pre># Returns 2<br>$r = string.count( "This is it!", "is" );<br><br># Returns 1, no overlaps allowed<br>$s = string.count( "ooo", "oo" );</pre><b>Alternate name:</b> count<br>
+<b>See also:</b> <a href="./string.html#string.find">string.find</a>, <a href="./string.html#string.contains">string.contains</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.decrypt">
+         <h4>string.decrypt( string, passphrase )</h4>
+         <div class="functionDescription"><p>
+Returns the decrypted version of a string that has previously been encrypted using string.encrypt(). The passphrase supplied must match that given to string.encrypt(), otherwise the decoding will fail. <br/> An empty string is returned if the decrypt or the integrity check fails.
+</p><pre># Decrypt the 'kart' cookie<br>$cookie = http.getcookie( "kart" );<br>if( $cookie != "" ) {<br>&nbsp;&nbsp;&nbsp;$cookie = string.decrypt( $cookie, $passphrase );<br>&nbsp;&nbsp;&nbsp;if( $cookie == "" ) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log.warn( "User modified kart cookie" );<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http.removecookie( "kart" );<br>&nbsp;&nbsp;&nbsp;} else {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http.setcookie( "kart", $cookie );<br>&nbsp;&nbsp;&nbsp;}<br>}</pre><b>Alternate name:</b> decrypt<br>
+<b>See also:</b> <a href="./string.html#string.encrypt">string.encrypt</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.dottedToBytes">
+         <h4>string.dottedToBytes( IP address )</h4>
+         <div class="functionDescription"><p>
+Converts an IP address to a network order byte string.
+</p><pre># Prepend the client IP onto $msg<br>$ip = request.getRemoteIP();<br>$msg = string.dottedToBytes( $ip ).$msg;</pre><b>Alternate name:</b> dottedToBytes<br>
+<b>See also:</b> <a href="./string.html#string.bytesToDotted">string.bytesToDotted</a>, <a href="./string.html#string.intToBytes">string.intToBytes</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.drop">
+         <h4>string.drop( string, count )</h4>
+         <div class="functionDescription"><p>
+Returns all but the last 'count' characters from the end of the provided string. An empty string will be returned if 'count' is greater than the length of the original string.
+</p><pre># returns "www.example"<br>$s = string.drop( "www.example.com", 4 );</pre><b>Alternate name:</b> drop<br>
+<b>See also:</b> <a href="./string.html#string.skip">string.skip</a>, <a href="./string.html#string.trim">string.trim</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.encrypt">
+         <h4>string.encrypt( string, passphrase )</h4>
+         <div class="functionDescription"><p>
+Encrypts a string using the provided pass phrase.  The returned string is encrypted using the AES block cipher, using an expanded form of the passphrase as the cipher key. A MAC is also added to ensure the integrity of the string. <br/> This is open to replay attacks, and as such, should not be used to encrypt sensitive data, such as credit card details.
+</p><pre># Encrypt the 'kart' cookie<br>$cookie = http.getresponsecookie( "kart" );<br>if( $cookie != "" ) {<br>&nbsp;&nbsp;&nbsp;$cookie = string.encrypt( $cookie, $passphrase );<br>&nbsp;&nbsp;&nbsp;http.setresponsecookie( "kart", $cookie );<br>}</pre><b>Alternate name:</b> encrypt<br>
+<b>See also:</b> <a href="./string.html#string.decrypt">string.decrypt</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.endsWith">
+         <h4>string.endsWith( string, suffix )</h4>
+         <div class="functionDescription"><p>
+Returns 1 if the provided string ends with the given suffix, and 0 otherwise.
+</p><pre>if( string.endsWith( $url, ".cgi") ) {<br>&nbsp;&nbsp;&nbsp;# Request is for a CGI script ...<br>}</pre><b>Alternate name:</b> endsWith<br>
+<b>See also:</b> <a href="./string.html#string.endsWithI">string.endsWithI</a>, <a href="./string.html#string.startsWith">string.startsWith</a>, <a href="./string.html#string.contains">string.contains</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.endsWithI">
+         <h4>string.endsWithI( string, suffix )</h4>
+         <div class="functionDescription"><p>
+Returns 1 if the provided string ends with the given suffix, and 0 otherwise. It is case-insensitive.
+</p><pre>if( string.endsWithI( $path, "victory") ) {<br>&nbsp;&nbsp;&nbsp;# The path ends with victory<br>}</pre><b>Alternate name:</b> endsWithI<br>
+<b>See also:</b> <a href="./string.html#string.endsWith">string.endsWith</a>, <a href="./string.html#string.startsWithI">string.startsWithI</a>, <a href="./string.html#string.containsI">string.containsI</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.escape">
+         <h4>string.escape( string )</h4>
+         <div class="functionDescription"><p>
+Returns a percent-encoded version of its parameter. <br/> Control characters and spaces (character value &lt;= 32) and '%' characters are each replaced by a '%' symbol, followed by their 2-digit hex value.
+</p><pre># returns "Hello%20World!%0D%0A"<br>$s = string.escape( "Hello World!\r\n" );</pre><b>Alternate name:</b> escape<br>
+<b>See also:</b> <a href="./string.html#string.unescape">string.unescape</a>, <a href="./string.html#string.hexencode">string.hexencode</a>, <a href="./string.html#string.regexescape">string.regexescape</a>, <a href="./string.html#string.urlencode">string.urlencode</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.extractHost">
+         <h4>string.extractHost( string )</h4>
+         <div class="functionDescription"><p>
+Returns the host part of the supplied address if it is a valid IP or hostname. Otherwise the empty string is returned.
+</p><pre>sub lookup_proxy( $path ) {<br>&nbsp;&nbsp;&nbsp;# Code to map a path to a node<br>}<br># Send certain requests to an external server<br>$forward = lookup_proxy( http.getPath() );<br>if( $forward<br>&nbsp;&nbsp;&nbsp;&nbsp;&& $host = string.extractHost( $forward ) ) {<br>&nbsp;&nbsp;&nbsp;if( !$port = string.extractPort( $forward ) ) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$port = 80;<br>&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;pool.use( "External", $host, $port );<br>}</pre><b>Alternate name:</b> extractHost<br>
+<b>See also:</b> <a href="./string.html#string.extractPort">string.extractPort</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.extractPort">
+         <h4>string.extractPort( string )</h4>
+         <div class="functionDescription"><p>
+Returns the port part of the supplied address if both the host and port of the supplied address are valid.  Otherwise the empty string is returned.
+</p><pre># Get the SIP request's next destination<br>$next = sip.getRequestHeader( "Route" );<br>string.regexmatch( $next, "^<sip:(.*?)>" );<br>$next = $1;<br># Get the port number of the destination<br>if( $port = string.extractPort( $next ) ) {<br>&nbsp;&nbsp;&nbsp;if( $port < 1024 ) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Don't forward the message<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sip.sendResponse( "403", "Forbidden" );<br>&nbsp;&nbsp;&nbsp;}<br>}</pre><b>Alternate name:</b> extractPort<br>
+<b>See also:</b> <a href="./string.html#string.extractHost">string.extractHost</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.find">
+         <h4>string.find( haystack, needle, [start] )</h4>
+         <div class="functionDescription"><p>
+Reports whether the provided search string (the needle) is contained inside the given string (the haystack). An optional parameter can specify the start position for the search. <br/> It returns the location of the first instance of the search string; note that character positions start at 0. <br/> If it could not find the search string, it returns -1.
+</p><pre>$r = string.find( "This is it!", "is" ); # Returns 2</pre><b>Alternate name:</b> find<br>
+<b>See also:</b> <a href="./string.html#string.findI">string.findI</a>, <a href="./string.html#string.findr">string.findr</a>, <a href="./string.html#string.contains">string.contains</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.findI">
+         <h4>string.findI( haystack, needle, [start] )</h4>
+         <div class="functionDescription"><p>
+Reports whether the provided search string (the needle) is contained inside the given string (the haystack). An optional parameter can specify the start position for the search. It is case-insensitive. <br/> It returns the location of the first instance of the search string; note that character positions start at 0. <br/> If it could not find the search string, it returns -1.
+</p><pre># Returns 0<br>$r = string.findI( "The way of the warrior", "the" );</pre><b>Alternate name:</b> findI<br>
+<b>See also:</b> <a href="./string.html#string.find">string.find</a>, <a href="./string.html#string.containsI">string.containsI</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.findr">
+         <h4>string.findr( haystack, needle, [distanceFromEndToStart] )</h4>
+         <div class="functionDescription"><p>
+Searches backwards from the end of a string, determining whether the provided search string (the needle) is contained inside the given string (the haystack). An optional parameter can specify the start position for the search, measured from the end of the string (so setting it to 1 skips the last character in the string). <br/> It returns the location of the last instance of the search string; note that character positions start at 0. <br/> If it could not find the search string, it returns -1.
+</p><pre># Returns 8 (the 'i' in it)<br>$r = string.findr( "This is it!", "i" );<br><br># Returns 5 (the 'i' in is)<br>$r = string.findr( "This is it!", "i", 3 );</pre><b>Alternate name:</b> findr<br>
+<b>See also:</b> <a href="./string.html#string.find">string.find</a>, <a href="./string.html#string.contains">string.contains</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.hash">
+         <h4>string.hash( string )</h4>
+         <div class="functionDescription"><p>
+Returns a number representing a hash of the provided string. The returned value should not be relied on to be consistent across different releases of the software.
+</p><pre>$hash = string.hash( http.getRawURL() );<br>connection.setPersistenceKey( $hash % 1000 );</pre><b>Alternate name:</b> hash<br>
+</div>
+      </div>
+
+      <div class="functionDoc" id="string.hashMD5">
+         <h4>string.hashMD5( string )</h4>
+         <div class="functionDescription"><p>
+Returns the MD5 hash of the provided string. The returned string will be 16 bytes long, and may contain non-printable characters.
+</p><pre>$hash = string.hashMD5( $data );</pre><b>Alternate name:</b> hashMD5<br>
+<b>See also:</b> <a href="./string.html#string.hexencode">string.hexencode</a>, <a href="./string.html#string.hashSHA1">string.hashSHA1</a>, <a href="./string.html#string.hashSHA256">string.hashSHA256</a>, <a href="./string.html#string.hashSHA384">string.hashSHA384</a>, <a href="./string.html#string.hashSHA512">string.hashSHA512</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.hashSHA1">
+         <h4>string.hashSHA1( string )</h4>
+         <div class="functionDescription"><p>
+Returns the SHA1 hash of the provided string. The returned string will be 20 bytes long, and may contain non-printable characters.
+</p><pre>$hash = string.hashSHA1( $data );</pre><b>Alternate name:</b> hashSHA1<br>
+<b>See also:</b> <a href="./string.html#string.hexencode">string.hexencode</a>, <a href="./string.html#string.hashMD5">string.hashMD5</a>, <a href="./string.html#string.hashSHA256">string.hashSHA256</a>, <a href="./string.html#string.hashSHA384">string.hashSHA384</a>, <a href="./string.html#string.hashSHA512">string.hashSHA512</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.hashSHA256">
+         <h4>string.hashSHA256( string )</h4>
+         <div class="functionDescription"><p>
+Returns the SHA-256 hash of the provided string. The returned string will be 32 bytes long, and may contain non-printable characters.
+</p><pre>$hash = string.hashSHA256( $data );</pre><b>Alternate name:</b> hashSHA256<br>
+<b>See also:</b> <a href="./string.html#string.hexencode">string.hexencode</a>, <a href="./string.html#string.hashMD5">string.hashMD5</a>, <a href="./string.html#string.hashSHA1">string.hashSHA1</a>, <a href="./string.html#string.hashSHA384">string.hashSHA384</a>, <a href="./string.html#string.hashSHA512">string.hashSHA512</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.hashSHA384">
+         <h4>string.hashSHA384( string )</h4>
+         <div class="functionDescription"><p>
+Returns the SHA-384 hash of the provided string. The returned string will be 48 bytes long, and may contain non-printable characters.
+</p><pre>$hash = string.hashSHA384( $data );</pre><b>Alternate name:</b> hashSHA384<br>
+<b>See also:</b> <a href="./string.html#string.hexencode">string.hexencode</a>, <a href="./string.html#string.hashMD5">string.hashMD5</a>, <a href="./string.html#string.hashSHA1">string.hashSHA1</a>, <a href="./string.html#string.hashSHA256">string.hashSHA256</a>, <a href="./string.html#string.hashSHA512">string.hashSHA512</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.hashSHA512">
+         <h4>string.hashSHA512( string )</h4>
+         <div class="functionDescription"><p>
+Returns the SHA-512 hash of the provided string. The returned string will be 64 bytes long, and may contain non-printable characters.
+</p><pre>$hash = string.hashSHA512( $data );</pre><b>Alternate name:</b> hashSHA512<br>
+<b>See also:</b> <a href="./string.html#string.hexencode">string.hexencode</a>, <a href="./string.html#string.hashMD5">string.hashMD5</a>, <a href="./string.html#string.hashSHA1">string.hashSHA1</a>, <a href="./string.html#string.hashSHA256">string.hashSHA256</a>, <a href="./string.html#string.hashSHA384">string.hashSHA384</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.hexToInt">
+         <h4>string.hexToInt( string )</h4>
+         <div class="functionDescription"><p>
+Converts a hexadecimal number to an integer. Returns the first valid hexadecimal value found in the string, or 0. A prefix of "0x" is accepted, but not required. Negative numbers are also valid.
+</p><pre># Returns 10.<br>$int = string.hexToInt( "0000a" );</pre><b>See also:</b> <a href="./string.html#string.intToHex">string.intToHex</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.hexdecode">
+         <h4>string.hexdecode( encoded string )</h4>
+         <div class="functionDescription"><p>
+Returns the hex-decoded version of the provided string. This interprets each character pair as a 2-digit hex value, replacing it with the corresponding 8-bit character. It does not verify that the original string was correctly encoded.
+</p><pre># returns "hello"<br>$s = string.hexdecode("68656C6C6F");</pre><b>Alternate name:</b> hexdecode<br>
+<b>See also:</b> <a href="./string.html#string.hexencode">string.hexencode</a>, <a href="./string.html#string.base64decode">string.base64decode</a>, <a href="./string.html#string.unescape">string.unescape</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.hexencode">
+         <h4>string.hexencode( string )</h4>
+         <div class="functionDescription"><p>
+Returns the hex-encoded version of the provided string . This converts each character into a two-character hex representation, doubling the length of the string.
+</p><pre># Returns "68656C6C6F"<br>$s = string.hexencode( "hello" );</pre><b>Alternate name:</b> hexencode<br>
+<b>See also:</b> <a href="./string.html#string.hexdecode">string.hexdecode</a>, <a href="./string.html#string.base64encode">string.base64encode</a>, <a href="./string.html#string.escape">string.escape</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.htmldecode">
+         <h4>string.htmldecode( encodedstring )</h4>
+         <div class="functionDescription"><p>
+Returned the HTML-decoded version of a string, converting symbols such as &amp;lt; and &amp;quot;
+</p><pre>$body = string.htmldecode( http.getBody( 0 ) );</pre><b>Alternate name:</b> htmldecode<br>
+<b>See also:</b> <a href="./string.html#string.htmlencode">string.htmlencode</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.htmlencode">
+         <h4>string.htmlencode( string )</h4>
+         <div class="functionDescription"><p>
+Returns the encoded version of the supplied string to make it safe for including in HTML. It converts '&lt;' to &amp;lt;, '&gt;' to &amp;gt;, '&quot;' to &amp;quot; and '&amp;' to &amp;amp;. Control characters are hex-encoded.
+</p><pre>$html = string.htmlencode( $parameter );</pre><b>Alternate name:</b> htmlencode<br>
+<b>See also:</b> <a href="./string.html#string.htmldecode">string.htmldecode</a>, <a href="./string.html#string.urlencode">string.urlencode</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.icmp">
+         <h4>string.icmp( str1, str2 )</h4>
+         <div class="functionDescription"><p>
+Compares its two parameters as strings in a case-insensitive manner. It returns a negative value if str1 is less than str2; zero if they are equal, and a positive value if str1 is greater than str2.
+</p><pre>if( string.icmp( $a, "Content-Length" ) == 0 ) {<br>&nbsp;&nbsp;&nbsp;# $a is "Content-Length"<br>}</pre><b>Alternate name:</b> icmp<br>
+<b>See also:</b> <a href="./string.html#string.cmp">string.cmp</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.insertBytes">
+         <h4>string.insertBytes( string, insertion, offset )</h4>
+         <div class="functionDescription"><p>
+Inserts a string into another string at the supplied offset, and returns the resulting string. If offset &lt; 0, or offset &gt; length( string ), the original string is returned unchanged. If offset == 0 the insertion string is prepended; if offset == length( string ) the insertion string is appended.
+</p><pre># $r = "he was Othello"<br>$r = string.insertbytes( "hello", " was Othe", 2 );<br><br># $r = "hello world"<br>$r = string.insertbytes( "hello", " world", 5 );<br><br># $r = "I say hello"<br>$r = string.insertbytes( "hello", "I say ", 0 );</pre><b>Alternate name:</b> insertBytes<br>
+<b>See also:</b> <a href="./string.html#string.replaceBytes">string.replaceBytes</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.intToBER">
+         <h4>string.intToBER( number )</h4>
+         <div class="functionDescription"><p>
+Converts an integer into a BER compressed integer (which is a variable-length binary string encoding).
+</p><pre># $r = "\201\110"<br>$r = string.intToBER( 200 );</pre><b>Alternate name:</b> intToBER<br>
+<b>See also:</b> <a href="./string.html#string.BERToInt">string.BERToInt</a>, <a href="./string.html#string.intToBytes">string.intToBytes</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.intToBytes">
+         <h4>string.intToBytes( number, [width] )</h4>
+         <div class="functionDescription"><p>
+Converts an integer to a network order byte string of the specified width. Only widths of 1, 2 and 4 are permitted, and the width defaults to 4 if it is not supplied.
+</p><pre># Prepend $msg with its length, as a 4-byte int<br>string.insertBytes( $msg,<br>&nbsp;&nbsp;&nbsp;string.intToBytes( string.len( $msg ) ),<br>&nbsp;&nbsp;&nbsp;0 );</pre><b>Alternate name:</b> intToBytes<br>
+<b>See also:</b> <a href="./string.html#string.bytesToInt">string.bytesToInt</a>, <a href="./string.html#string.bytesToDotted">string.bytesToDotted</a>, <a href="./string.html#string.intToBER">string.intToBER</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.intToHex">
+         <h4>string.intToHex( string )</h4>
+         <div class="functionDescription"><p>
+Converts an integer into a hexadecimal string.
+</p><pre># Returns "0000cafe"<br>$hex = string.intToHex( 51966 );</pre><b>See also:</b> <a href="./string.html#string.hexToInt">string.hexToInt</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.ipmaskmatch">
+         <h4>string.ipmaskmatch( IP Address, CIDR IP Subnet )</h4>
+         <div class="functionDescription"><p>
+Returns 1 if the provided IP address is contained in the CIDR IP Subnet, and 0 otherwise. <br/> It interprets its first parameter as a string containing an IP address, and its second parameter as an CIDR IP subnet. CIDR IP subnets can be of the form "10.0.1.0/24", "10.0.1.0/255.255.255.0", "10.0.1." or "10.0.1.1".  <br/> For IPv6, the standard notation of "2001:200:0:8002::/64" is supported.
+</p><pre>if( string.ipmaskmatch( $ip, "10.0.0.0/8" ) ) {<br>&nbsp;&nbsp;&nbsp;# IP is in the 10.*.*.* subnet ...<br>}</pre><b>Alternate name:</b> ipmaskmatch<br>
+<b>See also:</b> <a href="./string.html#string.validIPAddress">string.validIPAddress</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.left">
+         <h4>string.left( string, count )</h4>
+         <div class="functionDescription"><p>
+Returns the first 'count' characters of the provided string. An empty string will be returned if 'count' is less than or equal to zero.
+</p><pre># returns "#!"<br>$s = string.left( "#!/bin/sh", 2 );</pre><b>Alternate name:</b> left<br>
+<b>See also:</b> <a href="./string.html#string.skip">string.skip</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.len">
+         <h4>string.len( string )</h4>
+         <div class="functionDescription"><p>
+Interprets its parameter as a string and returns its length (in bytes).
+</p><pre>$len = string.len( "Hello world!" ); # returns 12</pre><b>Alternate name:</b> len<br>
+</div>
+      </div>
+
+      <div class="functionDoc" id="string.length">
+         <h4>string.length( string )</h4>
+         <div class="functionDescription"><p>
+This function is an alias for string.len.
+</p><pre>$len = string.length( "Hello world!" ); # returns 12</pre><b>Alternate name:</b> length<br>
+<b>See also:</b> <a href="./string.html#string.len">string.len</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.lowercase">
+         <h4>string.lowercase( string )</h4>
+         <div class="functionDescription"><p>
+Converts all characters in the provided string to lowercase and returns the result.
+</p><pre>$s = string.lowercase("AbCdEfG"); # Returns "abcdefg"</pre><b>Alternate name:</b> lowercase<br>
+<b>See also:</b> <a href="./string.html#string.uppercase">string.uppercase</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.normalizeIPAddress">
+         <h4>string.normalizeIPAddress( string )</h4>
+         <div class="functionDescription"><p>
+Returns a unique string representation of an IP address: all leading zeros are removed, and for IPv6 addresses the first occurrence of blocks consisting entirely of zeros is replaced by "::".  This normal form can be used to compare IP addresses without ambiguity and is also the form used by TrafficScript functions returning IP addresses.  If the string is not a valid IP address, the empty string is returned.
+</p><pre>$remote_ip = request.getremoteip();<br>$client = string.normalizeipaddress(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"2001:0:0157::0:006a" );<br># $client is now "2001::157:0:0:0:0:6a"<br>if( $remote_ip == $client ){<br>&nbsp;&nbsp;&nbsp;# do something specific for this client<br>}</pre><b>Alternate name:</b> normalizeIPAddress<br>
+<b>See also:</b> <a href="./string.html#string.validIPAddress">string.validIPAddress</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.randomBytes">
+         <h4>string.randomBytes( length )</h4>
+         <div class="functionDescription"><p>
+Returns a string of the supplied length filled with random bytes.
+</p><pre># Get a string 16 bytes long filled with random data<br>$str = string.randomBytes( 16 );</pre><b>Alternate name:</b> randomBytes<br>
+</div>
+      </div>
+
+      <div class="functionDoc" id="string.regexescape">
+         <h4>string.regexescape( string )</h4>
+         <div class="functionDescription"><p>
+Returns a version of its parameter suitable for using inside a regex match as a string literal. <br/> All characters in the string that aren't a-z, A-Z, 0-9 or '_' are escaped using a backslash.
+</p><pre>$str = "10.100.230.5";<br>$escaped = string.regexescape( $str );<br>if( string.regexmatch( $line, $escaped ) ) {<br>&nbsp;&nbsp;&nbsp;log.info( "Line matched: " . $str );<br>}</pre><b>Alternate name:</b> regexescape<br>
+<b>See also:</b> <a href="./string.html#string.escape">string.escape</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.regexmatch">
+         <h4>string.regexmatch( string, regex, [flags] ) )</h4>
+         <div class="functionDescription"><p>
+Performs a regular expression match on the supplied string. If the regular expression 'regex' contains bracketed sub-expressions, then the variables $1 ... $9 will be set to the matching substrings. <br/> Note that the '\' character is an escape character in TrafficScript strings enclosed with double quotation marks. If you need to put a literal '\' in a regular expression, you must escape it as '\\' or enclose the string in single quotation marks. To match a literal string inside a regular expression use the string.regexEscape function. <br/> The optional 'flags' parameter contains a string of single-letter options. The following options are supported: <ul>   <li>'i', meaning 'case insensitive' - letters in the pattern       match both upper and lower case letters.</li> </ul> <br/> It returns 1 if matched, and 0 otherwise.
+</p><pre>$id = "user=Joe, password=Secret";<br>if( string.regexmatch(<br>&nbsp;&nbsp;&nbsp;$id, "^user=(.*), password=(.*)$" ) ) {<br>&nbsp;&nbsp;&nbsp;log.info( "Got UserID: ".$1.", Password: ".$2 );<br>}<br><br>$name = "Name( Bob )";<br>string.regexmatch( $name, 'Name\( (\S+) \)' );<br>log.info( $1 ); # prints Bob</pre><b>Alternate name:</b> regexmatch<br>
+<b>See also:</b> <a href="./string.html#string.wildmatch">string.wildmatch</a>, <a href="./string.html#string.regexsub">string.regexsub</a>, <a href="./string.html#string.regexescape">string.regexescape</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.regexsub">
+         <h4>string.regexsub( string, regex, replacement, [flags] )</h4>
+         <div class="functionDescription"><p>
+Performs a regular expression match on the supplied string, then replaces each matching substring with the supplied replacement. The replacement string may contain $1 .. $9 substitutions, which reference bracketed sub-expressions in the regular expression. <br/> Note that the '\' character is an escape character in TrafficScript strings enclosed with double quotation marks. If you need to put a literal '\' in a regular expression, you must escape it as '\\' or enclose the string in single quotation marks. To match a literal string inside a regular expression use the string.regexEscape function. <br/> The optional 'flags' parameter contains a string of single-letter options. The following options are supported: <ul>   <li>'g', meaning 'global replace' - apply the regex pattern       as many times as possible.</li>   <li>'i', meaning 'case insensitive' - letters in the pattern       match both upper and lower case letters.</li> </ul> <br/> string.regexsub() returns the string with the replacements.
+</p><pre># Rewrite incoming URL<br>$url = string.regexsub($url, "^/(.*)/secure",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/$1/private");<br><br><br># Remove cookieless session from URL<br># e.g. "/(sessionid)/app/index" => "/app/index"<br>$url = string.regexsub( $url, '/\(\S+\)/', "/" );</pre><b>Alternate name:</b> regexsub<br>
+<b>See also:</b> <a href="./string.html#string.regexmatch">string.regexmatch</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.replace">
+         <h4>string.replace( string, search, replacement )</h4>
+         <div class="functionDescription"><p>
+Replaces the first occurrence of the search string in the supplied string with the replacement. It is case-sensitive and returns the string with the replacement.
+</p><pre># Rewrite incoming URL<br>$url = string.replace($url, "/secure", "/private");</pre><b>Alternate name:</b> replace<br>
+<b>See also:</b> <a href="./string.html#string.replaceI">string.replaceI</a>, <a href="./string.html#string.replaceAll">string.replaceAll</a>, <a href="./string.html#string.replaceAllI">string.replaceAllI</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.replaceAll">
+         <h4>string.replaceAll( string, search, replacement )</h4>
+         <div class="functionDescription"><p>
+Replaces all occurrences of the search string in the supplied string with the replacement. It is case-sensitive and returns the string with the replacements.
+</p><pre># Rewrite incoming URL<br>$url = string.replaceAll($url, "/in", "/out");</pre><b>Alternate name:</b> replaceAll<br>
+<b>See also:</b> <a href="./string.html#string.replaceAllI">string.replaceAllI</a>, <a href="./string.html#string.replace">string.replace</a>, <a href="./string.html#string.replaceI">string.replaceI</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.replaceAllI">
+         <h4>string.replaceAllI( string, search, replacement )</h4>
+         <div class="functionDescription"><p>
+Replaces all occurrences of the search string in the supplied string with the replacement. It is case-insensitive and returns the string with the replacements.
+</p><pre># Rewrite incoming URL<br>$url = string.replaceAllI($url, "/in", "/out");</pre><b>Alternate name:</b> replaceAllI<br>
+<b>See also:</b> <a href="./string.html#string.replaceAll">string.replaceAll</a>, <a href="./string.html#string.replaceI">string.replaceI</a>, <a href="./string.html#string.replace">string.replace</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.replaceBytes">
+         <h4>string.replaceBytes( string, replacement, offset )</h4>
+         <div class="functionDescription"><p>
+Replaces a portion of a string with a replacement string at the supplied offset. It returns a modified version of the original string of the same length as the original with the appropriate bytes replaced from the replacement string. <br/> If offset < 0, or offset > length( string ), or length( replacement ) == 0, string.replaceBytes returns the original string.
+</p><pre># $r = "hi lo"<br>$r = string.replaceBytes( "hello", "i ", 1 );<br><br># $r = "helwo"<br>$r = string.replaceBytes( "hello", "world", 3 );</pre><b>Alternate name:</b> replaceBytes<br>
+<b>See also:</b> <a href="./string.html#string.insertBytes">string.insertBytes</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.replaceI">
+         <h4>string.replaceI( string, search, replacement )</h4>
+         <div class="functionDescription"><p>
+Replaces the first occurrence of the search string in the supplied string with the replacement. It is case-insensitive and returns the string with the replacement.
+</p><pre># Rewrite incoming URL<br>$url = string.replaceI($url, "/secure", "/private");</pre><b>Alternate name:</b> replaceI<br>
+<b>See also:</b> <a href="./string.html#string.replace">string.replace</a>, <a href="./string.html#string.replaceAllI">string.replaceAllI</a>, <a href="./string.html#string.replaceAll">string.replaceAll</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.reverse">
+         <h4>string.reverse( string )</h4>
+         <div class="functionDescription"><p>
+Returns the characters of a string in reverse order.
+</p><pre>$c = string.reverse( "esrever" ); # Returns "reverse"</pre><b>Alternate name:</b> reverse<br>
+</div>
+      </div>
+
+      <div class="functionDoc" id="string.right">
+         <h4>string.right( string, count )</h4>
+         <div class="functionDescription"><p>
+Returns the last 'count' characters of the provided string. An empty string will be returned if 'count' is less than or equal to zero.
+</p><pre># returns "sh"<br>$s = string.right( "#!/bin/sh", 2 );</pre><b>Alternate name:</b> right<br>
+<b>See also:</b> <a href="./string.html#string.drop">string.drop</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.skip">
+         <h4>string.skip( string, count )</h4>
+         <div class="functionDescription"><p>
+Returns all but the first 'count' characters from the input string. An empty string will be returned if 'count' is greater than the length of the original string.
+</p><pre># returns "/bin/sh"<br>$s = string.skip( "#!/bin/sh", 2 );</pre><b>Alternate name:</b> skip<br>
+<b>See also:</b> <a href="./string.html#string.drop">string.drop</a>, <a href="./string.html#string.trim">string.trim</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.split">
+         <h4>string.split( string, [separator] )</h4>
+         <div class="functionDescription"><p>
+Returns an array containing the substrings of the supplied string that are delimited by the separator. The separator defaults to a space character, so applying this method to a string without supplying the separator character will return an array containing all the individual words in the string.
+</p><pre>$words = string.split( http.getResponseBody() );<br>log.info( "There were " . array.length( $words )<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;. " words in the response" );</pre><b>See also:</b> <a href="./array.html#array.join">array.join</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.sprintf">
+         <h4>string.sprintf( format string, arguments )</h4>
+         <div class="functionDescription"><p>
+Behaves like the C library sprintf() function. Only %s, %c, %d and %f are supported. The function returns the generated string.
+</p><pre>$text = string.sprintf(<br>&nbsp;&nbsp;&nbsp;"Apples: %3d Oranges: %3d\n",<br>&nbsp;&nbsp;&nbsp;$apples, $oranges );</pre><b>Alternate name:</b> sprintf<br>
+<b>See also:</b> <a href="./string.html#string.append">string.append</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.startsWith">
+         <h4>string.startsWith( string, prefix )</h4>
+         <div class="functionDescription"><p>
+Returns 1 if the provided string starts with the given prefix, and 0 otherwise.
+</p><pre>if( string.startsWith( $url, "http://" ) ) {<br>&nbsp;&nbsp;&nbsp;# URL is of the form http://host/uri ...<br>}</pre><b>Alternate name:</b> startsWith<br>
+<b>See also:</b> <a href="./string.html#string.startsWithI">string.startsWithI</a>, <a href="./string.html#string.endsWith">string.endsWith</a>, <a href="./string.html#string.contains">string.contains</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.startsWithI">
+         <h4>string.startsWithI( string, prefix )</h4>
+         <div class="functionDescription"><p>
+Returns 1 if the provided string starts with the given prefix, and 0 otherwise. It is case-insensitive.
+</p><pre>if( string.startsWithI( $path, "/tea" ) ) {<br>&nbsp;&nbsp;&nbsp;# The path starts with tea ...<br>}</pre><b>Alternate name:</b> startsWithI<br>
+<b>See also:</b> <a href="./string.html#string.startsWith">string.startsWith</a>, <a href="./string.html#string.endsWithI">string.endsWithI</a>, <a href="./string.html#string.containsI">string.containsI</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.substring">
+         <h4>string.substring( string, base, end )</h4>
+         <div class="functionDescription"><p>
+Returns the substring starting at character position 'base' and ending at position 'end'. <br/> Note that character positions start at 0, and the end position is inclusive.
+</p><pre># Set $s to "is is a"<br>$s = string.substring( "This is a string", 2, 8 );</pre><b>Alternate name:</b> substring<br>
+</div>
+      </div>
+
+      <div class="functionDoc" id="string.trim">
+         <h4>string.trim( string )</h4>
+         <div class="functionDescription"><p>
+Returns the result of removing leading and trailing white space (and control characters) from its input
+</p><pre>$s = string.trim( " 1234 " ); # returns "1234"</pre><b>Alternate name:</b> trim<br>
+<b>See also:</b> <a href="./string.html#string.skip">string.skip</a>, <a href="./string.html#string.drop">string.drop</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.unescape">
+         <h4>string.unescape( escaped string )</h4>
+         <div class="functionDescription"><p>
+Returns the escape-decoded version of its parameter. <br/> %-encoded characters are replaced with their decoded versions. %u-encoded characters are replaced with their UTF-8 representation. If there are illegal digits which cannot safely be converted, the variable $1 is set to 0 and the result contains '_' in place of the '%'.  Such malicious %-escaped URLs are a common way of attacking unassuming servers or applications, and by handling them in this way, the attack is thwarted, but some information about a suspicious request is retained.
+</p><pre># returns "\r\n100%"<br>$s = string.unescape("%0D%0A100%25");<br># returns "something_BGelse"<br>$s = string.unescape("something%BGelse");<br># returns "file.ida"<br>$s = string.unescape("file.%u0069%u0064%u0061");</pre><b>Alternate name:</b> unescape<br>
+<b>See also:</b> <a href="./string.html#string.escape">string.escape</a>, <a href="./string.html#string.hexdecode">string.hexdecode</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.uppercase">
+         <h4>string.uppercase( string )</h4>
+         <div class="functionDescription"><p>
+Converts all characters in the provided string to uppercase and returns the result.
+</p><pre>$s = string.uppercase("aBcDeFg"); # Returns "ABCDEFG"</pre><b>Alternate name:</b> uppercase<br>
+<b>See also:</b> <a href="./string.html#string.lowercase">string.lowercase</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.urlencode">
+         <h4>string.urlencode( string )</h4>
+         <div class="functionDescription"><p>
+Returns the URL-encoded version of the supplied string to make it safe for including in URLs. It converts anything other than A-Z a-z 0-9 . - _ to percent+hex form. It encodes reserved characters (RFC 3986) and % as well. string.urlencodeexceptreserved() should be used instead to exclude those.
+</p><pre>#$url will be <br># %2Fcheck%20price%3Famount%3D12%26currency%3D%24<br>$url = string.urlencode(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/check price?amount=12&currency=$");</pre><b>Alternate name:</b> urlencode<br>
+<b>See also:</b> <a href="./string.html#string.unescape">string.unescape</a>, <a href="./string.html#string.htmlencode">string.htmlencode</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.urlencodeexceptreserved">
+         <h4>string.urlencodeexceptreserved( string )</h4>
+         <div class="functionDescription"><p>
+Returns the URL-encoded version of the supplied string to make it safe for including in URLs. It converts characters except    - unreserved characters A-Z a-z 0-9 . - _    - reserved characters /  ?  #  [  ]  @  !  $  &  '  (  )     - %    according to RFC 3986 to percent+hex form.
+</p><pre># $url will be <br># "/check%20price?amount=12&currency=$" <br># where space ' ' gets encoded to %20 <br># and leaving /, ?, = and $ as they were. <br>$url = string.urlencodeexceptreserved(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/check price?amount=12&currency=$");</pre><b>Alternate name:</b> urlencodeexceptreserved<br>
+<b>See also:</b> <a href="./string.html#string.unescape">string.unescape</a>, <a href="./string.html#string.htmlencode">string.htmlencode</a>, <a href="./string.html#string.urlencode">string.urlencode</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.validIPAddress">
+         <h4>string.validIPAddress( string )</h4>
+         <div class="functionDescription"><p>
+Returns 4 if the string provided is an IPv4 address, 6 if it is an IPv6 address and 0 if it is not a valid IP address.
+</p><pre>$ipversion = string.validIPAddress( $x );<br>if( 4 == $ipversion ) {<br>&nbsp;&nbsp;&nbsp;# do something specific to IPv4<br>} else if( 6 == $ipversion ) {<br>&nbsp;&nbsp;&nbsp;# do something specific to IPv6<br>} else {<br>&nbsp;&nbsp;&nbsp;# error: not a valid IP address<br>}</pre><b>Alternate name:</b> validIPAddress<br>
+<b>See also:</b> <a href="./string.html#string.ipmaskmatch">string.ipmaskmatch</a></div>
+      </div>
+
+      <div class="functionDoc" id="string.wildmatch">
+         <h4>string.wildmatch( string, pattern )</h4>
+         <div class="functionDescription"><p>
+Performs a shell-like wild match on the supplied string. The pattern may contain the wildcard characters '?' (which matches a single character) and '*' (which matches any substring). <br/> It returns 1 if matched, and 0 otherwise.
+</p><pre>$url = http.getPath();<br>if( string.wildmatch( $url, "*.cgi" ) ) {<br>&nbsp;&nbsp;&nbsp;# Is a request for a CGI script ...<br>}</pre><b>Alternate name:</b> wildmatch<br>
+<b>See also:</b> <a href="./string.html#string.regexmatch">string.regexmatch</a></div>
+      </div>
+
+   </body>
+</html>

@@ -1,0 +1,66 @@
+<html>
+   <header>
+      <title>resource</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>resource</h2>
+
+      <div class="groupDescription">Functions that allow you to access files uploaded to the 'Extra Files' section of the traffic manager.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#resource.exists">resource.exists</a>
+         </li>
+         <li>
+            <a href="#resource.get">resource.get</a>
+         </li>
+         <li>
+            <a href="#resource.getLines">resource.getLines</a>
+         </li>
+         <li>
+            <a href="#resource.getMD5">resource.getMD5</a>
+         </li>
+         <li>
+            <a href="#resource.getMTime">resource.getMTime</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="resource.exists">
+         <h4>resource.exists( filename )</h4>
+         <div class="functionDescription"><p>
+Checks whether or not the named file exists in <i>ZEUSHOME</i>/zxtm/conf/extra/. If it exists 1 is returned, 0 otherwise.
+</p><pre># Test if the file exists<br>if( resource.exists( "myfile" ) ) {<br>&nbsp;&nbsp;&nbsp;# ... process resource<br>}</pre><b>See also:</b> <a href="./resource.html#resource.get">resource.get</a>, <a href="./resource.html#resource.getMD5">resource.getMD5</a></div>
+      </div>
+
+      <div class="functionDoc" id="resource.get">
+         <h4>resource.get( filename )</h4>
+         <div class="functionDescription"><p>
+Returns the contents of a named file stored in the <i>ZEUSHOME</i>/zxtm/conf/extra/ directory. If the file doesn't exist, then an empty string is returned. Note that subdirectories of conf/extra are not supported. <br/> Resources are pre-loaded into memory, so this call does not cause the file to be reloaded.
+</p><pre># Read the contents of the 'info' file and add them<br># as a new header.<br>http.addheader( "X-Info", resource.get( "info" ));</pre></div>
+      </div>
+
+      <div class="functionDoc" id="resource.getLines">
+         <h4>resource.getLines( filename )</h4>
+         <div class="functionDescription"><p>
+Returns the contents of a named file stored in the <i>ZEUSHOME</i>/zxtm/conf/extra/ directory as an array. If the file doesn't exist, then an empty array is returned. Note that subdirectories of conf/extra are not supported. <br/> Resources are pre-loaded into memory, so this call does not cause the file to be reloaded.
+</p><pre># Read the contents of the 'info' file and add<br># process them line-by-line<br>$info = resource.getLines( "info" );<br>foreach( $line in $info ) {<br>&nbsp;&nbsp;&nbsp;# ...<br>}</pre></div>
+      </div>
+
+      <div class="functionDoc" id="resource.getMD5">
+         <h4>resource.getMD5( filename )</h4>
+         <div class="functionDescription"><p>
+Returns the MD5 of the current contents of the file in <i>ZEUSHOME</i>/zxtm/conf/extra/. If the file doesn't exist, an empty string is returned. <br/> File MD5s are cached to speed up this call.
+</p><pre># Get the MD5 of the file<br>$md5 = resource.getMD5( "myfile" );</pre><b>See also:</b> <a href="./resource.html#resource.exists">resource.exists</a>, <a href="./resource.html#resource.get">resource.get</a></div>
+      </div>
+
+      <div class="functionDoc" id="resource.getMTime">
+         <h4>resource.getMTime( filename )</h4>
+         <div class="functionDescription"><p>
+Returns the time that the named file in <i>ZEUSHOME</i>/zxtm/conf/extra/ was last modified, in seconds since the epoch (i.e. UNIX time). If the file doesn't exist, 0 is returned.
+</p><pre># Find out the time the file was last modified<br>$mtime = resource.getMTime( "myfile" );</pre><b>See also:</b> <a href="./resource.html#resource.exists">resource.exists</a>, <a href="./resource.html#resource.get">resource.get</a>, <a href="./resource.html#resource.getMD5">resource.getMD5</a>, <a href="./sys.html#sys.timeToString">sys.timeToString</a>, <a href="./sys.html#sys.time">sys.time</a></div>
+      </div>
+
+   </body>
+</html>

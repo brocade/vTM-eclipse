@@ -1,0 +1,406 @@
+<html>
+   <header>
+      <title>ssl</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>ssl</h2>
+
+      <div class="groupDescription">Functions relating to the encryption applied to the current connection.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#ssl.clientCert">ssl.clientCert</a>
+         </li>
+         <li>
+            <a href="#ssl.clientCertAlgorithm">ssl.clientCertAlgorithm</a>
+         </li>
+         <li>
+            <a href="#ssl.clientCertChain">ssl.clientCertChain</a>
+         </li>
+         <li>
+            <a href="#ssl.clientCertCommonName">ssl.clientCertCommonName</a>
+         </li>
+         <li>
+            <a href="#ssl.clientCertEndDate">ssl.clientCertEndDate</a>
+         </li>
+         <li>
+            <a href="#ssl.clientCertHash">ssl.clientCertHash</a>
+         </li>
+         <li>
+            <a href="#ssl.clientCertIssuer">ssl.clientCertIssuer</a>
+         </li>
+         <li>
+            <a href="#ssl.clientCertPublicKey">ssl.clientCertPublicKey</a>
+         </li>
+         <li>
+            <a href="#ssl.clientCertSHA1">ssl.clientCertSHA1</a>
+         </li>
+         <li>
+            <a href="#ssl.clientCertSerial">ssl.clientCertSerial</a>
+         </li>
+         <li>
+            <a href="#ssl.clientCertSerialDec">ssl.clientCertSerialDec</a>
+         </li>
+         <li>
+            <a href="#ssl.clientCertStartDate">ssl.clientCertStartDate</a>
+         </li>
+         <li>
+            <a href="#ssl.clientCertStatus">ssl.clientCertStatus</a>
+         </li>
+         <li>
+            <a href="#ssl.clientCertSubject">ssl.clientCertSubject</a>
+         </li>
+         <li>
+            <a href="#ssl.clientCertVersion">ssl.clientCertVersion</a>
+         </li>
+         <li>
+            <a href="#ssl.clientCipher">ssl.clientCipher</a>
+         </li>
+         <li>
+            <a href="#ssl.clientSupportsSecureRenegotiation">ssl.clientSupportsSecureRenegotiation</a>
+         </li>
+         <li>
+            <a href="#ssl.getClientCloseAlert">ssl.getClientCloseAlert</a>
+         </li>
+         <li>
+            <a href="#ssl.getServerCloseAlert">ssl.getServerCloseAlert</a>
+         </li>
+         <li>
+            <a href="#ssl.getTLSServerName">ssl.getTLSServerName</a>
+         </li>
+         <li>
+            <a href="#ssl.isSSL">ssl.isSSL</a>
+         </li>
+         <li>
+            <a href="#ssl.serverCert">ssl.serverCert</a>
+         </li>
+         <li>
+            <a href="#ssl.serverCertAlgorithm">ssl.serverCertAlgorithm</a>
+         </li>
+         <li>
+            <a href="#ssl.serverCertCommonName">ssl.serverCertCommonName</a>
+         </li>
+         <li>
+            <a href="#ssl.serverCertEndDate">ssl.serverCertEndDate</a>
+         </li>
+         <li>
+            <a href="#ssl.serverCertHash">ssl.serverCertHash</a>
+         </li>
+         <li>
+            <a href="#ssl.serverCertIssuer">ssl.serverCertIssuer</a>
+         </li>
+         <li>
+            <a href="#ssl.serverCertName">ssl.serverCertName</a>
+         </li>
+         <li>
+            <a href="#ssl.serverCertPublicKey">ssl.serverCertPublicKey</a>
+         </li>
+         <li>
+            <a href="#ssl.serverCertSHA1">ssl.serverCertSHA1</a>
+         </li>
+         <li>
+            <a href="#ssl.serverCertSerial">ssl.serverCertSerial</a>
+         </li>
+         <li>
+            <a href="#ssl.serverCertStartDate">ssl.serverCertStartDate</a>
+         </li>
+         <li>
+            <a href="#ssl.serverCertSubject">ssl.serverCertSubject</a>
+         </li>
+         <li>
+            <a href="#ssl.serverCertVersion">ssl.serverCertVersion</a>
+         </li>
+         <li>
+            <a href="#ssl.serverSiteName">ssl.serverSiteName</a>
+         </li>
+         <li>
+            <a href="#ssl.setClientCloseAlert">ssl.setClientCloseAlert</a>
+         </li>
+         <li>
+            <a href="#ssl.setServerCloseAlert">ssl.setServerCloseAlert</a>
+         </li>
+         <li>
+            <a href="#ssl.setTLSServerName">ssl.setTLSServerName</a>
+         </li>
+         <li>
+            <a href="#ssl.sslSessionID">ssl.sslSessionID</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="ssl.clientCert">
+         <h4>ssl.clientCert(  )</h4>
+         <div class="functionDescription"><p>
+Returns the PEM encoded client certificate, or the empty string if the connection was not SSL-encrypted or if a certificate was not supplied.
+</p><pre># Display the client certificate data<br>$cert = ssl.clientCert();<br>log.info( "Certificate: " . $cert );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.clientCertAlgorithm">
+         <h4>ssl.clientCertAlgorithm(  )</h4>
+         <div class="functionDescription"><p>
+If the connection is SSL-encrypted and the client has supplied a valid certificate, then this returns either 'rsaEncryption', 'md2withRSAEncryption', 'md5withRSAEncryption', 'sha1withRSAEncryption' or 'RSA', depending on the certificate's encryption and hash algorithms. Otherwise, it returns the empty string.
+</p><pre># Display the client certificate algorithm<br>$alg = ssl.clientCertAlgorithm();<br>log.info( "Certificate alg: ".$alg );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.clientCertChain">
+         <h4>ssl.clientCertChain(  )</h4>
+         <div class="functionDescription"><p>
+Returns the PEM encoded client certificate chain, or the empty string if the connection was not SSL-encrypted or if a certificate was not supplied.
+</p><pre># Display the client certificate data<br>$cert = ssl.clientCertChain();<br>log.info( "Certificate Chain: " . $cert );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a>, <a href="./ssl.html#ssl.clientCert">ssl.clientCert</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.clientCertCommonName">
+         <h4>ssl.clientCertCommonName(  )</h4>
+         <div class="functionDescription"><p>
+Returns the common name of the client certificate, or the empty string if the connection was not SSL-encrypted or if a certificate was not supplied.
+</p><pre>$common_name = ssl.clientCertCommonName();<br>log.info( "Certificate common name: ".$common_name );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.clientCertEndDate">
+         <h4>ssl.clientCertEndDate(  )</h4>
+         <div class="functionDescription"><p>
+If the connection is SSL-encrypted and the client has supplied a valid certificate, then this returns the date when the certificate is no longer valid. The date is an integer, representing seconds since the epoch. <br/> Otherwise, this function returns 0.
+</p><pre># Display the client certificate end date<br>$end = ssl.clientCertEndDate();<br>log.info( "Certificate is valid until ".<br>&nbsp;&nbsp;&nbsp;sys.timeToString( $end ) );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a>, <a href="./ssl.html#ssl.clientCertStartDate">ssl.clientCertStartDate</a>, <a href="./sys.html#sys.timeToString">sys.timeToString</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.clientCertHash">
+         <h4>ssl.clientCertHash(  )</h4>
+         <div class="functionDescription"><p>
+Returns a hex-encoded MD5 hash of the client certificate, or the empty string if the connection was not SSL-encrypted, if a certificate was not supplied or if the MD5 algorithm is unavailable (e.g. when operating in  FIPS Mode).
+</p><pre># Display the client certificate hash<br>$hash = ssl.clientCertHash();<br>log.info( "Certificate hash: ".$hash );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a>, <a href="./ssl.html#ssl.clientCertSHA1">ssl.clientCertSHA1</a>, <a href="./sys.html#sys.isFIPS">sys.isFIPS</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.clientCertIssuer">
+         <h4>ssl.clientCertIssuer(  )</h4>
+         <div class="functionDescription"><p>
+Returns a string representing the issuer of the client certificate, or the empty string if the connection was not SSL-encrypted or if a certificate was not supplied.
+</p><pre># Display the client certificate issuer<br>$issuer = ssl.clientCertIssuer();<br>log.info( "Certificate issuer: ".$issuer );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.clientCertPublicKey">
+         <h4>ssl.clientCertPublicKey(  )</h4>
+         <div class="functionDescription"><p>
+Returns a string representation of the public key of the client certificate, or the empty string if the connection was not SSL-encrypted or if a certificate was not supplied.
+</p><pre># Display the client certificate key<br>$key = ssl.clientCertPublicKey();<br>log.info( "Certificate key: ".$key );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.clientCertSHA1">
+         <h4>ssl.clientCertSHA1(  )</h4>
+         <div class="functionDescription"><p>
+Returns a hex-encoded SHA1 fingerprint of the client certificate, or the empty string if the connection was not SSL-encrypted or if a certificate was not supplied.
+</p><pre># Display the client certificate SHA1 fingerprint<br>$sha1 = ssl.clientCertSHA1();<br>log.info( "Certificate SHA1 fingerprint: " . $sha1 );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a>, <a href="./ssl.html#ssl.clientCertHash">ssl.clientCertHash</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.clientCertSerial">
+         <h4>ssl.clientCertSerial(  )</h4>
+         <div class="functionDescription"><p>
+Returns the serial (in hex) of the client certificate, or the empty string if the connection was not SSL-encrypted or if a certificate was not supplied.
+</p><pre># Display the client certificate serial<br>$serial = ssl.clientCertSerial();<br>log.info( "Certificate serial: ".$serial );</pre><b>See also:</b> <a href="./ssl.html#ssl.clientCertSerialDec">ssl.clientCertSerialDec</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.clientCertSerialDec">
+         <h4>ssl.clientCertSerialDec(  )</h4>
+         <div class="functionDescription"><p>
+Returns the serial (in decimal) of the client certificate, or the empty string if the connection was not SSL-encrypted or if a certificate was not supplied.
+</p><pre># Display the client certificate serial in decimal<br>$serial = ssl.clientCertSerialDec();<br>log.info( "Certificate serial: ".$serial );</pre><b>See also:</b> <a href="./ssl.html#ssl.clientCertSerial">ssl.clientCertSerial</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.clientCertStartDate">
+         <h4>ssl.clientCertStartDate(  )</h4>
+         <div class="functionDescription"><p>
+If the connection is SSL-encrypted and the client has supplied a valid certificate, then this returns the date when the certificate became valid. The date is an integer, representing seconds since the epoch. <br/> Otherwise, this function returns 0.
+</p><pre># Display the client certificate start date<br>$start = ssl.clientCertStartDate();<br>log.info( "Certificate is valid from ".<br>&nbsp;&nbsp;&nbsp;sys.timeToString( $start ) );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a>, <a href="./ssl.html#ssl.clientCertEndDate">ssl.clientCertEndDate</a>, <a href="./sys.html#sys.timeToString">sys.timeToString</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.clientCertStatus">
+         <h4>ssl.clientCertStatus(  )</h4>
+         <div class="functionDescription"><p>
+Returns 'OK' if the client certificate is valid, or 'NoClientCert' if it was missing or not valid. It returns the empty string if the connection was not SSL-encrypted.
+</p><pre>if( ssl.clientCertStatus() != "OK" ) {<br>&nbsp;&nbsp;&nbsp;# Handle missing client certificate ...<br>}</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.clientCertSubject">
+         <h4>ssl.clientCertSubject(  )</h4>
+         <div class="functionDescription"><p>
+Returns a string representing the subject of the client certificate, or the empty string if the connection was not SSL-encrypted or if a certificate was not supplied.
+</p><pre># Display the client certificate subject<br>$subject = ssl.clientCertSubject();<br>log.info( "Certificate subject: ".$subject );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.clientCertVersion">
+         <h4>ssl.clientCertVersion(  )</h4>
+         <div class="functionDescription"><p>
+Returns "1", "2" or "3" denoting the version of the client certificate, or the empty string if the connection was not SSL-encrypted or if a certificate was not supplied.
+</p><pre># Display the client certificate version<br>$version = ssl.clientCertVersion();<br>log.info( "Certificate version: ".$version );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.clientCipher">
+         <h4>ssl.clientCipher(  )</h4>
+         <div class="functionDescription"><p>
+Returns the cipher used by the client to SSL-encrypt the connection. It returns an empty string if the connection was not SSL-encrypted. <br/> The string returned contains the cipher algorithm, SSL version and effective cipher strength, such as: <br/>  <br/> &nbsp;&nbsp;SSL_RSA_WITH_RC4_128_SHA, version=SSLv3, bits=128
+</p><pre># Get the encryption cipher<br>$cipher = ssl.clientCipher();<br>log.info( "Encrypted with ".$cipher );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.clientSupportsSecureRenegotiation">
+         <h4>ssl.clientSupportsSecureRenegotiation(  )</h4>
+         <div class="functionDescription"><p>
+Returns true if the client is RFC 5746 compliant, else false.
+</p><pre>if( ssl.isSSL() ) {<br>&nbsp;&nbsp;&nbsp;# gather statistics about client-side support<br>&nbsp;&nbsp;&nbsp;# for RFC 5746<br>&nbsp;&nbsp;&nbsp;if( ssl.clientSupportsSecureRenegotiation() ) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;counter.increment( 1 );<br>&nbsp;&nbsp;&nbsp;} else {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;counter.increment( 2 );<br>&nbsp;&nbsp;&nbsp;}<br>}</pre><b>See also:</b> <a href="./ssl.html#ssl.requireCert">ssl.requireCert</a>, <a href="./ssl.html#ssl.requestCert">ssl.requestCert</a>, <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.getClientCloseAlert">
+         <h4>ssl.getClientCloseAlert(  )</h4>
+         <div class="functionDescription"><p>
+Check whether your traffic manager will send the SSL client an SSL close alert prior to terminating the TCP connection.  The function will return a value of 1 if close alerts are enabled, and 0 if they are disabled.  The function will return -1 if the client-side connection is not established, or is not an SSL connection.
+</p><pre>if( ssl.isSSL() ) {<br>&nbsp;&nbsp;&nbsp;$alert = ssl.getClientCloseAlert();<br>&nbsp;&nbsp;&nbsp;log.info( "client close alert: " . $alert );<br>}</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a>, <a href="./ssl.html#ssl.setClientCloseAlert">ssl.setClientCloseAlert</a>, <a href="./ssl.html#ssl.setServerCloseAlert">ssl.setServerCloseAlert</a>, <a href="./ssl.html#ssl.getServerCloseAlert">ssl.getServerCloseAlert</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.getServerCloseAlert">
+         <h4>ssl.getServerCloseAlert(  )</h4>
+         <div class="functionDescription"><p>
+Check whether your traffic manager will send the SSL server an SSL close alert prior to terminating the TCP connection.  The function will return a value of 1 if close alerts are enabled, and 0 if they are disabled.  The function will return -1 if the connection is not an SSL connection, or if the server-side connection is not yet established (i.e. it should typically only be used in response rules.)
+</p><pre>if( ssl.isSSL() ) {<br>&nbsp;&nbsp;&nbsp;$alert = ssl.getServerCloseAlert();<br>&nbsp;&nbsp;&nbsp;log.info( "server close alert: " . $alert );<br>}</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a>, <a href="./ssl.html#ssl.setServerCloseAlert">ssl.setServerCloseAlert</a>, <a href="./ssl.html#ssl.setClientCloseAlert">ssl.setClientCloseAlert</a>, <a href="./ssl.html#ssl.getClientCloseAlert">ssl.getClientCloseAlert</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.getTLSServerName">
+         <h4>ssl.getTLSServerName(  )</h4>
+         <div class="functionDescription"><p>
+Returns the hostname provided by the client using the TLS 1.0 'server_name' extension. If this connection is not using SSL decryption or the client did use the extension then this function returns the empty string.
+</p><pre>$name = ssl.getTLSServerName();<br>log.info( "The client provided " .<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"the server name: " . $name );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a>, <a href="./ssl.html#ssl.setTLSServerName">ssl.setTLSServerName</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.isSSL">
+         <h4>ssl.isSSL(  )</h4>
+         <div class="functionDescription"><p>
+Returns 1 if this connection from the remote client was SSL encrypted and your traffic manager has decrypted the traffic. Otherwise, it returns 0.
+</p><pre>if( ssl.isSSL() ) {<br>&nbsp;&nbsp;&nbsp;# This is an SSL-encrypted connection ...<br>}</pre></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.serverCert">
+         <h4>ssl.serverCert(  )</h4>
+         <div class="functionDescription"><p>
+Returns a PEM encoded version of the entire certificate being used by your traffic manager for this connection. If this virtual server is not using SSL decryption then this function will return the empty string.
+</p><pre>$cert = ssl.serverCert();<br>log.info( "Server certificate: " . $cert );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.serverCertAlgorithm">
+         <h4>ssl.serverCertAlgorithm(  )</h4>
+         <div class="functionDescription"><p>
+Returns a description of the algorithms being used by the virtual server's current certificate. This will either be "rsaEncryption", "md2withRSAEncryption", "md5withRSAEncryption", "sha1withRSAEncryption" or "RSA". If this virtual server is not using SSL decryption (or the algorithm type is not recognised) then this function will return the empty string.
+</p><pre>$alg = ssl.serverCertAlgorithm();<br>log.info( "Server cert algorithm: " . $alg );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.serverCertCommonName">
+         <h4>ssl.serverCertCommonName(  )</h4>
+         <div class="functionDescription"><p>
+Returns the common name of the certificate being used by your traffic manager for this connection. If this virtual server is not using SSL decryption then this function will return the empty string.
+</p><pre>$common_name = ssl.serverCertCommonName();<br>if( http.getHostHeader() != $common_name ) {<br>&nbsp;&nbsp;&nbsp;log.warn( "Client browser may report certificate".<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" as invalid." );<br>}</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.serverCertEndDate">
+         <h4>ssl.serverCertEndDate(  )</h4>
+         <div class="functionDescription"><p>
+Returns the date that the certificate being used by your traffic manager for this connection became valid. The date is an integer, representing the number of seconds since the epoch. If this virtual server is not using SSL decryption then this function will return the empty string.
+</p><pre>$end = ssl.serverCertEndDate();<br>if( $time < sys.time() ) {<br>&nbsp;&nbsp;&nbsp;log.warn( "Using out of date certificate!" );<br>}</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a>, <a href="./ssl.html#ssl.serverCertStartDate">ssl.serverCertStartDate</a>, <a href="./sys.html#sys.time">sys.time</a>, <a href="./sys.html#sys.timeToString">sys.timeToString</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.serverCertHash">
+         <h4>ssl.serverCertHash(  )</h4>
+         <div class="functionDescription"><p>
+Returns the hex-encoded MD5 hash of the certificate being used by your traffic manager for this connection. If this virtual server is not using SSL decryption or if the MD5 algorithm is unavailable  (e.g. when operating in FIPS Mode) then this function will return the empty string.
+</p><pre>$md5 = ssl.serverCertHash();<br>log.info( "Server Cert Hash: " . $md5 );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a>, <a href="./ssl.html#ssl.serverCertSHA1">ssl.serverCertSHA1</a>, <a href="./sys.html#sys.isFIPS">sys.isFIPS</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.serverCertIssuer">
+         <h4>ssl.serverCertIssuer(  )</h4>
+         <div class="functionDescription"><p>
+Returns a string with the issuer data of the certificate being used by your traffic manager for this connection (each field is separated by commas). If this virtual server is not using SSL decryption then this function will return the empty string.
+</p><pre>$issuer = ssl.serverCertIssuer();<br>if( ssl.serverCertSubject() == $issuer ) {<br>&nbsp;&nbsp;&nbsp;log.info( "Certificate is self-signed" );<br>}</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a>, <a href="./ssl.html#ssl.serverCertSubject">ssl.serverCertSubject</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.serverCertName">
+         <h4>ssl.serverCertName(  )</h4>
+         <div class="functionDescription"><p>
+Returns the name of the certificate being used by the virtual server for this connection. This is the name used to identify the certificate in the UI. If this virtual server is not using SSL decryption then this function will return the empty string.
+</p><pre>$name = ssl.serverCertName();<br>log.info( "Using server cert: " . $name );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.serverCertPublicKey">
+         <h4>ssl.serverCertPublicKey(  )</h4>
+         <div class="functionDescription"><p>
+Returns information about the public key of the certificate being used by your traffic manager for this connection. If this virtual server is not using SSL decryption then this function will return the empty string.
+</p><pre># Returns public key information,<br># e.g.  "RSA (1024 bit)"<br>$public_key = ssl.serverCertPublicKey();<br>log.info( "Certificate public key: " . $public_key );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.serverCertSHA1">
+         <h4>ssl.serverCertSHA1(  )</h4>
+         <div class="functionDescription"><p>
+Returns the hex-encoded SHA1 fingerprint of the certificate being used by your traffic manager for this connection. If this virtual server is not using SSL decryption then this function will return the empty string.
+</p><pre>$sha1 = ssl.serverCertSHA1();<br>log.info( "Server Cert SHA1 Fingerprint: " . $sha1 );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a>, <a href="./ssl.html#ssl.serverCertHash">ssl.serverCertHash</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.serverCertSerial">
+         <h4>ssl.serverCertSerial(  )</h4>
+         <div class="functionDescription"><p>
+Returns a string with the serial number (in hex) of the certificate being used by your traffic manager for this connection. If this virtual server is not using SSL decryption then this function will return the empty string.
+</p><pre>$serial = ssl.serverCertSerial();<br>log.info( "Server certificate serial: " . $serial );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.serverCertStartDate">
+         <h4>ssl.serverCertStartDate(  )</h4>
+         <div class="functionDescription"><p>
+Returns the date the certificate being used by your traffic manager for this connection became valid. The date is an integer, representing the number of seconds since the epoch. If this virtual server is not using SSL decryption then this function will return the empty string.
+</p><pre>$start = ssl.serverCertStartDate();<br>log.info( "Server Certificate is valid from ".<br>&nbsp;&nbsp;&nbsp;&nbsp;sys.timeToString( $start ) );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a>, <a href="./ssl.html#ssl.serverCertEndDate">ssl.serverCertEndDate</a>, <a href="./sys.html#sys.time">sys.time</a>, <a href="./sys.html#sys.timeToString">sys.timeToString</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.serverCertSubject">
+         <h4>ssl.serverCertSubject(  )</h4>
+         <div class="functionDescription"><p>
+Returns the subject data of the certificate being used by your traffic manager for this connection (each field is separated by commas). If this virtual server is not using SSL decryption then this function will return the empty string.
+</p><pre># Returns the subject information of the cert,<br># e.g. C=GB, L=Cambridge, O=Brocade, CN=foo.com<br>$subject = ssl.serverCertSubject();<br>log.info( "Server cert subject: " . $subject );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a>, <a href="./ssl.html#ssl.serverCertIssuer">ssl.serverCertIssuer</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.serverCertVersion">
+         <h4>ssl.serverCertVersion(  )</h4>
+         <div class="functionDescription"><p>
+Returns the version of the certificate being used by your traffic manager for this connection (either "1", "2" or "3"). If this virtual server is not using SSL decryption then this function will return the empty string.
+</p><pre>$version = ssl.serverCertVersion();<br>log.info( "Server Cert Version: " . $version );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.serverSiteName">
+         <h4>ssl.serverSiteName(  )</h4>
+         <div class="functionDescription"><p>
+Returns the hostname or IP address that was used to select the current server certificate. If the default certificate was used, or the current connection is not encrypted, the empty string is  returned.
+</p><pre>$site_name = ssl.serverSiteName();<br>if( ssl.isSSL() && $site_name == "" ) {<br>&nbsp;&nbsp;&nbsp;# The default certificate was used<br>}</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.setClientCloseAlert">
+         <h4>ssl.setClientCloseAlert( alertflag )</h4>
+         <div class="functionDescription"><p>
+Sets whether your traffic manager will send the SSL client an SSL close alert prior to terminating the TCP connection. An value of 0 will disable close alerts, a non-zero value will enable close alerts.  This setting also applies to related connections, such as data transfer channels related to FTP command channels.  If the connection with the client is not an SSL connection then calling this function will do nothing.
+</p><pre>if( ssl.isSSL() ) {<br>&nbsp;&nbsp;&nbsp;# Ensure close alerts are enabled.<br>&nbsp;&nbsp;&nbsp;ssl.setClientCloseAlert( 1 );<br>}</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a>, <a href="./ssl.html#ssl.getClientCloseAlert">ssl.getClientCloseAlert</a>, <a href="./ssl.html#ssl.setServerCloseAlert">ssl.setServerCloseAlert</a>, <a href="./ssl.html#ssl.getServerCloseAlert">ssl.getServerCloseAlert</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.setServerCloseAlert">
+         <h4>ssl.setServerCloseAlert( alertflag )</h4>
+         <div class="functionDescription"><p>
+Sets whether your traffic manager will send the SSL server an SSL close alert prior to terminating the TCP connection. A value of 0 will disable close alerts, a non-zero value will enable close alerts.  This setting also applies to related connections, such as data transfer channels related to FTP command channels.  Note that this function will only work on SSL connections and the server side connection must be established (i.e. it should typically only be used in response rules.)
+</p><pre>if( ssl.isSSL() ) {<br>&nbsp;&nbsp;&nbsp;# Ensure close alerts are enabled.<br>&nbsp;&nbsp;&nbsp;ssl.setServerCloseAlert( 1 );<br>}</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a>, <a href="./ssl.html#ssl.getServerCloseAlert">ssl.getServerCloseAlert</a>, <a href="./ssl.html#ssl.setClientCloseAlert">ssl.setClientCloseAlert</a>, <a href="./ssl.html#ssl.getClientCloseAlert">ssl.getClientCloseAlert</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.setTLSServerName">
+         <h4>ssl.setTLSServerName( servername )</h4>
+         <div class="functionDescription"><p>
+Instructs your traffic manager to use the specified hostname when using the TLS 1.0 server_name extension. This method only works if the back end pool has SSL encryption and the server_name option enabled. Using the empty string as this function's parameter will make your traffic manager use the hostname of the node that it is connecting to.
+</p><pre># Use the hostname foo in the TLS 1.0 server_name<br># extension<br>ssl.setTLSServerName( "foo" );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a>, <a href="./ssl.html#ssl.getTLSServerName">ssl.getTLSServerName</a></div>
+      </div>
+
+      <div class="functionDoc" id="ssl.sslSessionID">
+         <h4>ssl.sslSessionID(  )</h4>
+         <div class="functionDescription"><p>
+Returns the session ID of the current SSL connection as a hex-encoded string. If the connection was not SSL-encrypted then an empty string is returned.<br/>  This function can also be used with SSL pass-through traffic.  When used in a request rule the traffic manager will look for a session ID provided in the ClientHello.  Clients provide session IDs only if they are trying to resume a previously used SSL session.  If the client did not provide a session ID, this function will return an empty string. <br/>  When used in a response rule with SSL pass-through traffic, this function will return the session ID provided in the ServerHello.  This might be the same as the session ID sent by the client If the client attempted to resume the session, but this is not guaranteed.
+</p><pre># Get the SSL session ID<br>$sessionid = ssl.sslSessionID();<br>log.info( "SessionID: " . $sessionid );</pre><b>See also:</b> <a href="./ssl.html#ssl.isSSL">ssl.isSSL</a></div>
+      </div>
+
+   </body>
+</html>

@@ -1,0 +1,26 @@
+<html>
+   <header>
+      <title>xml.xslt</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>xml.xslt</h2>
+
+      <div class="groupDescription">XSLT transformation functions.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#xml.xslt.transform">xml.xslt.transform</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="xml.xslt.transform">
+         <h4>xml.xslt.transform( document, stylesheet )</h4>
+         <div class="functionDescription"><p>
+Performs an XSLT transformation on a XML document. It returns the transformed document, or -1 on failure. <br/> The XML processing functionality must be enabled by the software license.
+</p><pre># Perform XSLT transformation on supplied POST XML<br># data, and return the HTML result to the client.<br>$response = xml.xslt.transform( http.getbody( 0 ),<br>&nbsp;&nbsp;&nbsp;resource.get( "people.xsl" ));<br>http.sendResponse( "200 OK", "text/html",<br>&nbsp;&nbsp;&nbsp;$response, "" );</pre></div>
+      </div>
+
+   </body>
+</html>

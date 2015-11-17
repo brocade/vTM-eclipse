@@ -1,0 +1,76 @@
+<html>
+   <header>
+      <title>hash</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>hash</h2>
+
+      <div class="groupDescription"></div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#hash.contains">hash.contains</a>
+         </li>
+         <li>
+            <a href="#hash.count">hash.count</a>
+         </li>
+         <li>
+            <a href="#hash.delete">hash.delete</a>
+         </li>
+         <li>
+            <a href="#hash.empty">hash.empty</a>
+         </li>
+         <li>
+            <a href="#hash.keys">hash.keys</a>
+         </li>
+         <li>
+            <a href="#hash.values">hash.values</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="hash.contains">
+         <h4>hash.contains( hash, key )</h4>
+         <div class="functionDescription"><p>
+Returns whether the supplied hash contains a particular key.
+</p><pre># See if bob is in the hash of users<br>#  and if so, whether his password matches<br>if( hash.contains( $users, "bob" ) ) {<br>&nbsp;&nbsp;&nbsp;if( $users["bob"] == $password ) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Access granted<br>&nbsp;&nbsp;&nbsp;} else {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Access denied<br>&nbsp;&nbsp;&nbsp;}<br>} else {<br>&nbsp;&nbsp;&nbsp;&nbsp;# User does not exist<br>}</pre><b>See also:</b> <a href="./hash.html#hash.keys">hash.keys</a></div>
+      </div>
+
+      <div class="functionDoc" id="hash.count">
+         <h4>hash.count( hash )</h4>
+         <div class="functionDescription"><p>
+Returns the number of items in the hash.
+</p><pre># See how many HTTP headers there are<br>$headers = http.getHeaders();<br>log.info( "There are "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;. hash.count( $headers )<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;. " headers in this request" );</pre></div>
+      </div>
+
+      <div class="functionDoc" id="hash.delete">
+         <h4>hash.delete( hash, key )</h4>
+         <div class="functionDescription"><p>
+Deletes the specified key from the hash.  The return value of this function can be used as the argument to another function to perform multiple operations on the same hash.
+</p><pre>$hash = [ "orange" => "fruit",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"apple" => "fruit",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"cabbage" => "vegetable",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"pear" => "fruit" ];<br><br>hash.delete( $hash, "cabbage" );<br><br># keys will be orange, apple and pear<br>$keys = hash.keys( $hash );</pre><b>See also:</b> <a href="./hash.html#hash.keys">hash.keys</a></div>
+      </div>
+
+      <div class="functionDoc" id="hash.empty">
+         <h4>hash.empty( hash )</h4>
+         <div class="functionDescription"><p>
+Removes all the values from the hash.  The return value of this function can be used as the argument to another function to perform multiple operations on the same hash.
+</p><pre># Empty the contents of a hypothetical set object<br>sub set.empty( $set ) {<br>&nbsp;&nbsp;&nbsp;# You cannot do '$set = [];' here because that<br>&nbsp;&nbsp;&nbsp;# would be reassigning the input variable<br>&nbsp;&nbsp;&nbsp;hash.empty( $set );<br>}<br><br>set.empty( $my_set );</pre><b>See also:</b> <a href="./hash.html#hash.keys">hash.keys</a></div>
+      </div>
+
+      <div class="functionDoc" id="hash.keys">
+         <h4>hash.keys( hash )</h4>
+         <div class="functionDescription"><p>
+Returns an array containing the keys that map to values in the supplied hash data structure.
+</p><pre># Get the set of IPs that have connected to the site<br>$ips = data.get( "connected_ips" );<br>$ips[request.getRemoteIP()] = 1;<br>data.set( "connected_ips", $ips );<br>$connected_set = hash.keys( $ips );<br>log.info( array.length( $connected_set ) .<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" unique IPs have connected to the site" );</pre><b>See also:</b> <a href="./hash.html#hash.values">hash.values</a></div>
+      </div>
+
+      <div class="functionDoc" id="hash.values">
+         <h4>hash.values( hash )</h4>
+         <div class="functionDescription"><p>
+Returns an array containing the values that have been mapped to in the hash.
+</p><pre># Add up the values of a hash<br>$values = hash.values( $hash );<br>$total = 0;<br>foreach( $val in $values ) {<br>&nbsp;&nbsp;&nbsp;$total += $val;<br>}<br>log.info( "The total is " . $total );</pre><b>See also:</b> <a href="./hash.html#hash.keys">hash.keys</a></div>
+      </div>
+
+   </body>
+</html>

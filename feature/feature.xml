@@ -1,0 +1,71 @@
+<?xml version="1.0" ?><feature id="com.zeus.eclipsePlugin" label="Brocade Virtual Traffic Manager Plugin for Eclipse" provider-name="Brocade Communications Systems" version="20140402.1.91597">
+
+   <description url="https://github.com/brocade/vTM-eclipse">
+      Plug-in that allows the editing of TrafficScript rules on Brocade
+      Virtual Traffic Manager.
+   </description>
+
+   <copyright url="http://www.brocade.com/">
+      Copyright (c) 2015 Brocade Communications Systems, Inc.
+Brocade Virtual Traffic Manager Plugin for Eclipse is licensed under the terms and conditions
+of the Eclipse Public License v1.0 set forth at https://github.com/brocade/vTM-eclipse/LICENSE
+(&quot;License&quot;). Brocade Virtual Traffic Manager Plugin for Eclipse is distributed &quot;AS
+IS&quot; as set forth in the License.  Brocade Virtual Traffic Manager Plugin for Eclipse 
+also includes certain third party code.  All such third party
+code is also distributed &quot;AS IS&quot; and is licensed by the respective
+copyright holders under the applicable terms and conditions (including,
+without limitation, warranty and liability disclaimers) identified
+at https://github.com/brocade/vTM-eclipse/LICENSE.
+   </copyright>
+
+   <license url="https://github.com/brocade/vTM-eclipse/LICENSE">
+      Brocade Virtual Traffic Manager Plugin for Eclipse is licensed under the following license terms:
+
+Copyright (c) 2015, Brocade Communications Systems, Inc.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+* Neither the name of Brocade nor the names of its
+  contributors may be used to endorse or promote products derived from
+  this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+   </license>
+
+   <url>
+      <update label="Brocade Communications Systems" url="https://github.com/brocade/vTM-eclipse/update-site"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.ui.views"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.core.filesystem"/>
+      <import plugin="org.eclipse.core.expressions"/>
+   </requires>
+
+   <plugin download-size="0" id="com.zeus.eclipsePlugin" install-size="0" version="0.0.0"/>
+
+</feature>

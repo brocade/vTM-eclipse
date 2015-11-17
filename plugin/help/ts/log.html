@@ -1,0 +1,46 @@
+<html>
+   <header>
+      <title>log</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>log</h2>
+
+      <div class="groupDescription">Functions for writing to the event log.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#log.error">log.error</a>
+         </li>
+         <li>
+            <a href="#log.info">log.info</a>
+         </li>
+         <li>
+            <a href="#log.warn">log.warn</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="log.error">
+         <h4>log.error( message )</h4>
+         <div class="functionDescription"><p>
+Writes an error message to the traffic managers's event log file. This log can be viewed through the UI.
+</p><pre>log.error( "Insert coffee to continue" );</pre><b>See also:</b> <a href="./log.html#log.info">log.info</a>, <a href="./log.html#log.warn">log.warn</a>, <a href="./event.html#event.emit">event.emit</a></div>
+      </div>
+
+      <div class="functionDoc" id="log.info">
+         <h4>log.info( message )</h4>
+         <div class="functionDescription"><p>
+Writes an informational message to the traffic manager's event log file. This log can be viewed through the UI.
+</p><pre>log.info( "Everything is OK" );</pre><b>See also:</b> <a href="./log.html#log.warn">log.warn</a>, <a href="./log.html#log.error">log.error</a>, <a href="./event.html#event.emit">event.emit</a></div>
+      </div>
+
+      <div class="functionDoc" id="log.warn">
+         <h4>log.warn( message )</h4>
+         <div class="functionDescription"><p>
+Writes a warning message to the traffic manager's event log file. This log can be viewed through the UI.
+</p><pre>log.warn( "There may be trouble ahead" );</pre><b>See also:</b> <a href="./log.html#log.info">log.info</a>, <a href="./log.html#log.error">log.error</a>, <a href="./event.html#event.emit">event.emit</a></div>
+      </div>
+
+   </body>
+</html>

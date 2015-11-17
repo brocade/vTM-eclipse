@@ -1,0 +1,26 @@
+<html>
+   <header>
+      <title>counter</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>counter</h2>
+
+      <div class="groupDescription">Functions for altering user defined counters.</div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#counter.increment">counter.increment</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="counter.increment">
+         <h4>counter.increment( counter, [amount] )</h4>
+         <div class="functionDescription"><p>
+Increments the numbered counter. These counters are readable via SNMP, and can be graphed on the Current Activity page on the Administration Server. <br/> By default, the counter is incremented by one, but you can also supply an amount to increment the counter by. If a negative amount is supplied the counter is decremented, but please keep in mind that a decrement is indiscernible from a wrap-around.
+</p><pre># Increment the first user counter by 100<br>counter.increment( 1, 100 );<br># Increment the first user counter by 1<br>counter.increment( 1 );</pre><b>See also:</b> <a href="./counter64.html#counter64.increment">counter64.increment</a></div>
+      </div>
+
+   </body>
+</html>

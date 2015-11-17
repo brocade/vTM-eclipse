@@ -1,0 +1,26 @@
+<html>
+   <header>
+      <title>http.request.ssl</title>
+      <link rel="stylesheet" href="../../../PRODUCT_PLUGIN/book.css" />
+   </header>
+   <body>
+      <h2>http.request.ssl</h2>
+
+      <div class="groupDescription"></div>
+      <h3>Contents</h3>
+      <ul>
+         <li>
+            <a href="#http.request.ssl.get">http.request.ssl.get</a>
+         </li>
+      </ul>
+
+      <h3>Function Documentation</h3>
+      <div class="functionDoc" id="http.request.ssl.get">
+         <h4>http.request.ssl.get( url, ca_certificates, [ headers ], [ timeout ] )</h4>
+         <div class="functionDescription"><p>
+Issues an HTTPS request for a remote web page and returns the body of the page requested. Its behavior is identical to that of http.request.get when used with an HTTPS URL except for the following differences:  <ol>  <li>The URL must start with 'https://', e.g https://www.iana.org, i.e. this function can only be used for secure communication.</li>  <li> http.request.ssl.get will verify the server's certificate during the SSL Handshake.  It will do so using the CA certificates provided in the second argument.  This argument has to be an array of certificates.  Certificates must be provided in PEM format.  If one of the provided strings is not a valid certificate in PEM format, or if the array is empty, the function will fail. Therefore, verification of the peer's certificate is mandatory.</li>  <li>Kept-alive connections are not re-used.</li>  </ol>
+</p><pre>$issuer = '-----BEGIN CERTIFICATE-----<br>MIIE3jCCA8agAwIBAgICAwEwDQYJKoZIhvcNAQEFBQAwYzELMA<br>kGA1UEBhMCVVMxITAfBgNVBAoTGFRoZSBHbyBEYWRkeSBHcm91<br>cCwgSW5jLjExMC8GA1UECxMoR28gRGFkZHkgQ2xhc3MgMiBDZX<br>J0aWZpY2F0aW9uIEF1dGhvcml0eTAeFw0wNjExMTYwMTU0Mzda<br>Fw0yNjExMTYwMTU0MzdaMIHKMQswCQYDVQQGEwJVUzEQMA4GA1<br>UECBMHQXJpem9uYTETMBEGA1UEBxMKU2NvdHRzZGFsZTEaMBgG<br>A1UEChMRR29EYWRkeS5jb20sIEluYy4xMzAxBgNVBAsTKmh0dH<br>A6Ly9jZXJ0aWZpY2F0ZXMuZ29kYWRkeS5jb20vcmVwb3NpdG9y<br>eTEwMC4GA1UEAxMnR28gRGFkZHkgU2VjdXJlIENlcnRpZmljYX<br>Rpb24gQXV0aG9yaXR5MREwDwYDVQQFEwgwNzk2OTI4NzCCASIw<br>DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMQt1RWMnCZM7D<br>I161+4WQFapmGBWTtwY6vj3D3HKrjJM9N55DrtPDAjhI6zMBS2<br>sofDPZVUBJ7fmd0LJR4h3mUpfjWoqVTr9vcyOdQmVZWt7/v+WI<br>bXnvQAjYwqDL1CBM6nPwT27oDyqu9SoWlm2r4arV3aLGbqGmu7<br>5RpRSgAvSMeYddi5Kcju+GZtCpyz8/x4fKL4o/K1w/O5epHBp+<br>YlLpyo7RJlbmr2EkRTcDCVw5wrWCs9CHRK8r5RsL+H0EwnWGu1<br>NcWdrxcx+AuP7q2BNgWJCJjPOq8lh8BJ6qf9Z/dFjpfMFDniNo<br>W1fho3/Rb2cRGadDAW/hOUoz+EDU8CAwEAAaOCATIwggEuMB0G<br>A1UdDgQWBBT9rGEyk2xF1uLuhV+auud2mWjM5zAfBgNVHSMEGD<br>AWgBTSxLDSkdRMEXGzYcs9of7dqGrU4zASBgNVHRMBAf8ECDAG<br>AQH/AgEAMDMGCCsGAQUFBwEBBCcwJTAjBggrBgEFBQcwAYYXaH<br>R0cDovL29jc3AuZ29kYWRkeS5jb20wRgYDVR0fBD8wPTA7oDmg<br>N4Y1aHR0cDovL2NlcnRpZmljYXRlcy5nb2RhZGR5LmNvbS9yZX<br>Bvc2l0b3J5L2dkcm9vdC5jcmwwSwYDVR0gBEQwQjBABgRVHSAA<br>MDgwNgYIKwYBBQUHAgEWKmh0dHA6Ly9jZXJ0aWZpY2F0ZXMuZ2<br>9kYWRkeS5jb20vcmVwb3NpdG9yeTAOBgNVHQ8BAf8EBAMCAQYw<br>DQYJKoZIhvcNAQEFBQADggEBANKGwOy9+aG2Z+5mC6IGOgRQjh<br>VyrEp0lVPLN8tESe8HkGsz2ZbwlFalEzAFPIUyIXvJxwqoJKSQ<br>3kbTJSMUA2fCENZvD117esyfxVgqwcSeIaha86ykRvOe5GPLL5<br>CkKSkB2XIsKd83ASe8T+5o0yGPwLPk9Qnt0hCqU7S+8MxZC9Y7<br>lhyVJEnfzuz9p0iRFEUOOjZv2kWzRaJBydTXRE4+uXR21aITVS<br>zGh6O1mawGhId/dQb8vxRMDsxuxN89txJx9OjxUUAiKEngHUuH<br>qDTMBqLdElrRhjZkAzVvb3du6/KFUJheqwNTrZEjYx8WnM25sg<br>VjOuH0aBsXBTWVU+4=<br>-----END CERTIFICATE-----';<br><br><br>$body = http.request.ssl.get(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"https://www.iana.org",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ $issuer ]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br>if( $1 ) {<br>&nbsp;&nbsp;&nbsp;http.sendResponse( $1, $2, $body, "" );<br>} else {<br>&nbsp;&nbsp;&nbsp;log.info( "An error occurred: " . $2 );<br>}</pre><b>See also:</b> <a href="./http.request.html#http.request.get">http.request.get</a></div>
+      </div>
+
+   </body>
+</html>
